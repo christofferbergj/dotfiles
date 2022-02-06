@@ -1,0 +1,1 @@
+/Users/christofferjensen/.fig/shell/pre.fish
