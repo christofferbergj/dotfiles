@@ -1,0 +1,13 @@
+[core]
+	excludesfile = /Users/christofferjensen/.gitignore_global
+[user]
+	name = Christoffer Berg
+	email = christofferbergj@gmail.com
+[init]
+	defaultBranch = main
+[alias]
+	yolo = !git commit -m \"$(curl -s whatthecommit.com/index.txt)\"
+[pull]
+	ff = only
+[push]
+	default = current
