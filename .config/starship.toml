@@ -1,0 +1,6 @@
+# Inserts a blank line between shell prompts
+add_newline = true
+
+[character]
+vicmd_symbol = "[V](bold green) "
+
