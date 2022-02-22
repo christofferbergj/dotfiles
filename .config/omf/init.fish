@@ -1,6 +1,9 @@
 # Default editor
 set -gx EDITOR nvim
 
+# Base colors for prompt to match iterm scheme
+set -gx fish_term24bit 0
+
 # Init starhip prompt
 starship init fish | source
 
