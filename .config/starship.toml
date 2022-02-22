@@ -4,3 +4,6 @@ add_newline = true
 [character]
 vicmd_symbol = "[V](bold green) "
 
+[nodejs]
+symbol = "node "
+
