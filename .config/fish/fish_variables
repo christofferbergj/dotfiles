@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR __git_plugin_abbreviations:g\x1ega\x1egaa\x1egau\x1egapa\x1egap\x1egb\x1egba\x1egban\x1egbd\x1egbD\x1egbl\x1egbs\x1egbsb\x1egbsg\x1egbsr\x1egbss\x1egc\x1egc\x21\x1egcn\x21\x1egca\x1egca\x21\x1egcan\x21\x1egcv\x1egcav\x1egcav\x21\x1egcm\x1egcam\x1egscam\x1egcfx\x1egcf\x1egcl\x1egclean\x1egclean\x21\x1egclean\x21\x21\x1egcount\x1egcp\x1egcpa\x1egcpc\x1egd\x1egdca\x1egds\x1egdsc\x1egdw\x1egdwc\x1egdto\x1egignore\x1egf\x1egfa\x1egfm\x1egfo\x1egl\x1egll\x1eglr\x1eglg\x1eglgg\x1eglgga\x1eglo\x1eglog\x1eglom\x1eglod\x1egloo\x1egm\x1egmt\x1egmom\x1egp\x1egp\x21\x1egpo\x1egpo\x21\x1egpv\x1egpv\x21\x1eggp\x21\x1egpu\x1egr\x1egra\x1egrb\x1egrba\x1egrbc\x1egrbi\x1egrbm\x1egrbmi\x1egrbmia\x1egrbd\x1egrbdi\x1egrbdia\x1egrbs\x1egrev\x1egrh\x1egrhh\x1egrhpa\x1egrm\x1egrmc\x1egrmv\x1egrrm\x1egrs\x1egrset\x1egrss\x1egrst\x1egrup\x1egrv\x1egsh\x1egsd\x1egsr\x1egss\x1egst\x1egsta\x1egstd\x1egstl\x1egstp\x1egsts\x1egsu\x1egsur\x1egsuri\x1egts\x1egtv\x1egsw\x1egswc\x1egunignore\x1egup\x1egupv\x1egupa\x1egupav\x1egwch\x1egco\x1egcb\x1egcod\x1egcom\x1egfb\x1egff\x1egfr\x1egfh\x1egfs\x1egfbs\x1egffs\x1egfrs\x1egfhs\x1egfss\x1egfbt\x1egfft\x1egfrt\x1egfht\x1egfst\x1egfp
 SETUVAR __git_plugin_initialized:Wed\x20Jan\x2019\x2018\x3a17\x3a31\x20CET\x202022
 SETUVAR _fish_abbr_c:code
@@ -210,4 +210,5 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_user_paths:/Users/christofferjensen/\x2elocal/bin\x1e/opt/homebrew/bin\x1e/Users/christofferjensen/\x2efig/bin\x1e/opt/homebrew/opt/fzf/bin\x1e/usr/local/bin\x1e/usr/bin\x1e/bin\x1e/usr/sbin\x1e/sbin
