@@ -28,6 +28,8 @@ Repo for my configuration files and applications.
 * karabiner-elements
 * alt-tab
 * hiddenbar
+* spark
+* rocket
 
 ## Raycast extensions
 
