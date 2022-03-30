@@ -2,7 +2,7 @@
 
 Repo for my configuration files and applications.
 
-## List of cli tools
+## CLI tools
 
 * starship
 * nvim
@@ -19,7 +19,7 @@ Repo for my configuration files and applications.
 * git
 * bat
 
-## List of apps
+## Apps
 
 * fish
 * fig
@@ -28,3 +28,14 @@ Repo for my configuration files and applications.
 * karabiner-elements
 * alt-tab
 * hiddenbar
+
+## Raycast extensions
+
+* Bitwarden Vault
+* Brew
+* GitHub
+* Google Workspace
+* Hacker News 
+* Bookmarks
+* Translate
+* Slack status
