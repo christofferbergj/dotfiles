@@ -182,6 +182,10 @@ SETUVAR _fish_abbr_s:git\x20status\x20\x2ds
 SETUVAR _fish_abbr_vim:nvim
 SETUVAR _fish_abbr_ws:webstorm
 SETUVAR _fish_abbr_ws_2E_:webstorm\x20\x2e
+SETUVAR _fish_abbr_ya:yadm\x20add
+SETUVAR _fish_abbr_ycm:yadm\x20commit\x20\x2dm
+SETUVAR _fish_abbr_yd:yadm\x20diff
+SETUVAR _fish_abbr_ys:yadm\x20status
 SETUVAR fish_color_autosuggestion:585858
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:a1b56c
