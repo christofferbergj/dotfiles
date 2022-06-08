@@ -30,6 +30,11 @@ Repo for my configuration files and applications.
 * hiddenbar
 * spark
 * rocket
+* cleanshot x
+* jetbrains toolbox
+* google drive
+* iterm
+* spotify
 
 ## Raycast extensions
 
@@ -41,3 +46,4 @@ Repo for my configuration files and applications.
 * Bookmarks
 * Translate
 * Slack status
+* Word Search
