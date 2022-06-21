@@ -8,6 +8,10 @@ Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.
 Install `tj/n` through brew, and make sure the `N_PREFIX` variable export exists within fish_config.  
 Copy fish abbreviations from `fish-abbrevations.txt` to `fish_config`
 
+## Font
+`brew tap homebrew/cask-fonts`  
+`brew install --cask font-jetbrains-mono-nerd-font`
+
 ## CLI tools
 
 * starship
