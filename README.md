@@ -57,3 +57,9 @@ Copy fish abbreviations from `fish-abbrevations.txt` to `fish_config`
 * Translate
 * Slack status
 * Word Search
+* Speedtest
+* Tailwindcss
+* Search NPM
+* Search MDN
+* Notion
+* Placeholder
