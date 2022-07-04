@@ -19,3 +19,4 @@ starship init fish | source
 
 # Export N_PREFIX for tj/n install path
 set -x N_PREFIX "/opt/homebrew/bin/node"; contains "$N_PREFIX/bin" $PATH; or set -a PATH "$N_PREFIX/bin"
+fish_add_path /Users/christofferbergj/.spicetify

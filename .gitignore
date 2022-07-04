@@ -1,1 +1,5 @@
 .idea
+.DS_Store
+
+.config/fish/conf.d/*_fig*
+.config/fish/functions/fzf_key_bindings.fish

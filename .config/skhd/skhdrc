@@ -1,8 +1,8 @@
 # Navigation
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+# alt - h : yabai -m window --focus west
+# alt - j : yabai -m window --focus south
+# alt - k : yabai -m window --focus north
+# alt - l : yabai -m window --focus east
 
 # Fast focus desktop
 alt - 0 : yabai -m space --focus recent
@@ -12,10 +12,18 @@ lctrl + shift - h : yabai -m display --focus 1
 lctrl + shift - l : yabai -m display --focus 2
 
 # Moving windows
-shift + alt - h : yabai -m window --warp west
-shift + alt - j : yabai -m window --warp south
-shift + alt - k : yabai -m window --warp north
-shift + alt - l : yabai -m window --warp east
+# shift + alt - h : yabai -m window --warp west
+# shift + alt - j : yabai -m window --warp south
+# shift + alt - k : yabai -m window --warp north
+# shift + alt - l : yabai -m window --warp east
+
+# Focus space relative to active display
+# alt - 1 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[0].index')
+# alt - 2 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[1].index')
+# alt - 3 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[2].index')
+# alt - 4 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[3].index')
+# alt - 5 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[4].index')
+# alt - 6 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[5].index')
 
 # Move focus container to workspace
 shift + alt - m : yabai -m window --space last; yabai -m space --focus last
