@@ -3,3 +3,4 @@
 
 .config/fish/conf.d/*_fig*
 .config/fish/functions/fzf_key_bindings.fish
+.config/nvim/plugin/packer_compiled.lua
