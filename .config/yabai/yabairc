@@ -58,9 +58,11 @@ yabai -m rule --add app="^Figma$" monitor=2
 
 # Apps to not manage 
 yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Messenger$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Archive Utility$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
-yabai -m rule --add app="^WebStorm$" title="^Preferences|Keyboard Shortcut|Rename|Go to" manage=off
+yabai -m rule --add app="^WebStorm$" title="^Preferences|Keyboard Shortcut|Rename|Go to|Background" manage=off
 yabai -m rule --add app="^Spark$" title="^Re:" manage=off
 yabai -m rule --add app="^Spectacle$" manage=off
 
