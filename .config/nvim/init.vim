@@ -32,6 +32,9 @@ set history=500
 " Set system clipboard
 set clipboard+=unnamed
 
+" Remove highlight
+set nohlsearch
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -361,3 +364,8 @@ endfunction
 function! CmdLine(str)
     call feedkeys(":" . a:str)
 endfunction
+
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+augroup END
