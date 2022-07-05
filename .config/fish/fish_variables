@@ -142,6 +142,7 @@ SETUVAR _fish_abbr_r:npm\x20run
 SETUVAR _fish_abbr_ra:ranger
 SETUVAR _fish_abbr_s:git\x20status\x20\x2ds
 SETUVAR _fish_abbr_v:nvim
+SETUVAR _fish_abbr_vim:nvim
 SETUVAR _fish_abbr_ws:open\x20\x2da\x20WebStorm
 SETUVAR _fish_abbr_ws_2E_:open\x20\x2da\x20WebStorm\x20\x2e
 SETUVAR fish_color_autosuggestion:585858

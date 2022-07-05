@@ -1,5 +1,8 @@
 local set = vim.opt
 
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])
+
 set.autoread = true
 set.autowrite = true
 set.autowriteall = true

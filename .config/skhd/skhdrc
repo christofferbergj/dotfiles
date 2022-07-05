@@ -1,68 +1,82 @@
-# Navigation
-# cmd + alt + lctrl + shift - h : yabai -m window --focus west
-# cmd + alt + lctrl + shift - j : yabai -m window --focus south
-# cmd + alt + lctrl + shift - k : yabai -m window --focus north
-# cmd + alt + lctrl + shift - l : yabai -m window --focus east
+# Restart yabai
+hyper - z : brew services restart yabai
 
-# Fast focus desktop
-alt - 0 : yabai -m space --focus recent
+# Fast focus recent desktop
+hyper - 0 : yabai -m space --focus recent
 
 # Focusing displays
-# lctrl - 1  : yabai -m display --focus 1
-# lctrl - 2  : yabai -m display --focus 2
-# lctrl - 3  : yabai -m display --focus 3
+lctrl - 1  : yabai -m display --focus 1
+lctrl - 2  : yabai -m display --focus 2
+lctrl - 3  : yabai -m display --focus 3
 
 # Moving windows
-# shift + alt - h : yabai -m window --warp west
-# shift + alt - j : yabai -m window --warp south
-# shift + alt - k : yabai -m window --warp north
-# shift + alt - l : yabai -m window --warp east
+hyper - w : yabai -m window --warp north 
+hyper - a : yabai -m window --warp west 
+hyper - s : yabai -m window --warp south 
+hyper - d : yabai -m window --warp east 
 
-# Focus space relative to active display
-# alt - 1 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[0].index')
-# alt - 2 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[1].index')
-# alt - 3 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[2].index')
-# alt - 4 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[3].index')
-# alt - 5 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[4].index')
-# alt - 6 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[5].index')
+# Move focused window to (100, 200)
+# hyper - c : yabai -m window --resize abs:1200:800; yabai -m window --move abs:1200:200
+
+hyper - up : yabai -m window --resize bottom_right:100:100
+hyper - down : yabai -m window --resize bottom_right:-100:-100
 
 # Move focus container to workspace
-# cmd + alt + lctrl + shift - p : yabai -m window --space prev; yabai -m space --focus prev
-# cmd + alt + lctrl + shift - n : yabai -m window --space next; yabai -m space --focus next
-cmd + alt + lctrl + shift - 1 : yabai -m window --space 1; yabai -m space --focus 1
-cmd + alt + lctrl + shift - 2 : yabai -m window --space 2; yabai -m space --focus 2
-cmd + alt + lctrl + shift - 3 : yabai -m window --space 3; yabai -m space --focus 3
-cmd + alt + lctrl + shift - 4 : yabai -m window --space 4; yabai -m space --focus 4
-cmd + alt + lctrl + shift - 5 : yabai -m window --space 5; yabai -m space --focus 5
-cmd + alt + lctrl + shift - 6 : yabai -m window --space 6; yabai -m space --focus 6
-cmd + alt + lctrl + shift - 7 : yabai -m window --space 7; yabai -m space --focus 7
+hyper - 1 : yabai -m window --space 1; yabai -m space --focus 1
+hyper - 2 : yabai -m window --space 2; yabai -m space --focus 2
+hyper - 3 : yabai -m window --space 3; yabai -m space --focus 3
+hyper - 4 : yabai -m window --space 4; yabai -m space --focus 4
+hyper - 5 : yabai -m window --space 5; yabai -m space --focus 5
+hyper - 6 : yabai -m window --space 6; yabai -m space --focus 6
+hyper - 7 : yabai -m window --space 7; yabai -m space --focus 7
 
 # Resize windows
-cmd + alt + lctrl + shift - 0x1B : yabai -m window --resize left:-100:0; yabai -m window --resize right:-100:0 
-cmd + alt + lctrl + shift - down : yabai -m window --resize bottom:0:100; yabai -m window --resize top:0:100
-cmd + alt + lctrl + shift - up : yabai -m window --resize top:0:-100; yabai -m window --resize bottom:0:-100
-cmd + alt + lctrl + shift - 0x18 : yabai -m window --resize right:100:0; yabai -m window --resize left:100:0
+hyper - 0x1B : yabai -m window --resize left:-100:0; yabai -m window --resize right:-100:0 # plus
+hyper - 0x18 : yabai -m window --resize right:100:0; yabai -m window --resize left:100:0 # minus
 
-# Equalize size of windows
-shift + alt - 0 : yabai -m space --balance
-cmd + alt + lctrl + shift - 0 : yabai -m space --balance
+hyper - k : \
+    yabai -m window --resize top:0:-50 ; \
+    yabai -m window --resize bottom:0:-50
 
-# Enable / Disable gaps in current workspace
-shift + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
+hyper - h : \
+    yabai -m window --resize left:-50:0 ; \
+    yabai -m window --resize right:-50:0
 
-# Rotate windows clockwise and anticlockwise
-alt - r : yabai -m space --rotate 90
+hyper - j : \
+    yabai -m window --resize bottom:0:50 ; \
+    yabai -m window --resize top:0:50
 
-# Cycle windows
-alt - w : yabai -m window --focus next || yabai -m window --focus first
-alt + shift - w : yabai -m window --focus prev || yabai -m window --focus last
+hyper - l : \
+    yabai -m window --resize right:50:0 ; \
+    yabai -m window --resize left:50:0
+
+# Balance size of windows
+hyper - b : yabai -m space --balance
+
+# Rotate windows clockwise 
+hyper - r : yabai -m space --rotate 270
+
+# Cycle windows forwards
+hyper - e : yabai -m window --focus prev || yabai -m window --focus last
+
+# Cycle windows backwards
+hyper - q : yabai -m window --focus next || yabai -m window --focus first
 
 # Rotate on X and Y Axis
-alt - x : yabai -m space --mirror x-axis
-alt - y : yabai -m space --mirror y-axis
+hyper - x : yabai -m space --mirror x-axis
+hyper - y : yabai -m space --mirror y-axis
 
 # Float / Unfloat window
-cmd + alt + lctrl + shift - space : yabai -m window --toggle float; yabai -m window 
+hyper - space : yabai -m window --toggle float; yabai -m window 
 
-# Make window native fullscreen
-alt - f         : yabai -m window --toggle zoom-fullscreen
+# Toggle window zoom
+hyper - t : yabai -m window --toggle zoom-parent
+hyper - f : yabai -m window --toggle zoom-fullscreen
+
+# Cycle windows forwards and backwards in focused stack only
+# hyper - tab : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+
+# hyper - up : yabai -m window --stack north
+# hyper - right : yabai -m window --stack east
+# hyper - down : yabai -m window --stack south
+# hyper - left : yabai -m window --stack west
