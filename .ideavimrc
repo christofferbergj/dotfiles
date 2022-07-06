@@ -11,5 +11,7 @@ set easymotion
 set visualbell
 
 map Y y$
+inoremap jk <Esc>
+
 
 " Find more examples here: https://jb.gg/share-ideavimrc
