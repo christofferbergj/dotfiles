@@ -1,6 +1,7 @@
 "" Source your .vimrc
 set clipboard+=unnamedplus
 set scrolloff=7
+set number relativenumber
 
 "" Plugins
 Plug 'machakann/vim-highlightedyank'
