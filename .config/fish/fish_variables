@@ -121,7 +121,7 @@ SETUVAR _fish_abbr_grep:rg
 SETUVAR _fish_abbr_grhh:git\x20reset\x20head\x20\x2d\x2dhard
 SETUVAR _fish_abbr_grst:git\x20restore\x20\x2d\x2dstaged
 SETUVAR _fish_abbr_grup:git\x20remote\x20update
-SETUVAR _fish_abbr_grv:git\x20AR\x20_fish_abbr_gsu\x3agit\x20submodule\x20update
+SETUVAR _fish_abbr_grv:git\x20remote\x20\x2dv
 SETUVAR _fish_abbr_gs:git\x20status\x20\x2ds
 SETUVAR _fish_abbr_gst:git\x20stash
 SETUVAR _fish_abbr_gsta:git\x20stash\x20apply
