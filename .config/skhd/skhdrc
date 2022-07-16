@@ -2,7 +2,7 @@
 hyper - z : brew services restart yabai
 
 # Fast focus recent desktop
-hyper - 0 : yabai -m space --focus recent
+hyper - tab : yabai -m space --focus recent
 
 # Focusing displays
 # lctrl - 1  : yabai -m display --focus 1
