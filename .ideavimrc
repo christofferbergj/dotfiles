@@ -6,9 +6,9 @@ set number relativenumber
 "" Plugins
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 200
-
 set sneak
 set easymotion
+
 set visualbell
 
 map Y y$
