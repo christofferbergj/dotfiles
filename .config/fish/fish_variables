@@ -126,6 +126,7 @@ SETUVAR _fish_abbr_gs:git\x20status\x20\x2ds
 SETUVAR _fish_abbr_gst:git\x20stash
 SETUVAR _fish_abbr_gsta:git\x20stash\x20apply
 SETUVAR _fish_abbr_gsw:git\x20switch
+SETUVAR _fish_abbr_gswc:git\x20switch\x20\x2dc
 SETUVAR _fish_abbr_gy:git\x20yolo
 SETUVAR _fish_abbr_gyn:git\x20yolo\x20\x2dn
 SETUVAR _fish_abbr_gyp:git\x20yolo\x3b\x20git\x20push
@@ -187,4 +188,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/christofferbergj/\x2espicetify\x1e/opt/homebrew/bin\x1e/Users/christofferbergj/\x2efig/bin\x1e/Users/christofferbergj/\x2elocal/bin\x1e/opt/homebrew/opt/fzf/bin
+SETUVAR fish_user_paths:/opt/homebrew/sbin\x1e/Users/christofferbergj/\x2espicetify\x1e/opt/homebrew/bin\x1e/Users/christofferbergj/\x2efig/bin\x1e/Users/christofferbergj/\x2elocal/bin\x1e/opt/homebrew/opt/fzf/bin
