@@ -1,18 +1,71 @@
-"" Source your .vimrc
-set clipboard+=unnamedplus
-set scrolloff=7
-set number relativenumber
+let mapleader=" "
 
-"" Plugins
-Plug 'machakann/vim-highlightedyank'
-let g:highlightedyank_highlight_duration = 200
+" Plugins  --------------------------------
 set sneak
-set easymotion
 
+Plug 'preservim/nerdtree'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'kana/vim-textobj-entire'
+Plug 'machakann/vim-highlightedyank'
+Plug 'dbakker/vim-paragraph-motion'
+
+" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+let g:highlightedyank_highlight_duration = 150
+
+" <C-n> seems to me as a better solution than <M-n>,
+" but we should finally support vim-visual-multi because vim-multiple-cursors is deprecated now
+map <C-n> <Plug>NextWholeOccurrence
+
+" Common settings -------------------------
+set clipboard+=unnamedplus
+set clipboard+=ideaput
+set incsearch
+set rnu
+set showmode
+set so=7
 set visualbell
 
-map Y y$
-inoremap jk <Esc>
+" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
 
+" Open ideavim settings and reload
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+" Plugin mappings -----------------------------
+map <leader>f <Plug>(easymotion-s)
+
+" Editor action mappings -----------------------------
+map <leader>r <Action>(RenameElement)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader>g <Action>(ChooseRunConfiguration)
+map <leader>. <Action>(SelectInProjectView)
+map <leader>s <Action>(FileStructurePopup)
+map <leader>a <Action>(EditorAddCaretPerSelectedLine)
+map <leader>o <Action>(OptimizeImports)
+map <leader>b <Action>(ShowNavBar)
+nmap gt <Action>(GotoTest)
+
+" General mappings -----------------------------
+imap jk <Esc>
+map H h
+map U <C-R>
+map Y y$
+
+" Keep register after pasting
+vmap p "_dP
+
+" Paste from previous register
+map ,p "0p
+map ,P "0P
+
+" Strict mode for development ---------------
+set ideastrictmode
 
 " Find more examples here: https://jb.gg/share-ideavimrc
