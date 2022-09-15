@@ -25,9 +25,10 @@ map <C-n> <Plug>NextWholeOccurrence
 set clipboard+=unnamedplus
 set clipboard+=ideaput
 set incsearch
+set number
 set rnu
 set showmode
-set so=7
+set scrolloff=7
 set visualbell
 
 " Idea specific settings ------------------
@@ -45,18 +46,26 @@ map <leader>f <Plug>(easymotion-s)
 map <leader>r <Action>(RenameElement)
 map <leader>z <Action>(ToggleDistractionFreeMode)
 map <leader>g <Action>(ChooseRunConfiguration)
-map <leader>. <Action>(SelectInProjectView)
 map <leader>s <Action>(FileStructurePopup)
 map <leader>a <Action>(EditorAddCaretPerSelectedLine)
 map <leader>o <Action>(OptimizeImports)
 map <leader>b <Action>(ShowNavBar)
-nmap gt <Action>(GotoTest)
+map <leader>d <Action>(SelectAllOccurrences)
+map <leader>e <Action>(ShowIntentionActions)
+map <leader>m <Action>(EditorMatchBrace)
+map <leader>x <Action>(CloseAllEditors)
+map gt <Action>(GotoTest)
 
 " General mappings -----------------------------
 imap jk <Esc>
-map H h
-map U <C-R>
-map Y y$
+nmap H h
+nmap U <C-R>
+nmap Y y$
+nmap H 0
+nmap L $
+nmap <leader>v V$%
+nmap <leader>w viw
+nmap <leader>y V$%y
 
 " Keep register after pasting
 vmap p "_dP
