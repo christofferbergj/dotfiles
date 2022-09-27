@@ -54,18 +54,25 @@ map <leader>d <Action>(SelectAllOccurrences)
 map <leader>e <Action>(ShowIntentionActions)
 map <leader>m <Action>(EditorMatchBrace)
 map <leader>x <Action>(CloseAllEditors)
+map <leader>i <Action>(ParameterInfo)
 map gt <Action>(GotoTest)
+
+" Tabshifter
+map <C-w>= <Action>(tabshifter.Actions.EqualSizeSplit)
 
 " General mappings -----------------------------
 imap jk <Esc>
-nmap H h
-nmap U <C-R>
+imap jj <Esc>A
 nmap Y y$
 nmap H 0
 nmap L $
-nmap <leader>v V$%
-nmap <leader>w viw
+nmap <leader>w V$%
+nmap <leader>V V$%
+nmap <leader>v v$
 nmap <leader>y V$%y
+
+" I think it's a better solution
+nmap U <C-R>
 
 " Keep register after pasting
 vmap p "_dP
