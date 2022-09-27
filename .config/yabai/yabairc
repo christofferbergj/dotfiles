@@ -38,31 +38,37 @@ yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
 
 # General space settings
-yabai -m config layout                       float
-yabai -m config top_padding                  12
-yabai -m config bottom_padding               12
-yabai -m config left_padding                 12
-yabai -m config right_padding                12
-yabai -m config window_gap                   12
+yabai -m config layout                       bsp
+yabai -m config top_padding                  16
+yabai -m config bottom_padding               16
+yabai -m config left_padding                 16
+yabai -m config right_padding                16
+yabai -m config window_gap                   16
 
-# Rules
-yabai -m rule --add app="^Chrome$" space=1 
-# yabai -m rule --add app="^WebStorm$" space=2
-yabai -m rule --add app="^Slack$" space=3
-yabai -m rule --add app="^Notion$" space=3
-yabai -m rule --add app="^Spotify$" space=4
-yabai -m rule --add app="^Messenger$" space=4
-yabai -m rule --add app="^Spark$" space=4
+# Setup spaces
+yabai -m space 1 --label web
+yabai -m space 2 --label editor
+yabai -m space 3 --label work
+yabai -m space 4 --label social
+yabai -m space 5 --label media
+yabai -m space 6 --label other
+
+# App rules
+# yabai -m rule --add app="^iTerm$" space="terminal"
+yabai -m rule --add app="^Google Chrome$" space="web"
+yabai -m rule --add app="^WebStorm$" space="editor"
+yabai -m rule --add app="^Slack$" space="work"
+yabai -m rule --add app="^Notion$" space="work"
+yabai -m rule --add app="^Spotify$" space="social"
+yabai -m rule --add app="^Messenger$" space="social"
+yabai -m rule --add app="^Spark$" space="other"
 yabai -m rule --add app="^Figma$" monitor=2
 
 # Apps to not manage 
 yabai -m rule --add app="^System Preferences$" manage=off
-yabai -m rule --add app="^Messenger$" manage=off
-yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Archive Utility$" manage=off
-yabai -m rule --add app="^Raycast" manage=off
-yabai -m rule --add app="^WebStorm$" title="^Preferences|Keyboard Shortcut|Rename|Go to|Background|Delete" manage=off
-yabai -m rule --add app="^Spark$" title="^Re:" manage=off
-yabai -m rule --add app="^Spectacle" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^WebStorm$" title!="(.*\[(.*)\].*)|(.*\(\:.*\).*)" manage=off
 
 echo "yabai configuration loaded.."
