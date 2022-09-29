@@ -10,11 +10,24 @@ alt - 2 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[1].
 alt - 3 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[2].index')
 alt - 4 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[3].index')
 alt - 5 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[4].index')
+alt - 6 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[5].index')
+alt - 7 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[6].index')
+alt - 8 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[7].index')
+alt - 9 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[8].index')
+
+# Navigate spaces
+alt + ctrl - right : yabai -m space --focus next || yabai -m space --focus first
+alt + ctrl - left : yabai -m space --focus prev || yabai -m space --focus last
 
 # Focusing specific displays
 rcmd - 1  : yabai -m display --focus 1
 rcmd - 2  : yabai -m display --focus 2
 rcmd - 3  : yabai -m display --focus 3
+
+# Move focused window to specific display
+alt + shift - 1  : yabai -m window --display 1; yabai -m display --focus 1
+alt + shift - 2  : yabai -m window --display 2; yabai -m display --focus 2
+alt + shift - 3  : yabai -m window --display 3; yabai -m display --focus 3
 
 # Focus next display by arrangement index
 hyper - space : yabai -m display --focus next || yabai -m display --focus first
@@ -23,10 +36,11 @@ hyper - space : yabai -m display --focus next || yabai -m display --focus first
 hyper - m : yabai -m window --grid 1:5:1:0:3:1
 
 # Center small window
-hyper - c : yabai -m window --resize abs:1200:700; yabai -m window --grid 1:6:1:1
+hyper - v : yabai -m window --resize abs:1200:700
 
 # Maximize window
-hyper - w : yabai -m window --grid 1:1:0:0:1:1
+hyper - w : yabai -m window --toggle zoom-fullscreen; yabai -m window --grid 1:1:0:0:1:1
+hyper - f : yabai -m window --toggle zoom-fullscreen; yabai -m window --grid 1:1:0:0:1:1
 
 # Moving windows
 hyper - up : yabai -m window --swap north 
@@ -34,29 +48,25 @@ hyper - left : yabai -m window --swap west
 hyper - down : yabai -m window --swap south 
 hyper - right : yabai -m window --swap east 
 
-# hyper - l : yabai -m window --resize abs:1200:800
-# hyper - down : yabai -m window --resize bottom_right:-100:-100
-
 # Move window to next display and follow focus
 hyper - g : yabai -m window --display next || yabai -m window --display first; yabai -m display --focus next || yabai -m display --focus first
 
-# Move focus container to workspace
-hyper - 1 : yabai -m window --space 1; yabai -m space --focus 1
-hyper - 2 : yabai -m window --space 2; yabai -m space --focus 2
-hyper - 3 : yabai -m window --space 3; yabai -m space --focus 3
-hyper - 4 : yabai -m window --space 4; yabai -m space --focus 4
-hyper - 5 : yabai -m window --space 5; yabai -m space --focus 5
-hyper - 6 : yabai -m window --space 6; yabai -m space --focus 6
-hyper - 7 : yabai -m window --space 7; yabai -m space --focus 7
+# Move focused window to workspace
+hyper - 1 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[0].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[0].index')
+hyper - 2 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[1].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[1].index')
+hyper - 3 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[2].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[2].index')
+hyper - 4 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[3].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[3].index')
+hyper - 5 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[4].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[4].index')
 
 # Resize windows
+hyper - h : yabai -m window --resize left:-100:0 && yabai -m window --resize right:-100:0
+hyper - j : yabai -m window --resize bottom:0:100 && yabai -m window --resize top:0:100
 hyper - k : yabai -m window --resize top:0:-100 && yabai -m window --resize bottom:0:-100
 hyper - l : yabai -m window --resize right:100:0 && yabai -m window --resize left:100:0
-hyper - j : yabai -m window --resize bottom:0:100 && yabai -m window --resize top:0:100
-hyper - h : yabai -m window --resize left:-100:0 && yabai -m window --resize right:-100:0
 
 # Balance size of windows
 hyper - b : yabai -m space --balance
+hyper - 0 : yabai -m space --balance
 
 # Rotate windows clockwise 
 # hyper - r : yabai -m space --rotate 270
@@ -68,20 +78,8 @@ hyper - e : yabai -m window --focus "$(yabai -m query --windows --space | jq -re
 hyper - q : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
 
 # Rotate on X and Y Axis
-# hyper - x : yabai -m space --mirror x-axis
-# hyper - y : yabai -m space --mirror y-axis
+hyper - y : yabai -m space --mirror y-axis
 
 # Float / Unfloat window
 hyper - t : yabai -m window --toggle float; yabai -m window 
 
-# Toggle window zoom
-# hyper - t : yabai -m window --toggle zoom-parent
-hyper - f : yabai -m window --toggle zoom-fullscreen
-
-# Cycle windows forwards and backwards in focused stack only
-# hyper - tab : yabai -m window --focus stack.next || yabai -m window --focus stack.first
-
-# hyper - up : yabai -m window --stack north
-# hyper - right : yabai -m window --stack east
-# hyper - down : yabai -m window --stack south
-# hyper - left : yabai -m window --stack west
