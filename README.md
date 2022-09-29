@@ -45,6 +45,8 @@ Copy fish abbreviations from `fish-abbrevations.txt` to `fish_config`
 * google drive
 * iterm
 * spotify
+* monitorcontrol
+* grammarly desktop
 
 ## Raycast extensions
 
