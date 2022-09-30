@@ -28,6 +28,10 @@ Copy fish abbreviations from `fish-abbrevations.txt` to `fish_config`
 * ripgrep
 * git
 * bat
+* yabai
+* skhd
+* ugit
+
 
 ## Apps
 
@@ -47,21 +51,26 @@ Copy fish abbreviations from `fish-abbrevations.txt` to `fish_config`
 * spotify
 * monitorcontrol
 * grammarly desktop
+* spaceid
+* notion
+* todoist
 
 ## Raycast extensions
 
-* Bitwarden Vault
-* Brew
-* GitHub
-* Google Workspace
-* Hacker News 
-* Bookmarks
-* Translate
-* Slack status
-* Word Search
-* Speedtest
-* Tailwindcss
-* Search NPM
-* Search MDN
-* Notion
-* Placeholder
+* bitwarden vault
+* brew
+* gitHub
+* google workspace
+* hacker news 
+* bookmarks
+* translate
+* slack status
+* word search
+* speedtest
+* tailwindcss
+* search npm
+* search mdn
+* notion
+* placeholder
+* generate random data
+* lorem ipsum
