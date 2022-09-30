@@ -15,6 +15,7 @@ Copy fish abbreviations from `fish-abbrevations.txt` to `fish_config`
 ## CLI tools
 
 * starship
+* yadm
 * nvim
 * rar
 * autojump
