@@ -32,8 +32,8 @@ alt + shift - 3  : yabai -m window --display 3; yabai -m display --focus 3
 # Focus next display by arrangement index
 hyper - space : yabai -m display --focus next || yabai -m display --focus first
 
-# 20% middle
-hyper - m : yabai -m window --grid 1:5:1:0:3:1
+# Floated 20% middle
+hyper - m : yabai -m window --toggle float; yabai -m window --grid 1:5:1:0:3:1
 
 # Center small window
 hyper - v : yabai -m window --resize abs:1200:700
@@ -48,6 +48,13 @@ hyper - left : yabai -m window --swap west
 hyper - down : yabai -m window --swap south 
 hyper - right : yabai -m window --swap east 
 
+# Focus windows
+alt - x : yabai -m window --focus recent
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
 # Move window to next display and follow focus
 hyper - g : yabai -m window --display next || yabai -m window --display first; yabai -m display --focus next || yabai -m display --focus first
 
@@ -57,6 +64,7 @@ hyper - 2 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[
 hyper - 3 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[2].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[2].index')
 hyper - 4 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[3].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[3].index')
 hyper - 5 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[4].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[4].index')
+hyper - 6 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[5].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[5].index')
 
 # Resize windows
 hyper - h : yabai -m window --resize left:-100:0 && yabai -m window --resize right:-100:0
@@ -72,10 +80,13 @@ hyper - 0 : yabai -m space --balance
 # hyper - r : yabai -m space --rotate 270
 
 # Cycle windows forwards
-hyper - e : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | reverse | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
+# hyper - e : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | reverse | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
+
+hyper - e : yabai -m window --focus east || yabai -m window --focus first
+hyper - q : yabai -m window --focus west || yabai -m window --focus last
 
 # Cycle windows backwards
-hyper - q : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
+# hyper - q : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
 
 # Rotate on X and Y Axis
 hyper - y : yabai -m space --mirror y-axis
