@@ -4,9 +4,9 @@ Repo for my configuration files and applications.
 
 ## General info
 
-Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.  
-Install `tj/n` through brew, and make sure the `N_PREFIX` variable export exists within fish_config.  
-Copy fish abbreviations from `fish-abbrevations.txt` to `fish_config`
+* Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.  
+* Install `tj/n` through brew, and make sure the `N_PREFIX` variable export exists within fish_config.  
+* Make sure to delete `SETUVAR fish_user_paths` line from `.config/fish/fish_variables` before copying over.
 
 ## Font
 `brew tap homebrew/cask-fonts`  
