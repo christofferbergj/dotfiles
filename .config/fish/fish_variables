@@ -8,9 +8,6 @@ SETUVAR _fish_abbr_bs:brew\x20search
 SETUVAR _fish_abbr_c:code
 SETUVAR _fish_abbr_c_2E_:code\x20\x2e
 SETUVAR _fish_abbr_cat:bat
-SETUVAR _fish_abbr_db:dotnet\x20build
-SETUVAR _fish_abbr_dbr:dotnet\x20build\x3b\x20dotnet\x20run\x3b
-SETUVAR _fish_abbr_dr:dotnet\x20run
 SETUVAR _fish_abbr_find:fd
 SETUVAR _fish_abbr_g:gitui
 SETUVAR _fish_abbr_ga:git\x20add
