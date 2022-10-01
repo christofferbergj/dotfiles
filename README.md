@@ -60,6 +60,7 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 * yabai
 * skhd
 * ugit
+* jq
 
 
 ## Apps
