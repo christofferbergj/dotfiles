@@ -19,6 +19,9 @@ alt - 9 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[8].
 alt + ctrl - right : yabai -m space --focus next || yabai -m space --focus first
 alt + ctrl - left : yabai -m space --focus prev || yabai -m space --focus last
 
+hyper - 0x1E : yabai -m space --focus next || yabai -m space --focus first
+hyper - 0x21 : yabai -m space --focus prev || yabai -m space --focus last
+
 # Focusing specific displays
 rcmd - 1  : yabai -m display --focus 1
 rcmd - 2  : yabai -m display --focus 2
@@ -55,6 +58,9 @@ hyper - left : yabai -m window --move rel:-150:0
 hyper - d : yabai -m window --swap next || yabai -m window --swap first
 hyper - a : yabai -m window --swap prev || yabai -m window --swap last
 
+alt - r         : yabai -m space --rotate 270
+shift + alt - r : yabai -m space --rotate 90
+
 # Focus windows
 alt - x : yabai -m window --focus recent
 
@@ -78,9 +84,9 @@ hyper - l : yabai -m window --resize right:100:0
 hyper - j : yabai -m window --resize bottom:0:100
 hyper - h : yabai -m window --resize left:-100:0 
 
-alt - k : yabai -m window --resize top:0:100
+# alt - k : yabai -m window --resize top:0:100
 alt - l : yabai -m window --resize right:-100:0
-alt - j : yabai -m window --resize bottom:0:-100
+# alt - j : yabai -m window --resize bottom:0:-100
 alt - h : yabai -m window --resize left:100:0 
 
 # Reize windows - Plus/minus
@@ -104,7 +110,7 @@ hyper - q : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'i
 hyper - y : yabai -m space --mirror y-axis
 
 # Float / Unfloat window
-hyper - t : yabai -m window --toggle float; yabai -m window 
+hyper - t : yabai -m window --toggle float
 
 # Set vertical layout
 hyper - n : yabai -m window --toggle split

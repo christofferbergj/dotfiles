@@ -15,7 +15,7 @@ Plug 'dbakker/vim-paragraph-motion'
 
 " Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
-let g:highlightedyank_highlight_duration = 150
+let g:highlightedyank_highlight_duration = 80
 
 " <C-n> seems to me as a better solution than <M-n>,
 " but we should finally support vim-visual-multi because vim-multiple-cursors is deprecated now

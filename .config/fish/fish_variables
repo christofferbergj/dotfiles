@@ -155,9 +155,8 @@ SETUVAR _fish_abbr_ybs:nvim\x20\x7e/\x2econfig/skhd/skhdrc
 SETUVAR _fish_abbr_yd:yadm\x20diff
 SETUVAR _fish_abbr_ys:yadm\x20status
 SETUVAR _fisher_edc_2F_bass_files:\x7e/\x2econfig/fish/functions/__bass\x2epy\x1e\x7e/\x2econfig/fish/functions/bass\x2efish
-SETUVAR _fisher_fabioantunes_2F_fish_2D_nvm_files:\x7e/\x2econfig/fish/functions/__nvm_run\x2efish\x1e\x7e/\x2econfig/fish/functions/node\x2efish\x1e\x7e/\x2econfig/fish/functions/npm\x2efish\x1e\x7e/\x2econfig/fish/functions/npx\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm_alias_command\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm_alias_function\x2efish\x1e\x7e/\x2econfig/fish/functions/yarn\x2efish\x1e\x7e/\x2econfig/fish/completions/nvm\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eedc/bass\x1efabioantunes/fish\x2dnvm
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eedc/bass
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:585858
 SETUVAR fish_color_cancel:\x2d\x2dreverse
@@ -198,4 +197,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/christofferbergj/\x2eplatformsh/bin\x1e/Users/christofferbergj/\x2ecomposer/vendor/bin\x1e/opt/homebrew/bin\x1e/opt/homebrew/opt/fzf/bin
+SETUVAR fish_user_paths:/opt/homebrew/bin/node/bin\x1e/opt/homebrew/sbin\x1e/Users/christofferbergj/\x2eplatformsh/bin\x1e/Users/christofferbergj/\x2ecomposer/vendor/bin\x1e/opt/homebrew/bin\x1e/opt/homebrew/opt/fzf/bin
