@@ -11,8 +11,8 @@
 # see this wiki page for information:
 #  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
 #
-sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
 
 # Global settings
 yabai -m config mouse_follows_focus          off
@@ -45,32 +45,55 @@ yabai -m config left_padding                 15
 yabai -m config right_padding                15
 yabai -m config window_gap                   15
 
+#
+# Setup spaces
+#
+for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 8)'); do
+  yabai -m space --destroy 9
+done
+
+function setup_space {
+  local idx="$1"
+  local name="$2"
+  local space=
+  echo "setup space $idx : $name"
+
+  space=$(yabai -m query --spaces --space "$idx")
+
+  if [ -z "$space" ]; then
+    yabai -m space --create
+  fi
+
+  yabai -m space "$idx" --label "$name"
+}
+
 # Label spaces
-yabai -m space 1 --label main
-yabai -m space 2 --label editor
-yabai -m space 3 --label messages
-yabai -m space 4 --label media
-yabai -m space 5 --label notes
-yabai -m space 6 --label mail
-yabai -m space 7 --label figma
-yabai -m space 8 --label other
+setup_space 1 main
+setup_space 2 editor
+setup_space 3 messages
+setup_space 4 media
+setup_space 5 notes
+setup_space 6 mail
+setup_space 7 figma
+setup_space 8 other
 
 # App rules
 yabai -m rule --add app="^Google Chrome$" space="main" 
-yabai -m rule --add app="^WebStorm$" space="editor" manage=off
-yabai -m rule --add app="^WebStorm$" title="( – )" space="editor" manage=on
+yabai -m rule --add app="^WebStorm$" space="editor" 
+yabai -m rule --add app="^WebStorm$" title="^Preferences|Keyboard Shortcut|Delete|Rename|Usages Detected$" manage=off
 yabai -m rule --add app="^Slack$" space="messages"
 yabai -m rule --add app="^Notion$" space="notes"
 yabai -m rule --add app="^Todoist$" space="notes"
+yabai -m rule --add app="^Notes$" space="notes"
 yabai -m rule --add app="^Spotify$" space="media" 
 yabai -m rule --add app="^Sonos$" space="media" 
 yabai -m rule --add app="^Podcasts$" space="media" 
-yabai -m rule --add app="^Messenger$" space="messages"
+yabai -m rule --add app="^Endel$" space="media" 
+yabai -m rule --add app="^Messenger$" space="messages" manage=off
 yabai -m rule --add app="^Spark$" space="mail"
 yabai -m rule --add app="^Spark$" title="^New Message$" space="mail" manage=off
 yabai -m rule --add app="^Figma$" monitor=2 space="figma"
 
-# Apps to not manage
 yabai -m rule --add app="^CleanShot X$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^AltTab$" manage=off
@@ -84,5 +107,6 @@ yabai -m rule --add app="^Homerow$" manage=off
 yabai -m rule --add app="^Rocket$" manage=off
 yabai -m rule --add app="^Vimac$" manage=off
 yabai -m rule --add app="^MonitorControl$" manage=off
+yabai -m rule --add app="^MeetingBar$" manage=off
 
 echo "yabai configuration loaded.."
