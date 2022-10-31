@@ -42,6 +42,7 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 
 ## CLI tools
 
+* fish shell
 * starship
 * yadm
 * nvim
@@ -65,10 +66,8 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 
 ## Apps
 
-* fish
 * fig
 * raycast
-* rectangle
 * karabiner-elements
 * alt-tab
 * hiddenbar
