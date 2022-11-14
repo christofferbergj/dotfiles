@@ -141,7 +141,15 @@ SETUVAR _fish_abbr_ni:npm\x20install
 SETUVAR _fish_abbr_no:npm\x20outdated
 SETUVAR _fish_abbr_nr:npm\x20remove
 SETUVAR _fish_abbr_nu:npm\x20update
-SETUVAR _fish_abbr_pa:php\x20artisan
+SETUVAR _fish_abbr_p:pnpm
+SETUVAR _fish_abbr_pa:pnpm\x20add
+SETUVAR _fish_abbr_pi:pnpm\x20install
+SETUVAR _fish_abbr_pl:pnpm\x20list
+SETUVAR _fish_abbr_po:pnpm\x20outdated
+SETUVAR _fish_abbr_pr:pnpm\x20run
+SETUVAR _fish_abbr_pre:pnpm\x20remove
+SETUVAR _fish_abbr_pu:pnpm\x20update
+SETUVAR _fish_abbr_px:pnpm\x20dlx
 SETUVAR _fish_abbr_r:npm\x20run
 SETUVAR _fish_abbr_ra:ranger
 SETUVAR _fish_abbr_s:git\x20status\x20\x2ds
@@ -197,4 +205,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/opt/homebrew/bin/node/bin\x1e/opt/homebrew/sbin\x1e/Users/christofferbergj/\x2eplatformsh/bin\x1e/Users/christofferbergj/\x2ecomposer/vendor/bin\x1e/opt/homebrew/bin\x1e/opt/homebrew/opt/fzf/bin
+SETUVAR fish_user_paths:/opt/homebrew/opt/mysql\x2dclient/bin\x1e/opt/homebrew/bin/node/bin\x1e/opt/homebrew/sbin\x1e/Users/christofferbergj/\x2eplatformsh/bin\x1e/Users/christofferbergj/\x2ecomposer/vendor/bin\x1e/opt/homebrew/bin\x1e/opt/homebrew/opt/fzf/bin
