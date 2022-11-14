@@ -48,8 +48,8 @@ yabai -m config window_gap                   15
 #
 # Setup spaces
 #
-for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 8)'); do
-  yabai -m space --destroy 9
+for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 7)'); do
+  yabai -m space --destroy 8
 done
 
 function setup_space {
@@ -74,13 +74,12 @@ setup_space 3 messages
 setup_space 4 media
 setup_space 5 notes
 setup_space 6 mail
-setup_space 7 figma
-setup_space 8 other
+setup_space 7 other
 
 # App rules
 yabai -m rule --add app="^Google Chrome$" space="main" 
-yabai -m rule --add app="^WebStorm$" space="editor" 
-yabai -m rule --add app="^WebStorm$" title="^Preferences|Keyboard Shortcut|Delete|Rename|Usages Detected$" manage=off
+yabai -m rule --add app="^WebStorm$" #space="editor" 
+yabai -m rule --add app="^WebStorm$" title="^Preferences|Keyboard Shortcut|Delete|Rename|Usages Detected|ESLint|Copy|Move|Add File to Git|Go to.*$" manage=off
 yabai -m rule --add app="^Slack$" space="messages"
 yabai -m rule --add app="^Notion$" space="notes"
 yabai -m rule --add app="^Todoist$" space="notes"
@@ -89,16 +88,16 @@ yabai -m rule --add app="^Spotify$" space="media"
 yabai -m rule --add app="^Sonos$" space="media" 
 yabai -m rule --add app="^Podcasts$" space="media" 
 yabai -m rule --add app="^Endel$" space="media" 
-yabai -m rule --add app="^Messenger$" space="messages" manage=off
+yabai -m rule --add app="^Messenger$" space="messages"
 yabai -m rule --add app="^Spark$" space="mail"
 yabai -m rule --add app="^Spark$" title="^New Message$" space="mail" manage=off
-yabai -m rule --add app="^Figma$" monitor=2 space="figma"
+yabai -m rule --add app="^Figma$" space=8
 
 yabai -m rule --add app="^CleanShot X$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^AltTab$" manage=off
 yabai -m rule --add app="^Reminders$" manage=off
-yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Archive Utility$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^JetBrains Toolbox$" manage=off
