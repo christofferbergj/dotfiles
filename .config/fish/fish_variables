@@ -134,6 +134,8 @@ SETUVAR _fish_abbr_gyn:git\x20yolo\x20\x2dn
 SETUVAR _fish_abbr_gyp:git\x20yolo\x3b\x20git\x20push
 SETUVAR _fish_abbr_gypn:git\x20yolo\x20\x2dn\x3b\x20git\x20push\x20\x2dn
 SETUVAR _fish_abbr_i:npm\x20install
+SETUVAR _fish_abbr_j:z
+SETUVAR _fish_abbr_kp:npm\x20kill\x2dport
 SETUVAR _fish_abbr_ll:exa\x20\x2dla
 SETUVAR _fish_abbr_nci:npm\x20ci
 SETUVAR _fish_abbr_nclean:rm\x20\x2drf\x20package\x2dlock\x2ejson\x20node_modules/\x3b\x20npm\x20install

@@ -11,8 +11,8 @@ set -gx EDITOR nvim
 # Base colors for prompt to match iterm scheme
 set -gx fish_term24bit 0
 
-# Init autojump
-[ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
+# Init zoxide
+zoxide init fish | source
 
 # Init Starship
 starship init fish | source

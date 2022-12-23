@@ -15,7 +15,7 @@ Plug 'dbakker/vim-paragraph-motion'
 
 " Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
-let g:highlightedyank_highlight_duration = 80
+let g:highlightedyank_highlight_duration = "100"
 
 " <C-n> seems to me as a better solution than <M-n>,
 " but we should finally support vim-visual-multi because vim-multiple-cursors is deprecated now
@@ -49,6 +49,7 @@ map <leader>g <Action>(ChooseRunConfiguration)
 map <leader>s <Action>(FileStructurePopup)
 map <leader>a <Action>(EditorAddCaretPerSelectedLine)
 map <leader>o <Action>(OptimizeImports)
+map <leader>p <Action>(ReformatWithPrettierAction)
 map <leader>b <Action>(ShowNavBar)
 map <leader>d <Action>(SelectAllOccurrences)
 map <leader>e <Action>(ShowIntentionActions)
@@ -70,8 +71,12 @@ nmap <leader>w V$%
 nmap <leader>V V$%
 nmap <leader>v v$
 nmap <leader>y V$%y
+nmap <C-d> <C-d>zz
+nmap <C-u> <C-u>zz
+nmap n nzz
+nmap N Nzz
 
-" I think it's a better solution
+" Undo with shift+u
 nmap U <C-R>
 
 " Keep register after pasting
