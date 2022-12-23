@@ -1,0 +1,5 @@
+theme = "gruvbox"
+
+[editor]
+line-number = "relative"
+mouse = false
