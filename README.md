@@ -1,12 +1,10 @@
-# dotfiles and apps
+# Dotfiles, cli tools and apps
 
 Repo for my configuration files and applications.
 
 ## General info
 
 * Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.  
-* Install `tj/n` through brew, and make sure the `N_PREFIX` variable export exists within fish_config.  
-* Make sure to delete `SETUVAR fish_user_paths` line from `.config/fish/fish_variables` before copying over.
 
 ## Fish shell
 
@@ -23,7 +21,7 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 
 **Make `fish` the default**
 
-* Check the fish path with which fish. In the examples below it was located at: /opt/homebrew/bin/fish. On older Macs these paths might differ.
+* Check the fish path with which fish.
 * Add fish to the know shells run the command: `sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells'`
 * Restart the terminal
 * Set fish as the default shell run the command: `chsh -s /opt/homebrew/bin/fish`
@@ -34,11 +32,10 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 
 `fish_config`
 
-
-
 ## Font
+
 `brew tap homebrew/cask-fonts`  
-`brew install --cask font-jetbrains-mono-nerd-font`
+`brew install --cask font-jetbrains-mono`
 
 ## CLI tools
 
@@ -66,6 +63,7 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 
 ## Apps
 
+* wezterm
 * fig
 * raycast
 * karabiner-elements
