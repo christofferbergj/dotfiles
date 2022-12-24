@@ -3,8 +3,3 @@
 
 .config/fish/conf.d/*_fig*
 .config/fish/functions/fzf_key_bindings.fish
-.config/configstore
-.config/github-copilot
-.config/configstore
-.config/jgit
-.config/planetscale
