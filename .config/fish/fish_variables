@@ -162,6 +162,7 @@ SETUVAR _fish_abbr_ws_2E_:open\x20\x2da\x20WebStorm\x20\x2e
 SETUVAR _fish_abbr_ya:yadm\x20add
 SETUVAR _fish_abbr_yb:nvim\x20\x7e/\x2econfig/yabai/yabairc
 SETUVAR _fish_abbr_ybs:nvim\x20\x7e/\x2econfig/skhd/skhdrc
+SETUVAR _fish_abbr_yc:yadm\x20commit
 SETUVAR _fish_abbr_yd:yadm\x20diff
 SETUVAR _fish_abbr_yp:yadm\x20push
 SETUVAR _fish_abbr_ys:yadm\x20status
