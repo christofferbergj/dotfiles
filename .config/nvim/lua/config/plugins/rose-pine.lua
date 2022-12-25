@@ -1,11 +1,11 @@
 return {
-  'rose-pine/neovim',
+  "rose-pine/neovim",
   lazy = false,
   enabled = false,
 
   config = function()
-    require('rose-pine').setup({
-      dark_variant = 'moon',
+    require("rose-pine").setup({
+      dark_variant = "moon",
       disable_background = true,
     })
   end,
