@@ -1,5 +1,5 @@
 return {
-    'folke/tokyonight.nvim',
+    "folke/tokyonight.nvim",
 
     lazy = false,
     enabled = false,

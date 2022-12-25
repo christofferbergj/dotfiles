@@ -15,7 +15,6 @@ return {
 	-- general
 	default_cursor_style = "SteadyBlock",
 	color_scheme = "Gruvbox dark, medium (base16)",
-
 	--color_scheme = "Rosé Pine Moon (base16)",
 	send_composed_key_when_left_alt_is_pressed = false,
 	send_composed_key_when_right_alt_is_pressed = true,
@@ -32,7 +31,7 @@ return {
 	tab_max_width = 999999,
 
 	-- window
-	window_background_opacity = 0.93,
+	window_background_opacity = 0.97,
 	window_decorations = "RESIZE",
 	window_padding = {
 		left = 25,
