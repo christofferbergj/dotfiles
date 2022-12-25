@@ -14,6 +14,13 @@ return {
     end,
 
     init = function()
-        vim.keymap.set("n", "<leader>gg", "<cmd>Neogit kind=split<cr>", { desc = "Neogit" })
+        local wk = require("which-key")
+        local binds = {
+            g = {
+                n = { "<cmd>Neogit kind=split<cr>", "Neogit" }
+            }
+        }
+
+        wk.register(binds, { prefix = "<leader>" })
     end,
 }
