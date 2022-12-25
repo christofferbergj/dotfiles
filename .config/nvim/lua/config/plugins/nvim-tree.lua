@@ -2,7 +2,8 @@ return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-        { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "NvimTree" },
+        { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "NvimTree toggle" },
+        { "<leader>n", "<cmd>NvimTreeFocus<cr>", desc = "NvimTree focus" },
     },
 
     config = function()
@@ -17,7 +18,7 @@ return {
     end,
 
     init = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
     end
 }

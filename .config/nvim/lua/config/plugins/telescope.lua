@@ -92,41 +92,65 @@ end
 function M.init()
     local builtin = require("telescope.builtin")
     local custom = require("config.plugins.telescope")
+    local extensions = require("telescope").extensions
+    local themes = require('telescope.themes')
+    local bind = vim.keymap.set
 
     -- live grep
-    vim.keymap.set("n", "<leader>fg", function()
+    bind("n", "<leader>fg", function()
         builtin.live_grep()
-    end, { desc = "Live Grep" })
+    end, { desc = "Live grep" })
+
+    -- word grep
+    bind("n", "<leader>fw", function()
+        builtin.grep_string()
+    end, { desc = "Word" })
 
     -- help tags
-    vim.keymap.set("n", "<leader>fh", function()
+    bind("n", "<leader>fh", function()
         builtin.help_tags()
-    end, { desc = "Help Tags" })
+    end, { desc = "Help tags" })
 
     -- open buffers
-    vim.keymap.set("n", "<leader>fb", function()
-        builtin.buffers({})
-    end, { desc = "Find Buffer" })
+    bind("n", "<leader>fb", function()
+        builtin.buffers()
+    end, { desc = "Open buffers" })
+
+    -- fuzzy search current buffer
+    bind('n', '<leader>f/', function()
+        local opts = themes.get_dropdown { previewer = false }
+        builtin.current_buffer_fuzzy_find(opts)
+    end, { desc = 'Current buffer' })
 
     -- nvim config files
-    vim.keymap.set("n", "<leader>fn", function()
+    bind("n", "<leader>fn", function()
         builtin.find_files({ cwd = "~/.config/nvim" })
-    end, { desc = "Find Nvim config file" })
+    end, { desc = "Neovim config files" })
 
     -- project files
-    vim.keymap.set("n", "<leader><space>", function()
+    bind("n", "<leader>ff", function()
         custom.project_files()
-    end, { desc = "Find Project File" })
+    end, { desc = "Project files" })
+
+    -- diagnostics
+    bind("n", "<leader>fd", function()
+        builtin.diagnostics({ initial_mode = "normal" })
+    end, { desc = "Diagnostics" })
 
     -- old files
-    vim.keymap.set("n", "<leader>fo", function()
+    bind("n", "<leader>fo", function()
         builtin.oldfiles()
-    end, { desc = "Find Old File" })
+    end, { desc = "Old files" })
 
     -- projects
-    vim.keymap.set("n", "<leader>fp", function()
-        require("telescope").extensions.project.project()
-    end, { desc = "Find Project" })
+    bind("n", "<leader>fp", function()
+        extensions.project.project()
+    end, { desc = "Projects" })
+
+    -- file browser
+    bind("n", "<leader>fB", function()
+        extensions.file_browser.file_browser()
+    end, { desc = "File browser" })
 
 end
 
