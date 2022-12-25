@@ -1,10 +1,11 @@
 local M = {
     "akinsho/nvim-toggleterm.lua",
+    enabled = true,
     cmd = { "ToggleTerm" },
 }
 
 -- Default options
-local defaultFloatOpts = { 
+local defaultFloatOpts = {
   direction = "float",
   hidden = true,
   -- full size

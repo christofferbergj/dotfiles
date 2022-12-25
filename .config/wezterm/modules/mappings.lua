@@ -12,7 +12,7 @@ return {
             action = act.ClearScrollback 'ScrollbackAndViewport',
         },
 
-        -- add new panes
+        -- add new panes (match vim default)
         {
             key = "s",
             mods = "LEADER",
