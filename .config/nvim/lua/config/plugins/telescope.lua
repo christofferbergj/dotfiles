@@ -4,11 +4,13 @@ local M = {
     cmd = { "Telescope" },
 
     dependencies = {
+        { "kkharji/sqlite.lua" },
+        { "nvim-lua/plenary.nvim" },
         { "nvim-telescope/telescope-file-browser.nvim" },
+        { "nvim-telescope/telescope-frecency.nvim" },
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         { "nvim-telescope/telescope-project.nvim" },
         { "nvim-telescope/telescope-symbols.nvim" },
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        { "nvim-lua/plenary.nvim" }
     },
 }
 
@@ -77,9 +79,9 @@ function M.config()
                 },
 
                 n = {
-                  ["q"] = actions.close,
-                  ["<C-j>"] = actions.move_selection_next,
-                  ["<C-k>"] = actions.move_selection_previous,
+                    ["q"] = actions.close,
+                    ["<C-j>"] = actions.move_selection_next,
+                    ["<C-k>"] = actions.move_selection_previous,
                 }
             },
         },
@@ -88,6 +90,7 @@ function M.config()
     telescope.load_extension("fzf")
     telescope.load_extension("file_browser")
     telescope.load_extension("project")
+    telescope.load_extension("frecency")
 end
 
 function M.init()
@@ -112,12 +115,13 @@ function M.init()
             w = { "<cmd>Telescope grep_string<cr>", "Grep word" },
             h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
             b = { "<cmd>Telescope buffers<cr>", "Open buffers" },
-            B = { "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>", "Projects" },
+            B = { "<cmd>Telescope file_browser<cr>", "Projects" },
             n = { "<cmd>Telescope find_files cwd=~/.config/nvim<cr>", "Nvim config files" },
             d = { "<cmd>Telescope diagnostics initial_mode=normal<cr>", "Diagnostics" },
             f = { "<cmd>lua require('config.plugins.telescope').project_files()<cr>", "Project files" },
             o = { "<cmd>Telescope oldfiles<cr>", "Old files" },
-            p = { "<cmd>lua require('telescope').extensions.project.project()<cr>", "Projects" },
+            r = { "<cmd>Telescope frecency<cr>", "Recent files" },
+            p = { "<cmd>Telescope project<cr>", "Projects" },
             ["/"] = {
                 function()
                     local opts = themes.get_dropdown { previewer = false }
