@@ -92,67 +92,47 @@ end
 
 function M.init()
     local builtin = require("telescope.builtin")
-    local custom = require("config.plugins.telescope")
-    local extensions = require("telescope").extensions
     local themes = require('telescope.themes')
-    local bind = vim.keymap.set
+    local wk = require("which-key")
 
-    -- live grep
-    bind("n", "<leader>fg", function()
-        builtin.live_grep()
-    end, { desc = "Live grep" })
+    local binds = {
+        h = {
+            t = { "<cmd>Telescope builtin<cr>", "Telescope" },
+            c = { "<cmd>Telescope commands<cr>", "Commands" },
+            h = { "<cmd>Telescope help_tags<cr>", "Help pages" },
+            m = { "<cmd>Telescope man_pages<cr>", "Man pages" },
+            k = { "<cmd>Telescope keymaps<cr>", "Key maps" },
+            s = { "<cmd>Telescope highlights<cr>", "Search highlight groups" },
+            f = { "<cmd>Telescope filetypes<cr>", "File types" },
+            o = { "<cmd>Telescope vim_options<cr>", "Options" },
+            a = { "<cmd>Telescope autocommands<cr>", "Auto commands" },
+        },
+        f = {
+            g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
+            w = { "<cmd>Telescope grep_string<cr>", "Grep word" },
+            h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
+            b = { "<cmd>Telescope buffers<cr>", "Open buffers" },
+            B = { "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>", "Projects" },
+            n = { "<cmd>Telescope find_files cwd=~/.config/nvim<cr>", "Nvim config files" },
+            d = { "<cmd>Telescope diagnostics initial_mode=normal<cr>", "Diagnostics" },
+            f = { "<cmd>lua require('config.plugins.telescope').project_files()<cr>", "Project files" },
+            o = { "<cmd>Telescope oldfiles<cr>", "Old files" },
+            p = { "<cmd>lua require('telescope').extensions.project.project()<cr>", "Projects" },
+            ["/"] = {
+                function()
+                    local opts = themes.get_dropdown { previewer = false }
+                    builtin.current_buffer_fuzzy_find(opts)
+                end, "Current buffer"
+            },
+        },
+        g = {
+            c = { "<cmd>Telescope git_commits<cr>", "Commits" },
+            b = { "<cmd>Telescope git_branches<cr>", "Branches" },
+            s = { "<cmd>Telescope git_status<cr>", "Status" },
+        },
+    }
 
-    -- word grep
-    bind("n", "<leader>fw", function()
-        builtin.grep_string()
-    end, { desc = "Word" })
-
-    -- help tags
-    bind("n", "<leader>fh", function()
-        builtin.help_tags()
-    end, { desc = "Help tags" })
-
-    -- open buffers
-    bind("n", "<leader>fb", function()
-        builtin.buffers()
-    end, { desc = "Open buffers" })
-
-    -- fuzzy search current buffer
-    bind('n', '<leader>f/', function()
-        local opts = themes.get_dropdown { previewer = false }
-        builtin.current_buffer_fuzzy_find(opts)
-    end, { desc = 'Current buffer' })
-
-    -- nvim config files
-    bind("n", "<leader>fn", function()
-        builtin.find_files({ cwd = "~/.config/nvim" })
-    end, { desc = "Neovim config files" })
-
-    -- project files
-    bind("n", "<leader>ff", function()
-        custom.project_files()
-    end, { desc = "Project files" })
-
-    -- diagnostics
-    bind("n", "<leader>fd", function()
-        builtin.diagnostics({ initial_mode = "normal" })
-    end, { desc = "Diagnostics" })
-
-    -- old files
-    bind("n", "<leader>fo", function()
-        builtin.oldfiles()
-    end, { desc = "Old files" })
-
-    -- projects
-    bind("n", "<leader>fp", function()
-        extensions.project.project()
-    end, { desc = "Projects" })
-
-    -- file browser
-    bind("n", "<leader>fB", function()
-        extensions.file_browser.file_browser()
-    end, { desc = "File browser" })
-
+    wk.register(binds, { prefix = "<leader>" })
 end
 
 return M
