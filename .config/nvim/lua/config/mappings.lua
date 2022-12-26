@@ -5,19 +5,23 @@ local bind = vim.keymap.set
 bind("n", "<C-Left>", "<cmd>bprevious<cr>")
 bind("n", "<C-Right>", "<cmd>bnext<cr>")
 
--- clear highlights with escape
+-- Clear highlights with escape
 bind({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
 
--- always center view when scrolling half a page
+-- Always center view when scrolling half a page
 bind("n", "<C-d>", "<C-d>zz")
 bind("n", "<C-u>", "<C-u>zz")
 
---  redo with shift-u
+-- Redo with shift-u
 bind("n", "U", "<C-r>")
 
+-- Navigate buffers
+bind("n", "[b", "<cmd>:bprevious<cr>", { desc = "Previous buffer" })
+bind("n", "]b", "<cmd>:bnext<cr>", { desc = "Next buffer" })
 
 -- which-key leader mappings
 local leader = {
+    q = { "<cmd>q<cr>", "Quit" },
     w = {
         name = "+window",
         ["w"] = { "<C-W>p", "Other window" },
@@ -53,6 +57,9 @@ local leader = {
         name = "+git",
         d = { "<cmd>DiffviewOpen<cr>", "DiffView" },
         h = { name = "+hunk" },
+    },
+    t = {
+        name = "+toggle",
     },
 }
 

@@ -2,18 +2,23 @@ local M = {
     "akinsho/nvim-toggleterm.lua",
     enabled = true,
     cmd = { "ToggleTerm" },
+    config = true,
 }
 
 -- Default options
 local defaultFloatOpts = {
   direction = "float",
   hidden = true,
-  -- full size
+  -- full size curved border
   float_opts = {
-    border = "single",
-    width = vim.o.columns,
-    height = vim.o.lines,
+      border = "curved",
+      width = vim.o.columns,
+      height = vim.o.lines,
   },
+  -- add qq keybinding to close the terminal
+  on_open = function(term)
+      vim.api.nvim_buf_set_keymap(term.bufnr, "t", "qq", "<cmd>close<cr>", {noremap = true, silent = true})
+  end,
   -- refresh buffer on close
   on_close = function()
     vim.cmd("checktime")
@@ -30,26 +35,25 @@ end
 
 function M.toggle_git_ui()
     local Terminal = require("toggleterm.terminal").Terminal
-    local gitui = Terminal:new(defaultFloatOpts)
+    local opts = vim.tbl_deep_extend("force", defaultFloatOpts, { cmd = "gitui" })
+    local gitui = Terminal:new(opts)
 
     gitui:toggle()
 end
 
-function M.config()
-    require("toggleterm").setup()
+function M.init()
+    local wk = require("which-key")
+    local binds = {
+        t = {
+            t = { "<cmd>lua require('config.plugins.toggleterm').toggle_default_float()<cr>", "Terminal" },
+            g = { "<cmd>lua require('config.plugins.toggleterm').toggle_git_ui()<cr>", "Gitui" },
+        }
+    }
+
+    wk.register(binds, { prefix = "<leader>" })
 
     -- Esc twice to get to normal mode
-    vim.cmd([[tnoremap <esc><esc> <C-\><C-N>]])
-end
-
-function M.init()
-    vim.keymap.set("n", "<leader>tt", function()
-        require("config.plugins.toggleterm").toggle_default_float()
-    end, { desc = "ToggleTerm Default Float" })
-
-    vim.keymap.set("n", "<leader>tg", function()
-        require("config.plugins.toggleterm").toggle_git_ui()
-    end, { desc = "ToggleTerm Git UI" })
+    vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>", {noremap = true, silent = true})
 end
 
 return M

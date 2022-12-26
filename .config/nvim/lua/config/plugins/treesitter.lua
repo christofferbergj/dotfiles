@@ -6,10 +6,11 @@ local M = {
     event = "BufReadPost",
 
     dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+        "JoosepAlviste/nvim-ts-context-commentstring",
         "RRethy/nvim-treesitter-textsubjects",
-        "nvim-treesitter/nvim-treesitter-refactor",
         "mfussenegger/nvim-treehopper",
+        "nvim-treesitter/nvim-treesitter-refactor",
+        "nvim-treesitter/nvim-treesitter-textobjects",
         { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     },
 }
@@ -102,6 +103,9 @@ function M.config()
                     ["gD"] = "@function.outer",
                 },
             },
+        },
+        matchup = {
+            enable = true,
         },
     })
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-
+#
 # the scripting-addition must be loaded manually if
 # you are running yabai on macOS Big Sur. Uncomment
 # the following line to have the injection performed
