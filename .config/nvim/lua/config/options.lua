@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 
 local set = vim.opt
 
+set.autochdir = true
 set.autoread = true
 set.autowrite = true
 set.autowriteall = true
