@@ -3,11 +3,17 @@ return {
     "folke/which-key.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
-    { "glepnir/dashboard-nvim", lazy = false },
+    "MunifTanjim/nui.nvim",
     { "Pocco81/auto-save.nvim", event = "VeryLazy", config = true },
 
     -- Search and replace stuff
     "windwp/nvim-spectre",
+
+    {
+        "dstein64/vim-startuptime",
+        -- lazy-load on a command
+        cmd = "StartupTime",
+    },
 
     -- Use treesitter to auto-close and auto-rename html tag
     { "windwp/nvim-ts-autotag", event = "InsertEnter", config = true },

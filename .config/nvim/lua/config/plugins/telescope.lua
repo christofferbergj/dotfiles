@@ -41,6 +41,11 @@ function M.config()
                     { "~/code", max_depth = 3 },
                 },
             },
+            frecency = {
+                default_workspace = "CWD",
+                show_filter_column = false,
+                show_unindexed = false
+            },
         },
         defaults = {
             vimgrep_arguments = {
@@ -114,8 +119,8 @@ function M.init()
             g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
             w = { "<cmd>Telescope grep_string<cr>", "Grep word" },
             h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
-            b = { "<cmd>Telescope buffers<cr>", "Open buffers" },
-            B = { "<cmd>Telescope file_browser<cr>", "Projects" },
+            B = { "<cmd>Telescope buffers<cr>", "Open buffers" },
+            b = { "<cmd>Telescope file_browser<cr>", "Projects" },
             n = { "<cmd>Telescope find_files cwd=~/.config/nvim<cr>", "Nvim config files" },
             ["."] = { "<cmd>Telescope find_files cwd=~/.config<cr>", "Dotfiles" },
             d = { "<cmd>Telescope diagnostics initial_mode=normal<cr>", "Diagnostics" },

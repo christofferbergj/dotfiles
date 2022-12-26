@@ -1,9 +1,11 @@
 local wk = require("which-key")
 local bind = vim.keymap.set
 
--- Switch buffers with ctrl + arrow keys
-bind("n", "<C-Left>", "<cmd>bprevious<cr>")
-bind("n", "<C-Right>", "<cmd>bnext<cr>")
+-- Navigate buffers
+bind("n", "<C-Left>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+bind("n", "<C-Right>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+bind("n", "[b", "<cmd>:bprevious<cr>", { desc = "Previous buffer" })
+bind("n", "]b", "<cmd>:bnext<cr>", { desc = "Next buffer" })
 
 -- Clear highlights with escape
 bind({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
@@ -15,9 +17,9 @@ bind("n", "<C-u>", "<C-u>zz")
 -- Redo with shift-u
 bind("n", "U", "<C-r>")
 
--- Navigate buffers
-bind("n", "[b", "<cmd>:bprevious<cr>", { desc = "Previous buffer" })
-bind("n", "]b", "<cmd>:bnext<cr>", { desc = "Next buffer" })
+
+-- Telescope recent files on control+r current cwd
+bind("n", "<C-r>", "<cmd>Telescope frecency<cr>", { desc = "Recent files" })
 
 -- which-key leader mappings
 local leader = {
@@ -55,8 +57,7 @@ local leader = {
     },
     g = {
         name = "+git",
-        d = { "<cmd>DiffviewOpen<cr>", "DiffView" },
-        h = { name = "+hunk" },
+        ["d"] = { "<cmd>DiffviewOpen<cr>", "DiffView" },
     },
     t = {
         name = "+toggle",
