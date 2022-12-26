@@ -1,23 +1,6 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
-# Override fish greeting
-set fish_greeting
-
-# Default editor
-set -gx EDITOR nvim
-
-# Base colors for prompt to match iterm scheme
-# set -gx fish_term24bit 0
-
-# Init zoxide
-zoxide init fish | source
-
-# Init Starship
-starship init fish | source
-
-# theme
+# Kanagawa Fish shell theme
+# A template was taken and modified from Tokyonight:
+# https://github.com/folke/tokyonight.nvim/blob/main/extras/fish_tokyonight_night.fish
 set -l foreground DCD7BA
 set -l selection 2D4F67
 set -l comment 727169
@@ -50,4 +33,3 @@ set -g fish_pager_color_progress $comment
 set -g fish_pager_color_prefix $cyan
 set -g fish_pager_color_completion $foreground
 set -g fish_pager_color_description $comment
-

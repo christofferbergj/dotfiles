@@ -1,6 +1,6 @@
 return {
     "ellisonleao/gruvbox.nvim",
-    enabled = true,
+    enabled = false,
     lazy = false,
 
     config = function()

@@ -117,6 +117,7 @@ function M.init()
             b = { "<cmd>Telescope buffers<cr>", "Open buffers" },
             B = { "<cmd>Telescope file_browser<cr>", "Projects" },
             n = { "<cmd>Telescope find_files cwd=~/.config/nvim<cr>", "Nvim config files" },
+            ["."] = { "<cmd>Telescope find_files cwd=~/.config<cr>", "Dotfiles" },
             d = { "<cmd>Telescope diagnostics initial_mode=normal<cr>", "Diagnostics" },
             f = { "<cmd>lua require('config.plugins.telescope').project_files()<cr>", "Project files" },
             o = { "<cmd>Telescope oldfiles<cr>", "Old files" },
