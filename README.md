@@ -2,6 +2,29 @@
 
 Repo for my configuration files and applications.
 
+## Screenshots
+
+![Neovim editor](https://user-images.githubusercontent.com/10507071/209715862-1437e36d-874c-439a-bcb2-dba439e056bf.png)
+
+
+<details>
+<summary>More screenshots</summary>
+
+### Neovim dashboard
+
+![Neovim dashboard](https://user-images.githubusercontent.com/10507071/209714484-7b6b8f61-9072-4906-89aa-487445209e81.png)
+
+### Telescope
+
+![TeleScope](https://user-images.githubusercontent.com/10507071/209715699-1a418964-b373-45a1-bc32-80a689e6dd7b.png)
+
+
+### Lua
+
+![Lua](https://user-images.githubusercontent.com/10507071/209715051-92a02502-5921-47ae-8986-e168c2ac6a9f.png)
+
+</details>
+
 ## General info
 
 * Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.  
