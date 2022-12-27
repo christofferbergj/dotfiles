@@ -112,21 +112,22 @@ function M.init()
             a = { "<cmd>Telescope autocommands<cr>", "Auto commands" },
         },
         f = {
+            s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
+            S = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace symbols" },
             g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
             w = { "<cmd>Telescope grep_string<cr>", "Grep word" },
             h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
-            B = { "<cmd>Telescope buffers<cr>", "Open buffers" },
             b = { "<cmd>Telescope file_browser<cr>", "Projects" },
+            B = { "<cmd>Telescope buffers<cr>", "Open buffers" },
             n = { "<cmd>Telescope find_files cwd=~/.config/nvim<cr>", "Nvim config files" },
-            -- todo comments
             t = { "<cmd>TodoTelescope<cr>", "Todo comments" },
-            ["."] = { "<cmd>Telescope find_files cwd=~/.config<cr>", "Dotfiles" },
             d = { "<cmd>Telescope diagnostics initial_mode=normal<cr>", "Diagnostics" },
             f = { "<cmd>lua require('config.plugins.telescope').project_files()<cr>", "Project files" },
             o = { "<cmd>Telescope oldfiles<cr>", "Old files" },
             r = { "<cmd>Telescope frecency<cr>", "Recent files" },
             p = { "<cmd>Telescope projects<cr>", "Projects" },
             y = { "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", "Yank history" },
+            ["."] = { "<cmd>Telescope find_files cwd=~/.config<cr>", "Dotfiles" },
             ["/"] = {
                 function()
                     local opts = themes.get_dropdown { previewer = false }

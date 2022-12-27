@@ -13,7 +13,7 @@ function M.config()
             changedelete = { hl = "GitSignsChange", text = "▍", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
             untracked = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         },
-        update_debounce = 15,
+        update_debounce = 10,
         on_attach = function()
             local bind = vim.keymap.set
             local gs = package.loaded.gitsigns
