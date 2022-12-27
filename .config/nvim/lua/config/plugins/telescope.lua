@@ -4,12 +4,12 @@ local M = {
     cmd = { "Telescope" },
 
     dependencies = {
+        { "ahmedkhalf/project.nvim" },
         { "kkharji/sqlite.lua" },
         { "nvim-lua/plenary.nvim" },
         { "nvim-telescope/telescope-file-browser.nvim" },
         { "nvim-telescope/telescope-frecency.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        { "nvim-telescope/telescope-project.nvim" },
         { "nvim-telescope/telescope-symbols.nvim" },
     },
 }
@@ -31,16 +31,12 @@ function M.project_files(opts)
 end
 
 function M.config()
-    local telescope = require("telescope")
     local actions = require("telescope.actions")
+    local telescope = require("telescope")
+    local trouble = require("trouble.providers.telescope")
 
     telescope.setup({
         extensions = {
-            project = {
-                base_dirs = {
-                    { "~/code", max_depth = 3 },
-                },
-            },
             frecency = {
                 default_workspace = "CWD",
                 show_filter_column = false,
@@ -79,23 +75,23 @@ function M.config()
             },
             mappings = {
                 i = {
-                    ["<C-j>"] = actions.move_selection_next,
-                    ["<C-k>"] = actions.move_selection_previous,
+                    ["<c-j>"] = actions.move_selection_next,
+                    ["<c-k>"] = actions.move_selection_previous,
                 },
 
                 n = {
                     ["q"] = actions.close,
-                    ["<C-j>"] = actions.move_selection_next,
-                    ["<C-k>"] = actions.move_selection_previous,
+                    ["<c-j>"] = actions.move_selection_next,
+                    ["<c-k>"] = actions.move_selection_previous,
                 }
             },
         },
     })
 
-    telescope.load_extension("fzf")
     telescope.load_extension("file_browser")
-    telescope.load_extension("project")
     telescope.load_extension("frecency")
+    telescope.load_extension("fzf")
+    telescope.load_extension("projects")
 end
 
 function M.init()
@@ -122,12 +118,15 @@ function M.init()
             B = { "<cmd>Telescope buffers<cr>", "Open buffers" },
             b = { "<cmd>Telescope file_browser<cr>", "Projects" },
             n = { "<cmd>Telescope find_files cwd=~/.config/nvim<cr>", "Nvim config files" },
+            -- todo comments
+            t = { "<cmd>TodoTelescope<cr>", "Todo comments" },
             ["."] = { "<cmd>Telescope find_files cwd=~/.config<cr>", "Dotfiles" },
             d = { "<cmd>Telescope diagnostics initial_mode=normal<cr>", "Diagnostics" },
             f = { "<cmd>lua require('config.plugins.telescope').project_files()<cr>", "Project files" },
             o = { "<cmd>Telescope oldfiles<cr>", "Old files" },
             r = { "<cmd>Telescope frecency<cr>", "Recent files" },
-            p = { "<cmd>Telescope project<cr>", "Projects" },
+            p = { "<cmd>Telescope projects<cr>", "Projects" },
+            y = { "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", "Yank history" },
             ["/"] = {
                 function()
                     local opts = themes.get_dropdown { previewer = false }

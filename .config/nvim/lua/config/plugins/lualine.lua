@@ -3,14 +3,19 @@ return {
     enabled = true,
     event = "BufReadPost",
 
+    dependencies = {
+        -- navic
+        { "SmiteshP/nvim-navic" },
+    },
+
     config = function()
+        local navic = require("nvim-navic")
+
         require("lualine").setup({
             options = {
                 icons_enabled = true,
                 theme = "auto",
                 disabled_filetypes = {},
-                -- section_separators = { left = "", right = "" },
-                -- component_separators = { left = "", right = "" },
                 section_separators = {},
                 component_separators = {},
                 always_divide_middle = true,
@@ -19,7 +24,11 @@ return {
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "branch" },
-                lualine_c = { "filename" },
+                lualine_c = {
+                    { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+                    { "filename", path = 1 },
+                    { navic.get_location, cond = navic.is_available },
+                },
                 lualine_x = { "diagnostics", "diff", "filetype" },
                 lualine_y = { "location" },
                 lualine_z = { "progress" },

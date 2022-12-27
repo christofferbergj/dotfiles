@@ -17,13 +17,25 @@ bind("n", "<C-u>", "<C-u>zz")
 -- Redo with shift-u
 bind("n", "U", "<C-r>")
 
-
 -- Telescope recent files on control+r current cwd
 bind("n", "<C-r>", "<cmd>Telescope frecency<cr>", { desc = "Recent files" })
 
 -- which-key leader mappings
 local leader = {
     q = { "<cmd>q<cr>", "Quit" },
+    l = { "<cmd>Lazy<cr>", "Lazy" },
+    r = {
+        name = "+refactor",
+    },
+    x = {
+        name = "+errors",
+    },
+    c = {
+        name = "+code",
+    },
+    f = {
+        name = "+find"
+    },
     w = {
         name = "+window",
         ["w"] = { "<C-W>p", "Other window" },
@@ -39,12 +51,6 @@ local leader = {
         ["="] = { "<C-W>=", "Balance window" },
         ["s"] = { "<C-W>s", "Split window below" },
         ["v"] = { "<C-W>v", "Split window wight" },
-    },
-    c = {
-        name = "+code",
-    },
-    f = {
-      name = "+find"
     },
     b = {
         name = "+buffer",

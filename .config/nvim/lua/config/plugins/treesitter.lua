@@ -59,27 +59,22 @@ function M.config()
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "<C-n>",
-                node_incremental = "<C-n>",
-                scope_incremental = "<C-s>",
-                node_decremental = "<C-r>",
+                init_selection = "<c-n>",
+                node_incremental = "<c-n>",
+                scope_incremental = "<c-s>",
+                node_decremental = "<c-r>",
             },
         },
         textsubjects = {
             enable = true,
             keymaps = {
-                enable = true,
-                prev_selection = ',', -- (Optional) keymap to select the previous selection
-                keymaps = {
-                    ['.'] = 'textsubjects-smart',
-                    [';'] = 'textsubjects-container-outer',
-                    ['i;'] = 'textsubjects-container-inner',
-                },
+                ["."] = "textsubjects-smart",
+                [";"] = "textsubjects-container-outer",
+                ['i;'] = 'textsubjects-container-inner',
             },
         },
         textobjects = {
             select = {
-                enable = true,
                 lookahead = true,
                 keymaps = {
                     -- You can use the capture groups defined in textobjects.scm
