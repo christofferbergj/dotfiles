@@ -9,12 +9,6 @@ return {
     -- Search and replace stuff
     "windwp/nvim-spectre",
 
-    {
-        "dstein64/vim-startuptime",
-        -- lazy-load on a command
-        cmd = "StartupTime",
-    },
-
     -- Use treesitter to auto-close and auto-rename html tag
     { "windwp/nvim-ts-autotag", event = "InsertEnter", config = true },
 
@@ -24,17 +18,6 @@ return {
     { "stevearc/dressing.nvim", event = "VeryLazy" },
 
     { "andymass/vim-matchup", event = "BufRead", config = true },
-
-    {
-        "folke/trouble.nvim",
-        cmd = { "TroubleToggle", "Trouble" },
-        config = function()
-            require("trouble").setup({
-                auto_open = false,
-                use_diagnostic_signs = true,
-            })
-        end,
-    },
 
     {
         "folke/zen-mode.nvim",

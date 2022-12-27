@@ -143,6 +143,7 @@ SETUVAR _fish_abbr_ni:npm\x20install
 SETUVAR _fish_abbr_no:npm\x20outdated
 SETUVAR _fish_abbr_nr:npm\x20remove
 SETUVAR _fish_abbr_nu:npm\x20update
+SETUVAR _fish_abbr_nv:nvim
 SETUVAR _fish_abbr_p:pnpm
 SETUVAR _fish_abbr_pa:pnpm\x20add
 SETUVAR _fish_abbr_pi:pnpm\x20install
@@ -156,7 +157,6 @@ SETUVAR _fish_abbr_r:npm\x20run
 SETUVAR _fish_abbr_ra:ranger
 SETUVAR _fish_abbr_s:git\x20status\x20\x2ds
 SETUVAR _fish_abbr_v:nvim
-SETUVAR _fish_abbr_vim:nvim
 SETUVAR _fish_abbr_ws:open\x20\x2da\x20WebStorm
 SETUVAR _fish_abbr_ws_2E_:open\x20\x2da\x20WebStorm\x20\x2e
 SETUVAR _fish_abbr_ya:yadm\x20add
