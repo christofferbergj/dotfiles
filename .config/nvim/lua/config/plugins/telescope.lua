@@ -113,7 +113,7 @@ function M.init()
         },
         f = {
             s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
-            S = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace symbols" },
+            S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace symbols" },
             g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
             w = { "<cmd>Telescope grep_string<cr>", "Grep word" },
             h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
