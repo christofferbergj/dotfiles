@@ -2,7 +2,8 @@ vim.g.mapleader = " "
 
 local set = vim.opt
 
-set.clipboard = "unnamedplus"
+set.eol = true -- end of line
+set.clipboard = "unnamedplus" -- copy to system clipboard
 set.autoread = true -- reload file if changed outside of vim
 set.autowrite = true -- save file when switching buffers
 set.autowriteall = true -- save all files when quitting

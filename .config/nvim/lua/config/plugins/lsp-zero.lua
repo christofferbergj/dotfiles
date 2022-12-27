@@ -48,6 +48,9 @@ function M.config()
   local cmp_sources = lsp.defaults.cmp_sources({
     { name = 'nvim_lsp', keyword_length = 1 },
     { name = 'buffer', keyword_length = 1 },
+    { name = 'path', keyword_length = 1 },
+    { name = 'luasnip', keyword_length = 1 },
+    { name = 'nvim_lua', keyword_length = 1 },
   })
 
   -- cmp settings
