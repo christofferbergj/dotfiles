@@ -10,11 +10,27 @@ return {
   -- Search and replace stuff
   "windwp/nvim-spectre",
 
+  {
+    "simrat39/symbols-outline.nvim",
+    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    config = true,
+  },
+
   -- Use treesitter to auto-close and auto-rename html tag
   { "windwp/nvim-ts-autotag", event = "InsertEnter", config = true },
 
   -- Useful status updates for LSP
-  { "j-hui/fidget.nvim", config = true },
+  { "j-hui/fidget.nvim", config = function()
+    require("fidget").setup({
+      text = {
+        spinner = "line", -- animation shown when tasks are ongoing
+        done = "✓", -- character shown when all tasks are complete
+        commenced = "Started", -- message shown when task starts
+        completed = "Completed", -- message shown when task completes
+      },
+    })
+  end
+  },
 
   { "stevearc/dressing.nvim", event = "VeryLazy" },
 

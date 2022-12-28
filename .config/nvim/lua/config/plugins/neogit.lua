@@ -8,7 +8,7 @@ return {
 
     config = function()
         require("neogit").setup({
-            kind = "split",
+            kind = "vsplit",
             integrations = { diffview = true },
         })
     end,
@@ -17,7 +17,7 @@ return {
         local wk = require("which-key")
         local binds = {
             g = {
-                n = { "<cmd>Neogit kind=split<cr>", "Neogit" }
+                n = { "<cmd>Neogit<cr>", "Neogit" }
             }
         }
 
