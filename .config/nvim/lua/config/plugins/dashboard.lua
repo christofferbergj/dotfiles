@@ -36,7 +36,7 @@ function M.config()
           shortcut = 'SPC f f' },
         { icon = '  ',
           desc = 'File Browser                        ',
-          shortcut = 'SPC f B' },
+          shortcut = 'SPC f b' },
         { icon = '  ',
           desc = 'Find nvim config files              ',
           shortcut = 'SPC f n' },

@@ -13,13 +13,13 @@ function M.config()
             changedelete = { hl = "GitSignsChange", text = "▍", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
             untracked = { hl = "GitSignsAdd", text = "▍", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
         },
-        update_debounce = 10,
+        update_debounce = 15,
         on_attach = function()
             local bind = vim.keymap.set
             local gs = package.loaded.gitsigns
             local wk = require("which-key")
 
-            function handle_navigate_next()
+            local function handle_navigate_next()
                 if vim.wo.diff then
                     return "]h"
                 end
@@ -29,7 +29,7 @@ function M.config()
                 return "<Ignore>"
             end
 
-            function handle_navigate_prev()
+            local function handle_navigate_prev()
                 if vim.wo.diff then
                     return "[h"
                 end

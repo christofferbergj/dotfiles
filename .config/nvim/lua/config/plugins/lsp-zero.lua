@@ -59,6 +59,8 @@ function M.config()
     mapping = cmp_mappings,
   })
 
+  lsp.configure('tsserver', { force_setup = true })
+
   lsp.setup()
 end
 

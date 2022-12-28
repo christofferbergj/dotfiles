@@ -79,7 +79,7 @@ setup_space 7 other
 # App rules
 yabai -m rule --add app="^Google Chrome$" space="main" 
 yabai -m rule --add app="^Brave Browser$" space="main" 
-yabai -m rule --add app="^WezTerm$" space="main"
+yabai -m rule --add app="^WezTerm$" space="editor"
 yabai -m rule --add app="^WebStorm$" space="editor"
 yabai -m rule --add app="^WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts$"  manage=off
 yabai -m rule --add app="^Slack$" space="messages"

@@ -23,6 +23,16 @@ return {
             mods = "LEADER",
             action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
         },
+        {
+            key = "d",
+            mods = "CMD",
+            action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+        },
+        {
+            key = "d",
+            mods = "CMD|SHIFT",
+            action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+        },
 
         -- closes current pane
         {
