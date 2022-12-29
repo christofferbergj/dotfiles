@@ -42,6 +42,11 @@ function M.config()
         show_unindexed = false
       },
     },
+    pickers = {
+      buffers = {
+        sort_lastused = true
+      }
+    },
     defaults = {
       vimgrep_arguments = {
         "rg",
@@ -100,11 +105,10 @@ function M.init()
   local bind = vim.keymap.set
 
   bind("n", "<A-e>", "<cmd>Telescope buffers initial_mode=normal<cr>", { desc = "Open buffers" })
-  bind("n", "<A-w>", "<cmd>Telescope frecency initial_mode=normal<cr>", { desc = "Open recent files" })
-  bind("n", "<A-r>", "<cmd>Telescope frecency initial_mode=normal<cr>", { desc = "Open recent files" })
-  bind("n", "<A-f>", "<cmd>lua require('config.plugins.telescope').project_files()<cr>", { desc = "Find files" })
-  -- alt + / current buffer fuzzy with dropdown theme
-  bind("n", "<A-/>",
+  bind("n", "<A-w>", "<cmd>Telescope frecency<cr>", { desc = "Open recent files" })
+  bind("n", "<A-r>", "<cmd>Telescope frecency<cr>", { desc = "Open recent files" })
+  bind("n", "<A-p>", "<cmd>lua require('config.plugins.telescope').project_files()<cr>", { desc = "Find files" })
+  bind("n", "<A-f>",
     "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
     , { desc = "Find in current buffer" })
 

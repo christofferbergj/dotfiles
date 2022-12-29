@@ -7,6 +7,10 @@ bind("n", "<C-Right>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 bind("n", "[b", "<cmd>:bprevious<cr>", { desc = "Previous buffer" })
 bind("n", "]b", "<cmd>:bnext<cr>", { desc = "Next buffer" })
 
+-- Navigate diagnostics
+bind("n", "<A-j>", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
+bind("n", "<A-k>", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
+
 -- Clear highlights with escape
 bind({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
 
@@ -22,7 +26,7 @@ bind("n", "<C-r>", "<cmd>Telescope frecency<cr>", { desc = "Recent files" })
 
 -- which-key leader mappings
 local leader = {
-  q = { "<cmd>q<cr>", "Quit" },
+  q = { "<cmd>close<cr>", "Close" },
   L = { "<cmd>Lazy<cr>", "Lazy" },
   l = {
     name = "+lsp",

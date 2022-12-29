@@ -7,9 +7,6 @@ return {
   { "mg979/vim-visual-multi", event = "BufReadPost", branch = "master" },
   { "Pocco81/auto-save.nvim", event = "VeryLazy", config = true },
 
-  -- Search and replace stuff
-  "windwp/nvim-spectre",
-
   {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
@@ -18,6 +15,13 @@ return {
 
   -- Use treesitter to auto-close and auto-rename html tag
   { "windwp/nvim-ts-autotag", event = "InsertEnter", config = true },
+
+  -- Persist sessions
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    config = { options = { "buffers", "curdir", "tabpages", "winsize", "help" } },
+  },
 
   -- Useful status updates for LSP
   { "j-hui/fidget.nvim", config = function()
