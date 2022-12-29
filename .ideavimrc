@@ -28,7 +28,7 @@ set incsearch
 set number
 set rnu
 set showmode
-set scrolloff=7
+set scrolloff=8
 set visualbell
 
 " Idea specific settings ------------------

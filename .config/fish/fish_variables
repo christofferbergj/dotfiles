@@ -10,7 +10,6 @@ SETUVAR _fish_abbr_bs:brew\x20search
 SETUVAR _fish_abbr_bsc:brew\x20search\x20\x2d\x2dcask
 SETUVAR _fish_abbr_bse:brew\x20services
 SETUVAR _fish_abbr_bsel:brew\x20services\x20list
-SETUVAR _fish_abbr_c:code
 SETUVAR _fish_abbr_c_2E_:code\x20\x2e
 SETUVAR _fish_abbr_cat:bat
 SETUVAR _fish_abbr_find:fd
