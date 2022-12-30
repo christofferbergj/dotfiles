@@ -8,8 +8,8 @@ set fish_greeting
 # Default editor
 set -gx EDITOR nvim
 
-# Base colors for prompt to match iterm scheme
-# set -gx fish_term24bit 0
+# Force 24-bit color support
+set -gx fish_term24bit 1
 
 # Init zoxide
 zoxide init fish | source

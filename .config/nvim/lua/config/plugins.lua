@@ -16,13 +16,6 @@ return {
   -- Use treesitter to auto-close and auto-rename html tag
   { "windwp/nvim-ts-autotag", event = "InsertEnter", config = true },
 
-  -- Persist sessions
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
-    config = { options = { "buffers", "curdir", "tabpages", "winsize", "help" } },
-  },
-
   -- Useful status updates for LSP
   { "j-hui/fidget.nvim", config = function()
     require("fidget").setup({
@@ -38,7 +31,12 @@ return {
 
   { "stevearc/dressing.nvim", event = "VeryLazy" },
 
-  { "andymass/vim-matchup", event = "BufRead", config = true },
+  { "andymass/vim-matchup",
+    event = "BufRead",
+    config = function()
+      -- may set any options here
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end },
 
   {
     "folke/zen-mode.nvim",
