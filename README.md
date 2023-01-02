@@ -1,10 +1,32 @@
 # Dotfiles, cli tools and apps
 
-Repo for my configuration files and applications.
+Repo for my configuration files and list of applications.
+
+## Quick overview
+
+**Operating system**  
+MacOS 
+
+**Terminal**  
+WezTerm
+
+**Editor**  
+Neovim + WebStorm
+
+**Window manager**  
+Yabai + Skhd
+
+**Launcher**  
+Raycast
+
+**Theme**  
+Gruvbox Medium Dark
 
 ## Screenshots
 
-![Neovim editor](https://user-images.githubusercontent.com/10507071/210084278-3849c000-f9a7-4cf7-ba95-3ec992c5abd4.png)
+### Neovim in TypeScript file
+
+![Neovim editor](https://user-images.githubusercontent.com/10507071/210222169-0adfa285-427d-4ed9-b0a2-f6d82c21a143.png)
 
 
 <details>
@@ -42,15 +64,15 @@ More info: https://fishshell.com/docs/current/tutorial.html#tut_path
 
 **Check the path**
 
-Check the fish path with `which fish`. In the examples below it was located at: `/opt/homebrew/bin/fish`. 
+Check the fish path with `which fish`. Most likely: `/opt/homebrew/bin/fish`. 
 On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the instruction below.
 
 **Make `fish` the default**
 
 * Check the fish path with which fish.
-* Add fish to the know shells run the command: `sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells'`
+* Add fish to the know shells run the command: `sudo sh -c 'echo (which fish) >> /etc/shells'`
 * Restart the terminal
-* Set fish as the default shell run the command: `chsh -s /opt/homebrew/bin/fish`
+* Set fish as the default shell run the command: `chsh -s (which fish)`
 * Restart the terminal and check if it launched with fish or not
 * Add brew binaries in fish path run the command: `set -U fish_user_paths /opt/homebrew/bin $fish_user_paths`
 
@@ -102,7 +124,7 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 * google drive
 * iterm
 * spotify
-* monitorcontrol
+* betterdisplay
 * grammarly desktop
 * spaceid
 * notion
