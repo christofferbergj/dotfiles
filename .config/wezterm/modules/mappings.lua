@@ -108,6 +108,22 @@ return {
     { key = '1', mods = 'CTRL', action = act.ActivatePaneByIndex(0) },
     { key = '2', mods = 'CTRL', action = act.ActivatePaneByIndex(1) },
     { key = '3', mods = 'CTRL', action = act.ActivatePaneByIndex(2) },
+
+    -- focus tab relative to each other
+    {
+      key = "j", mods = "CMD|SHIFT", action = act.ActivateTabRelative(-1)
+    },
+    {
+      key = "k", mods = "CMD|SHIFT", action = act.ActivateTabRelative(1)
+    },
+
+    -- move tab relative to each other
+    {
+      key = 'h', mods = 'CMD|SHIFT', action = act.MoveTabRelative(-1)
+    },
+    {
+      key = 'l', mods = 'CMD|SHIFT', action = act.MoveTabRelative(1)
+    },
   },
 
   key_tables = {
