@@ -55,8 +55,8 @@ hyper - down : yabai -m window --move rel:0:150
 hyper - left : yabai -m window --move rel:-150:0
 
 # Rotate windows
-hyper - d : yabai -m window --swap next || yabai -m window --swap first
-hyper - a : yabai -m window --swap prev || yabai -m window --swap last
+hyper - e : yabai -m window --swap next || yabai -m window --swap first
+hyper - q : yabai -m window --swap prev || yabai -m window --swap last
 
 alt - r         : yabai -m space --rotate 270
 shift + alt - r : yabai -m space --rotate 90
@@ -98,11 +98,11 @@ hyper - 0 : yabai -m space --balance
 hyper - b : yabai -m space --balance
 
 # Focus windows forwards
-hyper - e : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "next" else "stack.next" end') || \
+hyper - d : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "next" else "stack.next" end') || \
             yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "first" else "stack.first" end')
 
 # Focus windows backwards
-hyper - q : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "prev" else "stack.prev" end') || \
+hyper - a : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "prev" else "stack.prev" end') || \
             yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "last" else "stack.last" end')
 
 

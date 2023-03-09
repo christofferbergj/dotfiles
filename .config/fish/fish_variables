@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export N_PREFIX:/opt/homebrew/bin/node
+SETUVAR --export N_PREFIX:/Users/christofferbergj/\x2en
 SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_b:brew
 SETUVAR _fish_abbr_bi:brew\x20install
@@ -209,4 +209,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/christofferbergj/\x2ecargo/bin\x1e/Users/christofferbergj/Library/Application\x20Support/JetBrains/Toolbox/scripts\x1e/opt/homebrew/opt/mysql\x2dclient/bin\x1e/opt/homebrew/bin/node/bin\x1e/opt/homebrew/sbin\x1e/Users/christofferbergj/\x2eplatformsh/bin\x1e/Users/christofferbergj/\x2ecomposer/vendor/bin\x1e/opt/homebrew/bin\x1e/opt/homebrew/opt/fzf/bin
+SETUVAR fish_user_paths:/Users/christofferbergj/\x2en/bin\x1e/usr/local/bin\x1e/opt/homebrew/bin\x1e/Users/christofferbergj/\x2ecargo/bin\x1e/opt/homebrew/bin/node/bin\x1e/opt/homebrew/sbin\x1e/opt/homebrew/opt/fzf/bin
