@@ -69,22 +69,26 @@ setup_space() {
 
 # Label spaces
 setup_space 1 browser
-setup_space 2 editor
-setup_space 3 messages
-setup_space 4 media
-setup_space 5 notes
+setup_space 2 terminal
+setup_space 3 editor
+setup_space 4 messages
+setup_space 5 media
 setup_space 6 mail
-setup_space 7 other
+setup_space 7 notes
+setup_space 8 other
 
-# App rules
-yabai -m rule --add app="^Google Chrome$" space="browser"
-yabai -m rule --add app="^Brave Browser$" space="browser"
 
 # Terminal
-yabai -m rule --add app="^WezTerm$" space="editor"
+yabai -m rule --add app="^WezTerm$" space="terminal"
+
+# App rules
+yabai -m rule --add app="^Brave Browser$" space="browser"
+yabai -m rule --add app="^Google Chrome$" space="browser"
+yabai -m rule --add app="^Safari$" space="browser"
+yabai -m rule --add app="^Firefox$" space="browser"
 
 # Editor
-yabai -m rule --add app="^WebStorm$" space="editor"
+yabai -m rule --add app="^WebStorm$" space="editor" opacity=0.93
 yabai -m rule --add app="^WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$"  manage=off
 
 # Messages

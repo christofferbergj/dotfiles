@@ -1,7 +1,10 @@
 let mapleader=" "
 
 " Plugins  --------------------------------
+set matchit
 set sneak
+set quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
@@ -12,6 +15,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 Plug 'dbakker/vim-paragraph-motion'
+Plug 'chrisbra/matchit'
 
 " Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
@@ -24,6 +28,7 @@ map <C-n> <Plug>NextWholeOccurrence
 " Common settings -------------------------
 set clipboard+=unnamedplus
 set clipboard+=ideaput
+set ideajoin
 set incsearch
 set number
 set rnu
