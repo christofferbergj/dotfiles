@@ -24,9 +24,14 @@ Gruvbox Medium Dark
 
 ## Screenshots
 
+### WebStorm in Typescript file
+
+![WebStorm editor in typescript file](https://user-images.githubusercontent.com/10507071/227624576-b1731361-32f0-41ad-9644-185c18aae949.png)
+
+
 ### Neovim in TypeScript file
 
-![Neovim editor](https://user-images.githubusercontent.com/10507071/210222169-0adfa285-427d-4ed9-b0a2-f6d82c21a143.png)
+![Neovim editor in typescript file](https://user-images.githubusercontent.com/10507071/227624572-2222e339-0f70-470d-9127-52351eb64a36.png)
 
 
 <details>
