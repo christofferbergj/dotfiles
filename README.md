@@ -57,8 +57,7 @@ Gruvbox Medium Dark
 ## Fish shell
 
 Install Fish
-
-`brew install fish`
+– `brew install fish`
 
 More info: https://fishshell.com/docs/current/tutorial.html#tut_path
 
@@ -70,65 +69,76 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 **Make `fish` the default**
 
 * Check the fish path with which fish.
-* Add fish to the know shells run the command: `sudo sh -c 'echo (which fish) >> /etc/shells'`
+* Add fish to know shells: `sudo sh -c 'echo (which fish) >> /etc/shells'`
 * Restart the terminal
-* Set fish as the default shell run the command: `chsh -s (which fish)`
+* Set fish as the default shell: `chsh -s (which fish)`
 * Restart the terminal and check if it launched with fish or not
-* Add brew binaries in fish path run the command: `set -U fish_user_paths /opt/homebrew/bin $fish_user_paths`
+* Add brew binaries in fish path: `fish_add_path /opt/homebrew/bin`
 
 **Optionally configure the shell (launch web interface)**
 
 `fish_config`
 
 ## Font
-
-`brew tap homebrew/cask-fonts`  
-`brew install --cask font-jetbrains-mono`
+– `brew tap homebrew/cask-fonts`– `brew install --cask font-jetbrains-mono`
 
 ## CLI tools
 
-* fish shell
-* starship
-* yadm
-* nvim
-* rar
-* autojump
-* fzf
-* exa
-* fd
-* gh
-* gitui
-* n
-* tldr
-* ripgrep
-* git
-* bat
-* yabai
-* skhd
-* ugit
-* jq
+* fish shell – `brew install fish`
+* starship – `brew install starship`
+* nvim – `brew install neovim`
+* rar – `brew install rar`
+* fzf – `brew install fzf`
+* fd – `brew install fd`
+* gh – `brew install gh`
+* tldr – `brew install tldr`
+* ripgrep – `brew install ripgrep`
+* git – `brew install git`
+* bat – `brew install bat`
+* yabai – `brew install koekeishiya/formulae/yabai`
+* skhd – `brew install koekeishiya/formulae/skhd`
+* ugit – `brew install ugit`
+* jq – `brew install jq`
+* gitui – `brew install gitui`
+  * `abbr g gitui`
+* yadm – `brew install yadm`
+    * `ys 'yadm status'`
+    * `ya 'yadm add'`
+    * `yc 'yadm commit'`
+    * `yd 'yadm diff'`
+    * `yp 'yadm push'`
+* zoxide – `brew install zoxide`
+  * `abbr j z`
+* exa – `brew install exa`
+    * `abbr ll 'exa -la'`
+* n – `brew install n`
+  * `set -Ux N_PREFIX ~/.n`
+  * `fish_add_path -m ~/.n/bin`
 
 
 ## Apps
 
-* wezterm
-* fig
-* raycast
-* karabiner-elements
-* alt-tab
-* hiddenbar
-* spark
-* rocket
-* cleanshot x
-* jetbrains toolbox
-* google drive
-* iterm
-* spotify
-* betterdisplay
-* grammarly desktop
-* spaceid
-* notion
-* todoist
+* wezterm (terminal) – `brew install --cask wezterm`
+* fig (cli helper) – `brew install --cask fig`
+* raycast (launcher) – `brew install --cask raycast`
+* karabiner-elements (keyboard remapping) – `brew install --cask karabiner-elements`
+* alt-tab (window switcher) – `brew install --cask alt-tab`
+* hiddenbar – `brew install --cask hiddenbar`
+* spark (email client) – `brew install --cask readdle-spark`
+* rocket – `brew install --cask rocket`
+* cleanshot x – `brew install --cask cleanshot`
+* jetbrains toolbox – `brew install --cask jetbrains-toolbox`
+* google drive – `brew install --cask google-drive`
+* spotify – `brew install --cask spotify`
+* betterdisplay – `brew install --cask betterdisplay`
+* grammarly desktop – `brew install --cask grammarly-desktop`
+* spaceid – `brew install --cask spaceid`
+* notion – `brew install --cask notion`
+* todoist – `brew install --cask todoist`
+* bitwarden – `brew install --cask bitwarden`
+
+### All apps install command
+`brew install --cask wezterm fig raycast karabiner-elements alt-tab hiddenbar readdle-spark rocket cleanshot jetbrains-toolbox google-drive spotify betterdisplay grammarly-desktop spaceid notion todoist bitwarden`
 
 ## Raycast extensions
 
