@@ -73,6 +73,7 @@ nmap Y y$
 nmap H 0
 nmap L $
 nmap <leader>w V$%
+nmap <leader>e v$%$
 nmap <leader>V V$%
 nmap <leader>v v$
 nmap <leader>y V$%y
