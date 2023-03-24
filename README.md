@@ -33,7 +33,6 @@ Gruvbox Medium Dark
 
 ![Neovim editor in typescript file](https://user-images.githubusercontent.com/10507071/227624572-2222e339-0f70-470d-9127-52351eb64a36.png)
 
-
 <details>
 <summary>More screenshots</summary>
 
@@ -41,23 +40,25 @@ Gruvbox Medium Dark
 
 ![Neovim dashboard](https://user-images.githubusercontent.com/10507071/210083588-a54da17b-c2f3-42e2-9802-1d66b90183c5.png)
 
-
 ### Telescope
 
 ![Telescope](https://user-images.githubusercontent.com/10507071/210084081-d6a2e9ac-baba-46fa-9447-ffd521ba2de4.png)
 ![TeleScope](https://user-images.githubusercontent.com/10507071/210083952-1ad8568f-8aac-424c-961e-9767bc5cf4a3.png)
 
-
 ### Lua
 
 ![Lua](https://user-images.githubusercontent.com/10507071/210084163-c7b00ef5-ee74-49e6-b60a-145690dc6bb1.png)
-
 
 </details>
 
 ## General info
 
-* Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.  
+1. Install Homebrew
+2. Install Fish shell
+3. Install apps
+4. Install cli tools
+5. Install fonts
+6. Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.
 
 ## Fish shell
 
