@@ -1,5 +1,6 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    setup_abbreviations
 end
 
 # Override fish greeting
