@@ -96,9 +96,11 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 * rar – `brew install rar`
 * fzf – `brew install fzf`
 * fd – `brew install fd`
+    * `abbr find fd`
 * gh – `brew install gh`
 * tldr – `brew install tldr`
 * ripgrep – `brew install ripgrep`
+    * `abbr grep rg`
 * git – `brew install git`
 * bat – `brew install bat`
 * yabai – `brew install koekeishiya/formulae/yabai`
@@ -108,11 +110,11 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 * gitui – `brew install gitui`
   * `abbr g gitui`
 * yadm – `brew install yadm`
-    * `ys 'yadm status'`
-    * `ya 'yadm add'`
-    * `yc 'yadm commit'`
-    * `yd 'yadm diff'`
-    * `yp 'yadm push'`
+    * `abbr ys 'yadm status'`
+    * `abbr ya 'yadm add'`
+    * `abbr yc 'yadm commit'`
+    * `abbr yd 'yadm diff'`
+    * `abbr yp 'yadm push'`
 * zoxide – `brew install zoxide`
   * `abbr j z`
 * exa – `brew install exa`
