@@ -86,7 +86,9 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 `fish_config`
 
 ## Font
-– `brew tap homebrew/cask-fonts`– `brew install --cask font-jetbrains-mono`
+
+`brew tap homebrew/cask-fonts`  
+`brew install --cask font-jetbrains-mono`
 
 ## CLI tools
 
