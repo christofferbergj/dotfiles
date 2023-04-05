@@ -79,38 +79,38 @@ setup_space 8 other
 
 
 # Terminal
-yabai -m rule --add app="^WezTerm$" space="terminal"
+yabai -m rule --add app="^WezTerm$" space="^terminal"
 
 # App rules
-yabai -m rule --add app="^Brave Browser$" space="browser"
-yabai -m rule --add app="^Google Chrome$" space="browser"
-yabai -m rule --add app="^Safari$" space="browser"
-yabai -m rule --add app="^Firefox$" space="browser"
+yabai -m rule --add app="^Brave Browser$" space="^browser"
+yabai -m rule --add app="^Google Chrome$" space="^browser"
+yabai -m rule --add app="^Safari$" space="^browser"
+yabai -m rule --add app="^Firefox$" space="^browser"
 
 # Editor
-yabai -m rule --add app="^WebStorm$" space="editor" opacity=0.93
+yabai -m rule --add app="^WebStorm$" space="^editor" opacity=0.93
 yabai -m rule --add app="^WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$"  manage=off
 
 # Messages
-yabai -m rule --add app="^Messenger$" space="messages" manage=off
-yabai -m rule --add app="^Slack$" space="messages"
+yabai -m rule --add app="^Messenger$" space="^messages" manage=off
+yabai -m rule --add app="^Slack$" space="^messages"
 
 # Notes
-yabai -m rule --add app="^Notion$" space="notes"
-yabai -m rule --add app="^Todoist$" space="notes"
-yabai -m rule --add app="^Notes$" space="notes"
+yabai -m rule --add app="^Notion$" space="^notes"
+yabai -m rule --add app="^Todoist$" space="^notes"
+yabai -m rule --add app="^Notes$" space="^notes"
 
 # Media
-yabai -m rule --add app="^Spotify$" space="media"
-yabai -m rule --add app="^Sonos$" space="media"
-yabai -m rule --add app="^Podcasts$" space="media"
-yabai -m rule --add app="^Endel$" space="media"
+yabai -m rule --add app="^Spotify$" space="^media"
+yabai -m rule --add app="^Sonos$" space="^media"
+yabai -m rule --add app="^Podcasts$" space="^media"
+yabai -m rule --add app="^Endel$" space="^media"
 
 # Mail
-yabai -m rule --add app="^Spark$" space="mail"
-yabai -m rule --add app="^Spark$" title="^New Message$" space="mail" manage=off
+yabai -m rule --add app="^Spark$" space="^mail"
+yabai -m rule --add app="^Spark$" title="^New Message$" space="^mail" manage=off
 
-yabai -m rule --add app="^Figma$" space=8
+yabai -m rule --add app="^Figma$" space="^other"
 
 # Don't manage
 yabai -m rule --add app="^CleanShot X$" manage=off
