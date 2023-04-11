@@ -77,8 +77,11 @@ setup_space 6 mail
 setup_space 7 notes
 setup_space 8 other
 
+# Shared values
+opacity=0.87
+
 # Terminal
-yabai -m rule --add app="^WezTerm$" space="^terminal" opacity=0.87
+yabai -m rule --add app="^WezTerm$" space="^terminal" opacity=${opacity}
 
 # App rules
 yabai -m rule --add app="^Brave Browser$" space="^browser"
@@ -87,8 +90,13 @@ yabai -m rule --add app="^Safari$" space="^browser"
 yabai -m rule --add app="^Firefox$" space="^browser"
 
 # Editor
-yabai -m rule --add app="^WebStorm$" space="^editor" opacity=0.87
-yabai -m rule --add app="^WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$" manage=off opacity=0.93
+# yabai -m rule --add app="^WebStorm$" space="^editor" opacity=0.87
+# yabai -m rule --add app="^WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$" manage=off opacity=0.97
+
+# Editor
+editors='^(IntelliJ IDEA|WebStorm|GoLand|PyCharm)$'
+yabai -m rule --add app="${editors}" manage=off
+yabai -m rule --add app="${editors}" title="( – )" manage=on opacity=${opacity}
 
 # Messages
 yabai -m rule --add app="^Messenger$" space="^messages" manage=off
