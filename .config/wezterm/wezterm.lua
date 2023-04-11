@@ -30,7 +30,7 @@ return {
   tab_max_width = 999999,
 
   -- window
-  window_background_opacity = 0.93,
+  -- window_background_opacity = 0.93,
   window_decorations = "RESIZE",
   window_padding = {
     left = 38,

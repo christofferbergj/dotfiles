@@ -144,6 +144,7 @@ function setup_abbreviations
   abbr --add po 'pnpm outdated'
   abbr --add pr 'pnpm run'
   abbr --add pre 'pnpm remove'
+  abbr --add prm 'pnpm rm'
   abbr --add pu 'pnpm update'
   abbr --add px 'pnpm dlx'
 
