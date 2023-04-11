@@ -4,7 +4,9 @@ function setup_abbreviations
   abbr --add cat bat
   abbr --add find fd
   abbr --add grep rg
-  abbr --add ra ranger
+  abbr --add i 'npm install'
+  abbr --add j z
+  abbr --add kp 'npx kill-port 3000 3001 4000 6006'
 
   # homebrew
   abbr --add b brew
@@ -117,10 +119,6 @@ function setup_abbreviations
   abbr --add gyn 'git yolo -n'
   abbr --add gyp 'git yolo; git push'
   abbr --add gypn 'git yolo -n; git push -n'
-  abbr --add i 'npm install'
-  abbr --add j z
-  abbr --add kp 'npx kill-port 3000 3001 4000 6006'
-  abbr --add lars 'gitui'
 
   # exa
   abbr --add l 'exa -a -1 --git --icons'
@@ -158,11 +156,11 @@ function setup_abbreviations
   abbr --add ws. 'open -a WebStorm .'
 
   # yabai
-  abbr --add ya 'yadm add'
   abbr --add yb 'nvim ~/.config/yabai/yabairc'
   abbr --add ybs 'nvim ~/.config/skhd/skhdrc'
 
   # yadm dotfiles manager
+  abbr --add ya 'yadm add'
   abbr --add yc 'yadm commit'
   abbr --add yd 'yadm diff'
   abbr --add yp 'yadm push'
