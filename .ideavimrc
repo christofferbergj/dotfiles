@@ -1,32 +1,29 @@
 let mapleader=" "
 
 " Plugins  --------------------------------
-set matchit
 set sneak
 set quickscope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-Plug 'preservim/nerdtree'
+Plug 'chrisbra/matchit'
+Plug 'dbakker/vim-paragraph-motion'
 Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'vim-scripts/argtextobj.vim'
-Plug 'tommcdo/vim-exchange'
 Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
-Plug 'dbakker/vim-paragraph-motion'
-Plug 'chrisbra/matchit'
+Plug 'preservim/nerdtree'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/argtextobj.vim'
 
 " Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
-let g:highlightedyank_highlight_duration = "100"
+let g:highlightedyank_highlight_duration = "80"
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " <C-n> seems to me as a better solution than <M-n>,
 " but we should finally support vim-visual-multi because vim-multiple-cursors is deprecated now
 map <C-n> <Plug>NextWholeOccurrence
 
 " Common settings -------------------------
-set clipboard+=unnamedplus
 set clipboard+=ideaput
 set ideajoin
 set incsearch
@@ -38,7 +35,8 @@ set visualbell
 
 " Idea specific settings ------------------
 set ideajoin
-set ideastatusicon=gray
+set ideastatusicon=enabled
+set idearefactormode=keep
 
 " Open ideavim settings and reload
 nnoremap \e :e ~/.ideavimrc<CR>
@@ -57,7 +55,6 @@ map <leader>o <Action>(OptimizeImports)
 map <leader>p <Action>(ReformatWithPrettierAction)
 map <leader>b <Action>(ShowNavBar)
 map <leader>d <Action>(SelectAllOccurrences)
-map <leader>e <Action>(ShowIntentionActions)
 map <leader>m <Action>(EditorMatchBrace)
 map <leader>x <Action>(CloseAllEditors)
 map <leader>i <Action>(ParameterInfo)
