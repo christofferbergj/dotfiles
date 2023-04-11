@@ -46,18 +46,20 @@ nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 map <leader>f <Plug>(easymotion-s)
 
 " Editor action mappings -----------------------------
-map <leader>r <Action>(RenameElement)
-map <leader>z <Action>(ToggleDistractionFreeMode)
-map <leader>g <Action>(ChooseRunConfiguration)
-map <leader>s <Action>(FileStructurePopup)
 map <leader>a <Action>(EditorAddCaretPerSelectedLine)
-map <leader>o <Action>(OptimizeImports)
-map <leader>p <Action>(ReformatWithPrettierAction)
 map <leader>b <Action>(ShowNavBar)
 map <leader>d <Action>(SelectAllOccurrences)
-map <leader>m <Action>(EditorMatchBrace)
-map <leader>x <Action>(CloseAllEditors)
+map <leader>e <Action>(ActivateProjectToolWindow)
+map <leader>g <Action>(ChooseRunConfiguration)
 map <leader>i <Action>(ParameterInfo)
+map <leader>m <Action>(EditorMatchBrace)
+map <leader>o <Action>(OptimizeImports)
+map <leader>p <Action>(ReformatWithPrettierAction)
+map <leader>q <Action>(HideAllWindows)
+map <leader>r <Action>(RenameElement)
+map <leader>s <Action>(FileStructurePopup)
+map <leader>x <Action>(CloseAllEditors)
+map <leader>z <Action>(ToggleDistractionFreeMode)
 map gt <Action>(GotoTest)
 
 " Tabshifter
@@ -69,15 +71,16 @@ imap jj <Esc>A
 nmap Y y$
 nmap H 0
 nmap L $
-nmap <leader>w V$%
-nmap <leader>e v$%$
-nmap <leader>V V$%
-nmap <leader>v v$
-nmap <leader>y V$%y
 nmap <C-d> <C-d>zz
 nmap <C-u> <C-u>zz
 nmap n nzz
 nmap N Nzz
+nmap <leader>w V$%
+nmap <leader>W v$%$
+nmap <leader>V V$%
+nmap <leader>v v$
+nmap <leader>y V$%y
+nmap <leader>Y v$%y
 
 " Undo with shift+u
 nmap U <C-R>
