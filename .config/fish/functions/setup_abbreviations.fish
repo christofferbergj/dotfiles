@@ -121,7 +121,12 @@ function setup_abbreviations
   abbr --add j z
   abbr --add kp 'npx kill-port 3000 3001 4000 6006'
   abbr --add lars 'gitui'
-  abbr --add ll 'exa -la'
+
+  # exa
+  abbr --add l 'exa -a -1 --git --icons'
+  abbr --add ld 'exa -D -1 --git --icons'
+  abbr --add la 'exa -a -l --git --icons'
+  abbr --add ll 'exa -a -l --git --icons'
 
   # npm
   abbr --add ni 'npm install'
