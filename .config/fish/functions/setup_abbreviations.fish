@@ -21,6 +21,8 @@ function setup_abbreviations
   # gh (github cli)
   abbr --add gho 'gh repo view -w'
   abbr --add ghp 'gh pr view -w'
+  abbr --add ghpc 'gh pr create -f'
+  abbr --add ghpcd 'gh pr create -f -d'
   abbr --add ghw 'gh workflow view -w'
 
   # gitui
