@@ -78,7 +78,7 @@ setup_space 7 notes
 setup_space 8 other
 
 # Shared values
-opacity=0.88
+opacity=0.92
 
 # Browser
 yabai -m rule --add app="^Brave Browser$" space="^browser"

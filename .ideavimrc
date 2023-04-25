@@ -24,6 +24,7 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 map <C-n> <Plug>NextWholeOccurrence
 
 " Common settings -------------------------
+set clipboard=unnamedplus
 set clipboard+=ideaput
 set ideajoin
 set incsearch

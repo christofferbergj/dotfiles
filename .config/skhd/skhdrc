@@ -4,6 +4,9 @@ hyper - z : brew services restart yabai
 # Fast focus recent desktop
 hyper - tab : yabai -m space --focus recent
 
+# Destroy desktop
+hyper - x : yabai -m space --destroy
+
 # Focus space relative to active display
 alt - 1 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[0].index')
 alt - 2 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[1].index')
