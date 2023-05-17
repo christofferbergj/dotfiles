@@ -98,6 +98,7 @@ function setup_abbreviations
   abbr --add gp 'git push'
   abbr --add gp! 'git push --force-with-lease'
   abbr --add gpl 'git pull'
+  abbr --add gplf 'git pull ; git fetch --all --prune'
   abbr --add gpo 'git push origin'
   abbr --add gpo! 'git push --force-with-lease origin'
   abbr --add gpu 'git push --set-upstream'
