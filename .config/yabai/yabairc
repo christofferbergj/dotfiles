@@ -45,9 +45,7 @@ yabai -m config left_padding                 15
 yabai -m config right_padding                15
 yabai -m config window_gap                   15
 
-#
 # Setup spaces
-#
 for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 7)'); do
   yabai -m space --destroy 8
 done
