@@ -16,7 +16,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 -- load lazy and all plugins in the plugins file and folder
 require("lazy").setup("config.plugins", {
-  defaults = { 
+  defaults = {
     lazy = true
   },
   checker = {

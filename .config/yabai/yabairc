@@ -45,7 +45,7 @@ yabai -m config left_padding                 15
 yabai -m config right_padding                15
 yabai -m config window_gap                   15
 
-# Setup spaces
+# Delete all spaces except 1-7
 for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 7)'); do
   yabai -m space --destroy 8
 done
@@ -87,13 +87,13 @@ yabai -m rule --add app="^Firefox$" space="^browser"
 # Terminal
 yabai -m rule --add app="^WezTerm$" space="^terminal" opacity=${opacity}
 
-# Editor
+# Editor (WebStorm)
 yabai -m rule --add app="^WebStorm$" space="^editor" opacity=${opacity}
 yabai -m rule --add app="^WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$" manage=off opacity=0.97
 
 # Messages
-yabai -m rule --add app="^Messenger$" space="^messages" manage=off
-yabai -m rule --add app="^Slack$" space="^messages"
+yabai -m rule --add app="^Messenger$" space="messages" manage=off
+yabai -m rule --add app="^Slack$" space="messages"
 
 # Notes
 yabai -m rule --add app="^Notion$" space="^notes"
@@ -101,7 +101,7 @@ yabai -m rule --add app="^Todoist$" space="^notes"
 yabai -m rule --add app="^Notes$" space="^notes"
 
 # Media
-yabai -m rule --add app="^Spotify$" space="^media"
+yabai -m rule --add app="^Spotify$" space="media"
 yabai -m rule --add app="^Sonos$" space="^media"
 yabai -m rule --add app="^Podcasts$" space="^media"
 yabai -m rule --add app="^Endel$" space="^media"
