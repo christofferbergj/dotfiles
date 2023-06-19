@@ -83,7 +83,7 @@ return {
 
     -- focus tab relative to each other
     { key = "h", mods = "ALT|SHIFT", action = act.ActivateTabRelative(-1) },
-    { key = "l", mods = "CMD|SHIFT", action = act.ActivateTabRelative(1) },
+    { key = "l", mods = "ALT|SHIFT", action = act.ActivateTabRelative(1) },
 
     -- move tab relative to each other
     { key = 'j', mods = 'ALT|SHIFT', action = act.MoveTabRelative(-1) },
