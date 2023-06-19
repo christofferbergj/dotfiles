@@ -43,7 +43,7 @@ hyper - m : yabai -m window --toggle float; yabai -m window --grid 1:5:1:0:3:1
 hyper - w : yabai -m window --toggle float; yabai -m window --grid 1:5:1:0:3:1
 
 # Center small window
-hyper - v :  yabai -m window --resize abs:1000:600
+hyper - v :  yabai -m window --resize abs:1100:700
 
 # Maximize window
 hyper - f : yabai -m window --toggle zoom-fullscreen; yabai -m window --grid 1:1:0:0:1:1

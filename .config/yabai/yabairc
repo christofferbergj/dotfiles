@@ -88,8 +88,8 @@ yabai -m rule --add app="^Firefox$" space="^browser"
 yabai -m rule --add app="^WezTerm$" space="^terminal" opacity=${opacity}
 
 # Editor (WebStorm)
-yabai -m rule --add app="^WebStorm$" space="^editor" opacity=${opacity}
-yabai -m rule --add app="^WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$" manage=off opacity=0.97
+yabai -m rule --add app="WebStorm$" space="^editor" opacity=${opacity}
+yabai -m rule --add app="WebStorm$" title="^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$" manage=off opacity=0.97
 
 # Messages
 yabai -m rule --add app="^Messenger$" space="messages" manage=off

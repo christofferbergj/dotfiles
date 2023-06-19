@@ -60,7 +60,7 @@ map <leader>q <Action>(HideAllWindows)
 map <leader>r <Action>(RenameElement)
 map <leader>s <Action>(FileStructurePopup)
 map <leader>x <Action>(CloseAllEditors)
-map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader>z <Action>(Vcs.RollbackChangedLines)
 map gt <Action>(GotoTest)
 
 " Tabshifter
@@ -97,3 +97,4 @@ map ,P "0P
 set ideastrictmode
 
 " Find more examples here: https://jb.gg/share-ideavimrc
+" source ~/.config/colemak-vim

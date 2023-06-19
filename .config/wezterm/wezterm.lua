@@ -41,7 +41,7 @@ return {
 
   -- panes
   inactive_pane_hsb = {
-    brightness = 0.75,
+    brightness = 0.80,
   },
 
   -- key bindings
