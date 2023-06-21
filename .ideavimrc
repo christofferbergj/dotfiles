@@ -1,9 +1,16 @@
 let mapleader=" "
 
-" Plugins  --------------------------------
-set sneak
-set quickscope
+" Common settings -------------------------
+set clipboard=unnamedplus
+set clipboard+=ideaput
+set incsearch
+set number
+set rnu
+set showmode
+set scrolloff=8
+set visualbell
 
+" Plugins  --------------------------------
 Plug 'chrisbra/matchit'
 Plug 'dbakker/vim-paragraph-motion'
 Plug 'easymotion/vim-easymotion'
@@ -13,88 +20,72 @@ Plug 'preservim/nerdtree'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/argtextobj.vim'
+set sneak
+set quickscope
 
 " Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
 let g:highlightedyank_highlight_duration = "80"
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" <C-n> seems to me as a better solution than <M-n>,
-" but we should finally support vim-visual-multi because vim-multiple-cursors is deprecated now
-map <C-n> <Plug>NextWholeOccurrence
-
-" Common settings -------------------------
-set clipboard=unnamedplus
-set clipboard+=ideaput
-set ideajoin
-set incsearch
-set number
-set rnu
-set showmode
-set scrolloff=8
-set visualbell
-
 " Idea specific settings ------------------
 set ideajoin
 set ideastatusicon=enabled
 set idearefactormode=keep
 
-" Open ideavim settings and reload
-nnoremap \e :e ~/.ideavimrc<CR>
-nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
-
-" Plugin mappings -----------------------------
-map <leader>f <Plug>(easymotion-s)
-
 " Editor action mappings -----------------------------
-map <leader>a <Action>(EditorAddCaretPerSelectedLine)
-map <leader>b <Action>(ShowNavBar)
-map <leader>d <Action>(SelectAllOccurrences)
-map <leader>e <Action>(ActivateProjectToolWindow)
-map <leader>g <Action>(ChooseRunConfiguration)
-map <leader>i <Action>(ParameterInfo)
-map <leader>m <Action>(EditorMatchBrace)
-map <leader>o <Action>(OptimizeImports)
-map <leader>p <Action>(ReformatWithPrettierAction)
-map <leader>q <Action>(HideAllWindows)
-map <leader>r <Action>(RenameElement)
-map <leader>s <Action>(FileStructurePopup)
-map <leader>x <Action>(CloseAllEditors)
-map <leader>z <Action>(Vcs.RollbackChangedLines)
-map gt <Action>(GotoTest)
+nmap <leader>a <Action>(EditorAddCaretPerSelectedLine)
+nmap <leader>b <Action>(ShowNavBar)
+nmap <leader>d <Action>(SelectAllOccurrences)
+nmap <leader>e <Action>(ActivateProjectToolWindow)
+nmap <leader>f <Action>(AceWordStartAction)
+nmap <leader>g <Action>(ChooseRunConfiguration)
+nmap <leader>i <Action>(ParameterInfo)
+nmap <leader>m <Action>(EditorMatchBrace)
+nmap <leader>o <Action>(OptimizeImports)
+nmap <leader>p <Action>(ReformatWithPrettierAction)
+nmap <leader>q <Action>(HideAllWindows)
+nmap <leader>r <Action>(RenameElement)
+nmap <leader>s <Action>(FileStructurePopup)
+nmap <leader>x <Action>(CloseAllEditors)
+nmap <leader>y V$%y
+nmap <leader>Y v$%y
+nmap <leader>V V$%
+nmap <leader>v v$
+nmap <leader>w V$%
+nmap <leader>W v$%$
+nmap <leader>z <Action>(Vcs.RollbackChangedLines)
+nmap gt <Action>(GotoTest)
 
 " Tabshifter
 map <C-w>= <Action>(tabshifter.Actions.EqualSizeSplit)
 
 " General mappings -----------------------------
-imap jk <Esc>
 imap jj <Esc>A
-nmap Y y$
+imap jk <Esc>
 nmap H 0
+nmap 0 ^
 nmap L $
+nmap N Nzz
+nmap Y y$
 nmap <C-d> <C-d>zz
 nmap <C-u> <C-u>zz
 nmap n nzz
-nmap N Nzz
-nmap <leader>w V$%
-nmap <leader>W v$%$
-nmap <leader>V V$%
-nmap <leader>v v$
-nmap <leader>y V$%y
-nmap <leader>Y v$%y
-
-" Undo with shift+u
-nmap U <C-R>
-
-" Keep register after pasting
 vmap p "_dP
 
 " Paste from previous register
 map ,p "0p
 map ,P "0P
 
+" Undo with shift+u
+nmap U <C-R>
+
 " Strict mode for development ---------------
 set ideastrictmode
+
+" Open ideavim settings and reload
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 " source ~/.config/colemak-vim

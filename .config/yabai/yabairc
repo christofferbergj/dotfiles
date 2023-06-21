@@ -77,7 +77,6 @@ setup_space 8 other
 
 # Shared values
 opacity=0.92
-high_opacity=0.95
 
 # Browser
 yabai -m rule --add app="^Brave Browser$" space="^browser"
@@ -111,7 +110,7 @@ yabai -m rule --add app="^Endel$" space="^media"
 yabai -m rule --add app="^Spark$" space="^mail"
 yabai -m rule --add app="^Spark$" title="^New Message$" space="^mail" manage=off
 
-yabai -m rule --add app="^Figma$" space="^other"
+yabai -m rule --add app="^Figma$" display=2
 
 # Don't manage
 yabai -m rule --add app="^CleanShot X$" manage=off
