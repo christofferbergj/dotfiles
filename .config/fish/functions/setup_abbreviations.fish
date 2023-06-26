@@ -4,19 +4,19 @@ function setup_abbreviations
   abbr --add cat bat
   abbr --add find fd
   abbr --add grep rg
-  abbr --add i 'npm install'
   abbr --add j z
   abbr --add kp 'npx kill-port 3000 3001 4000 6006'
 
   # homebrew
   abbr --add b brew
+  abbr --add bu 'brew upgrade'
   abbr --add bi 'brew install'
   abbr --add bic 'brew install --cask'
   abbr --add br 'brew remove'
+  abbr --add bclean 'brew cleanup ; brew autoremove'
+  abbr --add bc 'brew cleanup ; brew autoremove'
   abbr --add bs 'brew search'
   abbr --add bsc 'brew search --cask'
-  abbr --add bse 'brew services'
-  abbr --add bsel 'brew services list'
 
   # gh (github cli)
   abbr --add gho 'gh repo view -w'
@@ -135,7 +135,7 @@ function setup_abbreviations
   abbr --add nr 'npm remove'
   abbr --add nu 'npm update'
   abbr --add nci 'npm ci'
-  abbr --add r 'npm run'
+  abbr --add nru 'npm run'
   abbr --add nclean 'rm -rf package-lock.json node_modules/; npm install'
 
   # neovim
@@ -158,11 +158,12 @@ function setup_abbreviations
   abbr --add ws 'open -a WebStorm'
   abbr --add ws. 'open -a WebStorm .'
 
-  # yabai
+  # yabai and skhd
   abbr --add yb 'nvim ~/.config/yabai/yabairc'
   abbr --add ybs 'nvim ~/.config/skhd/skhdrc'
 
   # yadm dotfiles manager
+  abbr --add y 'yadm'
   abbr --add ya 'yadm add'
   abbr --add yc 'yadm commit'
   abbr --add yd 'yadm diff'
