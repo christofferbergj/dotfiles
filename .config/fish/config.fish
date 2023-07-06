@@ -2,11 +2,14 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# Add Yabai functions to path
+set fish_function_path $fish_function_path $fish_function_path/yabai
+
 # Setup abbreviations
-setup_abbreviations
+init_abbreviations
 
 # Setup theme colors
-theme_gruvbox
+init_gruvbox
 
 # Override fish greeting
 set fish_greeting
