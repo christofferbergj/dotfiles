@@ -69,8 +69,10 @@ Install Homebrew
 
 ## Fish shell
 
-Install Fish
-– `brew install fish`
+Install Fish  
+```bash
+brew install fish
+```
 
 More info: https://fishshell.com/docs/current/tutorial.html#tut_path
 
