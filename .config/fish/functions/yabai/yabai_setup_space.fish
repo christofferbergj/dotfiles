@@ -1,7 +1,9 @@
 # Setup a single space
 function yabai_setup_space
-  set idx $argv[1]
-  set name $argv[2]
+  set -l idx $argv[1]
+
+  # Get amount of displays
+  set -l display_count (yabai -m query --displays | jq length)
 
   # Get the space on the passed index
   set space (yabai -m query --spaces --space $idx 2>/dev/null)
@@ -10,7 +12,4 @@ function yabai_setup_space
   if test -z "$space"
     yabai -m space --create
   end
-
-  # Get the space on the passed index
-  yabai -m space $idx --label $name
 end
