@@ -61,24 +61,25 @@ nmap gt <Action>(GotoTest)
 map <C-w>= <Action>(tabshifter.Actions.EqualSizeSplit)
 
 " General mappings -----------------------------
-imap jj <Esc>A
-imap jk <Esc>
-nmap H 0
-nmap 0 ^
-nmap L $
-nmap N Nzz
-nmap Y y$
-nmap <C-d> <C-d>zz
-nmap <C-u> <C-u>zz
-nmap n nzz
-vmap p "_dP
+inoremap jj <Esc>A
+inoremap jk <Esc>
+nnoremap H 0
+nnoremap 0 ^
+nnoremap ^ 0
+nnoremap L $
+nnoremap N Nzz
+nnoremap Y y$
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzz
+vnoremap p "_dP
 
 " Paste from previous register
 map ,p "0p
 map ,P "0P
 
 " Undo with shift+u
-nmap U <C-R>
+nnoremap U <C-R>
 
 " Strict mode for development ---------------
 set ideastrictmode

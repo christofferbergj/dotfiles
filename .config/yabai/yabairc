@@ -46,4 +46,4 @@ yabai -m config right_padding                15
 yabai -m config window_gap                   15
 
 # Run Yabai init script
-fish -c yabai_init
+fish -c init_yabai
