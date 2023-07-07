@@ -60,6 +60,13 @@ Gruvbox Medium Dark
 5. Install fonts
 6. Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.
 
+## Homebrew
+
+Install Homebrew  
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
 ## Fish shell
 
 Install Fish
