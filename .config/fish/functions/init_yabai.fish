@@ -11,6 +11,6 @@ function init_yabai
   # Focus on terminal space
   yabai -m space --focus "terminal" 2>/dev/null
 
-  echo ""
+  echo
   echo "Yabai initialisation complete ✨"
 end
