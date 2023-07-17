@@ -34,7 +34,7 @@ function init_abbreviations
   abbr --add g gitui
 
   # git
-  abbr --add yolo 'git add --all ; git commit -m "¯\_(ツ)_/¯" ; git push'
+  abbr --add yolo 'git add --all ; git commit -m "¯\_(ツ)_/¯"'
   abbr --add s 'git status -s'
   abbr --add ga 'git add'
   abbr --add gaa 'git add --all'
