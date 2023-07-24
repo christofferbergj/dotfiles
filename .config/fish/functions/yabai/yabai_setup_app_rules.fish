@@ -3,15 +3,15 @@ function yabai_setup_app_rules
 
   # Browser
   yabai -m rule --add app='^Brave Browser$' space='^browser'
-
-  yabai -m rule --add app='^Google Chrome$' space='^browser'
-  yabai -m rule --add app='^Safari$' space='^browser'
-  yabai -m rule --add app='^Firefox$' space='^browser'
+  yabai -m rule --add app='^Google Chrome$' space='^other'
+  yabai -m rule --add app='^Safari$' space='^other'
+  yabai -m rule --add app='^Firefox$' space='^other'
 
   # Terminal
   yabai -m rule --add app='^WezTerm$' space='^terminal' opacity=$opacity
 
-  # Editor (WebStorm)
+  # Editor (WebStorm and VSCode)
+  yabai -m rule --add app='Code$' space='^editor' opacity=$opacity
   yabai -m rule --add app='WebStorm$' space='^editor' opacity=$opacity
   yabai -m rule --add app='WebStorm$' title='^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$' manage=off opacity=$opacity
 
