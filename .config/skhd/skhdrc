@@ -39,8 +39,8 @@ alt + shift - 3  : yabai -m window --display 3; yabai -m display --focus 3
 hyper - space : yabai -m display --focus next || yabai -m display --focus first
 
 # Floated 20% middle
-hyper - m : yabai -m window --toggle float; yabai -m window --grid 1:5:1:0:3:1
-hyper - w : yabai -m window --toggle float; yabai -m window --grid 1:5:1:0:3:1
+hyper - m : yabai -m window --toggle float; yabai -m window --grid 1:12:1:0:10:1
+hyper - w : yabai -m window --toggle float; yabai -m window --grid 1:12:1:0:10:1
 
 # Center small window
 hyper - v :  yabai -m window --resize abs:1100:700

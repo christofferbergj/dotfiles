@@ -26,3 +26,5 @@ zoxide init fish | source
 # Init Starship
 starship init fish | source
 
+
+thefuck --alias | source
