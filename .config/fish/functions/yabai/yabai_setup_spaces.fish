@@ -1,4 +1,4 @@
-function yabai_setup_spaces
+function yabai_setup_spaces -d 'Setup Yabai spaces'
   set -l space_labels "browser" "terminal" "editor" "messages" "media" "mail" "notes" "junk" "other"
   set -l total_spaces (count $space_labels)
 

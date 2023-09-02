@@ -14,7 +14,7 @@
 #     > 1: Development
 #     > 2: Music
 #
-function yabai_get_spaces
+function yabai_get_spaces -d "Returns a list of spaces in the current macOS window layout."
     set -l spaces (yabai -m query --spaces | jq -rc '.[]')
 
     for space in $spaces

@@ -2,6 +2,7 @@ local M = {
   "nvim-telescope/telescope.nvim",
   enabled = true,
   cmd = { "Telescope" },
+  cond = not vim.g.vscode,
 
   dependencies = {
     { "ahmedkhalf/project.nvim" },
@@ -9,7 +10,7 @@ local M = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-telescope/telescope-frecency.nvim" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-fzf-native.nvim",  build = "make" },
     { "nvim-telescope/telescope-symbols.nvim" },
   },
 }

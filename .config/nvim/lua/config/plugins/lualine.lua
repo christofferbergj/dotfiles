@@ -2,6 +2,7 @@ return {
   "nvim-lualine/lualine.nvim",
   enabled = true,
   event = "BufReadPost",
+  cond = not vim.g.vscode,
 
   dependencies = {
     -- navic
@@ -25,8 +26,8 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch" },
         lualine_c = {
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { "filename", path = 1 },
+          { "filetype",         icon_only = true,         separator = "", padding = { left = 1, right = 0 } },
+          { "filename",         path = 1 },
           { navic.get_location, cond = navic.is_available },
         },
         lualine_x = { "diagnostics", "diff", "filetype" },

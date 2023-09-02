@@ -1,5 +1,7 @@
 return {
   "SmiteshP/nvim-navic",
+  cond = not vim.g.vscode,
+
   config = function()
     vim.g.navic_silence = true
     require("nvim-navic").setup({

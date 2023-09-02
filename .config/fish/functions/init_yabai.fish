@@ -1,4 +1,4 @@
-function init_yabai
+function init_yabai -d 'Initialise yabai window manager'
   # Delete all spaces
   yabai_delete_spaces
 

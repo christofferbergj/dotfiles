@@ -2,9 +2,11 @@ return {
   "nvim-tree/nvim-tree.lua",
   enabled = true,
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  cond = not vim.g.vscode,
+
   keys = {
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "NvimTree toggle" },
-    { "<leader>n", "<cmd>NvimTreeFocus<cr>", desc = "NvimTree focus" },
+    { "<leader>n", "<cmd>NvimTreeFocus<cr>",  desc = "NvimTree focus" },
   },
 
   config = function()
@@ -81,12 +83,12 @@ return {
           custom_only = false,
           list = {
             { key = "<C-k>", action = "" },
-            { key = "J", action = "first_sibling" },
-            { key = "O", action = "expand_all" },
-            { key = "K", action = "last_sibling" },
-            { key = "S", action = "system_open" },
-            { key = "s", action = "search_node" },
-            { key = "cd", action = "cd" },
+            { key = "J",     action = "first_sibling" },
+            { key = "O",     action = "expand_all" },
+            { key = "K",     action = "last_sibling" },
+            { key = "S",     action = "system_open" },
+            { key = "s",     action = "search_node" },
+            { key = "cd",    action = "cd" },
           },
         },
         number = false,

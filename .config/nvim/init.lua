@@ -1,9 +1,12 @@
 require("config.options")
 require("config.lazy")
+require("config.mappings")
 
-vim.api.nvim_create_autocmd("User", {
-    pattern = "VeryLazy",
-    callback = function()
-        require("config.mappings")
-    end,
-})
+if vim.g.vscode then
+  -- vscode
+  require("config.vscode.mappings")
+else
+  -- neovim
+  require("config.nvim.mappings")
+  require("config.nvim.commands")
+end

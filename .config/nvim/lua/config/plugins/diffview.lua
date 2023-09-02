@@ -3,11 +3,12 @@ return {
   enable = true,
   cmd = "DiffviewOpen",
   dependencies = { "nvim-lua/plenary.nvim" },
+  cond = not vim.g.vscode,
 
   config = function()
     require("diffview").setup {
       diff_binaries = false, -- Show diffs for binaries
-      use_icons = true, -- Requires nvim-web-devicons
+      use_icons = true,      -- Requires nvim-web-devicons
     }
   end,
 

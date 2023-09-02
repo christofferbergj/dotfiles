@@ -1,27 +1,32 @@
-local M = {
-    "zbirenbaum/copilot.lua",
-    enabled = true,
-    event = "VeryLazy",
-}
+return {
+  "zbirenbaum/copilot.lua",
+  enabled = true,
+  event = "VeryLazy",
+  cond = not vim.g.vscode,
 
-function M.config()
+  config = function()
     require("copilot").setup({
-        suggestion = {
-            enabled = true,
-            auto_trigger = true,
-            debounce = 40,
-            keymap = {
-                accept = "<M-a>",
-                accept_word = false,
-                accept_line = false,
-                next = "<M-]>",
-                prev = "<M-[>",
-                dismiss = "<C-]>",
-            },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        debounce = 40,
+        keymap = {
+          accept = "<M-a>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
         },
+      },
     })
-end
+  end,
 
-function M.test() end
+  init = function()
+    -- Initialization space
+  end,
 
-return M
+  test = function()
+    -- Test function space
+  end,
+}

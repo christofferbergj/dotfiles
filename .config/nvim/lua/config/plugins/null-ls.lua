@@ -2,6 +2,8 @@ return {
   "jose-elias-alvarez/null-ls.nvim",
   enable = true,
   event = "BufReadPre",
+  cond = not vim.g.vscode,
+
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
