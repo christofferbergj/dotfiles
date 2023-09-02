@@ -1,5 +1,5 @@
 # Setup a single space
-function yabai_setup_space
+function yabai_setup_space -d "Setup a single space"
   set -l idx $argv[1]
 
   # Get amount of displays

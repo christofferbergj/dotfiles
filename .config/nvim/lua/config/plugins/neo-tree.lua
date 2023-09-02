@@ -1,25 +1,25 @@
 return {
-    "nvim-neo-tree/neo-tree.nvim",
-    enabled = true,
-    cmd = "Neotree",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-    },
+  "nvim-neo-tree/neo-tree.nvim",
+  enabled = true,
+  cmd = "Neotree",
+  cond = not vim.g.vscode,
 
-    config = function()
-        require("neo-tree").setup({
-            filesystem = {
-                follow_current_file = true,
-                hijack_netrw_behavior = "open_current",
-            },
-        })
-    end,
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    "MunifTanjim/nui.nvim",
+  },
 
-    init = function()
-        vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-    end,
+  config = function()
+    require("neo-tree").setup({
+      filesystem = {
+        follow_current_file = true,
+        hijack_netrw_behavior = "open_current",
+      },
+    })
+  end,
+
+  init = function()
+    vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+  end,
 }
-
-

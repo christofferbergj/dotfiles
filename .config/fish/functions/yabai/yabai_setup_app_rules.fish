@@ -1,4 +1,4 @@
-function yabai_setup_app_rules
+function yabai_setup_app_rules -d "Setup app rules for yabai"
   set -l opacity 0.93
 
   # Browser
@@ -33,11 +33,13 @@ function yabai_setup_app_rules
   # Mail
   yabai -m rule --add app='^Spark$' space='^mail'
   yabai -m rule --add app='^Spark$' title='^New Message$' space='^mail' manage=off
+  yabai -m rule --add app='^Spark Desktop$' space='^mail'
 
   # Design tools
   yabai -m rule --add app='^Figma$' space='^other'
 
   # Don't manage
+  yabai -m rule --add app='^Rewind$' manage=off
   yabai -m rule --add app='^CleanShot X$' manage=off
   yabai -m rule --add app='^Finder$' manage=off
   yabai -m rule --add app='^AltTab$' manage=off

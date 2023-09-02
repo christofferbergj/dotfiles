@@ -1,4 +1,4 @@
-function init_gruvbox
+function init_gruvbox -d 'Initialize Gruvbox color scheme'
   # Gruvbox Color Palette
   set -l fg ebdbb2
   set -l fg0 fbf1c7

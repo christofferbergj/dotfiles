@@ -1,6 +1,6 @@
 # This function adds the yabai scripting addition to the sudoers file, allowing yabai to be executed with elevated privileges without requiring a password.
 # It also outputs the contents of the sudoers file using the bat command.
-function yabai_add_scripting_addition
+function yabai_add_scripting_addition -d "Adds the yabai scripting addition to the sudoers file."
     if not test -x (which yabai)
         echo (set_color red)"Error: yabai binary not found"(set_color normal)
         return 1

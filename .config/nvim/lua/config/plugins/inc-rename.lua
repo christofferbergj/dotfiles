@@ -1,13 +1,15 @@
 return {
-    "smjonas/inc-rename.nvim",
-    event = "BufReadPost",
-    config = function()
-        require("inc_rename").setup({
-            input_buffer_type = "dressing",
-        })
-    end,
+  "smjonas/inc-rename.nvim",
+  event = "BufReadPost",
+  cond = not vim.g.vscode,
 
-    init = function()
-        vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "Rename symbol under cursor" })
-    end,
+  config = function()
+    require("inc_rename").setup({
+      input_buffer_type = "dressing",
+    })
+  end,
+
+  init = function()
+    vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "Rename symbol under cursor" })
+  end,
 }

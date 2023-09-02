@@ -1,5 +1,5 @@
 # Delete all spaces
-function yabai_delete_spaces
+function yabai_delete_spaces -d "Delete all spaces"
   echo "Deleting all spaces"
   sleep 0.5
   set -l display_ids (yabai -m query --displays | jq -r '.[].index')

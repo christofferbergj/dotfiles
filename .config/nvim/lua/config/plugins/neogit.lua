@@ -1,26 +1,28 @@
 return {
-    "TimUntersberger/neogit",
-    enabled = true,
-    cmd = "Neogit",
-    dependencies = {
-        { "nvim-lua/plenary.nvim" }
-    },
+  "NeogitOrg/neogit",
+  enabled = true,
+  cmd = "Neogit",
+  cond = not vim.g.vscode,
 
-    config = function()
-        require("neogit").setup({
-            kind = "vsplit",
-            integrations = { diffview = true },
-        })
-    end,
+  dependencies = {
+    { "nvim-lua/plenary.nvim" }
+  },
 
-    init = function()
-        local wk = require("which-key")
-        local binds = {
-            g = {
-                n = { "<cmd>Neogit<cr>", "Neogit" }
-            }
-        }
+  config = function()
+    require("neogit").setup({
+      kind = "vsplit",
+      integrations = { diffview = true },
+    })
+  end,
 
-        wk.register(binds, { prefix = "<leader>" })
-    end,
+  init = function()
+    local wk = require("which-key")
+    local binds = {
+      g = {
+        n = { "<cmd>Neogit<cr>", "Neogit" }
+      }
+    }
+
+    wk.register(binds, { prefix = "<leader>" })
+  end,
 }

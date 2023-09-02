@@ -1,6 +1,6 @@
 let mapleader=" "
 
-" Common settings -------------------------
+" Common settings
 set clipboard=unnamedplus
 set clipboard+=ideaput
 set incsearch
@@ -10,7 +10,12 @@ set showmode
 set scrolloff=8
 set visualbell
 
-" Plugins  --------------------------------
+" Idea specific settings
+set ideajoin
+set ideastatusicon=enabled
+set idearefactormode=keep
+
+" Plugins
 Plug 'chrisbra/matchit'
 Plug 'dbakker/vim-paragraph-motion'
 Plug 'easymotion/vim-easymotion'
@@ -23,44 +28,12 @@ Plug 'vim-scripts/argtextobj.vim'
 set sneak
 set quickscope
 
-" Plugin settings -------------------------
+" Plugin settings
 let g:argtextobj_pairs="[:],(:),<:>"
-let g:highlightedyank_highlight_duration = "80"
+let g:highlightedyank_highlight_duration = "70"
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" Idea specific settings ------------------
-set ideajoin
-set ideastatusicon=enabled
-set idearefactormode=keep
-
-" Editor action mappings -----------------------------
-nmap <leader>a <Action>(EditorAddCaretPerSelectedLine)
-nmap <leader>b <Action>(ShowNavBar)
-nmap <leader>d <Action>(SelectAllOccurrences)
-nmap <leader>e <Action>(ActivateProjectToolWindow)
-nmap <leader>f <Action>(AceWordStartAction)
-nmap <leader>g <Action>(ChooseRunConfiguration)
-nmap <leader>i <Action>(ParameterInfo)
-nmap <leader>m <Action>(EditorMatchBrace)
-nmap <leader>o <Action>(OptimizeImports)
-nmap <leader>p <Action>(ReformatWithPrettierAction)
-nmap <leader>q <Action>(HideAllWindows)
-nmap <leader>r <Action>(RenameElement)
-nmap <leader>s <Action>(FileStructurePopup)
-nmap <leader>x <Action>(CloseAllEditors)
-nmap <leader>y V$%y
-nmap <leader>Y v$%y
-nmap <leader>V V$%
-nmap <leader>v v$
-nmap <leader>w V$%
-nmap <leader>W v$%$
-nmap <leader>z <Action>(Vcs.RollbackChangedLines)
-nmap gt <Action>(GotoTest)
-
-" Tabshifter
-map <C-w>= <Action>(tabshifter.Actions.EqualSizeSplit)
-
-" General mappings -----------------------------
+" General mappings
 inoremap jj <Esc>A
 inoremap jk <Esc>
 nnoremap H 0
@@ -73,20 +46,43 @@ nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 nnoremap n nzz
 vnoremap p "_dP
+nnoremap U <C-R>
 
 " Paste from previous register
-map ,p "0p
-map ,P "0P
+nnoremap ,p "0p
+nnoremap ,P "0P
 
-" Undo with shift+u
-nnoremap U <C-R>
+" Editor action mappings
+nmap <leader>a <Action>(EditorAddCaretPerSelectedLine)
+nmap <leader>b <Action>(ShowNavBar)
+nmap <leader>c <Action>(ChooseRunConfiguration)
+nmap <leader>d <Action>(SelectAllOccurrences)
+nmap <leader>e <Action>(ActivateProjectToolWindow)
+nmap <leader>f <Action>(AceWordStartAction)
+nmap <leader>i <Action>(ParameterInfo)
+nmap <leader>m <Action>(EditorMatchBrace)
+nmap <leader>o <Action>(OptimizeImports)
+nmap <leader>p <Action>(ReformatWithPrettierAction)
+nmap <leader>q <Action>(HideAllWindows)
+nmap <leader>r <Action>(RenameElement)
+nmap <leader>s <Action>(FileStructurePopup)
+nmap <leader>u <Action>(CloseAllEditors)
+nmap <leader>v <Action>(Vcs.RollbackChangedLines)
+nmap gt <Action>(GotoTest)
+
+" Leader editor action mappings
+nmap <leader>w V$%
+nmap <leader>W v$%$
+nmap <leader>x v$
+nmap <leader>y V$%
+nmap <leader>Y v$%y
+nmap <leader>Z V$%y
 
 " Strict mode for development ---------------
 set ideastrictmode
 
 " Open ideavim settings and reload
-nnoremap \e :e ~/.ideavimrc<CR>
-nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+nmap \e :e ~/.ideavimrc<CR>
+nmap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
 " Find more examples here: https://jb.gg/share-ideavimrc
-" source ~/.config/colemak-vim

@@ -1,22 +1,23 @@
-function init_abbreviations
-  # general
+function init_abbreviations -d 'Initialize fish abbreviations'
+  # general (cli tools)
   abbr --add c. 'code .'
-  abbr --add cat bat
-  abbr --add find fd
-  abbr --add grep rg
-  abbr --add j z
+  abbr --add cat 'bat'
+  abbr --add j 'z'
   abbr --add kp 'pnpm dlx kill-port 3000 3001 4000 6006'
+  abbr --add killport 'pnpm dlx kill-port 3000 3001 4000 6006'
 
-  # homebrew
-  abbr --add b brew
+  # homebrew (package manager)
+  abbr --add b 'brew'
   abbr --add bu 'brew upgrade'
+  abbr --add buc 'brew upgrade ; brew cleanup ; brew autoremove'
   abbr --add bi 'brew install'
   abbr --add bic 'brew install --cask'
   abbr --add br 'brew remove'
   abbr --add brm 'brew remove'
-  abbr --add bclean 'brew cleanup ; brew autoremove'
-  abbr --add bc 'brew cleanup ; brew autoremove'
+  abbr --add bclean 'brew cleanup --prune=all ; brew autoremove'
+  abbr --add bc 'brew cleanup --prune=all ; brew autoremove'
   abbr --add bs 'brew search'
+  abbr --add bl 'brew list'
   abbr --add bsc 'brew search --cask'
 
   # aicommits
@@ -31,7 +32,7 @@ function init_abbreviations
   abbr --add ghw 'gh workflow view -w'
 
   # gitui
-  abbr --add g gitui
+  abbr --add g 'gitui'
 
   # git
   abbr --add yolo 'git add --all ; git commit -m "¯\_(ツ)_/¯"'
@@ -147,6 +148,7 @@ function init_abbreviations
   # pnpm
   abbr --add p pnpm
   abbr --add pa 'pnpm add'
+  abbr --add pd 'pnpm dev'
   abbr --add pi 'pnpm install'
   abbr --add pb 'pnpm build'
   abbr --add pl 'pnpm list'
