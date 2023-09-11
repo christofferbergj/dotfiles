@@ -3,6 +3,7 @@ function yabai_setup_app_rules -d "Setup app rules for yabai"
 
   # Browser
   yabai -m rule --add app='^Brave Browser$' space='^browser'
+  yabai -m rule --add app='^Arc$' space='^browser'
   yabai -m rule --add app='^Google Chrome$' space='^other'
   yabai -m rule --add app='^Safari$' space='^other'
   yabai -m rule --add app='^Firefox$' space='^other'
