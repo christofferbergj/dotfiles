@@ -82,12 +82,12 @@ return {
     { key = '3', mods = 'CTRL', action = act.ActivatePaneByIndex(2) },
 
     -- focus tab relative to each other
-    { key = "h", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(-1) },
-    { key = "l", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(1) },
+    { key = "h", mods = "ALT|SHIFT", action = act.ActivateTabRelative(-1) },
+    { key = "l", mods = "ALT|SHIFT", action = act.ActivateTabRelative(1) },
 
     -- move tab relative to each other
-    { key = 'j', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1) },
-    { key = 'k', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
+    { key = 'j', mods = 'ALT|SHIFT', action = act.MoveTabRelative(-1) },
+    { key = 'k', mods = 'ALT|SHIFT', action = act.MoveTabRelative(1) },
   },
 
   key_tables = {
