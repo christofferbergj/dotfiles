@@ -14,7 +14,7 @@ function yabai_setup_app_rules -d "Setup app rules for yabai"
   # Editor (WebStorm and VSCode)
   yabai -m rule --add app='Code$' space='^editor' opacity=$opacity
   yabai -m rule --add app='WebStorm$' space='^editor' opacity=$opacity
-  yabai -m rule --add app='WebStorm$' title='^Rename|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable$' manage=off opacity=$opacity
+  yabai -m rule --add app='WebStorm$' title='^Rename|Run|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable|Go to Line:Column$' manage=off opacity=$opacity
 
   # Messages
   yabai -m rule --add app='^Messenger$' space='messages' manage=off
@@ -29,7 +29,6 @@ function yabai_setup_app_rules -d "Setup app rules for yabai"
   yabai -m rule --add app='^Spotify$' space='media'
   yabai -m rule --add app='^Sonos$' space='^media'
   yabai -m rule --add app='^Podcasts$' space='^media'
-  yabai -m rule --add app='^Endel$' space='^media'
 
   # Mail
   yabai -m rule --add app='^Spark$' space='^mail'
@@ -42,6 +41,7 @@ function yabai_setup_app_rules -d "Setup app rules for yabai"
   # Don't manage
   yabai -m rule --add app='^Rewind$' manage=off
   yabai -m rule --add app='^CleanShot X$' manage=off
+  yabai -m rule --add app='^Activity Monitor$' manage=off
   yabai -m rule --add app='^Finder$' manage=off
   yabai -m rule --add app='^AltTab$' manage=off
   yabai -m rule --add app='^Reminders$' manage=off
