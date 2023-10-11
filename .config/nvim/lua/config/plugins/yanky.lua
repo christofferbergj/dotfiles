@@ -26,8 +26,7 @@ function M.config()
   bind({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
   bind("n", "]p", "<Plug>(YankyPutAfterFilter)")
   bind("n", "[p", "<Plug>(YankyPutBeforeFilter)")
-  bind("n", "<leader>P", "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>",
-    { desc = "Yank history" })
+  bind("n", "<leader>P", "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", { desc = "Yank history" })
 end
 
 return M

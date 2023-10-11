@@ -1,14 +1,10 @@
 return {
   "ggandor/leap.nvim",
   event = "VeryLazy",
-
   dependencies = {
     {
       "ggandor/flit.nvim",
-      config = {
-        labeled_modes = "nv",
-        multiline = true
-      }
+      config = { labeled_modes = "nv", multiline = true }
     },
   },
 
@@ -18,10 +14,7 @@ return {
   end,
 
   init = function()
-    vim.api.nvim_set_hl(0, 'LeapBackdrop', {
-      fg = '#777777',
-    })
-
+    vim.api.nvim_set_hl(0, 'LeapBackdrop', { fg = '#777777' })
     vim.api.nvim_set_hl(0, 'LeapMatch', {
       fg = 'white', -- for light themes, set to 'black' or similar
       bold = true,

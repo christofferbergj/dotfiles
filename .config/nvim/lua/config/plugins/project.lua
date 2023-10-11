@@ -2,7 +2,6 @@ return {
   "ahmedkhalf/project.nvim",
   enabled = true,
   event = "VeryLazy",
-  cond = not vim.g.vscode,
 
   config = function()
     require("project_nvim").setup({

@@ -2,20 +2,8 @@ return {
   "monaqa/dial.nvim",
   enabled = true,
   keys = {
-    {
-      "<C-a>",
-      function()
-        return require("dial.map").inc_normal()
-      end,
-      expr = true,
-    },
-    {
-      "<C-x>",
-      function()
-        return require("dial.map").dec_normal()
-      end,
-      expr = true,
-    },
+    { "<C-a>", "<cmd>lua return require('dial.map').inc_normal()<cr>", expr = true },
+    { "<C-x>", "<cmd>lua return require('dial.map').dec_normal()<cr>", expr = true },
   },
 
   config = function()

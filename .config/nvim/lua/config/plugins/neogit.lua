@@ -2,8 +2,6 @@ return {
   "NeogitOrg/neogit",
   enabled = true,
   cmd = "Neogit",
-  cond = not vim.g.vscode,
-
   dependencies = {
     { "nvim-lua/plenary.nvim" }
   },
@@ -16,13 +14,8 @@ return {
   end,
 
   init = function()
-    local wk = require("which-key")
-    local binds = {
-      g = {
-        n = { "<cmd>Neogit<cr>", "Neogit" }
-      }
-    }
+    local bind = vim.keymap.set
 
-    wk.register(binds, { prefix = "<leader>" })
+    bind("n" , "<leader>gg", "<cmd>Neogit<cr>", { desc = "Neogit" })
   end,
 }
