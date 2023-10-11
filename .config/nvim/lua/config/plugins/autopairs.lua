@@ -1,20 +1,29 @@
 return {
   "windwp/nvim-autopairs",
-  enabled = true,
-  event = "BufReadPost",
-  cond = not vim.g.vscode,
-
+  event = { "InsertEnter" },
+  dependencies = {
+    "hrsh7th/nvim-cmp",
+  },
   config = function()
-    local npairs = require("nvim-autopairs")
+    local autopairs = require("nvim-autopairs")
 
-    npairs.setup({
-      check_ts = true,
+    -- configure autopairs
+    autopairs.setup({
+      check_ts = true, -- enable treesitter
       ts_config = {
-        lua = { "string", "comment" }, -- it will not add a pair on that treesitter node
+        lua = { "string" }, -- don't add pairs in lua string treesitter nodes
+        javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
+        java = false, -- don't check treesitter on java
       },
     })
 
+    -- import nvim-autopairs completion functionality
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+
+    -- import nvim-cmp plugin (completions plugin)
+    local cmp = require("cmp")
+
+    -- make autopairs and completion work together
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
   end,
 }

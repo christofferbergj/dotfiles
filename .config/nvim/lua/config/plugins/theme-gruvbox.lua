@@ -1,8 +1,7 @@
 return {
   "ellisonleao/gruvbox.nvim",
   enabled = true,
-  lazy = false,
-  cond = not vim.g.vscode,
+  priority = 1000,
 
   config = function()
     require("gruvbox").setup({
@@ -10,9 +9,9 @@ return {
       underline = true,
       bold = true,
       italic = {
-        strings = true,
-        operators = true,
-        comments = true,
+        strings = false,
+        operators = false,
+        comments = false,
       },
       strikethrough = true,
       invert_selection = false,

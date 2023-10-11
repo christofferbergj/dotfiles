@@ -2,7 +2,6 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   enabled = true,
   cmd = "Neotree",
-  cond = not vim.g.vscode,
 
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -12,6 +11,10 @@ return {
 
   config = function()
     require("neo-tree").setup({
+      window = {
+        position = "float",
+        width = 20,
+      },
       filesystem = {
         follow_current_file = true,
         hijack_netrw_behavior = "open_current",

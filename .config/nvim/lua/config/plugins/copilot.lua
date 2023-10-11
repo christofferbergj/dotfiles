@@ -1,15 +1,13 @@
 return {
   "zbirenbaum/copilot.lua",
-  enabled = true,
-  event = "VeryLazy",
-  cond = not vim.g.vscode,
+  event = "InsertEnter",
 
   config = function()
     require("copilot").setup({
       suggestion = {
         enabled = true,
         auto_trigger = true,
-        debounce = 40,
+        debounce = 50,
         keymap = {
           accept = "<M-a>",
           accept_word = false,
@@ -20,13 +18,5 @@ return {
         },
       },
     })
-  end,
-
-  init = function()
-    -- Initialization space
-  end,
-
-  test = function()
-    -- Test function space
   end,
 }

@@ -102,9 +102,11 @@ hyper - 0 : yabai -m space --balance
 alt - r : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "next" else "stack.next" end') || \
             yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "first" else "stack.first" end')
 
+alt + shift - r : yabai -m space --rotate 270
+
 # Focus windows backwards
-alt + shift - r : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "prev" else "stack.prev" end') || \
-            yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "last" else "stack.last" end')
+# alt + shift - r : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "prev" else "stack.prev" end') || \
+#             yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "last" else "stack.last" end')
 
 # Rotate on X and Y Axis
 alt + shift - y : yabai -m space --mirror y-axis
