@@ -47,6 +47,7 @@ function init_gruvbox -d 'Initialize Gruvbox color scheme'
   set -g fish_color_end $orange
   set -g fish_color_error $red
   set -g fish_color_param $fg
+  set -g fish_color_option $orange
   set -g fish_color_comment $purple_dark
   set -g fish_color_selection --background=$fg4
   set -g fish_color_search_match --background=$fg4
