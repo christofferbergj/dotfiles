@@ -47,13 +47,22 @@ function init_gruvbox -d 'Initialize Gruvbox color scheme'
   set -g fish_color_end $orange
   set -g fish_color_error $red
   set -g fish_color_param $fg
-  set -g fish_color_option $orange
+  set -g fish_color_option $blue
   set -g fish_color_comment $purple_dark
   set -g fish_color_selection --background=$fg4
   set -g fish_color_search_match --background=$fg4
   set -g fish_color_operator $green
   set -g fish_color_escape $blue
   set -g fish_color_autosuggestion $bg4
+  set -g fish_color_cancel $red
+  set -g fish_color_cwd $blue
+  set -g fish_color_cwd_root $green
+  set -g fish_color_host $yellow
+  set -g fish_color_host_remote $orange
+  set -g fish_color_status $green
+  set -g fish_color_user $purple
+  set -g fish_color_valid_path $fg
+
 
   # Completion Pager Colors
   set -g fish_pager_color_progress $purple_dark
