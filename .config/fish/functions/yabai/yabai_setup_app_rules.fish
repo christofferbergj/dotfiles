@@ -1,6 +1,9 @@
 function yabai_setup_app_rules -d "Setup app rules for yabai"
   set -l opacity 0.93
 
+  # Fig autocomplete
+  yabai -m rule --add app='^Fig$' layer='above'
+
   # Browser
   yabai -m rule --add app='^Brave Browser$' space='^browser'
   yabai -m rule --add app='^Arc$' space='^browser'
