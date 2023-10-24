@@ -28,6 +28,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
   abbr --add gho 'gh repo view -w'
   abbr --add ghp 'gh pr view -w'
   abbr --add ghpc 'gh pr create -f'
+  abbr --add ghpca 'gh pr create -f; and gh pr view -w'
   abbr --add ghpcd 'gh pr create -f -d'
   abbr --add ghw 'gh workflow view -w'
 
