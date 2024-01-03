@@ -14,7 +14,7 @@ return {
 	-- general
 	default_cursor_style = "SteadyBlock",
 	color_scheme = "Gruvbox dark, medium (base16)",
-	-- color_scheme = "Gruvbox Dark (Gogh)",
+	-- color_scheme = "Catppuccin Macchiato",
 	send_composed_key_when_left_alt_is_pressed = false,
 	send_composed_key_when_right_alt_is_pressed = true,
 	window_close_confirmation = "NeverPrompt",

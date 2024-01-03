@@ -86,10 +86,10 @@ map ,d <Action>(ContextDebug)
 map ,n <Action>(ActivateDebugToolWindow)
 
 " Leader editor action mappings
-map <leader>w V$%
+map <leader>w 0v$%$
 map <leader>W v$%$
 map <leader>x v$
-map <leader>y V$%y
+map <leader>y 0v$%$y
 map <leader>Y v$%y
 map <leader>Z V$%y
 
