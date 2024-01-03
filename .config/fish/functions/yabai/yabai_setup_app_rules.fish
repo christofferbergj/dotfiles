@@ -1,5 +1,5 @@
 function yabai_setup_app_rules -d "Setup app rules for yabai"
-  set -l opacity 0.93
+  set -l opacity 0.96
 
   # Fig autocomplete
   yabai -m rule --add app='^Fig$' layer='above'
@@ -14,10 +14,11 @@ function yabai_setup_app_rules -d "Setup app rules for yabai"
   # Terminal
   yabai -m rule --add app='^WezTerm$' space='^terminal' opacity=$opacity
 
-  # Editor (WebStorm and VSCode)
+  # Editor (WebStorm, Zed and VSCode)
   yabai -m rule --add app='Code$' space='^editor' opacity=$opacity
   yabai -m rule --add app='WebStorm$' space='^editor' opacity=$opacity
-  yabai -m rule --add app='WebStorm$' title='^Rename|Run|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable|Go to Line:Column$' manage=off opacity=$opacity
+  yabai -m rule --add app='Zed$' space='^editor' opacity=$opacity
+  yabai -m rule --add app='WebStorm$' title='^Rename|Run|Move|Copy|Problems Detected|Delete|Usages Detected|Settings|Conflicts|Rollback Changes|Find Usages|Extract Variable|Go to Line:Column|Conflicts|Merge Revisions.*$' manage=off opacity=$opacity
 
   # Messages
   yabai -m rule --add app='^Messenger$' space='messages' manage=off
