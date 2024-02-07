@@ -111,11 +111,11 @@ function init_abbreviations -d 'Initialize fish abbreviations'
   abbr --add gsw 'git switch'
   abbr --add gswc 'git switch -c'
 
-  # exa
-  abbr --add l 'exa -a -1 --git --icons'
-  abbr --add ld 'exa -D -1 --git --icons'
-  abbr --add la 'exa -a -l --git --icons'
-  abbr --add ll 'exa -a -l --git --icons'
+  # eza
+  abbr --add l 'eza -a -1 --git --icons'
+  abbr --add ld 'eza -D -1 --git --icons'
+  abbr --add la 'eza -a -l --git --icons'
+  abbr --add ll 'eza -a -l --git --icons'
 
   # npm
   abbr --add ni 'npm install'
