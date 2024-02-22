@@ -143,6 +143,9 @@ function init_abbreviations -d 'Initialize fish abbreviations'
   abbr --add prm 'pnpm rm'
   abbr --add pu 'pnpm update'
   abbr --add px 'pnpm dlx'
+  
+  # Zed
+  abbr --add z. 'zed .'
 
   # webstorm
   abbr --add ws 'open -a WebStorm'
