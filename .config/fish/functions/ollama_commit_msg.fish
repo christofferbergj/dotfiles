@@ -15,15 +15,31 @@ function ollama_commit_msg -d 'Generate commit msg with Mistral'
 
     # generate the commit message
     set -l commit_message (string trim -- (ollama run mistral \
-        "Generate a concise git commit message written in present tense for the following code diff with the given specifications: 1: Commit message must be a maximum of 255 characters. 2: One line of text and no lists of changes. 3: Exclude anything unnecessary such as translation. Your entire response will be passed directly into git commit. $git_diff"))
+        "Generate a git commit message in present tense that follows these specifications:
+            1: Must be a maximum of 255 characters.
+            2: One line of text with no lists of changes.
+            3: Exclude anything unnecessary such as translation.
+            4. Use imperative verb form e.g. 'update' instead of 'updated' and 'add' instead of 'added'.
+
+            Your entire response will be passed directly into git commit
+
+            Code diff: $git_diff"))
 
     echo (set_color green)"Commit message: "(set_color normal)"$commit_message"
 
     # confirm the commit message
     read -P "Is the commit message correct? (Y/n): " confirm
-    if test "$confirm" = "y" -o "$confirm" = ""
-        git commit -m "$commit_message"
-    else
+
+   # if the user doesn't confirm, abort the commit
+    if test -z "$confirm"
         echo "Commit aborted."
+        return
+    end
+
+    switch "$confirm"
+        case 'y' ''
+            git commit -m "$commit_message"
+        case '*'
+            echo "Commit aborted."
     end
 end
