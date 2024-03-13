@@ -143,6 +143,9 @@ function init_abbreviations -d 'Initialize fish abbreviations'
   abbr --add prm 'pnpm rm'
   abbr --add pu 'pnpm update'
   abbr --add px 'pnpm dlx'
+
+  # Raycast
+  abbr rgcm 'git diff | pbcopy; open raycast://ai-commands/git-commit-message'
   
   # Zed
   abbr --add z. 'zed .'
