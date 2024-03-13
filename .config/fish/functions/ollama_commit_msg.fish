@@ -15,7 +15,7 @@ function ollama_commit_msg -d 'Generate commit msg with Mistral'
 
     # generate the commit message
     set -l commit_message (string trim -- (ollama run mistral \
-        "Generate a concise git commit message written in present tense for the following code diff with the given specifications: Commit message must be a maximum of 255 characters. One line of text and no lists of changes. Exclude anything unnecessary such as translation. Your entire response will be passed directly into git commit. $git_diff"))
+        "Generate a concise git commit message written in present tense for the following code diff with the given specifications: 1: Commit message must be a maximum of 255 characters. 2: One line of text and no lists of changes. 3: Exclude anything unnecessary such as translation. Your entire response will be passed directly into git commit. $git_diff"))
 
     echo (set_color green)"Commit message: "(set_color normal)"$commit_message"
 
