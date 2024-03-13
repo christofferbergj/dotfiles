@@ -1,6 +1,7 @@
 function ollama_commit_msg -d 'Generate commit msg with Mistral'
     # check if there are changes to commit
     set git_diff (git diff --staged)
+
     if not test -n "$git_diff"
         echo "No changes to commit."
         return
