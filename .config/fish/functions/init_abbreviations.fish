@@ -146,7 +146,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
 
   # Raycast
   abbr rgcm 'git diff | pbcopy; open raycast://ai-commands/git-commit-message'
-  
+
   # Zed
   abbr --add z. 'zed .'
 
@@ -162,6 +162,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
   abbr --add y 'yadm'
   abbr --add ya 'yadm add'
   abbr --add yc 'yadm commit'
+  abbr --add ycm 'yadm commit -m'
   abbr --add yd 'yadm diff'
   abbr --add yp 'yadm push'
   abbr --add ys 'yadm status'
