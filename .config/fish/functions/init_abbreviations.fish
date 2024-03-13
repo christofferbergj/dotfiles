@@ -20,9 +20,8 @@ function init_abbreviations -d 'Initialize fish abbreviations'
   abbr --add bl 'brew list'
   abbr --add bsc 'brew search --cask'
 
-  # aicommits
-  abbr --add aic 'aicommits'
-  abbr --add aicc 'aicommits --type conventional'
+  # ollama commit message generation
+  abbr --add aic ollama_commit_msg
 
   # gh (github cli)
   abbr --add gho 'gh repo view -w'
