@@ -34,10 +34,10 @@ return {
 	-- window_background_opacity = 0.93,
 	window_decorations = "RESIZE",
 	window_padding = {
-		left = 38,
-		right = 38,
-		top = 38,
-		bottom = 38,
+		left = 30,
+		right = 30,
+		top = 30,
+		bottom = 30,
 	},
 
 	-- panes
