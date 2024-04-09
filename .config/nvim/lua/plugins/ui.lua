@@ -9,7 +9,7 @@ return {
   {
     "b0o/incline.nvim",
     dependencies = {},
-    event = "BufReadPre",
+    event = "VeryLazy",
     priority = 1200,
     config = function()
       local helpers = require("incline.helpers")
@@ -17,6 +17,9 @@ return {
         window = {
           padding = 0,
           margin = { horizontal = 0 },
+          placement = {
+            vertical = "top",
+          },
         },
         render = function(props)
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
