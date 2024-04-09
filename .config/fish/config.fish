@@ -25,6 +25,3 @@ zoxide init fish | source
 
 # Init Starship
 starship init fish | source
-
-# Init thefuck alias
-thefuck --alias | source
