@@ -1,14 +1,32 @@
 [core]
-	excludesfile = /Users/christofferbergj/.gitignore_global
+  excludesfile = /Users/christofferbergj/.gitignore_global
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
 [user]
-	name = Christoffer Berg Jensen
-	email = christofferbergj@gmail.com
+  name = Christoffer Berg Jensen
+  email = christofferbergj@gmail.com
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
 [alias]
-	yolo = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
+  yolo = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
+
 [pull]
-	ff = only
+  ff = only
+
 [push]
-	default = current
+  default = current
 

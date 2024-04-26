@@ -1,14 +1,14 @@
 function read_confirm
-  while true
-    read -l -P 'Is the commit message correct? [Y/n] ' confirm
+    while true
+        read -l -P 'Is the commit message correct? [Y/n] ' confirm
 
-    switch $confirm
-      case '' y Y
-        return 0
-      case n N
-        return 1
+        switch $confirm
+            case '' y Y
+                return 0
+            case n N
+                return 1
+        end
     end
-  end
 end
 
 function ollama_commit_msg -d 'Generate commit msg with Mistral'
@@ -21,13 +21,13 @@ function ollama_commit_msg -d 'Generate commit msg with Mistral'
     end
 
     # check if ollama is installed
-    if not command -v ollama > /dev/null ^&1
+    if not command -v ollama >/dev/null ^&1
         echo "Ollama is not installed. Please install it before running this script. https://ollama.com/"
         return
     end
 
     # generate the commit message
-    set -l commit_message (string trim -- (ollama run mistral \
+    set -l commit_message (string trim -- (ollama run llama3 \
         "Generate a git commit message in present tense that follows these specifications:
             1. Start with a capital letter.
             2. Use a maximum of 80 characters.
@@ -57,7 +57,7 @@ function ollama_commit_msg -d 'Generate commit msg with Mistral'
     # confirm the commit message
     if read -l -P "Is the commit message correct? (Y/n): " confirm
         switch "$confirm"
-            case 'y' ''
+            case y ''
                 # Proceed with the commit if the user presses 'Enter' or 'y'
                 git commit -m "$commit_message"
             case '*'

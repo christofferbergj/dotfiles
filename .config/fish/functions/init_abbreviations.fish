@@ -36,6 +36,8 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add g gitui
 
     # git
+    abbr --add fomo 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate'
+    abbr --add grbm 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate'
     abbr --add yolo 'git add --all ; git commit -m "¯\_(ツ)_/¯"'
     abbr --add s 'git status -s'
     abbr --add ga 'git add'
@@ -109,6 +111,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add gst 'git stash'
     abbr --add gsta 'git stash apply'
     abbr --add gsw 'git switch'
+    abbr --add gswm 'git switch main'
     abbr --add gswc 'git switch -c'
 
     # eza
