@@ -20,7 +20,7 @@ return {
 	window_close_confirmation = "NeverPrompt",
 
 	-- font
-	font = wezterm.font("JetBrains Mono", { weight = "Medium" }),
+	font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" }),
 	font_size = 15,
 	line_height = 1.6,
 
