@@ -19,6 +19,7 @@
   "ui_font_size": 15,
   "vertical_scroll_margin": 8,
   "vim_mode": true,
+  "show_whitespaces": "none",
 
   "vim": {
     "use_multiline_find": true,
@@ -33,7 +34,8 @@
   },
 
   "tab_bar": {
-    "show_nav_history_buttons": false
+    "show_nav_history_buttons": false,
+    "show": false
   },
 
   "tabs": {
@@ -63,6 +65,14 @@
     "copy_on_select": true,
     "line_height": {
       "custom": 2.0
+    }
+  },
+
+  "git": {
+    "inline_blame": {
+      "delay_ms": 5000,
+      "enabled": true,
+      "min_column": 0
     }
   },
 
