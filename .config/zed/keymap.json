@@ -5,7 +5,9 @@
   },
   {
     "context": "Editor",
-    "bindings": {}
+    "bindings": {
+      "cmd-shift-s": "editor::Format"
+    }
   },
   {
     "context": "Editor && mode == full",
@@ -203,7 +205,6 @@
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
       // put key-bindings here if you want them to work in normal & visual mode
-      "shift-k": "editor::Hover"
     }
   },
   {
