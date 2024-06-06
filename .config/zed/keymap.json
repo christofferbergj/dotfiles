@@ -80,55 +80,16 @@
   },
   {
     "context": "Pane",
-    "bindings": {
-      "ctrl-1": ["pane::ActivateItem", 0],
-      "ctrl-2": ["pane::ActivateItem", 1],
-      "ctrl-3": ["pane::ActivateItem", 2],
-      "ctrl-4": ["pane::ActivateItem", 3],
-      "ctrl-5": ["pane::ActivateItem", 4],
-      "ctrl-6": ["pane::ActivateItem", 5],
-      "ctrl-7": ["pane::ActivateItem", 6],
-      "ctrl-8": ["pane::ActivateItem", 7],
-      "ctrl-9": ["pane::ActivateItem", 8],
-      "ctrl-0": "pane::ActivateLastItem",
-      "ctrl--": "pane::GoBack",
-      "ctrl-_": "pane::GoForward",
-      "cmd-shift-t": "pane::ReopenClosedItem",
-      "cmd-shift-f": "project_search::ToggleFocus"
-    }
+    "bindings": {}
   },
   {
     "context": "Workspace",
-    "bindings": {
-      "cmd-1": ["workspace::ActivatePane", 0],
-      "cmd-2": ["workspace::ActivatePane", 1],
-      "cmd-3": ["workspace::ActivatePane", 2],
-      "cmd-4": ["workspace::ActivatePane", 3],
-      "cmd-5": ["workspace::ActivatePane", 4],
-      "cmd-6": ["workspace::ActivatePane", 5],
-      "cmd-7": ["workspace::ActivatePane", 6],
-      "cmd-8": ["workspace::ActivatePane", 7],
-      "cmd-9": ["workspace::ActivatePane", 8]
-    }
+    "bindings": {}
   },
   // Bindings from Sublime Text
   {
     "context": "Editor",
-    "bindings": {
-      "ctrl-j": "editor::JoinLines",
-      "ctrl-alt-backspace": "editor::DeleteToPreviousSubwordStart",
-      "ctrl-alt-h": "editor::DeleteToPreviousSubwordStart",
-      "ctrl-alt-delete": "editor::DeleteToNextSubwordEnd",
-      "ctrl-alt-d": "editor::DeleteToNextSubwordEnd",
-      "ctrl-alt-left": "editor::MoveToPreviousSubwordStart",
-      "ctrl-alt-b": "editor::MoveToPreviousSubwordStart",
-      "ctrl-alt-right": "editor::MoveToNextSubwordEnd",
-      "ctrl-alt-f": "editor::MoveToNextSubwordEnd",
-      "ctrl-alt-shift-left": "editor::SelectToPreviousSubwordStart",
-      "ctrl-alt-shift-b": "editor::SelectToPreviousSubwordStart",
-      "ctrl-alt-shift-right": "editor::SelectToNextSubwordEnd",
-      "ctrl-alt-shift-f": "editor::SelectToNextSubwordEnd"
-    }
+    "bindings": {}
   },
   // Bindings from Atom
   {
@@ -200,11 +161,14 @@
     "context": "Terminal",
     "bindings": {}
   },
-
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
       // put key-bindings here if you want them to work in normal & visual mode
+      "ctrl-shift-u": "vim::ScrollUp",
+      "ctrl-shift-d": "vim::ScrollDown",
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z"]
     }
   },
   {

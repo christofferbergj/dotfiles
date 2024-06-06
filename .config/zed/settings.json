@@ -14,7 +14,7 @@
   "preferred_line_length": 100,
   "relative_line_numbers": true,
   "show_wrap_guides": false,
-  "theme": "Gruvbox Dark",
+  "theme": "Gruvbox Dark - Berg",
   "ui_font_family": "Inter",
   "ui_font_size": 15,
   "vertical_scroll_margin": 8,
@@ -25,6 +25,10 @@
     "use_multiline_find": true,
     "use_smartcase_find": true,
     "use_system_clipboard": "always"
+  },
+
+  "indent_guides": {
+    "enabled": false
   },
 
   "autosave": {
@@ -70,7 +74,7 @@
 
   "git": {
     "inline_blame": {
-      "delay_ms": 5000,
+      "delay_ms": 3000,
       "enabled": true,
       "min_column": 0
     }
