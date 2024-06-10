@@ -168,7 +168,9 @@
       "ctrl-shift-u": "vim::ScrollUp",
       "ctrl-shift-d": "vim::ScrollDown",
       "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
-      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z"]
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z"],
+      "0": "vim::FirstNonWhitespace",
+      "^": "vim::StartOfLine"
     }
   },
   {

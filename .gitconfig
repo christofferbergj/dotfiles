@@ -26,6 +26,10 @@
 
 [pull]
   ff = only
+  rebase = true
+
+[rebase]
+  autoSquash = true
 
 [push]
   default = current
