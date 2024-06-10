@@ -62,6 +62,9 @@
   },
 
   "project_panel": {
+    "auto_reveal_entries": false,
+    "button": false,
+    "default_width": 340,
     "dock": "right"
   },
 
