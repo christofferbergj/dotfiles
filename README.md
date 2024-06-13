@@ -35,25 +35,6 @@ Gruvbox Medium Dark
 ![Neovim editor in typescript file](https://github.com/christofferbergj/dotfiles/assets/10507071/ceb605f9-9b3e-4215-a0d0-0ddf0cdc4987)
 
 
-
-<details>
-<summary>More screenshots</summary>
-
-### Neovim dashboard
-
-![Neovim dashboard](https://user-images.githubusercontent.com/10507071/210083588-a54da17b-c2f3-42e2-9802-1d66b90183c5.png)
-
-### Telescope
-
-![Telescope](https://user-images.githubusercontent.com/10507071/210084081-d6a2e9ac-baba-46fa-9447-ffd521ba2de4.png)
-![TeleScope](https://user-images.githubusercontent.com/10507071/210083952-1ad8568f-8aac-424c-961e-9767bc5cf4a3.png)
-
-### Lua
-
-![Lua](https://user-images.githubusercontent.com/10507071/210084163-c7b00ef5-ee74-49e6-b60a-145690dc6bb1.png)
-
-</details>
-
 ## General info
 
 1. Install Homebrew
