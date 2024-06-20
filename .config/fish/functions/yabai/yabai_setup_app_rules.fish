@@ -1,5 +1,5 @@
 function yabai_setup_app_rules -d "Setup app rules for yabai"
-    set -l opacity 0.96
+    set -l opacity 0.95
 
     # Browser
     yabai -m rule --add app='^Brave Browser$' space='^browser'

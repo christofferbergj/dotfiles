@@ -36,6 +36,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add g gitui
 
     # git
+    abbr --add gg 'git pull ; git fetch --all --prune ; git branch -v | rg "\[gone\]" | awk "{print \$1}" | string trim -l | xargs -L 1 git branch -D'
     abbr --add fomo 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate'
     abbr --add grbm 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate'
     abbr --add yolo 'git add --all ; git commit -m "¯\_(ツ)_/¯"'
