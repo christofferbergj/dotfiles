@@ -1,9 +1,9 @@
 (
     selected_tab: None,
     command_fg: None,
-    selection_bg: Some(DarkGray),
+    selection_bg: Some("DarkGray"),
     selection_fg: None,
-    cmdbar_bg: Some(DarkGray),
+    cmdbar_bg: Some("DarkGray"),
     cmdbar_extra_lines_bg: None,
     disabled_fg: None,
     diff_line_add: None,
