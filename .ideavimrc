@@ -37,19 +37,24 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " General mappings
 inoremap jj <Esc>A
 inoremap jk <Esc>
-nnoremap H ^
-nnoremap L $
-vnoremap H ^
-vnoremap L $
+nnoremap # #zz
+nnoremap * *zz
 nnoremap 0 ^
-nnoremap ^ 0
-nnoremap N Nzz
-nnoremap Y y$
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
-nnoremap n nzz
-vnoremap p "_dP
+nnoremap H ^
+nnoremap J mzJ`z
+nnoremap L $
+nnoremap N Nzz
 nnoremap U <C-R>
+nnoremap Y y$
+nnoremap ^ 0
+nnoremap n nzz
+vnoremap H ^
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+vnoremap L $
+vnoremap p "_dP
 
 " Paste from previous register
 nnoremap ,p "0p
