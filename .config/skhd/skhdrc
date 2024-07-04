@@ -39,7 +39,7 @@ alt + shift - 3  : yabai -m window --display 3; yabai -m display --focus 3
 alt + shift - space : yabai -m display --focus next || yabai -m display --focus first
 
 # Center small window
-hyper - v :  yabai -m window --resize abs:1100:700
+# hyper - v :  yabai -m window --resize abs:1100:700
 
 # Maximize window
 alt + shift - f : yabai -m window --toggle zoom-fullscreen; yabai -m window --grid 1:1:0:0:1:1
