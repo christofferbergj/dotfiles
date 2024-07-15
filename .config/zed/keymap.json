@@ -6,7 +6,16 @@
   {
     "context": "Editor",
     "bindings": {
-      "cmd-shift-s": "editor::Format"
+      "cmd-shift-s": "editor::Format",
+      "alt-enter": "editor::ToggleCodeActions",
+      "cmd-.": "pane::RevealInProjectPanel",
+
+      "cmd-shift-w": "editor::SelectLargerSyntaxNode",
+      "cmd-shift-a": "editor::SelectSmallerSyntaxNode",
+
+      "cmd-shift-d": "editor::UndoSelection",
+      "cmd-g": ["editor::SelectNext", { "replace_newest": true }],
+      "cmd-shift-g": ["editor::SelectPrevious", { "replace_newest": true }]
     }
   },
   {
@@ -26,11 +35,11 @@
     "bindings": {}
   },
   {
-    "context": "AssistantChat > Editor", // Used in the assistant2 crate
+    "context": "AssistantChat > Editor",
     "bindings": {}
   },
   {
-    "context": "AssistantPanel", // Used in the assistant crate, which we're replacing
+    "context": "AssistantPanel",
     "bindings": {}
   },
   {
@@ -126,8 +135,17 @@
     "bindings": {}
   },
   {
-    "context": "ProjectPanel",
-    "bindings": {}
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "q": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "OutlinePanel",
+    "bindings": {
+      "escape": "outline_panel::ToggleFocus",
+      "q": "workspace::ToggleLeftDock"
+    }
   },
   {
     "context": "ProjectPanel && not_editing",
@@ -167,10 +185,20 @@
       // put key-bindings here if you want them to work in normal & visual mode
       "ctrl-shift-u": "vim::ScrollUp",
       "ctrl-shift-d": "vim::ScrollDown",
-      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
-      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z 3 k"],
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z 3 k"],
+
       "0": "vim::FirstNonWhitespace",
-      "^": "vim::StartOfLine"
+      "^": "vim::StartOfLine",
+      "Y": ["workspace::SendKeystrokes", "y $"],
+      "space w": ["workspace::SendKeystrokes", "0 v $ % $"],
+      "space W": ["workspace::SendKeystrokes", "v $ % $"],
+
+      "space d": "diagnostics::Deploy",
+      "space e": "project_panel::ToggleFocus",
+      "space o": "outline_panel::ToggleFocus",
+      "space z": "workspace::ToggleCenteredLayout",
+      "space q": "workspace::CloseAllDocks"
     }
   },
   {
@@ -185,14 +213,15 @@
     "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
     "bindings": {
       // visual, visual line & visual block modes
+      "shift-alt-l": "editor::SortLinesCaseInsensitive"
     }
   },
   {
     "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
       // put key-bindings here if you want them to work in insert mode
-      // e.g.
-      // "j j": "vim::NormalBefore" // remap jj in insert mode to escape.
+      "j k": "vim::NormalBefore",
+      "j j": "vim::InsertEndOfLine"
     }
   }
 ]
