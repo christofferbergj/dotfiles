@@ -39,7 +39,7 @@ function yabai_setup_app_rules -d "Setup app rules for yabai"
     yabai -m rule --add app='^Spark Desktop$' space='^mail'
 
     # Design tools
-    yabai -m rule --add app='^Figma$' space='^other'
+    yabai -m rule --add app='^Figma$'
 
     # Don't manage
     yabai -m rule --add app='^Rewind$' manage=off
