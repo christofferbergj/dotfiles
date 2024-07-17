@@ -10,6 +10,11 @@
       "alt-enter": "editor::ToggleCodeActions",
       "cmd-.": "pane::RevealInProjectPanel",
 
+      "cmd-o": "project_symbols::Toggle",
+
+      "cmd-k w": "pane::CloseInactiveItems",
+      "cmd-k W": "workspace::CloseAllItemsAndPanes",
+
       "cmd-shift-w": "editor::SelectLargerSyntaxNode",
       "cmd-shift-a": "editor::SelectSmallerSyntaxNode",
 
@@ -95,11 +100,6 @@
     "context": "Workspace",
     "bindings": {}
   },
-  // Bindings from Sublime Text
-  {
-    "context": "Editor",
-    "bindings": {}
-  },
   // Bindings from Atom
   {
     "context": "Pane",
@@ -137,7 +137,8 @@
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
-      "q": "workspace::ToggleRightDock"
+      "q": "workspace::ToggleRightDock",
+      "cmd-shift-l": "project_panel::CollapseAllEntries"
     }
   },
   {
@@ -146,10 +147,6 @@
       "escape": "outline_panel::ToggleFocus",
       "q": "workspace::ToggleLeftDock"
     }
-  },
-  {
-    "context": "ProjectPanel && not_editing",
-    "bindings": {}
   },
   {
     "context": "CollabPanel && not_editing",
@@ -195,10 +192,28 @@
       "space W": ["workspace::SendKeystrokes", "v $ % $"],
 
       "space d": "diagnostics::Deploy",
+      "cmd-k p": "diagnostics::Deploy",
+
       "space e": "project_panel::ToggleFocus",
+      "cmd-k e": "project_panel::ToggleFocus",
+
+      "alt-k": "editor::GoToPrevDiagnostic",
+      "alt-j": "editor::GoToDiagnostic",
+
+      "cmd-[": "pane::GoBack",
+      "cmd-]": "pane::GoForward",
+
+      "alt-shift-k": "editor::GoToPrevHunk",
+      "alt-shift-j": "editor::GoToHunk",
+
       "space o": "outline_panel::ToggleFocus",
+      "cmd-k o": "outline_panel::ToggleFocus",
+
       "space z": "workspace::ToggleCenteredLayout",
-      "space q": "workspace::CloseAllDocks"
+      "cmd-k z": "workspace::ToggleCenteredLayout",
+
+      "space q": "workspace::CloseAllDocks",
+      "cmd-k q": "workspace::CloseAllDocks"
     }
   },
   {
