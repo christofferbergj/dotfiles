@@ -92,8 +92,9 @@ hyper - 9 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[
 # alt + shift - o : yabai -m window --resize left:100:0 
 
 # Reize windows - Plus/minus
-hyper - 0x18 : yabai -m window --resize bottom_right:80:50; yabai -m window --resize top_left:-80:-50
-hyper - 0x1B : yabai -m window --resize bottom_right:-80:-50; yabai -m window --resize top_left:80:50
+hyper - 0x18 : yabai -m window --resize right:80:0 || yabai -m window --resize left:80:0
+hyper - 0x1B : yabai -m window --resize right:-80:0 || yabai -m window --resize left:-80:0
+
 
 # Balance size of windows
 hyper - 0 : yabai -m space --balance
