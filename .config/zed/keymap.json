@@ -12,6 +12,7 @@
 
       "cmd-o": "project_symbols::Toggle",
 
+      "cmd-k r": "editor::Rename",
       "cmd-k w": "pane::CloseInactiveItems",
       "cmd-k W": "workspace::CloseAllItemsAndPanes",
 
