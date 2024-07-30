@@ -1,26 +1,35 @@
 [
-  // Standard macOS bindings
   {
-    "bindings": {}
+    // Global bindings
+    "bindings": {
+      "cmd-k e": "project_panel::ToggleFocus",
+      "cmd-k o": "outline_panel::ToggleFocus",
+      "cmd-k p": "diagnostics::Deploy",
+      "cmd-k q": "workspace::CloseAllDocks",
+      "cmd-k x": "zed::Extensions",
+      "cmd-k z": "workspace::ToggleCenteredLayout",
+
+      "cmd-k w": "pane::CloseInactiveItems",
+      "cmd-k W": "workspace::CloseAllItemsAndPanes"
+    }
   },
   {
     "context": "Editor",
     "bindings": {
-      "cmd-shift-s": "editor::Format",
       "alt-enter": "editor::ToggleCodeActions",
       "cmd-.": "pane::RevealInProjectPanel",
-
       "cmd-o": "project_symbols::Toggle",
+      "cmd-shift-s": "editor::Format",
+      "ctrl-r": "editor::Rename",
 
       "cmd-k r": "editor::Rename",
-      "cmd-k w": "pane::CloseInactiveItems",
-      "cmd-k W": "workspace::CloseAllItemsAndPanes",
+      "cmd-k s": "outline::Toggle",
 
-      "cmd-shift-w": "editor::SelectLargerSyntaxNode",
       "cmd-shift-a": "editor::SelectSmallerSyntaxNode",
+      "cmd-shift-w": "editor::SelectLargerSyntaxNode",
 
-      "cmd-shift-d": "editor::UndoSelection",
       "cmd-g": ["editor::SelectNext", { "replace_newest": true }],
+      "cmd-shift-d": "editor::UndoSelection",
       "cmd-shift-g": ["editor::SelectPrevious", { "replace_newest": true }]
     }
   },
@@ -180,6 +189,10 @@
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
     "bindings": {
+      // Undo and Redo
+      "u": "editor::Undo",
+      "shift-u": "editor::Redo",
+
       // put key-bindings here if you want them to work in normal & visual mode
       "ctrl-shift-u": "vim::ScrollUp",
       "ctrl-shift-d": "vim::ScrollDown",
@@ -193,10 +206,7 @@
       "space W": ["workspace::SendKeystrokes", "v $ % $"],
 
       "space d": "diagnostics::Deploy",
-      "cmd-k p": "diagnostics::Deploy",
-
       "space e": "project_panel::ToggleFocus",
-      "cmd-k e": "project_panel::ToggleFocus",
 
       "alt-k": "editor::GoToPrevDiagnostic",
       "alt-j": "editor::GoToDiagnostic",
@@ -208,13 +218,9 @@
       "alt-shift-j": "editor::GoToHunk",
 
       "space o": "outline_panel::ToggleFocus",
-      "cmd-k o": "outline_panel::ToggleFocus",
-
       "space z": "workspace::ToggleCenteredLayout",
-      "cmd-k z": "workspace::ToggleCenteredLayout",
 
-      "space q": "workspace::CloseAllDocks",
-      "cmd-k q": "workspace::CloseAllDocks"
+      "space q": "workspace::CloseAllDocks"
     }
   },
   {
