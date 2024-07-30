@@ -121,8 +121,8 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add z. 'zed .'
 
     # webstorm
-    abbr --add ws 'open -a WebStorm'
-    abbr --add ws. 'open -a WebStorm .'
+    abbr --add ws 'open -a WebStorm\ 2024.2\ RC'
+    abbr --add ws. 'open -a WebStorm\ 2024.2\ RC .'
 
     # yabai and skhd
     abbr --add yb 'nvim ~/.config/yabai/yabairc'
