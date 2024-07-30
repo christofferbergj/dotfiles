@@ -52,24 +52,49 @@
   },
   "gutter": {
     "code_actions": false,
-    "folds": false
+    "folds": false,
+    "line_numbers": true,
+    "runnables": false
+  },
+  "chat_panel": {
+    "button": true
+  },
+  "notification_panel": {
+    "button": true,
+    "default_width": 340
+  },
+  "collaboration_panel": {
+    "button": true,
+    "default_width": 340
+  },
+  "diagnostics": {
+    "include_warnings": true
+  },
+  "assistant": {
+    "enabled": false,
+    "version": "1",
+    "default_width": 340
   },
   "outline_panel": {
+    "dock": "left",
+    "button": true,
     "default_width": 340
   },
   "project_panel": {
     "auto_reveal_entries": true,
-    "button": false,
+    "button": true,
     "default_width": 340,
     "dock": "right"
   },
   "terminal": {
+    "button": true,
     "copy_on_select": true,
     "line_height": {
       "custom": 2.8
     }
   },
   "git": {
+    "git_gutter": "hide",
     "inline_blame": {
       "delay_ms": 3000,
       "enabled": true,
