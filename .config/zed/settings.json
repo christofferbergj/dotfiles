@@ -7,8 +7,13 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "features": {
+    "inline_completion_provider": "supermaven",
+    "copilot": false
+  },
+  "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 15,
+  "buffer_font_weight": 400,
   "buffer_line_height": {
     "custom": 2.8
   },
@@ -71,8 +76,13 @@
     "include_warnings": true
   },
   "assistant": {
-    "enabled": false,
-    "version": "1",
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-20240620"
+    },
+    "default_height": 340.0,
+    "enabled": true,
+    "version": "2",
     "default_width": 340
   },
   "outline_panel": {
@@ -99,6 +109,13 @@
       "delay_ms": 3000,
       "enabled": true,
       "min_column": 0
+    }
+  },
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "classAttributes": ["class", "className", "tv", "cn", "clsx", "styles"]
+      }
     }
   },
   "languages": {
