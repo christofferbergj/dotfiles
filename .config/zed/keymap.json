@@ -10,7 +10,9 @@
       "cmd-k z": "workspace::ToggleCenteredLayout",
 
       "cmd-k w": "pane::CloseInactiveItems",
-      "cmd-k W": "workspace::CloseAllItemsAndPanes"
+      "cmd-k W": "workspace::CloseAllItemsAndPanes",
+
+      "cmd-o": "project_symbols::Toggle"
     }
   },
   {
@@ -18,7 +20,6 @@
     "bindings": {
       "alt-enter": "editor::ToggleCodeActions",
       "cmd-.": "pane::RevealInProjectPanel",
-      "cmd-o": "project_symbols::Toggle",
       "cmd-shift-s": "editor::Format",
       "ctrl-r": "editor::Rename",
 
@@ -187,13 +188,13 @@
     "bindings": {}
   },
   {
-    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    // put key-bindings here if you want them to work in normal & visual mode
+    "context": "VimControl && !menu",
     "bindings": {
       // Undo and Redo
       "u": "editor::Undo",
       "shift-u": "editor::Redo",
 
-      // put key-bindings here if you want them to work in normal & visual mode
       "ctrl-shift-u": "vim::ScrollUp",
       "ctrl-shift-d": "vim::ScrollDown",
       "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z 3 k"],
@@ -202,7 +203,7 @@
       "0": "vim::FirstNonWhitespace",
       "^": "vim::StartOfLine",
       "Y": ["workspace::SendKeystrokes", "y $"],
-      "space w": ["workspace::SendKeystrokes", "0 v $ % $"],
+      "space w": "editor::SelectEnclosingSymbol",
       "space W": ["workspace::SendKeystrokes", "v $ % $"],
 
       "space d": "diagnostics::Deploy",
@@ -224,7 +225,7 @@
     }
   },
   {
-    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "context": "vim_mode == normal",
     "bindings": {
       // put key-bindings here if you want them to work only in normal mode
       // "down": ["workspace::SendKeystrokes", "4 j"]
@@ -232,16 +233,16 @@
     }
   },
   {
-    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "context": "vim_mode == visual",
     "bindings": {
       // visual, visual line & visual block modes
       "shift-alt-l": "editor::SortLinesCaseInsensitive"
     }
   },
   {
-    "context": "Editor && vim_mode == insert && !menu",
+    // put key-bindings here if you want them to work in insert mode
+    "context": "vim_mode == insert",
     "bindings": {
-      // put key-bindings here if you want them to work in insert mode
       "j k": "vim::NormalBefore",
       "j j": "vim::InsertEndOfLine"
     }
