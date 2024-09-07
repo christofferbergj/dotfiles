@@ -1,19 +1,19 @@
 let mapleader=" "
 
 " Common settings
-set clipboard=unnamedplus
 set clipboard+=ideaput
+set clipboard=unnamedplus
 set incsearch
 set number
 set rnu
+set scrolloff=10
 set showmode
-set scrolloff=8
 set visualbell
 
 " Idea specific settings
 set ideajoin
-set ideastatusicon=enabled
 set idearefactormode=keep
+set ideastatusicon=enabled
 
 " Plugins
 Plug 'chrisbra/matchit'
@@ -25,8 +25,8 @@ Plug 'preservim/nerdtree'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/argtextobj.vim'
-set sneak
 set quickscope
+set sneak
 
 " Plugin settings
 let g:argtextobj_pairs="[:],(:),<:>"
@@ -57,8 +57,8 @@ vnoremap L $
 vnoremap p "_dP
 
 " Paste from previous register
-nnoremap ,p "0p
 nnoremap ,P "0P
+nnoremap ,p "0p
 
 " Editor action mappings ~ General
 map <leader>a <Action>(EditorAddCaretPerSelectedLine)
@@ -66,8 +66,6 @@ map <leader>b <Action>(ShowNavBar)
 map <leader>c <Action>(ChooseRunConfiguration)
 map <leader>d <Action>(SelectAllOccurrences)
 map <leader>e <Action>(ActivateProjectToolWindow)
-map <leader>z <Action>(ToggleDistractionFreeMode)
-map <leader>t <Action>(CopyReferencePopupGroup)
 map <leader>f <Action>(AceWordStartAction)
 map <leader>i <Action>(ParameterInfo)
 map <leader>m <Action>(EditorMatchBrace)
@@ -76,27 +74,29 @@ map <leader>p <Action>(ReformatWithPrettierAction)
 map <leader>q <Action>(HideAllWindows)
 map <leader>r <Action>(RenameElement)
 map <leader>s <Action>(FileStructurePopup)
+map <leader>t <Action>(CopyReferencePopupGroup)
 map <leader>u <Action>(CloseAllEditors)
 map <leader>v <Action>(Vcs.RollbackChangedLines)
+map <leader>z <Action>(ToggleDistractionFreeMode)
 map gt <Action>(GotoTest)
 
 " Editor action mappings ~ Running and Debugging
-map ,r <Action>(RunClass)
-map ,c <Action>(ChooseRunConfiguration)
-map ,f <Action>(RerunFailedTests)
-map ,t <Action>(ContextRun)
 map ,, <Action>(Rerun)
 map ,b <Action>(ToggleLineBreakpoint)
+map ,c <Action>(ChooseRunConfiguration)
 map ,d <Action>(ContextDebug)
+map ,f <Action>(RerunFailedTests)
 map ,n <Action>(ActivateDebugToolWindow)
+map ,r <Action>(RunClass)
+map ,t <Action>(ContextRun)
 
 " Leader editor action mappings
-map <leader>w 0v$%$
 map <leader>W v$%$
-map <leader>x v$
-map <leader>y 0v$%$y
 map <leader>Y v$%y
 map <leader>Z V$%y
+map <leader>w 0v$%$
+map <leader>x v$
+map <leader>y 0v$%$y
 
 " Strict mode for development ---------------
 set ideastrictmode
