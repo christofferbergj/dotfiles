@@ -4,14 +4,14 @@
     "bindings": {
       "cmd-k e": "project_panel::ToggleFocus",
       "cmd-k o": "outline_panel::ToggleFocus",
+      "cmd-k a": "assistant::ToggleFocus",
       "cmd-k p": "diagnostics::Deploy",
+      "cmd-k d": "diagnostics::Deploy",
       "cmd-k q": "workspace::CloseAllDocks",
       "cmd-k x": "zed::Extensions",
       "cmd-k z": "workspace::ToggleCenteredLayout",
-
       "cmd-k w": "pane::CloseInactiveItems",
       "cmd-k W": "workspace::CloseAllItemsAndPanes",
-
       "cmd-o": "project_symbols::Toggle"
     }
   },
@@ -22,16 +22,23 @@
       "cmd-.": "pane::RevealInProjectPanel",
       "cmd-shift-s": "editor::Format",
       "ctrl-r": "editor::Rename",
-
       "cmd-k r": "editor::Rename",
       "cmd-k s": "outline::Toggle",
-
       "cmd-shift-a": "editor::SelectSmallerSyntaxNode",
       "cmd-shift-w": "editor::SelectLargerSyntaxNode",
-
-      "cmd-g": ["editor::SelectNext", { "replace_newest": true }],
+      "cmd-g": [
+        "editor::SelectNext",
+        {
+          "replace_newest": true
+        }
+      ],
       "cmd-shift-d": "editor::UndoSelection",
-      "cmd-shift-g": ["editor::SelectPrevious", { "replace_newest": true }]
+      "cmd-shift-g": [
+        "editor::SelectPrevious",
+        {
+          "replace_newest": true
+        }
+      ]
     }
   },
   {
@@ -194,33 +201,37 @@
       // Undo and Redo
       "u": "editor::Undo",
       "shift-u": "editor::Redo",
-
       "ctrl-shift-u": "vim::ScrollUp",
       "ctrl-shift-d": "vim::ScrollDown",
-      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z 3 k"],
-      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z 3 k"],
-
+      "ctrl-u": [
+        "workspace::SendKeystrokes",
+        "ctrl-shift-u z z 3 k"
+      ],
+      "ctrl-d": [
+        "workspace::SendKeystrokes",
+        "ctrl-shift-d z z 3 k"
+      ],
       "0": "vim::FirstNonWhitespace",
       "^": "vim::StartOfLine",
-      "Y": ["workspace::SendKeystrokes", "y $"],
+      "Y": [
+        "workspace::SendKeystrokes",
+        "y $"
+      ],
       "space w": "editor::SelectEnclosingSymbol",
-      "space W": ["workspace::SendKeystrokes", "v $ % $"],
-
+      "space W": [
+        "workspace::SendKeystrokes",
+        "v $ % $"
+      ],
       "space d": "diagnostics::Deploy",
       "space e": "project_panel::ToggleFocus",
-
       "alt-k": "editor::GoToPrevDiagnostic",
       "alt-j": "editor::GoToDiagnostic",
-
       "cmd-[": "pane::GoBack",
       "cmd-]": "pane::GoForward",
-
       "alt-shift-k": "editor::GoToPrevHunk",
       "alt-shift-j": "editor::GoToHunk",
-
       "space o": "outline_panel::ToggleFocus",
       "space z": "workspace::ToggleCenteredLayout",
-
       "space q": "workspace::CloseAllDocks"
     }
   },
