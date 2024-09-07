@@ -7,39 +7,43 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "features": {
-    "inline_completion_provider": "supermaven",
-    "copilot": false
-  },
-  "buffer_font_family": "JetBrains Mono",
+  // General Settings
+  "restore_on_startup": "last_workspace",
+  "preferred_line_length": 100,
+  "vertical_scroll_margin": 10,
+
+  // Theme and Appearance
+  "theme": "Gruvbox Dark - Berg",
+  "ui_font_family": "Inter",
+  "ui_font_size": 15,
+  "buffer_font_family": "JetBrainsMonoNL Nerd Font",
   "buffer_font_size": 15,
   "buffer_font_weight": 400,
   "buffer_line_height": {
     "custom": 2.8
   },
   "cursor_blink": false,
-  "preferred_line_length": 100,
-  "relative_line_numbers": true,
   "show_whitespaces": "none",
   "show_wrap_guides": false,
-  "theme": "Gruvbox Dark - Berg",
-  "ui_font_family": "Inter",
-  "ui_font_size": 15,
-  "vertical_scroll_margin": 10,
+  "relative_line_numbers": true,
+
+  // Editor Behavior
   "vim_mode": true,
   "vim": {
     "use_multiline_find": true,
     "use_smartcase_find": true,
     "use_system_clipboard": "always"
   },
-  "indent_guides": {
-    "enabled": false
-  },
   "autosave": {
     "after_delay": {
       "milliseconds": 5000
     }
   },
+  "indent_guides": {
+    "enabled": false
+  },
+
+  // UI Elements
   "tab_bar": {
     "show": false,
     "show_nav_history_buttons": false
@@ -61,6 +65,8 @@
     "line_numbers": true,
     "runnables": false
   },
+
+  // Panels and Features
   "chat_panel": {
     "button": true
   },
@@ -70,19 +76,6 @@
   },
   "collaboration_panel": {
     "button": true,
-    "default_width": 340
-  },
-  "diagnostics": {
-    "include_warnings": true
-  },
-  "assistant": {
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
-    },
-    "default_height": 340.0,
-    "enabled": true,
-    "version": "2",
     "default_width": 340
   },
   "outline_panel": {
@@ -103,36 +96,57 @@
       "custom": 2.8
     }
   },
-  "git": {
-    "git_gutter": "hide",
-    "inline_blame": {
-      "delay_ms": 3000,
-      "enabled": true,
-      "min_column": 0
-    }
+
+  // AI and Assistance
+  "features": {
+    "inline_completion_provider": "supermaven"
+  },
+  "assistant": {
+    "dock": "right",
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-20240620"
+    },
+    "default_height": 340.0,
+    "enabled": true,
+    "version": "2",
+    "default_width": 340
+  },
+
+  // Language and Formatting
+  "diagnostics": {
+    "include_warnings": true
   },
   "lsp": {
+    "biome": {
+      "settings": {
+        "require_config_file": true
+      }
+    },
     "tailwindcss-language-server": {
       "settings": {
         "classAttributes": ["class", "className", "tv", "cn", "clsx", "styles"]
       }
     }
   },
-  "languages": {
-    "TSX": {
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
-    },
-    "TypeScript": {
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
-    },
-    "JavaScript": {
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
+  "formatter": {
+    "language_server": {
+      "name": ["biome", "prettier"]
+    }
+  },
+  "code_actions_on_format": {
+    "source.fixAll.biome": true,
+    "source.fixAll.eslint": true,
+    "source.organizeImports.biome": true
+  },
+
+  // Git Integration
+  "git": {
+    "git_gutter": "hide",
+    "inline_blame": {
+      "delay_ms": 3000,
+      "enabled": true,
+      "min_column": 0
     }
   }
 }
