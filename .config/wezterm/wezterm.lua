@@ -20,7 +20,7 @@ config.send_composed_key_when_right_alt_is_pressed = true
 config.window_close_confirmation = "NeverPrompt"
 
 -- font
-config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" })
+config.font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "Medium" })
 config.font_size = 15
 config.line_height = 1.9
 
