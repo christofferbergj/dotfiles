@@ -79,6 +79,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add gsta 'git stash apply'
     abbr --add gsw 'git switch'
     abbr --add gswm 'git switch main'
+    abbr --add gsw- 'git switch -'
     abbr --add gswc 'git switch -c'
 
     # eza
