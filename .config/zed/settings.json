@@ -28,6 +28,8 @@
   "relative_line_numbers": true,
 
   // Editor Behavior
+  "format_on_save": "on",
+  "formatter": "auto",
   "vim_mode": true,
   "vim": {
     "use_multiline_find": true,
@@ -97,6 +99,11 @@
     }
   },
 
+  // Completion
+  "show_inline_completions": true,
+  "show_completions_on_input": true,
+  "show_completion_documentation": true,
+
   // AI and Assistance
   "features": {
     "inline_completion_provider": "supermaven"
@@ -107,15 +114,18 @@
       "provider": "zed.dev",
       "model": "claude-3-5-sonnet-20240620"
     },
-    "default_height": 340.0,
+    "default_height": 340,
     "enabled": true,
     "version": "2",
-    "default_width": 340
+    "default_width": 840
   },
 
   // Language and Formatting
   "diagnostics": {
     "include_warnings": true
+  },
+  "code_actions_on_format": {
+    "source.fixAll.eslint": true
   },
   "lsp": {
     "biome": {
@@ -128,16 +138,6 @@
         "classAttributes": ["class", "className", "tv", "cn", "clsx", "styles"]
       }
     }
-  },
-  "formatter": {
-    "language_server": {
-      "name": ["biome", "prettier"]
-    }
-  },
-  "code_actions_on_format": {
-    "source.fixAll.biome": true,
-    "source.fixAll.eslint": true,
-    "source.organizeImports.biome": true
   },
 
   // Git Integration
