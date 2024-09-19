@@ -1,0 +1,11 @@
+---
+"terminal:select_previous_block": cmd-k
+"workspace:move_tab_right": alt-shift-K
+"workspace:move_tab_left": alt-shift-J
+"terminal:select_next_block": cmd-j
+"workspace:show_command_search": none
+"input:clear_screen": cmd-r
+"terminal:clear_blocks": none
+"workspace:toggle_mouse_reporting": cmd-u
+"input:open_completion_suggestions": tab
+"input:search_command_history": ctrl-r
