@@ -22,12 +22,18 @@
 #            - exec: code .
 
 ---
-name: Fysioscout
+name: FysioScout
 windows:
   - tabs:
-      - layout:
+       - layout:
           cwd: /Users/christofferbergj/code/fysioscout-web
-      - layout:
+          commands:
+            - exec: pnpm dev --filter='@fysioscout/dashboard' --filter='@fysioscout/auth'
+
+       - layout:
           cwd: /Users/christofferbergj/code/fysioscout-web
-      - layout:
+          commands:
+            - exec: pnpm proxy:api
+
+       - layout:
           cwd: /Users/christofferbergj/code/fysioscout-web
