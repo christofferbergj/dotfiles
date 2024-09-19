@@ -10,6 +10,7 @@ function yabai_setup_app_rules -d "Setup app rules for yabai"
 
     # Terminal
     yabai -m rule --add app='^WezTerm$' space='^terminal' opacity=$opacity
+    yabai -m rule --add app='^Warp$' space='^terminal' opacity=$opacity
 
     # Editor (WebStorm, Zed and VSCode)
     yabai -m rule --add app='Visual Studio Code$' space='^editor' opacity=$opacity
