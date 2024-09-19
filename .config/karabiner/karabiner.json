@@ -25,7 +25,7 @@
                         ]
                     },
                     {
-                        "description": "Ctrl+N/P to Down/Up and VIM-style navigation with Ctrl+H/J/K/L",
+                        "description": "Hyper+N/P to Down/Up and VIM-style navigation with Hyper+H/J/K/L",
                         "manipulators": [
                             {
                                 "from": {
@@ -46,7 +46,7 @@
                             {
                                 "from": {
                                     "key_code": "h",
-                                    "modifiers": { "mandatory": ["control"] }
+                                    "modifiers": { "mandatory": ["shift", "control", "option", "command"] }
                                 },
                                 "to": [{ "key_code": "left_arrow" }],
                                 "type": "basic"
@@ -54,7 +54,7 @@
                             {
                                 "from": {
                                     "key_code": "j",
-                                    "modifiers": { "mandatory": ["control"] }
+                                    "modifiers": { "mandatory": ["shift", "control", "option", "command"] }
                                 },
                                 "to": [{ "key_code": "down_arrow" }],
                                 "type": "basic"
@@ -62,7 +62,7 @@
                             {
                                 "from": {
                                     "key_code": "k",
-                                    "modifiers": { "mandatory": ["control"] }
+                                    "modifiers": { "mandatory": ["shift", "control", "option", "command"] }
                                 },
                                 "to": [{ "key_code": "up_arrow" }],
                                 "type": "basic"
@@ -70,7 +70,7 @@
                             {
                                 "from": {
                                     "key_code": "l",
-                                    "modifiers": { "mandatory": ["control"] }
+                                    "modifiers": { "mandatory": ["shift", "control", "option", "command"] }
                                 },
                                 "to": [{ "key_code": "right_arrow" }],
                                 "type": "basic"
