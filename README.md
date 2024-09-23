@@ -36,10 +36,9 @@ Gruvbox Medium Dark
 
 1. Install Homebrew
 2. Install Fish shell
-3. Install apps
-4. Install cli tools
-5. Install fonts
-6. Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.
+3. Install apps and CLI tools (Brewfile)
+4. Install fonts
+5. Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.
 
 ## Homebrew
 
@@ -84,26 +83,7 @@ On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the 
 
 ## Apps
 
-- wezterm (terminal) – `brew install --cask wezterm`
-- raycast (launcher) – `brew install --cask raycast`
-- karabiner-elements (keyboard remapping) – `brew install --cask karabiner-elements`
-- alt-tab (window switcher) – `brew install --cask alt-tab`
-- hiddenbar – `brew install --cask hiddenbar`
-- spark (email client) – `brew install --cask readdle-spark`
-- cleanshot x – `brew install --cask cleanshot`
-- jetbrains toolbox – `brew install --cask jetbrains-toolbox`
-- google drive – `brew install --cask google-drive`
-- spotify – `brew install --cask spotify`
-- betterdisplay – `brew install --cask betterdisplay`
-- grammarly desktop – `brew install --cask grammarly-desktop`
-- spaceid – `brew install --cask spaceid`
-- notion – `brew install --cask notion`
-- todoist – `brew install --cask todoist`
-- bitwarden – `brew install --cask bitwarden`
-
-### All apps install command
-
-`brew install --cask wezterm fig raycast karabiner-elements alt-tab hiddenbar readdle-spark rocket cleanshot jetbrains-toolbox google-drive spotify betterdisplay grammarly-desktop spaceid notion todoist bitwarden`
+See Brewfile
 
 ## Raycast extensions
 
