@@ -88,15 +88,6 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add la 'eza -a -l --git --icons'
     abbr --add ll 'eza -a -l --git --icons'
 
-    # npm
-    abbr --add ni 'npm install'
-    abbr --add no 'npm outdated'
-    abbr --add nr 'npm remove'
-    abbr --add nu 'npm update'
-    abbr --add nci 'npm ci'
-    abbr --add nru 'npm run'
-    abbr --add nclean 'rm -rf package-lock.json node_modules/; npm install'
-
     # neovim
     abbr --add nv nvim
     abbr --add v nvim
