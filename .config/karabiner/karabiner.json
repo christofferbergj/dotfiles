@@ -6,7 +6,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Change caps_lock to command+control+option+shift.",
+                                "description": "Change caps_lock to Hyper.",
                                 "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": { "optional": ["any"] }
@@ -25,7 +25,7 @@
                         ]
                     },
                     {
-                        "description": "Hyper+N/P to Down/Up and VIM-style navigation with Hyper+H/J/K/L",
+                        "description": "Ctrl+N/P to Down/Up and VIM-style navigation with Hyper+H/J/K/L",
                         "manipulators": [
                             {
                                 "from": {
