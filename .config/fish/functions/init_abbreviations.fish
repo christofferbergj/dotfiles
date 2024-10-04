@@ -26,6 +26,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     # gh (github cli)
     abbr --add gho 'gh repo view -w'
     abbr --add ghp 'gh pr view -w'
+    abbr --add ghpl 'gh pr list'
     abbr --add ghpc 'gh pr create -f'
     abbr --add ghpma 'gh pr merge --merge --squash'
     abbr --add ghpca 'gh pr create -f; and gh pr view -w'
