@@ -101,7 +101,6 @@
     "context": "Pane",
     "bindings": {}
   },
-  // Bindings from VS Code
   {
     "context": "Editor",
     "bindings": {}
@@ -116,11 +115,6 @@
   },
   {
     "context": "Workspace",
-    "bindings": {}
-  },
-  // Bindings from Atom
-  {
-    "context": "Pane",
     "bindings": {}
   },
   // Bindings that should be unified with bindings for more general actions
@@ -140,6 +134,7 @@
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {}
   },
+
   // Custom bindings
   {
     "bindings": {}

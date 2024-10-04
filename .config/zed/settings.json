@@ -23,6 +23,7 @@
     "custom": 2.8
   },
   "cursor_blink": false,
+  "cursor_shape": "block",
   "show_whitespaces": "none",
   "show_wrap_guides": false,
   "relative_line_numbers": true,
@@ -52,7 +53,8 @@
   },
   "tabs": {
     "close_position": "right",
-    "git_status": false
+    "git_status": false,
+    "file_icons": false
   },
   "toolbar": {
     "breadcrumbs": true,
