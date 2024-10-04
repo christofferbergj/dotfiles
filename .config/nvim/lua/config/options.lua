@@ -4,6 +4,9 @@
 
 local opt = vim.opt
 
+vim.g.root_spec = { "cwd" }
+vim.g.autoformat = false
+
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 
