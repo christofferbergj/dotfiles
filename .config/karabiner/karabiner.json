@@ -135,6 +135,10 @@
                         "vendor_id": 56899
                     },
                     "manipulate_caps_lock_led": false
+                },
+                {
+                    "identifiers": { "is_keyboard": true },
+                    "manipulate_caps_lock_led": false
                 }
             ],
             "name": "Default profile",
@@ -144,7 +148,8 @@
                     "from": { "apple_vendor_top_case_key_code": "keyboard_fn" },
                     "to": [{ "key_code": "left_control" }]
                 }
-            ]
+            ],
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
     ]
 }
