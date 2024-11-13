@@ -1,3 +1,16 @@
+# App shortcuts
+hyper - w : open -a 'Brave Browser'
+hyper - d : open -a 'Spotify'
+hyper - i : open -a 'Endel'
+hyper - f : open -a 'Figma'
+hyper - x : open -a 'Messenger'
+hyper - n : open -a 'Notion'
+hyper - u : open -a 'Podcasts'
+hyper - s : open -a 'Slack'
+hyper - m : open -a 'Spark Desktop'
+hyper - e : open -a 'WebStorm'
+cmd - 0x32 : open -a 'Warp'
+
 # Restart yabai -- 0x32 = `
 hyper - 0x32 : yabai --restart-service
 
