@@ -89,8 +89,11 @@
   },
   "project_panel": {
     "auto_reveal_entries": true,
+    "indent_guides": {
+      "show": "never"
+    },
     "button": true,
-    "default_width": 340,
+    "default_width": 480,
     "dock": "right"
   },
   "terminal": {
@@ -114,7 +117,7 @@
     "dock": "right",
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
+      "model": "claude-3-5-sonnet-latest"
     },
     "default_height": 340,
     "enabled": true,
