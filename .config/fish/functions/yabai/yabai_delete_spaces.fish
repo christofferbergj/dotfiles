@@ -1,4 +1,5 @@
-# Delete all spaces
+# Delete all spaces except for the first space on each display
+# (macOS requires at least one space per display)
 function yabai_delete_spaces -d "Delete all spaces"
   echo "Deleting all spaces"
   sleep 0.5
