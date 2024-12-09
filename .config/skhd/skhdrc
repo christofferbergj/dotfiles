@@ -9,6 +9,7 @@ hyper - u : open -a 'Podcasts'
 hyper - s : open -a 'Slack'
 hyper - m : open -a 'Spark Desktop'
 hyper - e : open -a 'WebStorm'
+# hyper - e : open -a 'Visual Studio Code'
 cmd - 0x32 : open -a 'Warp'
 
 # Restart yabai -- 0x32 = `

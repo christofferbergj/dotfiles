@@ -16,8 +16,8 @@ launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist >
 sudo yabai --load-sa
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-yabai -m signal --add event=display_added action="sleep 2 && fish -c yabai_init_spaces"
-yabai -m signal --add event=display_removed action="sleep 2 && fish -c yabai_init_spaces"
+# yabai -m signal --add event=display_added action="sleep 2 && fish -c yabai_init_spaces"
+# yabai -m signal --add event=display_removed action="sleep 2 && fish -c yabai_init_spaces"
 
 # General settings
 yabai -m config active_window_opacity 1.0

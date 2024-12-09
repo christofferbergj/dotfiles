@@ -85,7 +85,14 @@
   "outline_panel": {
     "dock": "left",
     "button": true,
-    "default_width": 340
+    "default_width": 340,
+    "auto_reveal_entries": false,
+    "scrollbar": {
+      "show": "never"
+    },
+    "indent_guides": {
+      "show": "never"
+    }
   },
   "project_panel": {
     "auto_reveal_entries": true,
