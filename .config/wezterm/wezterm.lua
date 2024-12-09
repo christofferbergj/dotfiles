@@ -14,11 +14,12 @@ end)
 
 -- general
 config.default_cursor_style = "SteadyBlock"
-config.color_scheme = "Gruvbox dark, medium (base16)"
--- config.color_scheme = "Kanagawa (Gogh)"
+-- config.color_scheme = "Gruvbox dark, medium (base16)"
+config.color_scheme = "Kanagawa (Gogh)"
 config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = true
 config.window_close_confirmation = "NeverPrompt"
+config.max_fps = 120
 
 -- font
 config.font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "Medium" })
