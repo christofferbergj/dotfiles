@@ -38,7 +38,7 @@ return {
             " ",
             { filename, gui = modified and "bold,italic" or "bold" },
             " ",
-            guibg = "#282828",
+            guibg = "#223249",
           }
           return buffer
         end,
