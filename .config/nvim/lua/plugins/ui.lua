@@ -14,6 +14,27 @@ return {
     },
   },
 
+  -- snacks config
+  {
+    "snacks.nvim",
+    opts = {
+      scroll = { enabled = false },
+      indent = { enabled = false },
+    },
+  },
+
+  -- prettier diagnostic messages
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000, -- needs to be loaded in first
+    config = function()
+      vim.diagnostic.config({ virtual_text = false })
+
+      require("tiny-inline-diagnostic").setup()
+    end,
+  },
+
   -- filename
   {
     "b0o/incline.nvim",
@@ -39,7 +60,7 @@ return {
             " ",
             { filename, gui = modified and "bold,italic" or "bold" },
             " ",
-            guibg = "#223249",
+            guibg = "#282828",
           }
           return buffer
         end,
