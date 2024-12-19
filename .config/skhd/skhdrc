@@ -51,6 +51,7 @@ alt + shift - 3  : yabai -m window --display 3; yabai -m display --focus 3
 
 # Focus next display by arrangement index
 alt + shift - space : yabai -m display --focus next || yabai -m display --focus first
+hyper - space : yabai -m display --focus next || yabai -m display --focus first
 
 # Center small window
 # hyper - v :  yabai -m window --resize abs:1100:700
@@ -105,9 +106,17 @@ hyper - 9 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[
 # alt + shift - i : yabai -m window --resize top:0:100
 # alt + shift - o : yabai -m window --resize left:100:0 
 
-# Reize windows - Plus/minus
-hyper - 0x18 : yabai -m window --resize right:80:0 || yabai -m window --resize left:80:0
-hyper - 0x1B : yabai -m window --resize right:-80:0 || yabai -m window --resize left:-80:0
+# Resize window - Plus (0x18 is the plus key)
+hyper - 0x18 : yabai -m window --resize right:50:0 || \
+               yabai -m window --resize left:50:0 ; \
+               yabai -m window --resize top:0:-50 || \
+               yabai -m window --resize bottom:0:-50
+
+# Resize window - Minus (0x1B is the minus key)
+hyper - 0x1B : yabai -m window --resize right:-50:0 || \
+               yabai -m window --resize left:-50:0 ; \
+               yabai -m window --resize top:0:50 || \
+               yabai -m window --resize bottom:0:50
 
 
 # Balance size of windows
