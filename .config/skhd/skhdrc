@@ -1,17 +1,3 @@
-# App shortcuts
-hyper - w : open -a 'Brave Browser'
-hyper - d : open -a 'Spotify'
-hyper - i : open -a 'Endel'
-hyper - f : open -a 'Figma'
-#hyper - x : open -a 'Messenger'
-hyper - n : open -a 'Notion'
-hyper - u : open -a 'Podcasts'
-hyper - s : open -a 'Slack'
-hyper - m : open -a 'Spark Desktop'
-hyper - e : open -a 'WebStorm'
-# hyper - e : open -a 'Visual Studio Code'
-cmd - 0x32 : open -a 'Warp'
-
 # Restart yabai -- 0x32 = `
 hyper - 0x32 : yabai --restart-service
 
@@ -106,13 +92,13 @@ hyper - 9 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[
 # alt + shift - i : yabai -m window --resize top:0:100
 # alt + shift - o : yabai -m window --resize left:100:0 
 
-# Resize window - Plus (0x18 is the plus key)
+# Resize windows - Plus (0x18 is the plus key)
 hyper - 0x18 : yabai -m window --resize right:50:0 || \
                yabai -m window --resize left:50:0 ; \
                yabai -m window --resize top:0:-50 || \
                yabai -m window --resize bottom:0:-50
 
-# Resize window - Minus (0x1B is the minus key)
+# Resize windows - Minus (0x1B is the minus key)
 hyper - 0x1B : yabai -m window --resize right:-50:0 || \
                yabai -m window --resize left:-50:0 ; \
                yabai -m window --resize top:0:50 || \
