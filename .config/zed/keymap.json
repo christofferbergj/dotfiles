@@ -2,16 +2,16 @@
   {
     // Global bindings
     "bindings": {
+      "cmd-k W": "workspace::CloseAllItemsAndPanes",
+      "cmd-k a": "assistant::ToggleFocus",
+      "cmd-k d": "diagnostics::Deploy",
       "cmd-k e": "project_panel::ToggleFocus",
       "cmd-k o": "outline_panel::ToggleFocus",
-      "cmd-k a": "assistant::ToggleFocus",
       "cmd-k p": "diagnostics::Deploy",
-      "cmd-k d": "diagnostics::Deploy",
       "cmd-k q": "workspace::CloseAllDocks",
+      "cmd-k w": "pane::CloseInactiveItems",
       "cmd-k x": "zed::Extensions",
       "cmd-k z": "workspace::ToggleCenteredLayout",
-      "cmd-k w": "pane::CloseInactiveItems",
-      "cmd-k W": "workspace::CloseAllItemsAndPanes",
       "cmd-o": "project_symbols::Toggle"
     }
   },
@@ -46,11 +46,11 @@
     "bindings": {}
   },
   {
-    "context": "Editor && mode == full && inline_completion",
+    "context": "Editor && mode == full && edit_prediction",
     "bindings": {}
   },
   {
-    "context": "Editor && !inline_completion",
+    "context": "Editor && !edit_prediction",
     "bindings": {}
   },
   {
@@ -62,8 +62,10 @@
     "bindings": {}
   },
   {
-    "context": "AssistantPanel",
-    "bindings": {}
+    "context": "AssistantPanel && not_editing",
+    "bindings": {
+      "q": "workspace::ToggleRightDock"
+    }
   },
   {
     "context": "ConversationEditor > Editor",
@@ -111,7 +113,18 @@
   },
   {
     "context": "Pane",
-    "bindings": {}
+    "bindings": {
+      "cmd-1": ["pane::ActivateItem", 0],
+      "cmd-2": ["pane::ActivateItem", 1],
+      "cmd-3": ["pane::ActivateItem", 2],
+      "cmd-4": ["pane::ActivateItem", 3],
+      "cmd-5": ["pane::ActivateItem", 4],
+      "cmd-6": ["pane::ActivateItem", 5],
+      "cmd-7": ["pane::ActivateItem", 6],
+      "cmd-8": ["pane::ActivateItem", 7],
+      "cmd-9": ["pane::ActivateItem", 8],
+      "cmd-0": "pane::ActivateLastItem"
+    }
   },
   {
     "context": "Workspace",
@@ -155,10 +168,9 @@
     }
   },
   {
-    "context": "OutlinePanel",
+    "context": "OutlinePanel && not_editing",
     "bindings": {
-      "escape": "outline_panel::ToggleFocus",
-      "q": "workspace::ToggleLeftDock"
+      "q": "workspace::ToggleRightDock"
     }
   },
   {
@@ -222,8 +234,7 @@
     "context": "vim_mode == normal",
     "bindings": {
       // put key-bindings here if you want them to work only in normal mode
-      // "down": ["workspace::SendKeystrokes", "4 j"]
-      // "up": ["workspace::SendKeystrokes", "4 k"]
+      "q": "workspace::CloseAllDocks"
     }
   },
   {
@@ -231,12 +242,7 @@
     "bindings": {
       // visual, visual line & visual block modes
       "shift-alt-l": "editor::SortLinesCaseInsensitive",
-      "shift-s": [
-        "vim::PushOperator",
-        {
-          "AddSurrounds": {}
-        }
-      ]
+      "shift-s": ["vim::PushAddSurrounds", {}]
     }
   },
   {

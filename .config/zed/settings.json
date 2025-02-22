@@ -8,15 +8,17 @@
 // from the command palette or from `Zed` application menu.
 {
   // General Settings
+  "icon_theme": "Material Icon Theme",
   "restore_on_startup": "last_workspace",
   "preferred_line_length": 100,
-  "vertical_scroll_margin": 10,
+  "vertical_scroll_margin": 8,
 
   // Theme and Appearance
-  "theme": "Kanagawa Wave",
+  "theme": "Gruvbox Dark - Berg",
   "ui_font_family": "Inter",
   "ui_font_size": 15,
-  "buffer_font_family": "JetBrainsMonoNL Nerd Font",
+  "unstable.ui_density": "default",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 15,
   "buffer_font_weight": 400,
   "buffer_line_height": {
@@ -29,8 +31,15 @@
   "relative_line_numbers": true,
 
   // Editor Behavior
+  "always_treat_brackets_as_autoclosed": true,
+  "expand_excerpt_lines": 5,
+  "unnecessary_code_fade": 0.4,
   "format_on_save": "on",
   "formatter": "auto",
+  "file_finder": {
+    "modal_max_width": "large",
+    "file_icons": true
+  },
   "vim_mode": true,
   "vim": {
     "use_multiline_find": true,
@@ -48,7 +57,7 @@
 
   // UI Elements
   "tab_bar": {
-    "show": false,
+    "show": true,
     "show_nav_history_buttons": false
   },
   "tabs": {
@@ -72,7 +81,7 @@
 
   // Panels and Features
   "chat_panel": {
-    "button": true
+    "button": "never"
   },
   "notification_panel": {
     "button": true,
@@ -83,7 +92,7 @@
     "default_width": 340
   },
   "outline_panel": {
-    "dock": "left",
+    "dock": "right",
     "button": true,
     "default_width": 340,
     "auto_reveal_entries": false,
@@ -112,13 +121,13 @@
   },
 
   // Completion
-  "show_inline_completions": true,
+  "show_edit_predictions": true,
   "show_completions_on_input": true,
   "show_completion_documentation": true,
 
   // AI and Assistance
   "features": {
-    "inline_completion_provider": "supermaven"
+    "edit_prediction_provider": "zed"
   },
   "assistant": {
     "dock": "right",
@@ -132,7 +141,7 @@
     "default_width": 840
   },
 
-  // Language and Formatting
+  // LSP and Formatting
   "diagnostics": {
     "include_warnings": true
   },
@@ -151,10 +160,11 @@
       }
     }
   },
+  "lsp_highlight_debounce": 3000,
 
   // Git Integration
   "git": {
-    "git_gutter": "hide",
+    "git_gutter": "tracked_files",
     "inline_blame": {
       "delay_ms": 3000,
       "enabled": true,
