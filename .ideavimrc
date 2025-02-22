@@ -6,7 +6,7 @@ set clipboard=unnamedplus
 set incsearch
 set number
 set rnu
-set scrolloff=10
+set scrolloff=8
 set showmode
 set visualbell
 
@@ -40,6 +40,7 @@ inoremap jk <Esc>
 nnoremap # #zz
 nnoremap * *zz
 nnoremap 0 ^
+nnoremap <Tab> viw
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 nnoremap H ^
@@ -61,6 +62,8 @@ nnoremap ,P "0P
 nnoremap ,p "0p
 
 " Editor action mappings ~ General
+map N <Action>(MethodDown)
+map M <Action>(MethodUp)
 map <leader>a <Action>(EditorAddCaretPerSelectedLine)
 map <leader>b <Action>(ShowNavBar)
 map <leader>c <Action>(ChooseRunConfiguration)

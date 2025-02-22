@@ -1,3 +1,20 @@
+# App shortcuts
+hyper - w : open -a 'Brave Browser'
+hyper - d : open -a 'Spotify'
+hyper - i : open -a 'Endel'
+hyper - f : open -a 'Figma'
+#hyper - x : open -a 'Messenger' -- controlled by Raycast as I want to be able to hide it if it's focused
+hyper - n : open -a 'Notion'
+hyper - u : open -a 'Podcasts'
+hyper - s : open -a 'Slack'
+hyper - m : open -a 'Spark Desktop'
+hyper - e : open -a 'WebStorm'
+hyper - o : open -a 'Sonos'
+hyper - q : open -a 'Cursor'
+hyper - z : open -a 'Zed'
+# hyper - e : open -a 'Visual Studio Code'
+cmd - 0x32 : open -a 'Warp'
+
 # Restart yabai -- 0x32 = `
 hyper - 0x32 : yabai --restart-service
 
@@ -19,8 +36,8 @@ alt - 8 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[7].
 alt - 9 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[8].index')
 
 # Navigate spaces
-alt + ctrl - right : yabai -m space --focus next || yabai -m space --focus first
-alt + ctrl - left : yabai -m space --focus prev || yabai -m space --focus last
+# alt + ctrl - right : yabai -m space --focus next || yabai -m space --focus first
+# alt + ctrl - left : yabai -m space --focus prev || yabai -m space --focus last
 
 alt + shift - 0x1E : yabai -m space --focus next || yabai -m space --focus first
 alt + shift - 0x21 : yabai -m space --focus prev || yabai -m space --focus last
