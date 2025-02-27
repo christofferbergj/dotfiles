@@ -21,22 +21,39 @@
 [init]
   defaultBranch = main
 
-[alias]
-  yolo = !git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\"
+[branch]
+  sort = -committerdate
+
+[rebase]
+  autoSquash = true
+  updateRefs = true
+
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+
+[push]
+  default = current
+  autoSetupRemote = true
+  followTags = true
 
 [pull]
   ff = only
   rebase = true
 
-[rebase]
-  autoSquash = true
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
 
-[push]
-  default = current
-  autoSetupRemote = true
+[rerere]
+  enabled = true
+  autoupdate = true
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
