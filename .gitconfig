@@ -21,9 +21,6 @@
 [init]
   defaultBranch = main
 
-[branch]
-  sort = -committerdate
-
 [rebase]
   autoSquash = true
   updateRefs = true
