@@ -44,7 +44,8 @@
   "vim": {
     "use_multiline_find": true,
     "use_smartcase_find": true,
-    "use_system_clipboard": "always"
+    "use_system_clipboard": "always",
+    "highlight_on_yank_duration": 60
   },
   "autosave": {
     "after_delay": {
@@ -160,7 +161,7 @@
       }
     }
   },
-  "lsp_highlight_debounce": 3000,
+  "lsp_highlight_debounce": 75,
 
   // Git Integration
   "git": {
