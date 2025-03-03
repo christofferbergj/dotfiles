@@ -1,4 +1,5 @@
 [
+  // Global and workspace bindings
   {
     // Global bindings
     "bindings": {
@@ -15,6 +16,14 @@
       "cmd-o": "project_symbols::Toggle"
     }
   },
+
+  // Workspace context
+  {
+    "context": "Workspace",
+    "bindings": {}
+  },
+
+  // Editor contexts
   {
     "context": "Editor",
     "bindings": {
@@ -58,9 +67,40 @@
     "bindings": {}
   },
   {
-    "context": "AssistantChat > Editor",
+    "context": "Editor && renaming",
     "bindings": {}
   },
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {}
+  },
+  {
+    "context": "Editor && showing_code_actions",
+    "bindings": {}
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {}
+  },
+
+  // Pane context
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-1": ["pane::ActivateItem", 0],
+      "cmd-2": ["pane::ActivateItem", 1],
+      "cmd-3": ["pane::ActivateItem", 2],
+      "cmd-4": ["pane::ActivateItem", 3],
+      "cmd-5": ["pane::ActivateItem", 4],
+      "cmd-6": ["pane::ActivateItem", 5],
+      "cmd-7": ["pane::ActivateItem", 6],
+      "cmd-8": ["pane::ActivateItem", 7],
+      "cmd-9": ["pane::ActivateItem", 8],
+      "cmd-0": "pane::ActivateLastItem"
+    }
+  },
+
+  // Panel contexts
   {
     "context": "AssistantPanel && not_editing",
     "bindings": {
@@ -68,9 +108,28 @@
     }
   },
   {
-    "context": "ConversationEditor > Editor",
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "q": "workspace::ToggleRightDock",
+      "cmd-shift-l": "project_panel::CollapseAllEntries"
+    }
+  },
+  {
+    "context": "OutlinePanel && not_editing",
+    "bindings": {
+      "q": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "CollabPanel && not_editing",
     "bindings": {}
   },
+  {
+    "context": "(CollabPanel && editing) > Editor",
+    "bindings": {}
+  },
+
+  // Search contexts
   {
     "context": "BufferSearchBar",
     "bindings": {}
@@ -96,89 +155,21 @@
     "bindings": {}
   },
   {
-    "context": "ProjectSearchView",
-    "bindings": {}
-  },
-  {
-    "context": "Pane",
-    "bindings": {}
-  },
-  {
-    "context": "Editor",
-    "bindings": {}
-  },
-  {
-    "context": "Editor && mode == full",
-    "bindings": {}
-  },
-  {
-    "context": "Pane",
-    "bindings": {
-      "cmd-1": ["pane::ActivateItem", 0],
-      "cmd-2": ["pane::ActivateItem", 1],
-      "cmd-3": ["pane::ActivateItem", 2],
-      "cmd-4": ["pane::ActivateItem", 3],
-      "cmd-5": ["pane::ActivateItem", 4],
-      "cmd-6": ["pane::ActivateItem", 5],
-      "cmd-7": ["pane::ActivateItem", 6],
-      "cmd-8": ["pane::ActivateItem", 7],
-      "cmd-9": ["pane::ActivateItem", 8],
-      "cmd-0": "pane::ActivateLastItem"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {}
-  },
-  // Bindings that should be unified with bindings for more general actions
-  {
-    "context": "Editor && renaming",
-    "bindings": {}
-  },
-  {
-    "context": "Editor && showing_completions",
-    "bindings": {}
-  },
-  {
-    "context": "Editor && showing_code_actions",
-    "bindings": {}
-  },
-  {
-    "context": "Editor && (showing_code_actions || showing_completions)",
-    "bindings": {}
-  },
-
-  // Custom bindings
-  {
-    "bindings": {}
-  },
-  {
-    "context": "Editor && mode == full",
-    "bindings": {}
-  },
-  {
     "context": "ProjectSearchBar && !in_replace",
     "bindings": {}
   },
   {
-    "context": "ProjectPanel && not_editing",
-    "bindings": {
-      "q": "workspace::ToggleRightDock",
-      "cmd-shift-l": "project_panel::CollapseAllEntries"
-    }
+    "context": "ProjectSearchView",
+    "bindings": {}
   },
+
+  // Special editors and modals
   {
-    "context": "OutlinePanel && not_editing",
-    "bindings": {
-      "q": "workspace::ToggleRightDock"
-    }
-  },
-  {
-    "context": "CollabPanel && not_editing",
+    "context": "AssistantChat > Editor",
     "bindings": {}
   },
   {
-    "context": "(CollabPanel && editing) > Editor",
+    "context": "ConversationEditor > Editor",
     "bindings": {}
   },
   {
@@ -201,33 +192,61 @@
     "context": "Terminal",
     "bindings": {}
   },
+
+  // Vim contexts
   {
-    // put key-bindings here if you want them to work in normal & visual mode
     "context": "VimControl && !menu",
     "bindings": {
       // Undo and Redo
-      "u": "editor::Undo",
-      "shift-u": "editor::Redo",
-      "ctrl-shift-u": "vim::ScrollUp",
-      "ctrl-shift-d": "vim::ScrollDown",
-      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
+      "alt-j": "editor::GoToDiagnostic",
+      "alt-k": "editor::GoToPrevDiagnostic",
+      "alt-shift-j": "editor::GoToHunk",
+      "alt-shift-k": "editor::GoToPrevHunk",
+      "cmd-[": "pane::GoBack",
+      "cmd-]": "pane::GoForward",
       "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z"],
+      "ctrl-shift-d": "vim::ScrollDown",
+      "ctrl-shift-u": "vim::ScrollUp",
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
+      "shift-u": "editor::Redo",
+      "space d": "diagnostics::Deploy",
+      "space e": "project_panel::ToggleFocus",
+      "space o": "outline_panel::ToggleFocus",
+      "space q": "workspace::CloseAllDocks",
+      "space s": "outline::Toggle",
+      "space S": "project_symbols::Toggle",
+      "space z": "workspace::ToggleCenteredLayout",
+      "u": "editor::Undo"
+    }
+  },
+  {
+    "context": "VimControl && !menu && vim_mode != operator",
+    "bindings": {
       "0": "vim::FirstNonWhitespace",
       "^": "vim::StartOfLine",
       "Y": ["workspace::SendKeystrokes", "y $"],
       "space w": "editor::SelectEnclosingSymbol",
       "space W": ["workspace::SendKeystrokes", "v $ % $"],
-      "space d": "diagnostics::Deploy",
-      "space e": "project_panel::ToggleFocus",
-      "alt-k": "editor::GoToPrevDiagnostic",
-      "alt-j": "editor::GoToDiagnostic",
-      "cmd-[": "pane::GoBack",
-      "cmd-]": "pane::GoForward",
-      "alt-shift-k": "editor::GoToPrevHunk",
-      "alt-shift-j": "editor::GoToHunk",
-      "space o": "outline_panel::ToggleFocus",
-      "space z": "workspace::ToggleCenteredLayout",
-      "space q": "workspace::CloseAllDocks"
+      "space y": ["workspace::SendKeystrokes", "v space w y"],
+      "b": "vim::PreviousSubwordStart",
+      "e": "vim::NextSubwordEnd",
+      "g e": "vim::PreviousSubwordEnd",
+      "w": "vim::NextSubwordStart"
+    }
+  },
+  {
+    "context": "VimControl && !menu && vim_mode == normal && !showing_completions",
+    "bindings": {
+      "space W": ["workspace::SendKeystrokes", "v $ % $"],
+      "space y": ["workspace::SendKeystrokes", "v space w y"],
+      "tab": ["workspace::SendKeystrokes", "v i w"]
+    }
+  },
+  {
+    "context": "VimControl && !menu && vim_mode == visual",
+    "bindings": {
+      "tab": "editor::SelectLargerSyntaxNode",
+      "shift-tab": "editor::SelectSmallerSyntaxNode"
     }
   },
   {
@@ -249,8 +268,8 @@
     // put key-bindings here if you want them to work in insert mode
     "context": "vim_mode == insert",
     "bindings": {
-      "j k": "vim::NormalBefore",
-      "j j": "vim::InsertEndOfLine"
+      "j j": "vim::InsertEndOfLine",
+      "j k": "vim::NormalBefore"
     }
   }
 ]
