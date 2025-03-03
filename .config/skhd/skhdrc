@@ -2,8 +2,8 @@
 hyper - w : open -a 'Brave Browser'
 hyper - d : open -a 'Spotify'
 hyper - i : open -a 'Endel'
-hyper - f : open -a 'Figma'
-#hyper - x : open -a 'Messenger' -- controlled by Raycast as I want to be able to hide it if it's focused
+# hyper - f : open -a 'Figma'
+# hyper - x : open -a 'Messenger' -- controlled by Raycast as I want to be able to hide it if it's focused
 hyper - n : open -a 'Notion'
 hyper - u : open -a 'Podcasts'
 hyper - s : open -a 'Slack'
@@ -12,7 +12,6 @@ hyper - e : open -a 'WebStorm'
 hyper - o : open -a 'Sonos'
 hyper - q : open -a 'Cursor'
 hyper - z : open -a 'Zed'
-# hyper - e : open -a 'Visual Studio Code'
 cmd - 0x32 : open -a 'Warp'
 
 # Restart yabai -- 0x32 = `
