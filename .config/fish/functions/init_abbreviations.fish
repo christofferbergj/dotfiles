@@ -37,8 +37,8 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add g gitui
 
     # git
-    abbr --add gg 'git pull ; git fetch --all --prune ; git branch -v | rg "\[gone\]" | awk "{print \$1}" | string trim -l | xargs -L 1 git branch -D'
-    abbr --add ggr 'git pull --rebase ; git fetch --all --prune ; git branch -v | rg "\[gone\]" | awk "{print \$1}" | string trim -l | xargs -L 1 git branch -D'
+    abbr --add gg "git pull ; git fetch --all --prune ; git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
+    abbr --add gbad "git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
     abbr --add fomo 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate --reapply-cherry-picks'
     abbr --add grbm 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate --reapply-cherry-picks'
     abbr --add grbc 'git rebase --continue'
@@ -49,7 +49,6 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add gap 'git apply'
     abbr --add gb 'git branch -vv'
     abbr --add gbD 'git branch -D'
-    abbr --add gbad 'git branch -v | rg "\[gone\]" | awk "{print \$1}" | string trim -l | xargs -L 1 git branch -D'
     abbr --add gba 'git branch -a -v'
     abbr --add gban 'git branch -a -v --no-merged'
     abbr --add gbd 'git branch -d'
