@@ -39,6 +39,7 @@ inoremap jj <Esc>A
 inoremap jk <Esc>
 nnoremap # #zz
 nnoremap * *zz
+nnoremap x "_x
 nnoremap 0 ^
 nnoremap <Tab> viw
 nnoremap <C-d> <C-d>zz
