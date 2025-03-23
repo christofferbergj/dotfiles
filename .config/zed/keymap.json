@@ -3,14 +3,15 @@
   {
     // Global bindings
     "bindings": {
-      "cmd-k W": "workspace::CloseAllItemsAndPanes",
       "cmd-k a": "assistant::ToggleFocus",
       "cmd-k d": "diagnostics::Deploy",
       "cmd-k e": "project_panel::ToggleFocus",
+      "cmd-k g": "git_panel::ToggleFocus",
       "cmd-k o": "outline_panel::ToggleFocus",
       "cmd-k p": "diagnostics::Deploy",
       "cmd-k q": "workspace::CloseAllDocks",
       "cmd-k w": "pane::CloseInactiveItems",
+      "cmd-k W": "workspace::CloseAllItemsAndPanes",
       "cmd-k x": "zed::Extensions",
       "cmd-k z": "workspace::ToggleCenteredLayout",
       "cmd-o": "project_symbols::Toggle"
@@ -199,9 +200,9 @@
     "bindings": {
       // Undo and Redo
       "alt-j": "editor::GoToDiagnostic",
-      "alt-k": "editor::GoToPrevDiagnostic",
+      "alt-k": "editor::GoToPreviousDiagnostic",
       "alt-shift-j": "editor::GoToHunk",
-      "alt-shift-k": "editor::GoToPrevHunk",
+      "alt-shift-k": "editor::GoToPreviousHunk",
       "cmd-[": "pane::GoBack",
       "cmd-]": "pane::GoForward",
       "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z"],
@@ -212,6 +213,7 @@
       "space d": "diagnostics::Deploy",
       "space e": "project_panel::ToggleFocus",
       "space o": "outline_panel::ToggleFocus",
+      "space g": "git_panel::ToggleFocus",
       "space q": "workspace::CloseAllDocks",
       "space s": "outline::Toggle",
       "space S": "project_symbols::Toggle",

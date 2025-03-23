@@ -138,4 +138,4 @@ alt + shift - r : yabai -m space --rotate 270
 alt + shift - y : yabai -m space --mirror y-axis
 
 # Float / Unfloat window
-hyper - t : yabai -m window --toggle float
+hyper - y : yabai -m window --toggle float
