@@ -57,6 +57,8 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap L $
 vnoremap p "_dP
+vmap <Tab> <Action>(EditorSelectWord)
+vmap <S-Tab> <Action>(EditorUnSelectWord)
 
 " Paste from previous register
 nnoremap ,P "0P
