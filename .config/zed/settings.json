@@ -165,12 +165,13 @@
       }
     }
   },
-  "lsp_highlight_debounce": 75,
+  "lsp_highlight_debounce": 3000,
 
   // Git Integration
   "git": {
     "git_gutter": "tracked_files",
     "inline_blame": {
+      "show_commit_summary": true,
       "delay_ms": 3000,
       "enabled": true,
       "min_column": 0

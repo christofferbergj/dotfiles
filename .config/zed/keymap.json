@@ -212,11 +212,12 @@
       "shift-u": "editor::Redo",
       "space d": "diagnostics::Deploy",
       "space e": "project_panel::ToggleFocus",
-      "space o": "outline_panel::ToggleFocus",
       "space g": "git_panel::ToggleFocus",
+      "space o": "outline_panel::ToggleFocus",
       "space q": "workspace::CloseAllDocks",
       "space s": "outline::Toggle",
       "space S": "project_symbols::Toggle",
+      "space v": "git::Restore",
       "space z": "workspace::ToggleCenteredLayout",
       "u": "editor::Undo"
     }
