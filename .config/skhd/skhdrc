@@ -2,7 +2,6 @@
 hyper - w : open -a 'Brave Browser'
 hyper - d : open -a 'Spotify'
 hyper - i : open -a 'Endel'
-# hyper - f : open -a 'Figma'
 # hyper - x : open -a 'Messenger' -- controlled by Raycast as I want to be able to hide it if it's focused
 hyper - n : open -a 'Notion'
 hyper - u : open -a 'Podcasts'
@@ -10,8 +9,8 @@ hyper - s : open -a 'Slack'
 hyper - m : open -a 'Spark Desktop'
 hyper - e : open -a 'WebStorm'
 hyper - o : open -a 'Sonos'
-hyper - q : open -a 'Cursor'
 hyper - z : open -a 'Zed'
+hyper - q : open -a 'Warp'
 cmd - 0x32 : open -a 'Warp'
 
 # Restart yabai -- 0x32 = `
@@ -34,13 +33,6 @@ alt - 7 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[6].
 alt - 8 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[7].index')
 alt - 9 : yabai -m space --focus $(yabai -m query --spaces --display | jq '.[8].index')
 
-# Navigate spaces
-# alt + ctrl - right : yabai -m space --focus next || yabai -m space --focus first
-# alt + ctrl - left : yabai -m space --focus prev || yabai -m space --focus last
-
-alt + shift - 0x1E : yabai -m space --focus next || yabai -m space --focus first
-alt + shift - 0x21 : yabai -m space --focus prev || yabai -m space --focus last
-
 # Focusing specific displays
 rcmd - 1  : yabai -m display --focus 1
 rcmd - 2  : yabai -m display --focus 2
@@ -54,9 +46,6 @@ alt + shift - 3  : yabai -m window --display 3; yabai -m display --focus 3
 # Focus next display by arrangement index
 alt + shift - space : yabai -m display --focus next || yabai -m display --focus first
 hyper - space : yabai -m display --focus next || yabai -m display --focus first
-
-# Center small window
-# hyper - v :  yabai -m window --resize abs:1100:700
 
 # Maximize window
 alt + shift - f : yabai -m window --toggle zoom-fullscreen; yabai -m window --grid 1:1:0:0:1:1
@@ -96,18 +85,6 @@ hyper - 7 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[
 hyper - 8 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[7].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[7].index')
 hyper - 9 : yabai -m window --space $(yabai -m query --spaces --display | jq '.[8].index'); yabai -m space --focus $(yabai -m query --spaces --display | jq '.[8].index')
 
-# Resize windows - expand
-# alt + shift - k : yabai -m window --resize top:0:-100
-# alt + shift - l : yabai -m window --resize right:100:0
-# alt + shift - j : yabai -m window --resize bottom:0:100
-# alt + shift - h : yabai -m window --resize left:-100:0 
-
-# Resize windows - shrink
-# alt + shift - y : yabai -m window --resize right:-100:0
-# alt + shift - u : yabai -m window --resize bottom:0:-100
-# alt + shift - i : yabai -m window --resize top:0:100
-# alt + shift - o : yabai -m window --resize left:100:0 
-
 # Resize windows - Plus (0x18 is the plus key)
 hyper - 0x18 : yabai -m window --resize right:50:0 || \
                yabai -m window --resize left:50:0 ; \
@@ -128,11 +105,8 @@ hyper - 0 : yabai -m space --balance
 alt - r : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "next" else "stack.next" end') || \
             yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "first" else "stack.first" end')
 
-alt + shift - r : yabai -m space --rotate 270
-
 # Focus windows backwards
-# alt + shift - r : yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "prev" else "stack.prev" end') || \
-#             yabai -m window --focus $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "last" else "stack.last" end')
+alt + shift - r : yabai -m space --rotate 270
 
 # Rotate on X and Y Axis
 alt + shift - y : yabai -m space --mirror y-axis

@@ -2,9 +2,10 @@ return {
   -- disabled ui plugins
   { "echasnovski/mini.indentscope", enabled = false },
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
-  { "akinsho/bufferline.nvim", enabled = false },
+  { "akinsho/bufferline.nvim", enabled = true },
   { "folke/noice.nvim", enabled = false },
   { "rafamadriz/friendly-snippets", enabled = false },
+  { "nvim-lualine/lualine.nvim", enabled = false },
 
   {
     "rcarriga/nvim-notify",
@@ -41,6 +42,7 @@ return {
     dependencies = {},
     event = "VeryLazy",
     priority = 1200,
+    enabled = false,
     config = function()
       local helpers = require("incline.helpers")
       require("incline").setup({
