@@ -38,6 +38,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
 
     # git
     abbr --add gg "git pull ; git fetch --all --prune ; git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
+    abbr --add ggr "git pull --rebase ; git fetch --all --prune ; git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
     abbr --add gbad "git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
     abbr --add fomo 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate --reapply-cherry-picks'
     abbr --add grbm 'git fetch --all --prune; and git rebase origin/main --rerere-autoupdate --reapply-cherry-picks'

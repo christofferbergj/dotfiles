@@ -8,7 +8,10 @@
 // from the command palette or from `Zed` application menu.
 {
   // General Settings
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": {
+    "dark": "JetBrains New UI Icons (Dark)",
+    "light": "JetBrains New UI Icons (Light)"
+  },
   "restore_on_startup": "last_workspace",
   "preferred_line_length": 100,
   "vertical_scroll_margin": 8,
