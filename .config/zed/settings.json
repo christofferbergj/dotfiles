@@ -150,6 +150,13 @@
   },
 
   // LSP and Formatting
+  "inlay_hints": {
+    "enabled": false,
+    "show_type_hints": false,
+    "toggle_on_modifiers_press": {
+      "control": true
+    }
+  },
   "diagnostics": {
     "include_warnings": true
   },
