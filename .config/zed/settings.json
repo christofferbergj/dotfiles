@@ -137,7 +137,7 @@
   "features": {
     "edit_prediction_provider": "zed"
   },
-  "assistant": {
+  "agent": {
     "dock": "right",
     "default_model": {
       "provider": "zed.dev",
@@ -154,7 +154,8 @@
     "enabled": false,
     "show_type_hints": false,
     "toggle_on_modifiers_press": {
-      "control": true
+      "control": true,
+      "shift": true
     }
   },
   "diagnostics": {
