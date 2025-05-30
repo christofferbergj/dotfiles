@@ -9,8 +9,8 @@
 {
   // General Settings
   "icon_theme": {
-    "dark": "JetBrains New UI Icons (Dark)",
-    "light": "JetBrains New UI Icons (Light)"
+    "dark": "Colored Zed Icons Theme Dark",
+    "light": "Colored Zed Icons Theme Light"
   },
   "restore_on_startup": "last_workspace",
   "preferred_line_length": 100,
