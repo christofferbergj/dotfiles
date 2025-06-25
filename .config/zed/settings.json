@@ -52,7 +52,7 @@
   },
   "autosave": {
     "after_delay": {
-      "milliseconds": 5000
+      "milliseconds": 10000
     }
   },
   "indent_guides": {
@@ -141,7 +141,7 @@
     "dock": "right",
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "model": "claude-sonnet-4"
     },
     "default_height": 340,
     "enabled": true,
@@ -176,14 +176,14 @@
       }
     }
   },
-  "lsp_highlight_debounce": 3000,
+  "lsp_highlight_debounce": 75,
 
   // Git Integration
   "git": {
     "git_gutter": "tracked_files",
     "inline_blame": {
       "show_commit_summary": true,
-      "delay_ms": 3000,
+      "delay_ms": 5000,
       "enabled": true,
       "min_column": 0
     }
