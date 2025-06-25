@@ -8,3 +8,4 @@
 .config/jgit
 .config/configstore
 .config/github-copilot
+.config/btop
