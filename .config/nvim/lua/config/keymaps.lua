@@ -77,3 +77,6 @@ end, opts)
 map("v", "<S-Tab>", function()
   require("nvim-treesitter.incremental_selection").node_decremental()
 end, opts)
+
+-- Select whole block of code
+map("n", "<leader>w", "0v$%$", opts)
