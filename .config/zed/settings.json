@@ -8,6 +8,15 @@
 // from the command palette or from `Zed` application menu.
 {
   // General Settings
+  "context_servers": {
+    "mcp-server-context7": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "default_minimum_tokens": "10000"
+      }
+    }
+  },
   "icon_theme": {
     "dark": "Colored Zed Icons Theme Dark",
     "light": "Colored Zed Icons Theme Light"
@@ -132,6 +141,9 @@
   "show_edit_predictions": true,
   "show_completions_on_input": true,
   "show_completion_documentation": true,
+  "edit_predictions": {
+    "mode": "eager"
+  },
 
   // AI and Assistance
   "features": {
@@ -145,7 +157,6 @@
     },
     "default_height": 340,
     "enabled": true,
-    "version": "2",
     "default_width": 840
   },
 
