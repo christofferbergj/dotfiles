@@ -3,7 +3,7 @@
   {
     // Global bindings
     "bindings": {
-      "cmd-k a": "assistant::ToggleFocus",
+      "cmd-k a": "agent::ToggleFocus",
       "cmd-k d": "diagnostics::Deploy",
       "cmd-k e": "project_panel::ToggleFocus",
       "cmd-k g": "git_panel::ToggleFocus",
@@ -57,7 +57,9 @@
   },
   {
     "context": "Editor && mode == full && edit_prediction",
-    "bindings": {}
+    "bindings": {
+      "alt-enter": "editor::AcceptEditPrediction"
+    }
   },
   {
     "context": "Editor && !edit_prediction",
@@ -264,7 +266,7 @@
     "bindings": {
       // visual, visual line & visual block modes
       "shift-alt-l": "editor::SortLinesCaseInsensitive",
-      "shift-s": ["vim::PushAddSurrounds", {}]
+      "shift-s": "vim::PushAddSurrounds"
     }
   },
   {
