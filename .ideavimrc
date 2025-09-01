@@ -39,11 +39,12 @@ inoremap jj <Esc>A
 inoremap jk <Esc>
 nnoremap # #zz
 nnoremap * *zz
-nnoremap x "_x
 nnoremap 0 ^
-nnoremap <Tab> viw
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+nnoremap <Tab> viw
+nnoremap <cr> m`o<Esc>``
+nnoremap <S-cr> m`O<Esc>``
 nnoremap H ^
 nnoremap J mzJ`z
 nnoremap L $
@@ -52,6 +53,7 @@ nnoremap U <C-R>
 nnoremap Y y$
 nnoremap ^ 0
 nnoremap n nzz
+nnoremap x "_x
 vnoremap H ^
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
