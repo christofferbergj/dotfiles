@@ -32,3 +32,4 @@ test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+set -gx PATH /Users/christofferbergj/.local/bin $PATH
