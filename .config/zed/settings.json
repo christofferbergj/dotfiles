@@ -10,16 +10,15 @@
   // General Settings
   "context_servers": {
     "mcp-server-context7": {
-      "source": "extension",
       "enabled": true,
       "settings": {
-        "default_minimum_tokens": "10000"
-      }
-    }
+        "default_minimum_tokens": "10000",
+      },
+    },
   },
   "icon_theme": {
     "dark": "Colored Zed Icons Theme Dark",
-    "light": "Colored Zed Icons Theme Light"
+    "light": "Colored Zed Icons Theme Light",
   },
   "restore_on_startup": "last_workspace",
   "preferred_line_length": 100,
@@ -34,13 +33,13 @@
   "buffer_font_size": 15,
   "buffer_font_weight": 400,
   "buffer_line_height": {
-    "custom": 2.8
+    "custom": 2.8,
   },
   "cursor_blink": false,
   "cursor_shape": "block",
   "show_whitespaces": "none",
   "show_wrap_guides": false,
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
 
   // Editor Behavior
   "always_treat_brackets_as_autoclosed": true,
@@ -50,63 +49,58 @@
   "formatter": "auto",
   "file_finder": {
     "modal_max_width": "small",
-    "file_icons": true
+    "file_icons": true,
   },
   "vim_mode": true,
   "vim": {
-    "use_multiline_find": true,
     "use_smartcase_find": true,
     "use_system_clipboard": "always",
-    "highlight_on_yank_duration": 60
+    "highlight_on_yank_duration": 60,
   },
   "autosave": {
     "after_delay": {
-      "milliseconds": 10000
-    }
+      "milliseconds": 10000,
+    },
   },
   "indent_guides": {
-    "enabled": false
+    "enabled": false,
   },
 
   // UI Elements
   "tab_bar": {
     "show": true,
-    "show_nav_history_buttons": false
+    "show_nav_history_buttons": false,
   },
   "tabs": {
     "close_position": "right",
     "git_status": false,
-    "file_icons": false
+    "file_icons": false,
   },
   "toolbar": {
     "breadcrumbs": true,
-    "quick_actions": false
+    "quick_actions": false,
   },
   "scrollbar": {
-    "show": "never"
+    "show": "never",
   },
   "gutter": {
-    "code_actions": false,
     "folds": false,
     "line_numbers": true,
-    "runnables": false
+    "runnables": false,
   },
 
   // Panels and Features
-  "chat_panel": {
-    "button": "never"
-  },
   "git_panel": {
     "dock": "right",
-    "default_width": 600
+    "default_width": 600,
   },
   "notification_panel": {
     "button": true,
-    "default_width": 340
+    "default_width": 340,
   },
   "collaboration_panel": {
     "button": true,
-    "default_width": 340
+    "default_width": 340,
   },
   "outline_panel": {
     "dock": "right",
@@ -114,27 +108,28 @@
     "default_width": 340,
     "auto_reveal_entries": false,
     "scrollbar": {
-      "show": "never"
+      "show": "never",
     },
     "indent_guides": {
-      "show": "never"
-    }
+      "show": "never",
+    },
   },
   "project_panel": {
+    "starts_open": true,
     "auto_reveal_entries": true,
     "indent_guides": {
-      "show": "never"
+      "show": "never",
     },
     "button": true,
     "default_width": 480,
-    "dock": "right"
+    "dock": "right",
   },
   "terminal": {
     "button": true,
     "copy_on_select": true,
     "line_height": {
-      "custom": 2.8
-    }
+      "custom": 2.8,
+    },
   },
 
   // Completion
@@ -142,22 +137,23 @@
   "show_completions_on_input": true,
   "show_completion_documentation": true,
   "edit_predictions": {
-    "mode": "eager"
+    "mode": "eager",
   },
 
   // AI and Assistance
   "features": {
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "zed",
   },
   "agent": {
-    "dock": "right",
+    "always_allow_tool_actions": true,
+    "dock": "left",
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
     },
     "default_height": 340,
     "enabled": true,
-    "default_width": 840
+    "default_width": 840,
   },
 
   // LSP and Formatting
@@ -166,26 +162,26 @@
     "show_type_hints": false,
     "toggle_on_modifiers_press": {
       "control": true,
-      "shift": true
-    }
+      "shift": true,
+    },
   },
   "diagnostics": {
-    "include_warnings": true
+    "include_warnings": true,
   },
   "code_actions_on_format": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
   },
   "lsp": {
     "biome": {
       "settings": {
-        "require_config_file": true
-      }
+        "require_config_file": true,
+      },
     },
     "tailwindcss-language-server": {
       "settings": {
-        "classAttributes": ["class", "className", "tv", "cn", "clsx", "styles"]
-      }
-    }
+        "classAttributes": ["class", "className", "tv", "cn", "clsx", "styles"],
+      },
+    },
   },
   "lsp_highlight_debounce": 75,
 
@@ -196,7 +192,7 @@
       "show_commit_summary": true,
       "delay_ms": 5000,
       "enabled": true,
-      "min_column": 0
-    }
-  }
+      "min_column": 0,
+    },
+  },
 }
