@@ -1,18 +1,16 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "google_auth": false,
+  "disabled_hooks": ["anthropic-auto-compact"],
   "agents": {
     "Sisyphus": {
-      "model": "google/claude-opus-4-5-thinking"
+      "model": "google/gemini-3-pro-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/claude-opus-4-5-thinking"
-    },
-    "Builder-Sisyphus": {
-      "model": "google/claude-opus-4-5-thinking"
+      "model": "google/gemini-3-pro-high"
     },
     "librarian": {
-      "model": "google/claude-sonnet-4-5"
+      "model": "google/gemini-3-pro-high"
     },
     "oracle": {
       "model": "google/gemini-3-pro-high"
