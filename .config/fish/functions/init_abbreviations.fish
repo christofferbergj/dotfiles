@@ -37,6 +37,9 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     # gitui
     abbr --add g gitui
 
+    # opencode
+    abbr --add oc 'opencode'
+
     # git
     abbr --add gg "git pull ; git fetch --all --prune ; git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
     abbr --add ggr "git pull --rebase ; git fetch --all --prune ; git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
