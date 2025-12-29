@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export CARAPACE_BRIDGES:zsh\x2cfish\x2cbash\x2cinshellisense
 SETUVAR --export N_PREFIX:/Users/christofferbergj/\x2en
-SETUVAR __fish_initialized:3800
+SETUVAR __fish_initialized:4300
 SETUVAR _fisher_catppuccin_2F_fish_files:\x7e/\x2econfig/fish/themes/Catppuccin\x20Frappe\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Latte\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Macchiato\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Mocha\x2etheme
 SETUVAR _fisher_edc_2F_bass_files:\x7e/\x2econfig/fish/functions/__bass\x2epy\x1e\x7e/\x2econfig/fish/functions/bass\x2efish
 SETUVAR _fisher_jorgebucaran_2F_autopair_2E_fish_files:\x7e/\x2econfig/fish/functions/_autopair_backspace\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_left\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_right\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_insert_same\x2efish\x1e\x7e/\x2econfig/fish/functions/_autopair_tab\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/autopair\x2efish
@@ -12,46 +12,7 @@ SETUVAR _fisher_nickeb96_2F_puffer_2D_fish_files:\x7e/\x2econfig/fish/functions/
 SETUVAR _fisher_patrickf1_2F_fzf_2E_fish_files:\x7e/\x2econfig/fish/functions/_fzf_configure_bindings_help\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_extract_var_info\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_changed_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_preview_file\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_diff_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_report_file_type\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_directory\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_log\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_git_status\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_history\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_processes\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_search_variables\x2efish\x1e\x7e/\x2econfig/fish/functions/_fzf_wrapper\x2efish\x1e\x7e/\x2econfig/fish/functions/fzf_configure_bindings\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/fzf\x2efish\x1e\x7e/\x2econfig/fish/completions/fzf_configure_bindings\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eedc/bass\x1emeaningful\x2dooo/sponge\x1ejorgebucaran/autopair\x2efish\x1epatrickf1/fzf\x2efish\x1enickeb96/puffer\x2dfish\x1ecatppuccin/fish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
-SETUVAR fish_color_autosuggestion:7c6f64
-SETUVAR fish_color_cancel:fb4934
-SETUVAR fish_color_command:8ec07c
-SETUVAR fish_color_comment:b16286
-SETUVAR fish_color_cwd:83a598
-SETUVAR fish_color_cwd_root:red
-SETUVAR fish_color_end:fe8019
-SETUVAR fish_color_error:fb4934
-SETUVAR fish_color_escape:83a598
-SETUVAR fish_color_gray:6e738d
-SETUVAR fish_color_history_current:\x2d\x2dbold
-SETUVAR fish_color_host:fabd2f
-SETUVAR fish_color_host_remote:fe8019
-SETUVAR fish_color_keyword:83a598
-SETUVAR fish_color_match:7cafc2
-SETUVAR fish_color_normal:ebdbb2
-SETUVAR fish_color_operator:b8bb26
-SETUVAR fish_color_option:ebdbb2
-SETUVAR fish_color_param:ebdbb2
-SETUVAR fish_color_quote:fabd2f
-SETUVAR fish_color_redirection:ebdbb2
-SETUVAR fish_color_search_match:\x2d\x2dbackground\x3da89984
-SETUVAR fish_color_selection:\x2d\x2dbackground\x3da89984
-SETUVAR fish_color_status:b8bb26
-SETUVAR fish_color_user:d3869b
-SETUVAR fish_color_valid_path:ebdbb2
-SETUVAR fish_key_bindings:fish_vi_key_bindings
-SETUVAR fish_pager_color_background:\x1d
-SETUVAR fish_pager_color_completion:ebdbb2
-SETUVAR fish_pager_color_description:b16286
-SETUVAR fish_pager_color_prefix:8ec07c
-SETUVAR fish_pager_color_progress:b16286
-SETUVAR fish_pager_color_secondary_background:\x1d
-SETUVAR fish_pager_color_secondary_completion:\x1d
-SETUVAR fish_pager_color_secondary_description:\x1d
-SETUVAR fish_pager_color_secondary_prefix:\x1d
-SETUVAR fish_pager_color_selected_background:\x1d
-SETUVAR fish_pager_color_selected_completion:\x1d
-SETUVAR fish_pager_color_selected_description:\x1d
-SETUVAR fish_pager_color_selected_prefix:\x1d
+SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_user_paths:/Users/christofferbergj/\x2en/bin\x1e/usr/local/bin\x1e/opt/homebrew/bin\x1e/Users/christofferbergj/\x2ecargo/bin\x1e/opt/homebrew/bin/node/bin\x1e/opt/homebrew/sbin\x1e/opt/homebrew/opt/fzf/bin
 SETUVAR sponge_allow_previously_successful:true
 SETUVAR sponge_delay:2

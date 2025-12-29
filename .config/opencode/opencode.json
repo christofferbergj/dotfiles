@@ -2,6 +2,9 @@
   "$schema": "https://opencode.ai/config.json",
   "plugin": ["oh-my-opencode", "opencode-antigravity-auth", "opencode-supermemory"],
   "model": "google/gemini-3-pro-high",
+  "keybinds": {
+    "command_list": "ctrl+k"
+  },
   "provider": {
     "google": {
       "models": {
@@ -37,16 +40,48 @@
             "output": ["text"]
           }
         },
-        "claude-sonnet-4-5-thinking": {
-          "name": "Claude Sonnet 4.5 Thinking (Antigravity)",
+        "claude-sonnet-4-5-thinking-low": {
+          "name": "Claude Sonnet 4.5 Thinking Low (Antigravity)",
           "limit": { "context": 200000, "output": 64000 },
           "modalities": {
             "input": ["text", "image", "pdf"],
             "output": ["text"]
           }
         },
-        "claude-opus-4-5-thinking": {
-          "name": "Claude Opus 4.5 Thinking (Antigravity)",
+        "claude-sonnet-4-5-thinking-medium": {
+          "name": "Claude Sonnet 4.5 Thinking Medium (Antigravity)",
+          "limit": { "context": 200000, "output": 64000 },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          }
+        },
+        "claude-sonnet-4-5-thinking-high": {
+          "name": "Claude Sonnet 4.5 Thinking High (Antigravity)",
+          "limit": { "context": 200000, "output": 64000 },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          }
+        },
+        "claude-opus-4-5-thinking-low": {
+          "name": "Claude Opus 4.5 Thinking Low (Antigravity)",
+          "limit": { "context": 200000, "output": 64000 },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          }
+        },
+        "claude-opus-4-5-thinking-medium": {
+          "name": "Claude Opus 4.5 Thinking Medium (Antigravity)",
+          "limit": { "context": 200000, "output": 64000 },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"]
+          }
+        },
+        "claude-opus-4-5-thinking-high": {
+          "name": "Claude Opus 4.5 Thinking High (Antigravity)",
           "limit": { "context": 200000, "output": 64000 },
           "modalities": {
             "input": ["text", "image", "pdf"],
@@ -63,8 +98,5 @@
         }
       }
     }
-  },
-  "keybinds": {
-    "command_list": "ctrl+k"
   }
 }
