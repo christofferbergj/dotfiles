@@ -4,16 +4,16 @@
   "disabled_hooks": ["anthropic-auto-compact"],
   "agents": {
     "Sisyphus": {
-      "model": "google/claude-opus-4-5-thinking"
+      "model": "google/claude-opus-4-5-thinking-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/claude-opus-4-5-thinking"
+      "model": "google/claude-opus-4-5-thinking-high"
     },
     "librarian": {
       "model": "google/claude-sonnet-4-5"
     },
     "oracle": {
-      "model": "google/claude-opus-4-5-thinking"
+      "model": "google/claude-opus-4-5-thinking-high"
     },
     "frontend-ui-ux-engineer": {
       "model": "google/gemini-3-pro-high"
