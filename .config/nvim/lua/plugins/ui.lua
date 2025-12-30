@@ -1,6 +1,6 @@
 return {
   -- disabled ui plugins
-  { "echasnovski/mini.indentscope", enabled = false },
+  { "mini-nvim/mini.indentscope", enabled = false },
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
   { "akinsho/bufferline.nvim", enabled = true },
   { "folke/noice.nvim", enabled = false },
