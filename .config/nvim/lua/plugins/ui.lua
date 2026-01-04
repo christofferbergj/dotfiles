@@ -2,7 +2,7 @@ return {
   -- disabled ui plugins
   { "mini-nvim/mini.indentscope", enabled = false },
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
-  { "akinsho/bufferline.nvim", enabled = true },
+  { "akinsho/bufferline.nvim", enabled = false },
   { "folke/noice.nvim", enabled = false },
   { "rafamadriz/friendly-snippets", enabled = false },
   { "nvim-lualine/lualine.nvim", enabled = false },
@@ -21,6 +21,13 @@ return {
     opts = {
       scroll = { enabled = false },
       indent = { enabled = false },
+      picker = {
+        sources = {
+          files = { hidden = true },
+          grep = { hidden = true },
+          explorer = { hidden = true },
+        },
+      },
     },
   },
 
@@ -68,5 +75,9 @@ return {
         end,
       })
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    opts = { max_lines = 2 },
   },
 }
