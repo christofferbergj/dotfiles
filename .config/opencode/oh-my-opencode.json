@@ -4,25 +4,28 @@
   "disabled_hooks": ["anthropic-context-window-limit-recovery"],
   "agents": {
     "Sisyphus": {
-      "model": "google/claude-opus-4-5-thinking-high"
+      "model": "google/antigravity-claude-opus-4-5-thinking-high"
     },
     "Planner-Sisyphus": {
-      "model": "google/claude-opus-4-5-thinking-high"
-    },
-    "librarian": {
-      "model": "google/claude-sonnet-4-5"
+      "model": "google/antigravity-claude-opus-4-5-thinking-high"
     },
     "oracle": {
-      "model": "google/claude-opus-4-5-thinking-high"
+      "model": "google/antigravity-claude-opus-4-5-thinking-high"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/gemini-3-pro-high"
+      "model": "google/antigravity-gemini-3-pro-high"
+    },
+    "librarian": {
+      "model": "google/antigravity-gemini-3-flash"
+    },
+    "explore": {
+      "model": "google/antigravity-gemini-3-flash"
     },
     "document-writer": {
-      "model": "google/gemini-3-flash"
+      "model": "google/antigravity-gemini-3-flash"
     },
     "multimodal-looker": {
-      "model": "google/gemini-3-flash"
+      "model": "google/antigravity-gemini-3-flash"
     }
   }
 }
