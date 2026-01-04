@@ -4,7 +4,7 @@
 
 local opt = vim.opt
 
-vim.g.root_spec = { "cwd" }
+vim.g.root_spec = { "lsp", { ".git", "turbo.json", "pnpm-workspace.yaml" }, "cwd" }
 vim.g.autoformat = false
 
 opt.encoding = "utf-8"
