@@ -26,4 +26,4 @@ macos-titlebar-style = transparent
 shell-integration = fish
 shell-integration-features = no-cursor
 
-keybind = global:cmd+r=text:\x0c
+keybind = cmd+r=text:\x0c
