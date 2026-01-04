@@ -1,0 +1,29 @@
+theme = Gruvbox Dark
+
+font-size = 15
+font-family = JetBrainsMono Nerd Font
+
+window-decoration = true
+window-padding-x = 15
+window-padding-y = 15
+
+adjust-cell-height = 30
+
+confirm-close-surface = false
+clipboard-paste-protection = false
+unfocused-split-opacity = 1.0
+copy-on-select = clipboard
+
+background-opacity = 1.0
+
+cursor-style = block
+cursor-style-blink = false
+
+mouse-hide-while-typing = true
+keybind = shift+enter=text:\n
+macos-option-as-alt = true
+macos-titlebar-style = transparent
+shell-integration = fish
+shell-integration-features = no-cursor
+
+
