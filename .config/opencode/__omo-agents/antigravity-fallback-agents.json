@@ -1,16 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-  "google_auth": false,
-  "disabled_hooks": ["anthropic-context-window-limit-recovery"],
   "agents": {
     "orchestrator-sisyphus": {
       "model": "opencode/glm-4.7-free"
     },
     "Sisyphus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "Prometheus (Planner)": {
-      "model": "google/antigravity-claude-opus-4-5-thinking"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "oracle": {
       "model": "github-copilot/gpt-5.2"
