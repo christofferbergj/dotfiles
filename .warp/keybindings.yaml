@@ -1,12 +1,12 @@
 ---
-"workspace:show_command_search": none
-"editor_view:insert_autosuggestion": tab
 "workspace:move_tab_right": alt-shift-K
-"workspace:move_tab_left": alt-shift-J
-"input:open_completion_suggestions": ctrl-space
-"terminal:clear_blocks": none
-"workspace:toggle_mouse_reporting": cmd-u
+"workspace:show_command_search": none
 "input:search_command_history": ctrl-r
-"terminal:select_previous_block": cmd-k
+"workspace:toggle_mouse_reporting": cmd-u
 "terminal:select_next_block": cmd-j
+"terminal:select_previous_block": cmd-k
+"input:open_completion_suggestions": ctrl-space
 "input:clear_screen": cmd-r
+"workspace:move_tab_left": alt-shift-J
+"editor_view:insert_autosuggestion": tab
+"terminal:clear_blocks": none
