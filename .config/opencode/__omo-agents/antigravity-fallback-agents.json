@@ -2,13 +2,16 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
     "orchestrator-sisyphus": {
-      "model": "opencode/glm-4.7-free"
+      "model": "google/antigravity-gemini-3-pro"
     },
     "Sisyphus": {
       "model": "google/antigravity-gemini-3-pro"
     },
     "Prometheus (Planner)": {
       "model": "google/antigravity-gemini-3-pro"
+    },
+    "Sisyphus-Junior": {
+      "model": "opencode/glm-4.7-free"
     },
     "oracle": {
       "model": "github-copilot/gpt-5.2"

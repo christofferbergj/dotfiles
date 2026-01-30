@@ -3,32 +3,35 @@
   "google_auth": false,
   "disabled_hooks": ["anthropic-context-window-limit-recovery"],
   "agents": {
-    "orchestrator-sisyphus": {
-      "model": "opencode/glm-4.7-free"
+    "sisyphus": {
+      "model": "opencode/kimi-k2.5-free"
     },
-    "Sisyphus": {
-      "model": "google/antigravity-claude-opus-4-5-thinking"
-    },
-    "Prometheus (Planner)": {
-      "model": "google/antigravity-claude-opus-4-5-thinking"
+    "atlas": {
+      "model": "opencode/kimi-k2.5-free"
     },
     "oracle": {
       "model": "github-copilot/gpt-5.2"
     },
-    "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro"
-    },
     "librarian": {
-      "model": "opencode/glm-4.7-free"
+      "model": "opencode/kimi-k2.5-free"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
-    },
-    "document-writer": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "opencode/kimi-k2.5-free"
     },
     "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "opencode/kimi-k2.5-free"
+    },
+    "prometheus": {
+      "model": "opencode/kimi-k2.5-free"
+    },
+    "metis": {
+      "model": "opencode/kimi-k2.5-free"
+    },
+    "momus": {
+      "model": "opencode/kimi-k2.5-free"
+    },
+    "sisyphus-junior": {
+      "model": "opencode/kimi-k2.5-free"
     }
   }
 }
