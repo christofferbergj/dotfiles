@@ -30,7 +30,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add ghpc 'gh pr create -f'
     abbr --add ghpma 'gh pr merge --merge --squash'
     abbr --add ghpca 'gh pr create -f; and gh pr view -w'
-    abbr --add crp 'gh pr create --title "@coderabbitai" --body "@coderabbitai summary" ; gh pr view -w'
+    abbr --add crp 'gh pr create --title "@coderabbitai" --body "" ; gh pr view -w'
     abbr --add ghpcd 'gh pr create -f -d'
     abbr --add ghw 'gh workflow view -w'
 
@@ -39,6 +39,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
 
     # opencode
     abbr --add oc 'opencode'
+    abbr --add occ 'rm -rf ~/.cache/opencode/node_modules ~/.cache/opencode/bun.lock'
 
     # git
     abbr --add gg "git pull ; git fetch --all --prune ; git branch -v | rg '\[gone\]' | awk '{print \$1}' | string trim -l | xargs -L 1 git branch -D"
