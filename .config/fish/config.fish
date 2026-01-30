@@ -2,6 +2,11 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# Global environment variables
+set -gx PATH /Users/christofferbergj/.local/bin $PATH
+set -gx HOMEBREW_NO_ENV_HINTS 1
+set -gx OPENCODE_EXPERIMENTAL_OXFMT true
+
 # Add Yabai functions to path
 set fish_function_path $fish_function_path $fish_function_path/yabai
 
@@ -32,5 +37,3 @@ test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-set -gx PATH /Users/christofferbergj/.local/bin $PATH
-set -gx HOMEBREW_NO_ENV_HINTS 1
