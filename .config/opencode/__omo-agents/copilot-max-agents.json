@@ -1,32 +1,35 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
-    "orchestrator-sisyphus": {
-      "model": "opencode/glm-4.7-free"
-    },
-    "Sisyphus": {
+    "sisyphus": {
       "model": "github-copilot/claude-opus-4.5"
     },
-    "Prometheus (Planner)": {
-      "model": "github-copilot/gpt-5.2"
+    "atlas": {
+      "model": "github-copilot/claude-opus-4.5"
     },
     "oracle": {
       "model": "github-copilot/gpt-5.2"
     },
-    "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro"
-    },
     "librarian": {
-      "model": "opencode/glm-4.7-free"
+      "model": "github-copilot/claude-sonnet-4.5"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
-    },
-    "document-writer": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "opencode/kimi-k2.5-free"
     },
     "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "opencode/kimi-k2.5-free"
+    },
+    "prometheus": {
+      "model": "github-copilot/claude-opus-4.5"
+    },
+    "metis": {
+      "model": "github-copilot/claude-sonnet-4.5"
+    },
+    "momus": {
+      "model": "github-copilot/claude-sonnet-4.5"
+    },
+    "sisyphus-junior": {
+      "model": "github-copilot/claude-sonnet-4.5"
     }
   }
 }
