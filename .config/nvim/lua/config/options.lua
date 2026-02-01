@@ -5,7 +5,7 @@
 local opt = vim.opt
 
 -- Prefer monorepo root markers over LSP roots (monorepos often have nested package.json)
-vim.g.root_spec = { { ".git", "turbo.json", "pnpm-workspace.yaml" }, "cwd" }
+vim.g.root_spec = { { ".git", "pnpm-workspace.yaml" }, "cwd" }
 vim.g.autoformat = false
 
 opt.encoding = "utf-8"
