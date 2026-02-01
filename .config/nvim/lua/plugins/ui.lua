@@ -29,6 +29,32 @@ return {
         },
       },
     },
+    keys = {
+      {
+        "<leader>E",
+        function()
+          local uv = vim.uv or vim.loop
+          local root = LazyVim.root()
+
+          local path = vim.api.nvim_buf_get_name(0)
+          local dir = vim.fs.dirname(path ~= "" and vim.fs.normalize(path) or uv.cwd())
+
+          while dir and dir ~= "/" do
+            if dir == root then
+              break
+            end
+            if uv.fs_stat(vim.fs.joinpath(dir, "package.json")) then
+              Snacks.explorer({ cwd = dir })
+              return
+            end
+            dir = vim.fs.dirname(dir)
+          end
+
+          Snacks.explorer({ cwd = uv.cwd() })
+        end,
+        desc = "Explorer (package root)",
+      },
+    },
   },
 
   -- prettier diagnostic messages
