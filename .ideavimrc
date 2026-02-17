@@ -110,25 +110,6 @@ map <leader>y 0v$%$y
 nmap s <Action>(flash.search)
 xmap s <Action>(flash.search)
 
-" enhance vim f (find for char in characters to the right of the current cursor)
-nmap f <Action>(flash.find)
-xmap f <Action>(flash.find)
-
-nmap F <Action>(flash.find_backward)
-xmap F <Action>(flash.find_backward)
-
-nmap t <Action>(flash.till)
-xmap t <Action>(flash.till)
-
-nmap T <Action>(flash.till_backward)
-xmap T <Action>(flash.till_backward)
-
-nmap ; <Action>(flash.repeat)
-xmap ; <Action>(flash.repeat)
-
-nmap , <Action>(flash.repeat_backward)
-xmap , <Action>(flash.repeat_backward)
-
 " Strict mode for development ---------------
 set ideastrictmode
 
