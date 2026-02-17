@@ -1,0 +1,196 @@
+{
+  "version": 3,
+  "skills": {
+    "turborepo": {
+      "source": "vercel/turborepo",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel/turborepo.git",
+      "skillPath": "skills/turborepo/SKILL.md",
+      "skillFolderHash": "5673854dd1b719546784b9fdfb46824fb5cf5c37",
+      "installedAt": "2026-01-23T10:55:47.272Z",
+      "updatedAt": "2026-02-17T17:35:49.043Z"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "skillFolderHash": "079b06a135401704ea94ab74c7c9d86c92ba259f",
+      "installedAt": "2026-01-23T10:56:06.390Z",
+      "updatedAt": "2026-02-06T18:30:43.518Z"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
+      "installedAt": "2026-01-23T10:56:20.887Z",
+      "updatedAt": "2026-01-23T11:48:42.028Z"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "skillFolderHash": "928950704df8a8b885c03de5da626331e6f29cf8",
+      "installedAt": "2026-01-23T10:56:36.497Z",
+      "updatedAt": "2026-01-23T11:48:53.129Z"
+    },
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "skillFolderHash": "84fe752a54c0e33238594b71fd4f80ccc3df8206",
+      "installedAt": "2026-01-23T10:57:56.440Z",
+      "updatedAt": "2026-02-17T17:35:50.963Z"
+    },
+    "performance": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/addyosmani/web-quality-skills.git",
+      "skillPath": "skills/performance/SKILL.md",
+      "skillFolderHash": "3ae01d0bb58bdc2c94de4694e2f782204ffba083",
+      "installedAt": "2026-01-23T11:48:13.166Z",
+      "updatedAt": "2026-01-23T11:48:13.166Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "installedAt": "2026-01-27T13:19:02.223Z",
+      "updatedAt": "2026-02-12T14:07:08.147Z"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "skillFolderHash": "bf90d0a4b83ea054653350f9c67f6de235d3a368",
+      "installedAt": "2026-01-27T13:19:23.261Z",
+      "updatedAt": "2026-01-30T10:02:21.752Z"
+    },
+    "next-best-practices": {
+      "source": "vercel-labs/next-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/next-skills.git",
+      "skillPath": "skills/next-best-practices/SKILL.md",
+      "skillFolderHash": "ad17eb27952b39a6ab0061bd50e8a2213b63a3ec",
+      "installedAt": "2026-01-27T13:19:34.755Z",
+      "updatedAt": "2026-01-27T13:19:34.755Z"
+    },
+    "next-cache-components": {
+      "source": "vercel-labs/next-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/next-skills.git",
+      "skillPath": "skills/next-cache-components/SKILL.md",
+      "skillFolderHash": "a6f29564b9228af553737bd437c7016fc3dc44e0",
+      "installedAt": "2026-01-27T13:20:11.138Z",
+      "updatedAt": "2026-02-17T17:35:52.314Z"
+    },
+    "better-result-adopt": {
+      "source": "dmmulroy/better-result",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dmmulroy/better-result.git",
+      "skillPath": "skills/adopt/SKILL.md",
+      "skillFolderHash": "f5604ee3971521451e075c746c6543b661588af1",
+      "installedAt": "2026-01-30T17:12:40.178Z",
+      "updatedAt": "2026-01-30T17:12:40.178Z"
+    },
+    "neovim": {
+      "source": "julianobarbosa/claude-code-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/julianobarbosa/claude-code-skills.git",
+      "skillPath": "skills/neovim-skill/SKILL.md",
+      "skillFolderHash": "33138b72d690170777cae47335f20c39a67b8fc3",
+      "installedAt": "2026-02-01T16:05:32.842Z",
+      "updatedAt": "2026-02-01T16:08:05.974Z"
+    },
+    "implement-design": {
+      "source": "figma/mcp-server-guide",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
+      "skillPath": "skills/implement-design/SKILL.md",
+      "skillFolderHash": "d067a8156ba4f4a28f6fc44904c2adebc2bb5920",
+      "installedAt": "2026-02-03T11:28:54.786Z",
+      "updatedAt": "2026-02-09T13:07:10.643Z"
+    },
+    "react-aria": {
+      "source": "adobe/com",
+      "sourceType": "well-known",
+      "sourceUrl": "https://react-aria.adobe.com/.well-known/skills/react-aria/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-02-05T11:46:23.948Z",
+      "updatedAt": "2026-02-05T17:41:44.964Z"
+    },
+    "mise-expert": {
+      "source": "samhvw8/dotfiles",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/samhvw8/dotfiles.git",
+      "skillPath": "dot_ccp/hub/skills/mise-expert/SKILL.md",
+      "skillFolderHash": "cc2778e4ad1050c7c3d070aef9e2d6e09ea174dc",
+      "installedAt": "2026-02-06T18:30:14.434Z",
+      "updatedAt": "2026-02-06T18:30:14.434Z"
+    },
+    "sentry-fix-issues": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/getsentry/sentry-agent-skills.git",
+      "skillPath": "skills/sentry-fix-issues/SKILL.md",
+      "skillFolderHash": "2c70d7f620eac9f3e4c4dcdcf83c0acc273f3369",
+      "installedAt": "2026-02-07T11:57:49.881Z",
+      "updatedAt": "2026-02-08T09:12:32.112Z"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "skillFolderHash": "a01fbe3fa7f17f64173bd4fdcfecea86a3fd664c",
+      "installedAt": "2026-02-07T12:19:12.450Z",
+      "updatedAt": "2026-02-07T12:19:12.450Z"
+    },
+    "gh-fix-ci": {
+      "source": "openai/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/openai/skills.git",
+      "skillPath": "skills/.curated/gh-fix-ci/SKILL.md",
+      "skillFolderHash": "3f99938c9464393f27cc4cc00e4ba17387517803",
+      "installedAt": "2026-02-08T09:06:35.396Z",
+      "updatedAt": "2026-02-08T09:06:35.396Z"
+    },
+    "sentry-react-setup": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/getsentry/sentry-agent-skills.git",
+      "skillPath": "skills/sentry-react-setup/SKILL.md",
+      "skillFolderHash": "90eb56b0049af658c1f1bb2cc6f2cb09db146051",
+      "installedAt": "2026-02-08T09:18:08.252Z",
+      "updatedAt": "2026-02-08T09:18:08.252Z"
+    },
+    "sentry-pr-code-review": {
+      "source": "getsentry/sentry-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/getsentry/sentry-agent-skills.git",
+      "skillPath": "skills/sentry-pr-code-review/SKILL.md",
+      "skillFolderHash": "833d1392d82b2c479048c0055eb4f7b2986d944d",
+      "installedAt": "2026-02-08T09:20:09.893Z",
+      "updatedAt": "2026-02-08T09:20:09.893Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "codex",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode",
+    "claude-code"
+  ]
+}
