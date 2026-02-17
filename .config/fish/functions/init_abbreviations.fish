@@ -6,6 +6,9 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add kp 'pnpm dlx kill-port 3000 3001 4000 6006 5173'
     abbr --add killport 'pnpm dlx kill-port 3000 3001 4000 6006 5173'
 
+    # mise
+    abbr --add u mise update-all
+
     # homebrew (package manager)
     abbr --add b brew
     abbr --add bu 'brew upgrade'
