@@ -8,6 +8,9 @@
 # User-specific stuff
 .idea/
 
+# Oh My Opencode
+.sisyphus
+
 # CMake
 cmake-build-*/
 
