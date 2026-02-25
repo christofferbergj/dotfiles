@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/turborepo.git",
       "skillPath": "skills/turborepo/SKILL.md",
-      "skillFolderHash": "5673854dd1b719546784b9fdfb46824fb5cf5c37",
+      "skillFolderHash": "590ab518589d63e0a8717ff1052494805148ef29",
       "installedAt": "2026-01-23T10:55:47.272Z",
-      "updatedAt": "2026-02-17T17:35:49.043Z"
+      "updatedAt": "2026-02-24T07:54:52.304Z"
     },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
@@ -42,9 +42,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "84fe752a54c0e33238594b71fd4f80ccc3df8206",
+      "skillFolderHash": "56959a2ddd833553648e4a884c344acd52e89434",
       "installedAt": "2026-01-23T10:57:56.440Z",
-      "updatedAt": "2026-02-17T17:35:50.963Z"
+      "updatedAt": "2026-02-25T10:36:45.572Z"
     },
     "performance": {
       "source": "addyosmani/web-quality-skills",
@@ -140,18 +140,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/getsentry/sentry-agent-skills.git",
       "skillPath": "skills/sentry-fix-issues/SKILL.md",
-      "skillFolderHash": "2c70d7f620eac9f3e4c4dcdcf83c0acc273f3369",
+      "skillFolderHash": "72d28fe828f5d22396684caae7a80eb1b251ca4d",
       "installedAt": "2026-02-07T11:57:49.881Z",
-      "updatedAt": "2026-02-08T09:12:32.112Z"
+      "updatedAt": "2026-02-21T15:06:50.057Z"
     },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "skillPath": "skills/skill-creator/SKILL.md",
-      "skillFolderHash": "a01fbe3fa7f17f64173bd4fdcfecea86a3fd664c",
+      "skillFolderHash": "5c26c1472b98de33a48074ba5d3efe3a727b8e37",
       "installedAt": "2026-02-07T12:19:12.450Z",
-      "updatedAt": "2026-02-07T12:19:12.450Z"
+      "updatedAt": "2026-02-25T10:36:47.595Z"
     },
     "gh-fix-ci": {
       "source": "openai/skills",
@@ -167,18 +167,72 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/getsentry/sentry-agent-skills.git",
       "skillPath": "skills/sentry-react-setup/SKILL.md",
-      "skillFolderHash": "90eb56b0049af658c1f1bb2cc6f2cb09db146051",
+      "skillFolderHash": "1569cc9d9b45fc17ce6f3e6a002c8cc212ccfd2c",
       "installedAt": "2026-02-08T09:18:08.252Z",
-      "updatedAt": "2026-02-08T09:18:08.252Z"
+      "updatedAt": "2026-02-21T15:06:51.323Z"
     },
     "sentry-pr-code-review": {
       "source": "getsentry/sentry-agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/getsentry/sentry-agent-skills.git",
       "skillPath": "skills/sentry-pr-code-review/SKILL.md",
-      "skillFolderHash": "833d1392d82b2c479048c0055eb4f7b2986d944d",
+      "skillFolderHash": "e8d9de488a1a9faf307ee296b5c6aa3e397f2906",
       "installedAt": "2026-02-08T09:20:09.893Z",
-      "updatedAt": "2026-02-08T09:20:09.893Z"
+      "updatedAt": "2026-02-21T15:06:52.871Z"
+    },
+    "react-doctor": {
+      "source": "millionco/react-doctor",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/millionco/react-doctor.git",
+      "skillPath": "skills/react-doctor/SKILL.md",
+      "skillFolderHash": "63a9d42561575b2a8f8c29798040d7b9defbbda8",
+      "installedAt": "2026-02-18T12:38:03.148Z",
+      "updatedAt": "2026-02-19T22:54:51.021Z"
+    },
+    "code-simplifier": {
+      "source": "getsentry/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/getsentry/skills.git",
+      "skillPath": ".agents/skills/code-simplifier/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-02-21T15:14:12.968Z",
+      "updatedAt": "2026-02-21T15:14:12.968Z"
+    },
+    "tanstack-query-best-practices": {
+      "source": "deckardger/tanstack-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/deckardger/tanstack-agent-skills.git",
+      "skillPath": "skills/tanstack-query/SKILL.md",
+      "skillFolderHash": "b73085898a2015a0f33c98aef0f3f2ff4ee9454f",
+      "installedAt": "2026-02-21T17:18:51.940Z",
+      "updatedAt": "2026-02-21T17:18:51.940Z"
+    },
+    "tanstack-router-best-practices": {
+      "source": "deckardger/tanstack-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/deckardger/tanstack-agent-skills.git",
+      "skillPath": "skills/tanstack-router/SKILL.md",
+      "skillFolderHash": "0f076dd09acf3e8e7c2ef80e654ad253e25c6eec",
+      "installedAt": "2026-02-21T17:19:06.748Z",
+      "updatedAt": "2026-02-21T17:19:16.987Z"
+    },
+    "tanstack-integration-best-practices": {
+      "source": "deckardger/tanstack-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/deckardger/tanstack-agent-skills.git",
+      "skillPath": "skills/tanstack-integration/SKILL.md",
+      "skillFolderHash": "b58a61b39334338357c412b20b4d825d69bf293f",
+      "installedAt": "2026-02-21T17:19:27.487Z",
+      "updatedAt": "2026-02-21T17:19:27.487Z"
+    },
+    "tanstack-start-best-practices": {
+      "source": "deckardger/tanstack-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/deckardger/tanstack-agent-skills.git",
+      "skillPath": "skills/tanstack-start/SKILL.md",
+      "skillFolderHash": "d4e415c2c618da237bbab97be0406e0c92efb18f",
+      "installedAt": "2026-02-21T17:19:37.154Z",
+      "updatedAt": "2026-02-21T17:19:37.154Z"
     }
   },
   "dismissed": {
@@ -187,6 +241,7 @@
   "lastSelectedAgents": [
     "amp",
     "codex",
+    "cursor",
     "gemini-cli",
     "github-copilot",
     "kimi-cli",
