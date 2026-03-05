@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "disabled_hooks": ["anthropic-context-window-limit-recovery"],
   "browser_automation_engine": {
     "provider": "agent-browser"
   },
