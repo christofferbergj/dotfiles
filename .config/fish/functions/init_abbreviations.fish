@@ -3,7 +3,7 @@ function init_abbreviations -d 'Initialize fish abbreviations'
     abbr --add c. 'code .'
     abbr --add cat bat
     abbr --add j z
-    abbr --add kp 'pnpm dlx kill-port 3000 3001 4000 6006 5173'
+    abbr --add kp 'pnpm dlx kill-port 3000 3001 3002 4000 4001 6006 5173'
     abbr --add killport 'pnpm dlx kill-port 3000 3001 4000 6006 5173'
 
     # mise
