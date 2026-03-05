@@ -137,15 +137,15 @@
   "show_completions_on_input": true,
   "show_completion_documentation": true,
   "edit_predictions": {
+    "provider": "zed",
     "mode": "eager",
   },
 
   // AI and Assistance
-  "features": {
-    "edit_prediction_provider": "zed",
-  },
   "agent": {
-    "always_allow_tool_actions": true,
+    "tool_permissions": {
+      "default": "allow",
+    },
     "dock": "left",
     "default_model": {
       "provider": "copilot_chat",
@@ -172,11 +172,6 @@
     "source.fixAll.eslint": true,
   },
   "lsp": {
-    "biome": {
-      "settings": {
-        "require_config_file": true,
-      },
-    },
     "tailwindcss-language-server": {
       "settings": {
         "classAttributes": ["class", "className", "tv", "cn", "clsx", "styles"],
