@@ -6,18 +6,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/turborepo.git",
       "skillPath": "skills/turborepo/SKILL.md",
-      "skillFolderHash": "590ab518589d63e0a8717ff1052494805148ef29",
+      "skillFolderHash": "9a186554f3a547a0e1e1759d4b8e8bf7336fd18f",
       "installedAt": "2026-01-23T10:55:47.272Z",
-      "updatedAt": "2026-02-24T07:54:52.304Z"
+      "updatedAt": "2026-03-05T08:15:02.735Z"
     },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/react-best-practices/SKILL.md",
-      "skillFolderHash": "079b06a135401704ea94ab74c7c9d86c92ba259f",
+      "skillFolderHash": "fce8b5a24ff4ff2fc5db6aa1051e03b53c6b5bf1",
       "installedAt": "2026-01-23T10:56:06.390Z",
-      "updatedAt": "2026-02-06T18:30:43.518Z"
+      "updatedAt": "2026-03-03T08:37:10.800Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -42,9 +42,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "56959a2ddd833553648e4a884c344acd52e89434",
+      "skillFolderHash": "368263b629b1c1af2abd68ff2e45fa40ead82601",
       "installedAt": "2026-01-23T10:57:56.440Z",
-      "updatedAt": "2026-02-25T10:36:45.572Z"
+      "updatedAt": "2026-03-04T08:09:43.864Z"
     },
     "performance": {
       "source": "addyosmani/web-quality-skills",
@@ -114,9 +114,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
       "skillPath": "skills/implement-design/SKILL.md",
-      "skillFolderHash": "d067a8156ba4f4a28f6fc44904c2adebc2bb5920",
+      "skillFolderHash": "51523284d53fb7815acb784c7e347ffd5418c4f4",
       "installedAt": "2026-02-03T11:28:54.786Z",
-      "updatedAt": "2026-02-09T13:07:10.643Z"
+      "updatedAt": "2026-02-28T13:21:18.485Z"
     },
     "react-aria": {
       "source": "adobe/com",
