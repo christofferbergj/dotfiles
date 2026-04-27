@@ -25,6 +25,8 @@
 !.codex/AGENTS.md
 !.codex/rules/
 !.codex/rules/default.rules
+.config/local/env.fish
+.config/local/*.local.fish
 .config/codex/env.local
 .config/codex/env.fish
 .config/opencode/*.bak*
