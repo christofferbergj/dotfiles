@@ -18,3 +18,8 @@
 !.codex/rules/default.rules
 .config/codex/env.local
 .config/codex/env.fish
+.config/opencode/*.bak*
+.config/opencode/*.backup*
+.config/opencode/*.uidotsh.*
+.config/opencode/package-lock.json
+.config/opencode/pnpm-lock.yaml
