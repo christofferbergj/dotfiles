@@ -1,105 +1,139 @@
-# Dotfiles, cli tools and apps
+# Dotfiles
 
-Repo for my configuration files and list of applications.
+Public dotfiles for my macOS setup, managed with [yadm](https://yadm.io/).
 
-## Quick overview
+## Overview
 
-**Operating system**  
-MacOS
+**Operating system**
+macOS
 
-**Terminal**  
-WezTerm
+**Terminal**
+Ghostty, WezTerm, and Warp
 
-**Editor**  
-Neovim + WebStorm
+**Shell**
+fish
 
-**Window manager**  
-Yabai + Skhd
+**Editor**
+Neovim, Zed, and JetBrains IDEs
 
-**Launcher**  
+**Window manager**
+AeroSpace
+
+**Launcher**
 Raycast
 
-**Theme**  
+**Theme**
 Gruvbox Medium Dark
 
 ## Screenshots
 
-### WebStorm in Typescript file
+### WebStorm in TypeScript file
 
-![WebStorm editor in typescript file](https://github.com/christofferbergj/dotfiles/assets/10507071/382ec3bd-5f53-4cd0-96bd-a9e8be88999c)
+![WebStorm editor in TypeScript file](https://github.com/christofferbergj/dotfiles/assets/10507071/382ec3bd-5f53-4cd0-96bd-a9e8be88999c)
 
 ### Neovim in TypeScript file
 
-![Neovim editor in typescript file](https://github.com/christofferbergj/dotfiles/assets/10507071/ceb605f9-9b3e-4215-a0d0-0ddf0cdc4987)
+![Neovim editor in TypeScript file](https://github.com/christofferbergj/dotfiles/assets/10507071/ceb605f9-9b3e-4215-a0d0-0ddf0cdc4987)
 
-## General info
+## Fresh macOS setup
 
-1. Install Homebrew
-2. Install Fish shell
-3. Install apps and CLI tools (Brewfile)
-4. Install fonts
-5. Setup and add Github SSH keys with `gh`. Add to ssh-agent afterwards.
+### 1. Install Command Line Tools
 
-## Homebrew
+```bash
+xcode-select --install
+```
 
-Install Homebrew
+Homebrew requires Apple's Command Line Tools or Xcode.
+
+### 2. Install Homebrew
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-## Fish shell
-
-Install Fish
+After installation, follow the shell setup lines printed by Homebrew. On Apple Silicon that is usually:
 
 ```bash
-brew install fish
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-More info: https://fishshell.com/docs/current/tutorial.html#tut_path
+On Intel Macs the Homebrew prefix is usually `/usr/local`.
 
-**Check the path**
+### 3. Install yadm and clone dotfiles
 
-Check the fish path with `which fish`. Most likely: `/opt/homebrew/bin/fish`.
-On older Macs default path is `/usr/local/bin/fish`, replace accordingly in the instruction below.
+```bash
+brew install yadm
+yadm clone git@github.com:christofferbergj/dotfiles.git
+```
 
-**Make `fish` the default**
+Use the HTTPS URL instead if SSH keys are not configured yet:
 
-- Check the fish path with which fish.
-- Add fish to know shells: `sudo sh -c 'echo (which fish) >> /etc/shells'`
-- Restart the terminal
-- Set fish as the default shell: `chsh -s (which fish)`
-- Restart the terminal and check if it launched with fish or not
-- Add brew binaries in fish path: `fish_add_path /opt/homebrew/bin`
+```bash
+yadm clone https://github.com/christofferbergj/dotfiles.git
+```
 
-**Optionally configure the shell (launch web interface)**
+### 4. Install apps and CLI tools
 
-`fish_config`
+```bash
+brew bundle --file="$HOME/Brewfile"
+```
 
-## Font
+Check whether the machine matches the Brewfile with:
 
-`brew tap homebrew/cask-fonts`  
-`brew install --cask font-jetbrains-mono`
+```bash
+brew bundle check --file="$HOME/Brewfile"
+```
 
-## Apps
+### 5. Configure fish as the login shell
 
-See Brewfile
+The Brewfile installs fish. Confirm the path first:
+
+```bash
+command -v fish
+```
+
+Then add fish to the list of allowed login shells and switch to it:
+
+```bash
+command -v fish | sudo tee -a /etc/shells
+chsh -s "$(command -v fish)"
+```
+
+Restart the terminal afterwards. fish automatically loads `~/.config/fish/config.fish` and files in `~/.config/fish/conf.d/`.
+
+### 6. Configure GitHub SSH
+
+```bash
+gh auth login
+gh ssh-key add ~/.ssh/id_ed25519.pub
+```
+
+Create an SSH key first if one does not exist yet.
+
+## Fonts
+
+Fonts are installed from the Brewfile. To install one manually:
+
+```bash
+brew install --cask font-jetbrains-mono
+```
+
+## Local secrets
+
+Secrets do not belong in this public repository. Machine-local values are loaded from ignored files such as:
+
+- `~/.config/codex/env.fish`
 
 ## Raycast extensions
 
-- bitwarden vault
-- brew
-- github
-- google workspace
-- hacker news
-- bookmarks
-- translate
-- slack status
-- word search
-- speedtest
-- tailwindcss
-- search mdn
-- notion
-- placeholder
-- generate random data
-- lorem ipsum
+Currently installed extensions detected from the local Raycast setup:
+
+- Apple Reminders
+- Coffee
+- Color Picker
+- GitHub
+- Kill Process
+- Port Manager
+- Ray.so
+- Sips
+- Speedtest
