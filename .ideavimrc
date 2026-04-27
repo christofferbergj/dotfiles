@@ -117,7 +117,4 @@ set ideastrictmode
 nmap \e :e ~/.ideavimrc<CR>
 nmap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
-" Find more examples here: https://jb.gg/share-ideavimrc
-
-" Sweep AI Tab completion mapping
-map <Tab> :action dev.sweep.assistant.autocomplete.edit.AcceptEditCompletionAction<CR>
+\ Find more examples here: https://jb.gg/share-ideavimrc

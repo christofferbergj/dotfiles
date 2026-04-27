@@ -99,6 +99,7 @@
     "default_width": 340,
   },
   "collaboration_panel": {
+    "dock": "right",
     "button": true,
     "default_width": 340,
   },
