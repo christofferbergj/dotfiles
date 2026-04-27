@@ -1,6 +1,8 @@
 .idea
 .DS_Store
 
+.agent-browser/
+
 .config/fish/conf.d/*_fig*
 .config/fish/functions/fzf_key_bindings.fish
 .config/planetscale
