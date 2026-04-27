@@ -18,7 +18,14 @@ import {Breadcrumbs, Breadcrumb} from 'vanilla-starter/Breadcrumbs';
 
 ```tsx
 'use client';
-import {Breadcrumbs as RACBreadcrumbs, BreadcrumbsProps, Breadcrumb as RACBreadcrumb, BreadcrumbProps, LinkProps, Link} from 'react-aria-components';
+import {
+  Breadcrumbs as RACBreadcrumbs,
+  type BreadcrumbsProps,
+  Breadcrumb as RACBreadcrumb,
+  type BreadcrumbProps,
+  type LinkProps,
+  Link,
+} from 'react-aria-components/Breadcrumbs';
 import {ChevronRight} from 'lucide-react';
 import './Breadcrumbs.css';
 
@@ -111,7 +118,13 @@ import {Breadcrumbs, Breadcrumb} from 'tailwind-starter/Breadcrumbs';
 'use client';
 import { ChevronRight } from 'lucide-react';
 import React from 'react';
-import { Breadcrumb as AriaBreadcrumb, Breadcrumbs as AriaBreadcrumbs, BreadcrumbProps, BreadcrumbsProps, LinkProps } from 'react-aria-components';
+import {
+  Breadcrumb as AriaBreadcrumb,
+  Breadcrumbs as AriaBreadcrumbs,
+  type BreadcrumbProps,
+  type BreadcrumbsProps,
+  type LinkProps,
+} from 'react-aria-components/Breadcrumbs';
 import { twMerge } from 'tailwind-merge';
 import { Link } from './Link';
 import { composeTailwindRenderProps } from './utils';
@@ -138,7 +151,7 @@ export function Breadcrumb(props: BreadcrumbProps & Omit<LinkProps, 'className'>
 `Breadcrumbs` follows the [Collection Components API](collections.md?component=Breadcrumbs), accepting both static and dynamic collections. This example shows a dynamic collection, passing a list of objects to the `items` prop, and a function to render the children. The `onAction` event is called when a user presses a breadcrumb.
 
 ```tsx
-import type {Key} from 'react-aria-components';
+import type {Key} from 'react-aria-components/Breadcrumbs';
 import {Breadcrumbs, Breadcrumb} from 'vanilla-starter/Breadcrumbs';
 import {useState} from 'react';
 

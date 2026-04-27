@@ -8,10 +8,7 @@ A meter represents a quantity within a known range, or a fractional value.
 
 ```tsx
 'use client';
-import {
-  Meter as AriaMeter,
-  MeterProps as AriaMeterProps
-} from 'react-aria-components';
+import { Meter as AriaMeter, type MeterProps as AriaMeterProps } from 'react-aria-components/Meter';
 import {Label} from './Form';
 import './Meter.css';
 
@@ -96,10 +93,7 @@ export function Meter({ label, ...props }: MeterProps) {
 'use client';
 import { AlertTriangle } from 'lucide-react';
 import React from 'react';
-import {
-  Meter as AriaMeter,
-  MeterProps as AriaMeterProps
-} from 'react-aria-components';
+import { Meter as AriaMeter, type MeterProps as AriaMeterProps } from 'react-aria-components/Meter';
 import { Label } from './Field';
 import { composeTailwindRenderProps } from './utils';
 

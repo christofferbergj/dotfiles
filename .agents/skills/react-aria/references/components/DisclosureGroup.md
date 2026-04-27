@@ -25,7 +25,7 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'vanilla-starter/Dis
 
 ```tsx
 'use client';
-import {DisclosureGroup as RACDisclosureGroup, DisclosureGroupProps} from 'react-aria-components';
+import { DisclosureGroup as RACDisclosureGroup, type DisclosureGroupProps } from 'react-aria-components/DisclosureGroup';
 import './DisclosureGroup.css';
 
 export function DisclosureGroup(props: DisclosureGroupProps) {
@@ -70,8 +70,8 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'tailwind-starter/Di
 import React from "react";
 import {
   DisclosureGroup as AriaDisclosureGroup,
-  DisclosureGroupProps as AriaDisclosureGroupProps,
-} from "react-aria-components";
+  type DisclosureGroupProps as AriaDisclosureGroupProps,
+} from 'react-aria-components/DisclosureGroup';
 
 export interface DisclosureGroupProps extends AriaDisclosureGroupProps {
   children: React.ReactNode
@@ -92,7 +92,7 @@ export function DisclosureGroup({ children, ...props }: DisclosureGroupProps) {
 Use the `defaultExpandedKeys` or `expandedKeys` prop to set the expanded items, and `onExpandedChange` to handle user interactions. The expanded keys correspond to the `id` prop of each `<Disclosure>`.
 
 ```tsx
-import type {Key} from 'react-aria-components';
+import type {Key} from 'react-aria-components/DisclosureGroup';
 import {DisclosureGroup} from 'vanilla-starter/DisclosureGroup';
 import {Disclosure, DisclosureHeader, DisclosurePanel} from 'vanilla-starter/Disclosure';
 import {useState} from 'react';

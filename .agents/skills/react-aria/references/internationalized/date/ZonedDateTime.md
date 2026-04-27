@@ -23,9 +23,9 @@ let date = new ZonedDateTime(
 
 You can also create a `ZonedDateTime` by parsing an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) formatted string using the one of the following functions:
 
-* `parseZonedDateTime` – This function parses a date with an explicit time zone and optional UTC offset attached (e.g. `"2021-11-07T00:45[America/Los_Angeles]"` or `"2021-11-07T00:45-07:00[America/Los_Angeles]"`). This format preserves the maximum amount of information. If the exact local time and time zone that a user selected is important, use this format. Storing the time zone and offset that was selected rather than converting to UTC ensures that the local time is correct regardless of daylight saving rule changes (e.g. if a locale abolishes DST). Examples where this applies include calendar events, reminders, and other times that occur in a particular location.
-* `parseAbsolute` – This function parses an absolute date and time that occurs at the same instant at all locations on Earth. It can be represented in UTC (e.g. `"2021-11-07T07:45:00Z"`), or stored with a particular offset (e.g. `"2021-11-07T07:45:00-07:00"`). A time zone identifier, e.g. `America/Los_Angeles`, must be passed, and the result will be converted into that time zone. Absolute times are the best way to represent events that occurred in the past, or future events where an exact time is needed, regardless of time zone.
-* `parseAbsoluteToLocal` – This function parses an absolute date and time into the current user's local time zone. It is a shortcut for `parseAbsolute`, and accepts the same formats.
+- `parseZonedDateTime` – This function parses a date with an explicit time zone and optional UTC offset attached (e.g. `"2021-11-07T00:45[America/Los_Angeles]"` or `"2021-11-07T00:45-07:00[America/Los_Angeles]"`). This format preserves the maximum amount of information. If the exact local time and time zone that a user selected is important, use this format. Storing the time zone and offset that was selected rather than converting to UTC ensures that the local time is correct regardless of daylight saving rule changes (e.g. if a locale abolishes DST). Examples where this applies include calendar events, reminders, and other times that occur in a particular location.
+- `parseAbsolute` – This function parses an absolute date and time that occurs at the same instant at all locations on Earth. It can be represented in UTC (e.g. `"2021-11-07T07:45:00Z"`), or stored with a particular offset (e.g. `"2021-11-07T07:45:00-07:00"`). A time zone identifier, e.g. `America/Los_Angeles`, must be passed, and the result will be converted into that time zone. Absolute times are the best way to represent events that occurred in the past, or future events where an exact time is needed, regardless of time zone.
+- `parseAbsoluteToLocal` – This function parses an absolute date and time into the current user's local time zone. It is a shortcut for `parseAbsolute`, and accepts the same formats.
 
 ```tsx
 import {parseZonedDateTime} from '@internationalized/date';
@@ -37,8 +37,8 @@ let date = parseAbsoluteToLocal('2021-11-07T07:45:00Z');
 
 You can also create a `ZonedDateTime` using a `Date` object or epoch time (milliseconds) using one of the following functions:
 
-* `fromDate` – This function creates a `ZonedDateTime` from a `Date` object. A time zone identifier, e.g. `America/Los_Angeles`, must be passed, and the result will be converted into that time zone.
-* `fromAbsolute` – This function creates a `ZonedDateTime` from a Unix epoch (e.g. `1688023843144`, representing milliseconds since 1970). A time zone identifier, e.g. `America/Los_Angeles`, must be provided, and the result will be converted into that time zone.
+- `fromDate` – This function creates a `ZonedDateTime` from a `Date` object. A time zone identifier, e.g. `America/Los_Angeles`, must be passed, and the result will be converted into that time zone.
+- `fromAbsolute` – This function creates a `ZonedDateTime` from a Unix epoch (e.g. `1688023843144`, representing milliseconds since 1970). A time zone identifier, e.g. `America/Los_Angeles`, must be provided, and the result will be converted into that time zone.
 
 ```tsx
 import {fromDate, fromAbsolute} from '@internationalized/date';
@@ -223,10 +223,10 @@ date.set({day: 14}); // 2020-03-14T10:00-07:00[America/Los_Angeles]
 
 In addition, some time values during daylight saving transitions may be *ambiguous*. For example, in the United States, the 2 AM hour is skipped in the spring, and the 1 AM hour occurs twice in the fall. When setting date fields, this ambiguity must be resolved to determine the exact time. By default, the later of the two possible times is chosen for "spring forward" transitions, and the earlier time is chosen for "fall back" transitions. This can be controlled by passing the `disambiguation` parameter to the `set` method.
 
-* `'earlier'` – choose the earlier of the two possible times
-* `'later'` – choose the later of the two possible times
-* `'compatible'` (default) – choose the later of the two times during "spring forward" transitions, and the earlier time during "fall back" transitions.
-* `'reject'` – throws an error when the time is ambiguous
+- `'earlier'` – choose the earlier of the two possible times
+- `'later'` – choose the later of the two possible times
+- `'compatible'` (default) – choose the later of the two times during "spring forward" transitions, and the earlier time during "fall back" transitions.
+- `'reject'` – throws an error when the time is ambiguous
 
 ```tsx
 // A "spring forward" transition
@@ -404,10 +404,10 @@ b.compare(a) > 0; // true
 
 In addition, the following functions can be used to perform a partial comparison. These functions accept dates in different calendar systems, and the second date is converted to the calendar system of the first date before comparison.
 
-* `isSameYear` – <span>{docs.exports.isSameYear.description}</span>
-* `isSameMonth` – <span>{docs.exports.isSameMonth.description}</span>
-* `isSameDay` – <span>{docs.exports.isSameDay.description}</span>
-* `isToday` – <span>{docs.exports.isToday.description}</span>
+- `isSameYear` – <span>{docs.exports.isSameYear.description}</span>
+- `isSameMonth` – <span>{docs.exports.isSameMonth.description}</span>
+- `isSameDay` – <span>{docs.exports.isSameDay.description}</span>
+- `isToday` – <span>{docs.exports.isToday.description}</span>
 
 ```tsx
 import {isSameMonth} from '@internationalized/date';
@@ -425,20 +425,20 @@ isSameMonth(
 
 A similar set of functions is also available that does not convert between calendar systems and requires the calendars to be equal.
 
-* `isEqualYear` – <span>{docs.exports.isEqualYear.description}</span>
-* `isEqualMonth` – <span>{docs.exports.isEqualMonth.description}</span>
-* `isEqualDay` – <span>{docs.exports.isEqualDay.description}</span>
+- `isEqualYear` – <span>{docs.exports.isEqualYear.description}</span>
+- `isEqualMonth` – <span>{docs.exports.isEqualMonth.description}</span>
+- `isEqualDay` – <span>{docs.exports.isEqualDay.description}</span>
 
 ### Start and end dates
 
 The following functions can be used to find the start or end dates of a particular unit of time. These only affect the date components of a `ZonedDateTime`. The time fields are left unchanged.
 
-* `startOfYear` – <span>{docs.exports.startOfYear.description}</span>
-* `endOfYear` – <span>{docs.exports.endOfYear.description}</span>
-* `startOfMonth` – <span>{docs.exports.startOfMonth.description}</span>
-* `endOfMonth` – <span>{docs.exports.endOfMonth.description}</span>
-* `startOfWeek` – <span>{docs.exports.startOfWeek.description}</span>
-* `endOfWeek` – <span>{docs.exports.endOfWeek.description}</span>
+- `startOfYear` – <span>{docs.exports.startOfYear.description}</span>
+- `endOfYear` – <span>{docs.exports.endOfYear.description}</span>
+- `startOfMonth` – <span>{docs.exports.startOfMonth.description}</span>
+- `endOfMonth` – <span>{docs.exports.endOfMonth.description}</span>
+- `startOfWeek` – <span>{docs.exports.startOfWeek.description}</span>
+- `endOfWeek` – <span>{docs.exports.endOfWeek.description}</span>
 
 Note that `startOfWeek` and `endOfWeek` require a locale string to be provided. This is because the first day of the week changes depending on the locale. For example, in the United States, the first day of the week is on Sunday, but in France it is on Monday.
 

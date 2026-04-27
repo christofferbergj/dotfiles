@@ -5,8 +5,7 @@ A menu displays a list of actions or options that a user can choose.
 ## Vanilla CSS example
 
 ```tsx
-import {MenuTrigger, SubmenuTrigger, Menu, MenuItem, MenuSection} from 'vanilla-starter/Menu';
-import {Separator, Text, Keyboard} from 'react-aria-components';
+import {MenuTrigger, SubmenuTrigger, Menu, MenuItem, MenuSection, Separator, Text, Keyboard} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 import {Ellipsis, FolderOpen, Pencil, Copy, Trash, Share, Mail, Smartphone, Instagram} from 'lucide-react';
 
@@ -77,14 +76,17 @@ import {
   MenuSection as AriaMenuSection,
   MenuTrigger as AriaMenuTrigger,
   SubmenuTrigger as AriaSubmenuTrigger,
-  MenuItemProps,
-  MenuProps,
-  MenuSectionProps,
-  MenuTriggerProps,
-  SubmenuTriggerProps,
-} from 'react-aria-components';
+  Header,
+  Separator,
+  Keyboard,
+  type MenuItemProps,
+  type MenuProps,
+  type MenuSectionProps,
+  type MenuTriggerProps,
+  type SubmenuTriggerProps,
+} from 'react-aria-components/Menu';
 import {Popover} from './Popover';
-import { Text } from './Content';
+import {Text} from './Content';
 import React from 'react';
 import './Menu.css';
 
@@ -145,6 +147,7 @@ export function SubmenuTrigger(props: SubmenuTriggerProps) {
   );
 }
 
+export {Text, Header, Separator, Keyboard};
 ```
 
 ### Menu.css
@@ -384,22 +387,22 @@ import React from 'react';
 import {
   Menu as AriaMenu,
   MenuItem as AriaMenuItem,
-  MenuProps,
-  MenuItemProps,
+  type MenuProps,
+  type MenuItemProps,
   MenuSection as AriaMenuSection,
-  MenuSectionProps as AriaMenuSectionProps,
+  type MenuSectionProps as AriaMenuSectionProps,
   MenuTrigger as AriaMenuTrigger,
   SubmenuTrigger as AriaSubmenuTrigger,
   Separator,
-  SeparatorProps,
-  composeRenderProps,
+  type SeparatorProps,
   Header,
   Collection,
-  SubmenuTriggerProps,
-  MenuTriggerProps as AriaMenuTriggerProps
-} from 'react-aria-components';
+  type SubmenuTriggerProps,
+  type MenuTriggerProps as AriaMenuTriggerProps,
+} from 'react-aria-components/Menu';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { dropdownItemStyles } from './ListBox';
-import { Popover, PopoverProps } from './Popover';
+import { Popover, type PopoverProps } from './Popover';
 
 export function Menu<T extends object>(props: MenuProps<T>) {
   return (
@@ -519,8 +522,7 @@ function Example() {
 Use the `"label"` and `"description"` slots to separate primary and secondary content within a `<MenuItem>`. This improves screen reader announcements and can also be used for styling purposes. Use the `<Keyboard>` component to display a keyboard shortcut.
 
 ```tsx
-import {MenuTrigger, Menu, MenuItem} from 'vanilla-starter/Menu';
-import {Text, Keyboard} from 'react-aria-components';
+import {MenuTrigger, Menu, MenuItem, Text, Keyboard} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 
 <MenuTrigger>
@@ -557,8 +559,7 @@ import {Button} from 'vanilla-starter/Button';
 Use the `<MenuSection>` component to group options. A `<Header>` element may also be included to label the section. Sections without a header must have an `aria-label`.
 
 ```tsx
-import {Header} from 'react-aria-components';
-import {MenuTrigger, Menu, MenuItem, MenuSection} from 'vanilla-starter/Menu';
+import {MenuTrigger, Menu, MenuItem, MenuSection, Header} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 
 <MenuTrigger>
@@ -621,8 +622,7 @@ import {Button} from 'vanilla-starter/Button';
 Separators may be added between menu items or sections in order to create non-labeled groupings.
 
 ```tsx
-import {MenuTrigger, Menu, MenuItem} from 'vanilla-starter/Menu';
-import {Separator} from 'react-aria-components';
+import {MenuTrigger, Menu, MenuItem, Separator} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 
 <MenuTrigger>
@@ -681,7 +681,7 @@ By default, links are rendered as an `<a>` element. Use the `render` prop to int
 Popovers can include additional components as siblings of a menu. This example uses an [Autocomplete](Autocomplete.md) with a [SearchField](SearchField.md) to let the user filter the items.
 
 ```tsx
-import {Autocomplete, useFilter} from 'react-aria-components';
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
 import {MenuTrigger, Menu, MenuItem} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 import {SearchField} from 'vanilla-starter/SearchField';
@@ -720,7 +720,7 @@ function Example() {
 Use the `selectionMode` prop to enable single or multiple selection. The selected items can be controlled via the `selectedKeys` prop, matching the `id` prop of the items. Items can be disabled with the `isDisabled` prop. See the [selection guide](selection.md?component=Menu) for more details.
 
 ```tsx
-import type {Selection} from 'react-aria-components';
+import type {Selection} from 'react-aria-components/Menu';
 import {MenuTrigger, Menu, MenuItem} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 import {useState} from 'react';
@@ -756,9 +756,8 @@ function Example(props) {
 Each section in a menu may have independent selection states by passing `selectionMode` and `selectedKeys` to the `MenuSection`.
 
 ```tsx
-import type {Selection} from 'react-aria-components';
-import {Header} from 'react-aria-components';
-import {MenuTrigger, Menu, MenuItem, MenuSection} from 'vanilla-starter/Menu';
+import type {Selection} from 'react-aria-components/Menu';
+import {MenuTrigger, Menu, MenuItem, MenuSection, Header} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 import {useState} from 'react';
 
@@ -805,7 +804,7 @@ function Example() {
 `MenuTrigger` works with any pressable React Aria component (e.g. [Button](Button.md), [Link](Link.md), etc.). Use the `<Pressable>` component or [usePress](usePress.md) hook to wrap a custom trigger element such as a third party component or DOM element.
 
 ```tsx
-import {Pressable} from 'react-aria-components';
+import {Pressable} from 'react-aria-components/Menu';
 import {MenuTrigger, Menu, MenuItem} from 'vanilla-starter/Menu';
 
 <MenuTrigger>
@@ -913,12 +912,12 @@ import {ChevronDown} from 'lucide-react';
 | `autoFocus` | `boolean | FocusStrategy | undefined` | — | Where the focus should be set. |
 | `children` | `React.ReactNode | ((item: T) => ReactNode)` | — | The contents of the collection. |
 | `className` | `ClassNameOrFunction<MenuRenderProps> | undefined` | 'react-aria-Menu' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
-| `defaultSelectedKeys` | `Iterable<Key> | "all" | undefined` | — | The initial selected keys in the collection (uncontrolled). |
+| `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. |
 | `disallowEmptySelection` | `boolean | undefined` | — | Whether the collection allows empty selection. |
-| `escapeKeyBehavior` | `"none" | "clearSelection" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the menu or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
+| `escapeKeyBehavior` | `"clearSelection" | "none" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the menu or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
@@ -993,7 +992,7 @@ import {ChevronDown} from 'lucide-react';
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", MenuRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `renderEmptyState` | `(() => ReactNode) | undefined` | — | Provides content to display when there are no items in the list. |
-| `selectedKeys` | `Iterable<Key> | "all" | undefined` | — | The currently selected keys in the collection (controlled). |
+| `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldCloseOnSelect` | `boolean | undefined` | — | Whether the menu should close when the menu item is selected. |
 | `shouldFocusWrap` | `boolean | undefined` | — | Whether keyboard navigation is circular. |
@@ -1096,7 +1095,7 @@ import {ChevronDown} from 'lucide-react';
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `((props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> | React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement>, renderProps: MenuItemRenderProps) => ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `((props: React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement> | React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, renderProps: MenuItemRenderProps) => ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
 | `shouldCloseOnSelect` | `boolean | undefined` | — | Whether the menu should close when the menu item is selected. |
 | `style` | `(React.CSSProperties | ((values: MenuItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
@@ -1112,7 +1111,7 @@ import {ChevronDown} from 'lucide-react';
 | `aria-label` | `string | undefined` | — | An accessibility label for the section. |
 | `children` | `React.ReactNode | ((item: T) => ReactElement)` | — | Static child items or a function to render children. |
 | `className` | `string | undefined` | 'react-aria-MenuSection' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
-| `defaultSelectedKeys` | `Iterable<Key> | "all" | undefined` | — | The initial selected keys in the collection (uncontrolled). |
+| `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The currently disabled keys in the collection (controlled). |
@@ -1188,7 +1187,7 @@ import {ChevronDown} from 'lucide-react';
 | `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"section", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `selectedKeys` | `Iterable<Key> | "all" | undefined` | — | The currently selected keys in the collection (controlled). |
+| `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldCloseOnSelect` | `boolean | undefined` | — | Whether the menu should close when the menu item is selected. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |

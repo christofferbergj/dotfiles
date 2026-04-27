@@ -8,7 +8,8 @@ A button allows a user to perform an action, with mouse, touch, and keyboard int
 
 ```tsx
 'use client';
-import {Button as RACButton, ButtonProps as RACButtonProps, composeRenderProps} from 'react-aria-components';
+import { Button as RACButton, type ButtonProps as RACButtonProps } from 'react-aria-components/Button';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {ProgressCircle} from './ProgressCircle';
 import './Button.css';
 
@@ -100,7 +101,8 @@ export function Button(props: ButtonProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { composeRenderProps, Button as RACButton, ButtonProps as RACButtonProps } from 'react-aria-components';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import { Button as RACButton, type ButtonProps as RACButtonProps } from 'react-aria-components/Button';
 import { tv } from 'tailwind-variants';
 import { focusRing } from './utils';
 
@@ -231,7 +233,7 @@ function PendingButton() {
 The `Button` component always represents a button semantically. To create a link that visually looks like a button, use the [Link](Link.md) component instead. You can reuse the same styles you apply to the `Button` component on the `Link`.
 
 ```tsx
-import {Link} from 'react-aria-components';
+import {Link} from 'react-aria-components/Link';
 
 <Link className="react-aria-Button button-base" href="https://adobe.com/" target="_blank">
   Adobe

@@ -8,15 +8,15 @@ npm install @internationalized/date
 
 ## Features
 
-* **Typed objects** – Includes immutable objects to represent dates, times, and calendars.
-* **International calendars** – Support for 13 calendar systems used around the world, including Gregorian, Buddhist, Islamic, Persian, and more.
-* **Manipulation** – Add and subtract durations, set and cycle fields, etc.
-* **Conversion** – Convert between calendar systems, time zones, string representations, and object types.
-* **Queries** – Compare dates and times for ordering or full/partial equality. Determine locale-specific metadata such as day of week, weekend/weekday, etc.
-* **Time zone aware** – The [ZonedDateTime](ZonedDateTime.md) object supports time zone aware date and time manipulation.
-* **Predictable** – The API is designed to resolve ambiguity in all operations explicitly, including time zone conversions, arithmetic involving daylight saving time, locale-specific queries, and more.
-* **Small bundle size** – The entire library including all calendars and functions is 8 kB minified and compressed with Brotli.
-* **Tree shakeable** – Only include the functions and calendar systems you need. For example, if you only use the Gregorian calendar and builtin `CalendarDate` methods, it's just 2.8 kB.
+- **Typed objects** – Includes immutable objects to represent dates, times, and calendars.
+- **International calendars** – Support for 13 calendar systems used around the world, including Gregorian, Buddhist, Islamic, Persian, and more.
+- **Manipulation** – Add and subtract durations, set and cycle fields, etc.
+- **Conversion** – Convert between calendar systems, time zones, string representations, and object types.
+- **Queries** – Compare dates and times for ordering or full/partial equality. Determine locale-specific metadata such as day of week, weekend/weekday, etc.
+- **Time zone aware** – The [ZonedDateTime](ZonedDateTime.md) object supports time zone aware date and time manipulation.
+- **Predictable** – The API is designed to resolve ambiguity in all operations explicitly, including time zone conversions, arithmetic involving daylight saving time, locale-specific queries, and more.
+- **Small bundle size** – The entire library including all calendars and functions is 8 kB minified and compressed with Brotli.
+- **Tree shakeable** – Only include the functions and calendar systems you need. For example, if you only use the Gregorian calendar and builtin `CalendarDate` methods, it's just 2.8 kB.
 
 ## Introduction
 
@@ -28,11 +28,11 @@ By default, JavaScript represents dates and times using the [Date](https://devel
 
 The `@internationalized/date` package includes the following object types:
 
-* [Calendar](Calendar.md) – An interface which provides calendar conversion and metadata like number of days in month, and number of months in year. Many implementations are provided to support the most commonly used calendar systems.
-* [CalendarDate](CalendarDate.md) – An immutable object that stores a date associated with a specific calendar system, without any time components.
-* [CalendarDateTime](CalendarDateTime.md) – An immutable object that represents a date and time without a time zone, in a specific calendar system.
-* [ZonedDateTime](ZonedDateTime.md) – An immutable object that represents a date and time in a specific time zone and calendar system.
-* [Time](Time.md) – An immutable object that stores a clock time without any date components.
+- [Calendar](Calendar.md) – An interface which provides calendar conversion and metadata like number of days in month, and number of months in year. Many implementations are provided to support the most commonly used calendar systems.
+- [CalendarDate](CalendarDate.md) – An immutable object that stores a date associated with a specific calendar system, without any time components.
+- [CalendarDateTime](CalendarDateTime.md) – An immutable object that represents a date and time without a time zone, in a specific calendar system.
+- [ZonedDateTime](ZonedDateTime.md) – An immutable object that represents a date and time in a specific time zone and calendar system.
+- [Time](Time.md) – An immutable object that stores a clock time without any date components.
 
 Each object includes methods to allow basic manipulation and conversion functionality, such as adding and subtracting durations, and formatting as an ISO 8601 string. Additional less commonly used functions can be imported from the `@internationalized/date` package, and passed a date object as a parameter. This includes functions to parse ISO 8601 strings, query properties such as day of week, convert between time zones and much more. See the documentation for each of the objects to learn more about the supported methods and functions.
 

@@ -27,9 +27,8 @@ Sections or groups of items can be constructed by wrapping the items in a sectio
 ## Menu example
 
 ```tsx
-import {MenuTrigger, Menu, MenuItem, MenuSection} from 'vanilla-starter/Menu';
+import {MenuTrigger, Menu, MenuItem, MenuSection, Header} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
-import {Header} from 'react-aria-components';
 
 <MenuTrigger>
   <Button>Menu</Button>
@@ -54,8 +53,7 @@ import {Header} from 'react-aria-components';
 ## ListBox example
 
 ```tsx
-import {ListBox, ListBoxItem, ListBoxSection} from 'vanilla-starter/ListBox';
-import {Header} from 'react-aria-components';
+import {ListBox, ListBoxItem, ListBoxSection, Header} from 'vanilla-starter/ListBox';
 
 <ListBox aria-label="Text style" selectionMode="multiple">
   {/*- begin highlight -*/}
@@ -149,8 +147,7 @@ let animals = [
 Dynamic collections are automatically memoized to improve performance. Rendered item elements are cached based on the object identity of the list item. If rendering an item depends on additional external state, the `dependencies` prop must be provided. This invalidates rendered elements similar to dependencies in React's `useMemo` hook.
 
 ```tsx
-import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
-import {Text} from 'react-aria-components';
+import {ListBox, ListBoxItem, Text} from 'vanilla-starter/ListBox';
 import {ToggleButtonGroup} from 'vanilla-starter/ToggleButtonGroup';
 import {ToggleButton} from 'vanilla-starter/ToggleButton';
 import {useState} from 'react';
@@ -226,8 +223,8 @@ Note that adding dependencies will result in the *entire* list being invalidated
 To combine multiple sources of data, or mix static and dynamic items, use the `<Collection>` component.
 
 ```tsx
-import {ListBox, ListBoxSection, ListBoxItem} from 'vanilla-starter/ListBox';
-import {Collection, Header} from 'react-aria-components';
+import {ListBox, ListBoxSection, ListBoxItem, Header} from 'vanilla-starter/ListBox';
+import {Collection} from 'react-aria-components/Collection';
 
 let animals = [
   {id: 1, species: 'Aardvark'},
@@ -271,8 +268,9 @@ Data can be loaded asynchronously using any data fetching library. [useAsyncList
 Several components also support infinite scrolling by rendering a `LoadMoreItem` at the end of the list. These trigger loading of additional pages of items and display a loading spinner. Multiple load more items can be rendered at once, e.g. when loading multiple levels of a tree or sections in a list.
 
 ```tsx
-import {Collection, ListBoxLoadMoreItem, useAsyncList} from 'react-aria-components';
-import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
+import {Collection} from 'react-aria-components/Collection';
+import {useAsyncList} from 'react-aria-components/useAsyncList';
+import {ListBox, ListBoxItem, ListBoxLoadMoreItem} from 'vanilla-starter/ListBox';
 import {ProgressCircle} from 'vanilla-starter/ProgressCircle';
 
 interface Character {

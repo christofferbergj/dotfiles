@@ -19,7 +19,7 @@ import {ToggleButton} from 'vanilla-starter/ToggleButton';
 
 ```tsx
 'use client';
-import {ToggleButtonGroup as RACToggleButtonGroup, ToggleButtonGroupProps} from 'react-aria-components';
+import { ToggleButtonGroup as RACToggleButtonGroup, type ToggleButtonGroupProps } from 'react-aria-components/ToggleButtonGroup';
 import './ToggleButtonGroup.css';
 
 export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
@@ -119,7 +119,8 @@ import {ToggleButton} from 'tailwind-starter/ToggleButton';
 ```tsx
 'use client';
 import React from 'react';
-import { composeRenderProps, ToggleButtonGroup as RACToggleButtonGroup, ToggleButtonGroupProps } from 'react-aria-components';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import { ToggleButtonGroup as RACToggleButtonGroup, type ToggleButtonGroupProps } from 'react-aria-components/ToggleButtonGroup';
 import { tv } from 'tailwind-variants';
 
 const styles = tv({
@@ -147,7 +148,7 @@ export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
 Use the `selectionMode` prop to enable single or multiple selection. The selected items can be controlled via the `selectedKeys` prop, matching the `id` of each `<ToggleButton>`. Items can be disabled with the `isDisabled` prop. See the [selection guide](selection.md?component=ToggleButtonGroup) for more details.
 
 ```tsx
-import type {Key} from 'react-aria-components';
+import type {Key} from 'react-aria-components/ToggleButtonGroup';
 import {useState} from 'react';
 import {ToggleButtonGroup} from 'vanilla-starter/ToggleButtonGroup';
 import {ToggleButton} from 'vanilla-starter/ToggleButton';
@@ -190,7 +191,8 @@ function Example(props) {
 Render a [SelectionIndicator](selection.md#animated-selectionindicator) within each `ToggleButton` to animate selection changes.
 
 ```tsx
-import {ToggleButtonGroup, ToggleButton, ToggleButtonProps, SelectionIndicator, composeRenderProps} from 'react-aria-components';
+import {ToggleButtonGroup, ToggleButton, ToggleButtonProps, SelectionIndicator} from 'react-aria-components/ToggleButtonGroup';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
 import 'vanilla-starter/SegmentedControl.css';
 
 function SegmentedControlItem(props: ToggleButtonProps) {

@@ -15,7 +15,7 @@ By default, `useField` assumes that the label is a native HTML `<label>` element
 
 ```tsx
 'use client';
-import {useField} from 'react-aria';
+import {useField} from 'react-aria/useField';
 
 function ContactPicker(props) {
   let {labelProps, fieldProps, descriptionProps, errorMessageProps} = useField(props);
@@ -70,7 +70,6 @@ function ContactPicker(props) {
 | `description` | `ReactNode` | — | A description for the field. Provides a hint such as specific requirements for what to choose. |
 | `errorMessage` | `ReactNode | ((v: ValidationResult) => ReactNode)` | — | An error message for the field. |
 | `isInvalid` | `boolean | undefined` | — | Whether the input value is invalid. |
-| `validationState` | `ValidationState | undefined` | — | — |
 | `validationBehavior` | `"aria" | "native" | undefined` | 'aria' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
 | `validate` | `((value: any) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
 

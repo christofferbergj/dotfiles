@@ -17,14 +17,14 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'vanilla-starter/Dis
 
 ```tsx
 'use client';
+import { Button } from 'react-aria-components/Button';
 import {
-  Button,
   Disclosure as AriaDisclosure,
   DisclosurePanel as AriaDisclosurePanel,
-  DisclosureProps,
-  DisclosurePanelProps,
-  HeadingProps,
-} from 'react-aria-components';
+  type DisclosureProps,
+  type DisclosurePanelProps,
+  type HeadingProps
+} from 'react-aria-components/Disclosure';
 import {Heading} from './Content';
 import {ChevronRight} from 'lucide-react';
 import './Disclosure.css';
@@ -152,13 +152,13 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'tailwind-starter/Di
 import React, { useContext } from "react";
 import {
   Disclosure as AriaDisclosure,
-  DisclosureProps as AriaDisclosureProps,
   DisclosurePanel as AriaDisclosurePanel,
-  DisclosurePanelProps as AriaDisclosurePanelProps,
-  composeRenderProps,
-  Heading,
   DisclosureStateContext,
-} from "react-aria-components";
+  Heading,
+  type DisclosurePanelProps as AriaDisclosurePanelProps,
+  type DisclosureProps as AriaDisclosureProps,
+} from 'react-aria-components/Disclosure';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { Button } from './Button';
 import { tv } from "tailwind-variants";
 import { ChevronRight } from "lucide-react";

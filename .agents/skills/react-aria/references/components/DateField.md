@@ -11,14 +11,14 @@ Each part of a date value is displayed in an individually editable segment.
 'use client';
 import {
   DateField as AriaDateField,
-  DateFieldProps as AriaDateFieldProps,
+  type DateFieldProps as AriaDateFieldProps,
   DateInput as AriaDateInput,
-  DateInputProps,
+  type DateInputProps,
   DateSegment as AriaDateSegment,
-  DateSegmentProps,
-  DateValue,
-  ValidationResult
-} from 'react-aria-components';
+  type DateSegmentProps,
+  type DateValue,
+  type ValidationResult,
+} from 'react-aria-components/DateField';
 import {Label, FieldError, Description} from './Form';
 import './DateField.css';
 
@@ -141,13 +141,13 @@ export function DateInput(props: DateInputProps) {
 import React from 'react';
 import {
   DateField as AriaDateField,
-  DateFieldProps as AriaDateFieldProps,
+  type DateFieldProps as AriaDateFieldProps,
   DateInput as AriaDateInput,
-  DateInputProps,
+  type DateInputProps,
   DateSegment,
-  DateValue,
-  ValidationResult
-} from 'react-aria-components';
+  type DateValue,
+  type ValidationResult,
+} from 'react-aria-components/DateField';
 import { tv } from 'tailwind-variants';
 import { Description, FieldError, Label, fieldGroupStyles } from './Field';
 import { composeTailwindRenderProps } from './utils';
@@ -202,7 +202,7 @@ Use the `value` or `defaultValue` prop to set the date value, using objects in t
 
 ```tsx
 import {parseDate, getLocalTimeZone, type CalendarDate} from '@internationalized/date';
-import {useDateFormatter} from 'react-aria';
+import {useDateFormatter} from 'react-aria/useDateFormatter';
 import {DateField} from 'vanilla-starter/DateField';
 import {useState} from 'react';
 
@@ -240,7 +240,7 @@ import {DateField} from 'vanilla-starter/DateField';
 By default, `DateField` displays the value using the calendar system for the user's locale. Use `<I18nProvider>` to override the calendar system by setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string). The `onChange` event always receives a date in the same calendar as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
 
 ```tsx
-import {I18nProvider} from 'react-aria-components';
+import {I18nProvider} from 'react-aria-components/I18nProvider';
 import {parseZonedDateTime} from '@internationalized/date';
 import {DateField} from 'vanilla-starter/DateField';
 

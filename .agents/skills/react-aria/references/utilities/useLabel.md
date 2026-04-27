@@ -10,7 +10,7 @@ creating an id for the field and associates the label with it.
 
 ```tsx
 'use client';
-import {useLabel} from 'react-aria';
+import {useLabel} from 'react-aria/useLabel';
 
 function ColorField(props) {
   let {labelProps, fieldProps} = useLabel(props);

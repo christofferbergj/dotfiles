@@ -9,7 +9,7 @@ or application.
 
 ```tsx
 'use client';
-import {Link as RACLink, LinkProps} from 'react-aria-components';
+import { Link as RACLink, type LinkProps } from 'react-aria-components/Link';
 import './Link.css';
 
 export function Link(props: LinkProps) {
@@ -62,7 +62,8 @@ export function Link(props: LinkProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { Link as AriaLink, LinkProps as AriaLinkProps, composeRenderProps } from 'react-aria-components';
+import { Link as AriaLink, type LinkProps as AriaLinkProps } from 'react-aria-components/Link';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 import { focusRing } from './utils';
 
@@ -200,7 +201,7 @@ import {Link} from 'vanilla-starter/Link';
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `((props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> | React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement>, renderProps: LinkRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `((props: React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement> | React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, renderProps: LinkRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `style` | `(React.CSSProperties | ((values: LinkRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |

@@ -12,7 +12,7 @@ import {ToggleButton} from 'vanilla-starter/ToggleButton';
 import {Button} from 'vanilla-starter/Button';
 import {Select, SelectItem} from 'vanilla-starter/Select';
 import {Separator} from 'vanilla-starter/Separator';
-import {Group} from 'react-aria-components';
+import {Group} from 'react-aria-components/Group';
 import {Bold, Italic, Underline, ClipboardCopy, Scissors, ClipboardPaste} from 'lucide-react';
 
 <Toolbar>
@@ -52,7 +52,9 @@ import {Bold, Italic, Underline, ClipboardCopy, Scissors, ClipboardPaste} from '
 
 ```tsx
 'use client';
-import {Toolbar as RACToolbar, SeparatorContext, ToggleButtonGroupContext, ToolbarProps} from 'react-aria-components';
+import { Toolbar as RACToolbar, type ToolbarProps } from 'react-aria-components/Toolbar';
+import { SeparatorContext } from 'react-aria-components/Separator';
+import { ToggleButtonGroupContext } from 'react-aria-components/ToggleButtonGroup';
 import './Toolbar.css';
 
 export function Toolbar(props: ToolbarProps) {
@@ -111,7 +113,7 @@ import {ToggleButtonGroup} from 'tailwind-starter/ToggleButtonGroup';
 import {ToggleButton} from 'tailwind-starter/ToggleButton';
 import {Button} from 'tailwind-starter/Button';
 import {Select, SelectItem} from 'tailwind-starter/Select';
-import {Group} from 'react-aria-components';
+import {Group} from 'react-aria-components/Group';
 import {Bold, Italic, Underline, ClipboardCopy, Scissors, ClipboardPaste} from 'lucide-react';
 
 <Toolbar>
@@ -150,7 +152,9 @@ import {Bold, Italic, Underline, ClipboardCopy, Scissors, ClipboardPaste} from '
 ```tsx
 'use client';
 import React from 'react';
-import { Toolbar as RACToolbar, ToggleButtonGroupContext, ToolbarProps, composeRenderProps } from 'react-aria-components';
+import { Toolbar as RACToolbar, type ToolbarProps } from 'react-aria-components/Toolbar';
+import { ToggleButtonGroupContext } from 'react-aria-components/ToggleButtonGroup';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 
 const styles = tv({

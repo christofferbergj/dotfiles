@@ -5,7 +5,7 @@ Handles keyboard interactions for a focusable element.
 ```tsx
 "use client"
 import React from 'react';
-import {useKeyboard} from 'react-aria';
+import {useKeyboard} from 'react-aria/useKeyboard';
 
 function Example() {
   let [events, setEvents] = React.useState<string[]>([]);
@@ -128,11 +128,9 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `aria-description` | `string | undefined` | Defines a string value that describes or annotates the current element. |
 | `aria-details` | `string | undefined` | Identifies the element that provides a detailed, extended description for the object. |
 | `aria-disabled` | `(boolean | "true" | "false") | undefined` | Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable. |
-| `aria-dropeffect` | `"none" | "link" | "copy" | "execute" | "move" | "popup" | undefined` | Indicates what functions can be performed when a dragged object is released on the drop target. |
 | `aria-errormessage` | `string | undefined` | Identifies the element that provides an error message for the object. |
 | `aria-expanded` | `(boolean | "true" | "false") | undefined` | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
 | `aria-flowto` | `string | undefined` | Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion, allows assistive technology to override the general default of reading in document source order. |
-| `aria-grabbed` | `(boolean | "true" | "false") | undefined` | Indicates an element's "grabbed" state in a drag-and-drop operation. |
 | `aria-haspopup` | `boolean | "true" | "false" | "dialog" | "grid" | "listbox" | "menu" | "tree" | undefined` | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-hidden` | `(boolean | "true" | "false") | undefined` | Indicates whether the element is exposed to an accessibility API. |
 | `aria-invalid` | `boolean | "true" | "false" | "grammar" | "spelling" | undefined` | Indicates the entered value does not conform to the format expected by the application. |
@@ -200,8 +198,6 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `onErrorCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
 | `onKeyDown` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
 | `onKeyDownCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
-| `onKeyPress` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
-| `onKeyPressCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
 | `onKeyUp` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
 | `onKeyUpCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
 | `onAbort` | `React.ReactEventHandler<HTMLElement> | undefined` | — |

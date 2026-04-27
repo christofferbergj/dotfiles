@@ -20,12 +20,12 @@ import {RadioGroup, Radio} from 'vanilla-starter/RadioGroup';
 'use client';
 import {
   RadioGroup as AriaRadioGroup,
-  RadioGroupProps as AriaRadioGroupProps,
-  ValidationResult,
-  RadioProps,
+  type RadioGroupProps as AriaRadioGroupProps,
+  type ValidationResult,
+  type RadioProps,
   Radio as AriaRadio,
-  composeRenderProps
-} from 'react-aria-components';
+} from 'react-aria-components/RadioGroup';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {Label, FieldError, Description} from './Form';
 import './RadioGroup.css';
 import './utilities.css';
@@ -163,8 +163,15 @@ import {RadioGroup, Radio} from 'tailwind-starter/RadioGroup';
 
 ```tsx
 'use client';
-import React, { ReactNode } from 'react';
-import { composeRenderProps, Radio as RACRadio, RadioGroup as RACRadioGroup, RadioGroupProps as RACRadioGroupProps, RadioProps, ValidationResult } from 'react-aria-components';
+import React, { type ReactNode } from 'react';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import {
+  Radio as RACRadio,
+  RadioGroup as RACRadioGroup,
+  type RadioGroupProps as RACRadioGroupProps,
+  type RadioProps,
+  type ValidationResult,
+} from 'react-aria-components/RadioGroup';
 import { tv } from 'tailwind-variants';
 import { Description, FieldError, Label } from './Field';
 import { composeTailwindRenderProps, focusRing } from './utils';
@@ -394,22 +401,94 @@ import {Form} from 'vanilla-starter/Form';;
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | undefined` | — | Whether the element should receive focus on render. |
-| `children` | `ReactNode` | — | The label for the element. |
+| `children` | `ChildrenOrFunction<RadioRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
+| `className` | `ClassNameOrFunction<RadioRenderProps> | undefined` | 'react-aria-Radio' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
+| `dir` | `string | undefined` | — |  |
+| `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
+| `inert` | `boolean | undefined` | — |  |
 | `inputRef` | `RefObject<HTMLInputElement | null> | undefined` | — | A ref for the HTML input element. |
 | `isDisabled` | `boolean | undefined` | — | Whether the radio button is disabled or not. Shows that a selection exists, but is not available in that circumstance. |
-| `onBlur` | `((e: FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
-| `onFocus` | `((e: FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element receives focus. |
+| `lang` | `string | undefined` | — |  |
+| `onAnimationEnd` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onAnimationIteration` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onAnimationIterationCapture` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onAnimationStart` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onAuxClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onAuxClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onContextMenu` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onContextMenuCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onDoubleClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onDoubleClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onFocus` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element receives focus. |
 | `onFocusChange` | `((isFocused: boolean) => void) | undefined` | — | Handler that is called when the element's focus status changes. |
+| `onGotPointerCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onHoverChange` | `((isHovering: boolean) => void) | undefined` | — | Handler that is called when the hover state changes. |
+| `onHoverEnd` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction ends. |
+| `onHoverStart` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction starts. |
 | `onKeyDown` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is pressed. |
 | `onKeyUp` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is released. |
+| `onLostPointerCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseDown` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseDownCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseEnter` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseLeave` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseMove` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseMoveCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseOut` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseOutCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseOver` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseOverCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseUp` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onMouseUpCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerCancel` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerCancelCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerDown` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerDownCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerEnter` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerLeave` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerMove` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerMoveCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerOut` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerOutCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerOver` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerOverCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerUp` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onPointerUpCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onPress` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when the press is released over the target. |
 | `onPressChange` | `((isPressed: boolean) => void) | undefined` | — | Handler that is called when the press state changes. |
 | `onPressEnd` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction ends, either over the target or when the pointer leaves the target. |
 | `onPressStart` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction starts. |
 | `onPressUp` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press is released over the target, regardless of whether it started on the target or not. |
+| `onScroll` | `React.UIEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onScrollCapture` | `React.UIEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchCancel` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchCancelCapture` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchEnd` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchEndCapture` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchMove` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchMoveCapture` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchStart` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTouchStartCapture` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionCancel` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionCancelCapture` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionEnd` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionEndCapture` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionRun` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionRunCapture` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionStart` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onWheel` | `React.WheelEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `onWheelCapture` | `React.WheelEventHandler<HTMLLabelElement> | undefined` | — |  |
+| `render` | `DOMRenderFunction<"label", RadioRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `styles` | `StylesProp | undefined` | — | Spectrum-defined styles, returned by the `style()` macro. |
-| `UNSAFE_className` | `UnsafeClassName | undefined` | — | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
-| `UNSAFE_style` | `CSSProperties | undefined` | — | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
+| `style` | `(React.CSSProperties | ((values: RadioRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"yes" | "no" | undefined` | — |  |
 | `value` | `string` | — | The value of the radio button, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio#Value). |

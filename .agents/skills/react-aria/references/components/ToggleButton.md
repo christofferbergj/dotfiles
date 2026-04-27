@@ -8,7 +8,8 @@ A toggle button allows a user to toggle a selection on or off, for example switc
 
 ```tsx
 'use client';
-import {composeRenderProps, ToggleButton as RACToggleButton, ToggleButtonProps as RACToggleButtonProps} from 'react-aria-components';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import { ToggleButton as RACToggleButton, type ToggleButtonProps as RACToggleButtonProps } from 'react-aria-components/ToggleButton';
 import './ToggleButton.css';
 
 interface ToggleButtonProps extends RACToggleButtonProps {
@@ -87,7 +88,8 @@ export function ToggleButton(props: ToggleButtonProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { ToggleButton as RACToggleButton, ToggleButtonProps, composeRenderProps } from 'react-aria-components';
+import { ToggleButton as RACToggleButton, type ToggleButtonProps } from 'react-aria-components/ToggleButton';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 import { focusRing } from './utils';
 
@@ -156,7 +158,7 @@ function Example(props) {
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-disabled` | `boolean | "true" | "false" | undefined` | — | Indicates whether the element is disabled to users of assistive technology. |
 | `aria-expanded` | `boolean | "true" | "false" | undefined` | — | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
-| `aria-haspopup` | `boolean | "dialog" | "menu" | "grid" | "true" | "false" | "listbox" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-haspopup` | `boolean | "true" | "false" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `aria-pressed` | `boolean | "true" | "false" | "mixed" | undefined` | — | Indicates the current "pressed" state of toggle buttons. |

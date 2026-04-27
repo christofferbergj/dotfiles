@@ -8,10 +8,10 @@ npm install @internationalized/number
 
 ## Features
 
-* **Advanced formatting** – Formatting and parsing decimals, percentages, currency values, and unit values are supported.
-* **Locale-aware** – Numbers are formatted and parsed according to the locale expectations, including decimal characters and separators, percent signs, unit and currency symbols, and more.
-* **International numbering systems** – Support for the Latin, Arabic, and Han decimal numbering systems, including automatic detection of the numbering system used in the input.
-* **Small bundle size** – The entire library is 1.7 kB minified and compressed with Brotli. No large locale data is needed – all data is retrieved from builtin browser APIs!
+- **Advanced formatting** – Formatting and parsing decimals, percentages, currency values, and unit values are supported.
+- **Locale-aware** – Numbers are formatted and parsed according to the locale expectations, including decimal characters and separators, percent signs, unit and currency symbols, and more.
+- **International numbering systems** – Support for the Latin, Arabic, and Han decimal numbering systems, including automatic detection of the numbering system used in the input.
+- **Small bundle size** – The entire library is 1.7 kB minified and compressed with Brotli. No large locale data is needed – all data is retrieved from builtin browser APIs!
 
 ## Introduction
 

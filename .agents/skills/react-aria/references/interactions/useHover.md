@@ -5,7 +5,7 @@ across browsers and platforms, and ignores emulated mouse events on touch device
 
 ```tsx
 import React from 'react';
-import {useHover} from 'react-aria';
+import {useHover} from 'react-aria/useHover';
 
 function Example() {
   let [events, setEvents] = React.useState<string[]>([]);

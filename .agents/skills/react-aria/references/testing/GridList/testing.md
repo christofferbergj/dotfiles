@@ -4,8 +4,8 @@
 
 GridList supports long press interactions on its items in certain configurations. See the following sections on how to handle these behaviors in your tests.
 
-* [Timers](../testing.md#timers)
-* [Long press](../testing.md#simulating-long-press)
+- [Timers](../testing.md#timers)
+- [Long press](../testing.md#simulating-long-press)
 
 ## Test utils
 

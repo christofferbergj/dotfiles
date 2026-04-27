@@ -7,7 +7,7 @@ Learn how to integrate with HTML forms, validate and submit data, and use React 
 Accessible forms start with clear, descriptive labels for each field. Rendering a `<Label>` within a field automatically associates it with the input. Additional context can also be added via a secondary `description` slot. The label and description are announced by screen readers when the field is focused.
 
 ```tsx
-import {TextField, Label, Input, Text} from 'react-aria-components';
+import {TextField, Label, Input, Text} from 'react-aria-components/TextField';
 
 <TextField type="password">
   {/*- begin highlight -*/}
@@ -124,7 +124,7 @@ All React Aria form components integrate with HTML [constraint validation](https
 Use the `FieldError` component to display validation errors with custom styles rather than the browser's default UI.
 
 ```tsx
-import {TextField, Label, Input, FieldError} from 'react-aria-components';
+import {TextField, Label, Input, FieldError} from 'react-aria-components/TextField';
 import {Form} from 'vanilla-starter/Form';
 import {Button} from 'vanilla-starter/Button';
 
@@ -144,11 +144,11 @@ import {Button} from 'vanilla-starter/Button';
 
 Supported constraints include:
 
-* `isRequired` indicates that a field must have a value before the form can be submitted.
-* `minValue` and `maxValue` specify the minimum and maximum value in a date picker or number field.
-* `minLength` and `maxLength` specify the minimum and maximum length of text input.
-* `pattern` provides a custom [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions) that a text input must conform to.
-* `type="email"` and `type="url"` provide builtin validation for email addresses and URLs.
+- `isRequired` indicates that a field must have a value before the form can be submitted.
+- `minValue` and `maxValue` specify the minimum and maximum value in a date picker or number field.
+- `minLength` and `maxLength` specify the minimum and maximum length of text input.
+- `pattern` provides a custom [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions) that a text input must conform to.
+- `type="email"` and `type="url"` provide builtin validation for email addresses and URLs.
 
 See each component's documentation for more details on the supported validation props.
 
@@ -157,7 +157,7 @@ See each component's documentation for more details on the supported validation 
 By default, the `FieldError` component displays the error message provided by the browser, which is localized in the user's preferred language. You can customize these messages by providing a render prop function to `FieldError`. This receives a list of error strings along with a [ValidityState](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) object describing why the field is invalid.
 
 ```tsx
-import {TextField, Label, Input, FieldError} from 'react-aria-components';
+import {TextField, Label, Input, FieldError} from 'react-aria-components/TextField';
 import {Form} from 'vanilla-starter/Form';
 import {Button} from 'vanilla-starter/Button';
 

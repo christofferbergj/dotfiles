@@ -3,7 +3,7 @@
 Provides landmark navigation in an application. Call this with a role and label to register a landmark navigable with F6.
 
 ```tsx
-import {useLandmark} from 'react-aria';
+import {useLandmark} from 'react-aria/useLandmark';
 import {useRef} from 'react';
 
 function Navigation(props) {
@@ -59,9 +59,9 @@ Landmarks provide a way to designate important subsections of a page. They allow
 By default, browsers do not provide a consistent way to navigate between landmarks using the keyboard.
 The `useLandmark` hook enables keyboard navigation between landmarks, and provides a consistent experience across browsers.
 
-* <Keyboard>F6</Keyboard> and <Keyboard>Shift+F6</Keyboard> key navigation between landmarks
-* <Keyboard>Alt+F6</Keyboard> key navigation to the main landmark
-* Support for navigating nested landmarks
+- <Keyboard>F6</Keyboard> and <Keyboard>Shift+F6</Keyboard> key navigation between landmarks
+- <Keyboard>Alt+F6</Keyboard> key navigation to the main landmark
+- Support for navigating nested landmarks
 
 ## Anatomy
 

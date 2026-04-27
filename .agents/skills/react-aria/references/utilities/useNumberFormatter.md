@@ -18,7 +18,8 @@ using the [I18nProvider](I18nProvider.md) to specify the locale to display.
 
 ```tsx
 'use client';
-import {I18nProvider, useNumberFormatter} from 'react-aria';
+import {I18nProvider} from 'react-aria/I18nProvider';
+import {useNumberFormatter} from 'react-aria/useNumberFormatter';
 
 function Currency({value, currency}) {
   let formatter = useNumberFormatter({

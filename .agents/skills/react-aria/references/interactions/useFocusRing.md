@@ -6,7 +6,7 @@ not with a mouse, touch, or other input methods.
 
 ```tsx
 'use client';
-import {useFocusRing} from 'react-aria';
+import {useFocusRing} from 'react-aria/useFocusRing';
 
 function Example() {
   let {isFocusVisible, focusProps} = useFocusRing();

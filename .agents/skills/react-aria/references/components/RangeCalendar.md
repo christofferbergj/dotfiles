@@ -10,14 +10,14 @@ RangeCalendars display a grid of days in one or more months and allow users to s
 'use client';
 import {
   CalendarCell as AriaCalendarCell,
-  DateValue,
-  Heading,
   RangeCalendar as AriaRangeCalendar,
-  RangeCalendarProps as AriaRangeCalendarProps,
+  Heading,
   Text,
-  composeRenderProps,
-  CalendarCellProps
-} from 'react-aria-components';
+  type DateValue,
+  type RangeCalendarProps as AriaRangeCalendarProps,
+  type CalendarCellProps,
+} from 'react-aria-components/RangeCalendar';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {Button} from './Button';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {CalendarGrid} from './Calendar';
@@ -196,13 +196,13 @@ export function CalendarCell(props: CalendarCellProps) {
 import React from 'react';
 import {
   RangeCalendar as AriaRangeCalendar,
-  RangeCalendarProps as AriaRangeCalendarProps,
   CalendarCell,
   CalendarGrid,
   CalendarGridBody,
-  DateValue,
-  Text
-} from 'react-aria-components';
+  Text,
+  type DateValue,
+  type RangeCalendarProps as AriaRangeCalendarProps
+} from 'react-aria-components/RangeCalendar';
 import { tv } from 'tailwind-variants';
 import { CalendarGridHeader, CalendarHeader } from './Calendar';
 import { composeTailwindRenderProps, focusRing } from './utils';
@@ -267,7 +267,7 @@ Use the `value` or `defaultValue` prop to set the selected date range, using obj
 
 ```tsx
 import {parseDate, getLocalTimeZone} from '@internationalized/date';
-import {useDateFormatter} from 'react-aria';
+import {useDateFormatter} from 'react-aria/useDateFormatter';
 import {RangeCalendar} from 'vanilla-starter/RangeCalendar';
 import {useState} from 'react';
 
@@ -298,7 +298,7 @@ function Example() {
 By default, `RangeCalendar` displays the value using the calendar system for the user's locale. Use `<I18nProvider>` to override the calendar system by setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string). The `onChange` event always receives a date in the same calendar as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
 
 ```tsx
-import {I18nProvider} from 'react-aria-components';
+import {I18nProvider} from 'react-aria-components/I18nProvider';
 import {parseDate} from '@internationalized/date';
 import {RangeCalendar} from 'vanilla-starter/RangeCalendar';
 
@@ -440,10 +440,10 @@ function Example(props) {
 Set the `visibleDuration` prop and render multiple `CalendarGrid` elements to display more than one month at a time. The `pageBehavior` prop controls whether pagination advances by a single month or multiple. The `firstDayOfWeek` prop overrides the locale-specified first day of the week.
 
 ```tsx
-import {RangeCalendar, Heading} from 'react-aria-components';
+import {RangeCalendar, Heading} from 'react-aria-components/RangeCalendar';
 import {CalendarGrid, CalendarCell} from 'vanilla-starter/RangeCalendar';
 import {Button} from 'vanilla-starter/Button';
-import {useDateFormatter} from 'react-aria';
+import {useDateFormatter} from 'react-aria/useDateFormatter';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 
 // TODO: move this into the starter example.
@@ -522,7 +522,7 @@ function Example() {
 You can also control the focused date via `CalendarStateContext`. This example shows month and year dropdown components that work inside any `<RangeCalendar>`.
 
 ```tsx
-import {RangeCalendar} from 'react-aria-components';
+import {RangeCalendar} from 'react-aria-components/RangeCalendar';
 import {CalendarGrid, CalendarCell} from 'vanilla-starter/RangeCalendar';
 import {MonthDropdown} from './MonthDropdown';
 import {YearDropdown} from './YearDropdown';
@@ -577,6 +577,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | undefined` | false | Whether to automatically focus the calendar when it mounts. |
+| `commitBehavior` | `"clear" | "reset" | "select" | undefined` | 'select' | Controls the behavior when a pointer is released outside the calendar or a blur occurs mid selection: - `clear`: clear the currently selected range of dates. - `reset`: reset the selection to the previously selected range of dates. - `select`: select the currently hovered range of dates. |
 | `createCalendar` | `((identifier: CalendarIdentifier) => Calendar) | undefined` | — | A function to create a new [Calendar](https://react-spectrum.adobe.com/internationalized/date/Calendar.html) object for a given calendar identifier. If not provided, the `createCalendar` function from `@internationalized/date` will be used. |
 | `defaultFocusedValue` | `DateValue | null | undefined` | — | The date that is focused when the calendar first mounts (uncontrolled). |
 | `defaultValue` | `RangeValue<T> | null | undefined` | — | The default value (uncontrolled). |
@@ -593,7 +594,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onChange` | `((value: RangeValue<MappedDateValue<T>>) => void) | undefined` | — | Handler that is called when the value changes. |
 | `onFocusChange` | `((date: CalendarDate) => void) | undefined` | — | Handler that is called when the focused date changes. |
 | `pageBehavior` | `PageBehavior | undefined` | visible | Controls the behavior of paging. Pagination either works by advancing the visible page by visibleDuration (default) or one unit of visibleDuration. |
-| `selectionAlignment` | `"start" | "end" | "center" | undefined` | 'center' | Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection. |
+| `selectionAlignment` | `"start" | "center" | "end" | undefined` | 'center' | Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `styles` | `StylesProp | undefined` | — | Spectrum-defined styles, returned by the `style()` macro. |
 | `UNSAFE_className` | `UnsafeClassName | undefined` | — | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |

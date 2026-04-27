@@ -18,7 +18,7 @@ Learn how to integrate React Aria with your framework.
         ```tsx
         // app/layout.tsx
         import {headers} from 'next/headers';
-        import {isRTL} from 'react-aria-components';
+        import {isRTL} from 'react-aria-components/I18nProvider';
         import {ClientProviders} from './provider';
 
         export default async function RootLayout({children}) {
@@ -47,7 +47,7 @@ Learn how to integrate React Aria with your framework.
         // app/provider.tsx
         "use client";
 
-        import {I18nProvider} from 'react-aria-components';
+        import {I18nProvider} from 'react-aria-components/I18nProvider';
 
         export function ClientProviders({lang, children}) {
           return (
@@ -57,6 +57,10 @@ Learn how to integrate React Aria with your framework.
           );
         }
         ```
+      </Step>
+
+      <Step>
+        <Counter/>If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) with a nonce, add a `<meta property="csp-nonce">` tag to your document head, setting the `content` attribute to the generated nonce value. React Aria automatically reads the nonce from this tag.
       </Step>
     </StepList>
   </TabPanel>
@@ -82,7 +86,7 @@ Learn how to integrate React Aria with your framework.
         import {ServerRouter} from 'react-router';
         import {renderToPipeableStream} from 'react-dom/server';
         /*- begin highlight -*/
-        import {I18nProvider} from 'react-aria-components';
+        import {I18nProvider} from 'react-aria-components/I18nProvider';
         import {getLocalizationScript} from 'react-aria-components/i18n';
         /*- end highlight -*/
 
@@ -126,7 +130,7 @@ Learn how to integrate React Aria with your framework.
 
         ```tsx
         // app/root.tsx
-        import {useLocale} from 'react-aria-components';
+        import {useLocale} from 'react-aria-components/I18nProvider';
 
         export function Layout({children}) {
           /*- begin highlight -*/
@@ -180,6 +184,10 @@ Learn how to integrate React Aria with your framework.
         });
         ```
       </Step>
+
+      <Step>
+        <Counter/>If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) with a nonce, add a `<meta property="csp-nonce">` tag to your document head, setting the `content` attribute to the generated nonce value. React Aria automatically reads the nonce from this tag.
+      </Step>
     </StepList>
   </TabPanel>
 
@@ -214,6 +222,10 @@ Learn how to integrate React Aria with your framework.
           "locales": ["en-US", "fr-FR"]
         }
         ```
+      </Step>
+
+      <Step>
+        <Counter/>If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) with a nonce, add a `<meta property="csp-nonce">` tag to your document head, setting the `content` attribute to the generated nonce value. React Aria automatically reads the nonce from this tag.
       </Step>
     </StepList>
   </TabPanel>
@@ -250,6 +262,10 @@ Learn how to integrate React Aria with your framework.
         });
         ```
       </Step>
+
+      <Step>
+        <Counter/>If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) with a nonce, configure [`html.cspNonce`](https://vite.dev/config/shared-options.html#html-cspnonce) in `vite.config.ts`. React Aria automatically reads the nonce that Vite injects.
+      </Step>
     </StepList>
   </TabPanel>
 
@@ -281,6 +297,10 @@ Learn how to integrate React Aria with your framework.
           ]
         };
         ```
+      </Step>
+
+      <Step>
+        <Counter/>If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) with a nonce, configure [`__webpack_nonce__`](https://webpack.js.org/guides/csp/) in your entry script. React Aria automatically reads the nonce from the webpack global.
       </Step>
     </StepList>
   </TabPanel>
@@ -314,6 +334,10 @@ Learn how to integrate React Aria with your framework.
         };
         ```
       </Step>
+
+      <Step>
+        <Counter/>If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) with a nonce, add a `<meta property="csp-nonce">` tag to your document head, setting the `content` attribute to the generated nonce value. React Aria automatically reads the nonce from this tag.
+      </Step>
     </StepList>
   </TabPanel>
 
@@ -345,6 +369,10 @@ Learn how to integrate React Aria with your framework.
           ]
         });
         ```
+      </Step>
+
+      <Step>
+        <Counter/>If you are using a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (CSP) with a nonce, add a `<meta property="csp-nonce">` tag to your document head, setting the `content` attribute to the generated nonce value. React Aria automatically reads the nonce from this tag.
       </Step>
     </StepList>
   </TabPanel>

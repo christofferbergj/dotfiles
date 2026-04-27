@@ -4,7 +4,7 @@ VisuallyHidden hides its children visually, while keeping content visible
 to screen readers.
 
 ```tsx
-import {VisuallyHidden} from 'react-aria';
+import {VisuallyHidden} from 'react-aria/VisuallyHidden';
 
 <VisuallyHidden>I am hidden</VisuallyHidden>
 ```
@@ -37,11 +37,9 @@ import {VisuallyHidden} from 'react-aria';
 | `aria-description` | `string | undefined` | — | Defines a string value that describes or annotates the current element. |
 | `aria-details` | `string | undefined` | — | Identifies the element that provides a detailed, extended description for the object. |
 | `aria-disabled` | `(boolean | "true" | "false") | undefined` | — | Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable. |
-| `aria-dropeffect` | `"link" | "none" | "copy" | "execute" | "move" | "popup" | undefined` | — | Indicates what functions can be performed when a dragged object is released on the drop target. |
 | `aria-errormessage` | `string | undefined` | — | Identifies the element that provides an error message for the object. |
 | `aria-expanded` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
 | `aria-flowto` | `string | undefined` | — | Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion, allows assistive technology to override the general default of reading in document source order. |
-| `aria-grabbed` | `(boolean | "true" | "false") | undefined` | — | Indicates an element's "grabbed" state in a drag-and-drop operation. |
 | `aria-haspopup` | `boolean | "dialog" | "grid" | "listbox" | "menu" | "tree" | "true" | "false" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-hidden` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element is exposed to an accessibility API. |
 | `aria-invalid` | `boolean | "true" | "false" | "grammar" | "spelling" | undefined` | — | Indicates the entered value does not conform to the format expected by the application. |
@@ -152,8 +150,6 @@ import {VisuallyHidden} from 'react-aria';
 | `onInvalidCapture` | `React.FormEventHandler<FocusableElement> | undefined` | — |  |
 | `onKeyDown` | `React.KeyboardEventHandler<FocusableElement> | undefined` | — |  |
 | `onKeyDownCapture` | `React.KeyboardEventHandler<FocusableElement> | undefined` | — |  |
-| `onKeyPress` | `React.KeyboardEventHandler<FocusableElement> | undefined` | — |  |
-| `onKeyPressCapture` | `React.KeyboardEventHandler<FocusableElement> | undefined` | — |  |
 | `onKeyUp` | `React.KeyboardEventHandler<FocusableElement> | undefined` | — |  |
 | `onKeyUpCapture` | `React.KeyboardEventHandler<FocusableElement> | undefined` | — |  |
 | `onLoad` | `React.ReactEventHandler<FocusableElement> | undefined` | — |  |

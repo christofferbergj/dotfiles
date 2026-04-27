@@ -9,10 +9,7 @@ over time.
 
 ```tsx
 'use client';
-import {
-  ProgressBar as AriaProgressBar,
-  ProgressBarProps as AriaProgressBarProps
-} from 'react-aria-components';
+import { ProgressBar as AriaProgressBar, type ProgressBarProps as AriaProgressBarProps } from 'react-aria-components/ProgressBar';
 import {Label} from './Form';
 import './ProgressBar.css';
 
@@ -146,10 +143,7 @@ export function ProgressBar({ label, ...props }: ProgressBarProps) {
 ```tsx
 'use client';
 import React from 'react';
-import {
-  ProgressBar as AriaProgressBar,
-  ProgressBarProps as AriaProgressBarProps
-} from 'react-aria-components';
+import { ProgressBar as AriaProgressBar, type ProgressBarProps as AriaProgressBarProps } from 'react-aria-components/ProgressBar';
 import { Label } from './Field';
 import { composeTailwindRenderProps } from './utils';
 

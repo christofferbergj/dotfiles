@@ -3,7 +3,7 @@
 Manages focus visible state for the page, and subscribes individual components for updates.
 
 ```tsx
-import {useFocusVisible} from 'react-aria';
+import {useFocusVisible} from 'react-aria/useFocusVisible';
 
 function Example() {
   let {isFocusVisible} = useFocusVisible({isTextInput: true});

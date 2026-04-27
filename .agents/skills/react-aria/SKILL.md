@@ -1,17 +1,16 @@
 ---
-name: react-aria
-description: Build accessible UI components with React Aria Components. Use when developers mention React Aria, react-aria-components, accessible components, or need unstyled accessible primitives. Provides documentation for building custom accessible UI with hooks and components.
-license: Apache-2.0
-compatibility: Requires React project with react-aria-components installed.
+name: "react-aria"
+description: "Build accessible UI components with React Aria Components. Use when developers mention React Aria, react-aria-components, accessible components, or need unstyled accessible primitives. Provides documentation for building custom accessible UI with hooks and components."
+license: "Apache-2.0"
+compatibility: "Requires React project with react-aria-components installed."
 metadata:
-  author: Adobe
-  website: https://react-aria.adobe.com/
+  author: "Adobe"
+  website: "https://react-aria.adobe.com/"
 ---
 
 # React Aria Components
 
 React Aria Components is a library of unstyled, accessible UI components that you can style with any CSS solution. Built on top of React Aria hooks, it provides the accessibility and behavior without prescribing any visual design.
-
 ## Documentation Structure
 
 The `references/` directory contains detailed documentation organized as follows:
@@ -26,6 +25,7 @@ The `references/` directory contains detailed documentation organized as follows
 - [Quality](references/guides/quality.md): React Aria is built around three core principles: , , and . Learn how to apply these tools to build high quality UIs that work for everyone, everywhere, and on every device.
 - [Selection](references/guides/selection.md): Many collection components support selecting items by clicking or tapping them, or by using the keyboard. Learn how to handle selection events, how to control selection programmatically, and the data structures used to represent a selection.
 - [Styling](references/guides/styling.md): React Aria does not include any styles by default. Learn how to build custom designs to fit your application or design system using any styling solution.
+- [Testing](references/guides/testing.md): Learn how to test components and applications built with React Aria using test utilities to simulate common user interactions.
 - [Working with AI](references/guides/ai.md): Learn how to use the React Aria MCP Server, Agent Skills, and more to help you build with AI.
 
 ### Components

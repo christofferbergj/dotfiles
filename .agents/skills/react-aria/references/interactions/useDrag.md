@@ -14,7 +14,7 @@ See the [drag and drop guide](dnd.md) to learn more.
 This example shows how to make a simple draggable element that provides data as plain text. In order to support keyboard and screen reader drag interactions, the element must be focusable and have an ARIA role (in this case, `button`). While it is being dragged, it is displayed with a dimmed appearance by applying an additional CSS class.
 
 ```tsx
-import {useDrag} from 'react-aria';
+import {useDrag} from 'react-aria/useDrag';
 import {DropTarget} from './DropTarget';
 import './useDragExample.css';
 import 'vanilla-starter/theme.css';
@@ -49,7 +49,7 @@ In addition to providing items in multiple formats, you can also return multiple
 This example drags two items, each of which contains representations as plain text, HTML, and a custom app-specific data format. Dropping on the drop targets in this page will use the custom data format to render formatted items. If you drop in an external application supporting rich text, the HTML representation will be used. Dropping in a text editor will use the plain text format.
 
 ```tsx
-import {useDrag} from 'react-aria';
+import {useDrag} from 'react-aria/useDrag';
 import {DropTarget} from './DropTarget';
 
 function Draggable() {
@@ -91,9 +91,8 @@ This example renders a custom drag preview which shows the text of the first dra
 
 ```tsx
 import React from 'react';
-import {useDrag} from 'react-aria';
+import {useDrag, DragPreview} from 'react-aria/useDrag';
 import {DropTarget} from './DropTarget';
-import {DragPreview} from 'react-aria';
 
 function Draggable() {
   let preview = React.useRef(null);
@@ -128,10 +127,10 @@ function Draggable() {
 
 A `DropOperation` is an indication of what will happen when dragged data is dropped on a particular drop target. These are:
 
-* `move` – indicates that the dragged data will be moved from its source location to the target location.
-* `copy` – indicates that the dragged data will be copied to the target destination.
-* `link` – indicates that there will be a relationship established between the source and target locations.
-* `cancel` – indicates that the drag and drop operation will be canceled, resulting in no changes made to the source or target.
+- `move` – indicates that the dragged data will be moved from its source location to the target location.
+- `copy` – indicates that the dragged data will be copied to the target destination.
+- `link` – indicates that there will be a relationship established between the source and target locations.
+- `cancel` – indicates that the drag and drop operation will be canceled, resulting in no changes made to the source or target.
 
 Many operating systems display these in the form of a cursor change, e.g. a plus sign to indicate a copy operation. The user may also be able to use a modifier key to choose which drop operation to perform, such as <Keyboard>Option</Keyboard> or <Keyboard>Alt</Keyboard> to switch from move to copy.
 The `onDragEnd` event allows the drag source to respond when a drag that it initiated ends, either because it was dropped or because it was canceled by the user. The `dropOperation` property of the event object indicates the operation that was performed. For example, when data is moved, the UI could be updated to reflect this change by removing the original dragged element.
@@ -140,7 +139,7 @@ This example removes the draggable element from the UI when a move operation is 
 ```tsx
 "use client"
 import React from 'react';
-import {useDrag} from 'react-aria';
+import {useDrag} from 'react-aria/useDrag';
 import {DropTarget} from './DropTarget';
 
 function Draggable() {
@@ -178,7 +177,7 @@ function Draggable() {
 The drag source can also control which drop operations are allowed for the data. For example, if moving data is not allowed, and only copying is supported, the `getAllowedDropOperations` function could be implemented to indicate this. When you drag the element below, the cursor now shows the copy affordance by default, and pressing a modifier to switch drop operations results in the drop being canceled.
 
 ```tsx
-import {useDrag} from 'react-aria';
+import {useDrag} from 'react-aria/useDrag';
 import {DropTarget} from './DropTarget';
 
 function Draggable() {
@@ -214,7 +213,7 @@ When the `hasDragButton` option is enabled, the keyboard interactions are moved 
 
 ```tsx
 import React from 'react';
-import {useDrag} from 'react-aria';
+import {useDrag} from 'react-aria/useDrag';
 import {useButton} from '@react-aria/button';
 import {DropTarget} from './DropTarget';
 
@@ -255,7 +254,8 @@ function Draggable() {
 If you need to temporarily disable dragging, you can pass the `isDisabled` option to `useDrag`. This will prevent dragging an element until it is re-enabled.
 
 ```tsx
-import {useDrag} from 'react-aria';
+import {useDrag} from 'react-aria/useDrag';
+
 function Draggable() {
   let {dragProps, isDragging} = useDrag({
     getItems() {

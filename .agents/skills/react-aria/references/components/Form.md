@@ -24,17 +24,11 @@ import {Button} from 'vanilla-starter/Button';
 
 ```tsx
 'use client';
-import {
-  Form as RACForm,
-  FormProps,
-  LabelProps,
-  Label as RACLabel,
-  FieldErrorProps,
-  FieldError as RACFieldError,
-  ButtonProps,
-  Button,
-  TextProps
-} from 'react-aria-components';
+import { Form as RACForm, type FormProps } from 'react-aria-components/Form';
+import { type LabelProps, Label as RACLabel } from 'react-aria-components/Label';
+import { type FieldErrorProps, FieldError as RACFieldError } from 'react-aria-components/FieldError';
+import { type ButtonProps, Button } from 'react-aria-components/Button';
+import { type TextProps } from 'react-aria-components/Text';
 import './Form.css';
 import { Text } from './Content';
 
@@ -194,7 +188,7 @@ import {Button} from 'tailwind-starter/Button';
 ```tsx
 'use client';
 import React from 'react';
-import { FormProps, Form as RACForm } from 'react-aria-components';
+import { type FormProps, Form as RACForm } from 'react-aria-components/Form';
 import { twMerge } from 'tailwind-merge';
 
 export function Form(props: FormProps) {
@@ -372,7 +366,7 @@ function Example() {
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
 | `lang` | `string | undefined` | — |  |
-| `method` | `"dialog" | "get" | "post" | undefined` | — | The HTTP method to submit the form with. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#method). |
+| `method` | `"get" | "post" | "dialog" | undefined` | — | The HTTP method to submit the form with. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#method). |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLFormElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLFormElement> | undefined` | — |  |
 | `onAnimationIteration` | `React.AnimationEventHandler<HTMLFormElement> | undefined` | — |  |
@@ -445,5 +439,5 @@ function Example() {
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
 | `target` | `"_blank" | "_self" | "_parent" | "_top" | undefined` | — | The target attribute specifies a name or a keyword that indicates where to display the response that is received after submitting the form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#target). |
 | `translate` | `"yes" | "no" | undefined` | — |  |
-| `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when a field value is missing or invalid, or mark fields as required or invalid via ARIA. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when a field value is missing or invalid, or mark fields as required or invalid via ARIA. |
 | `validationErrors` | `ValidationErrors | undefined` | — | Validation errors for the form, typically returned by a server. This should be set to an object mapping from input names to errors. |

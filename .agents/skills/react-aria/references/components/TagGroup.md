@@ -23,11 +23,11 @@ import {
   Button,
   Tag as AriaTag,
   TagGroup as AriaTagGroup,
-  TagGroupProps as AriaTagGroupProps,
+  type TagGroupProps as AriaTagGroupProps,
   TagList,
-  TagListProps,
-  TagProps,
-} from 'react-aria-components';
+  type TagListProps,
+  type TagProps,
+} from 'react-aria-components/TagGroup';
 import {Description, Label} from './Form';
 import {Text} from './Content';
 import {X} from 'lucide-react';
@@ -226,14 +226,14 @@ import React, { createContext, useContext } from 'react';
 import {
   Tag as AriaTag,
   TagGroup as AriaTagGroup,
-  TagGroupProps as AriaTagGroupProps,
-  TagProps as AriaTagProps,
+  type TagGroupProps as AriaTagGroupProps,
+  type TagProps as AriaTagProps,
   Button,
   TagList,
-  TagListProps,
+  type TagListProps,
   Text,
-  composeRenderProps
-} from 'react-aria-components';
+} from 'react-aria-components/TagGroup';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
 import { Description, Label } from './Field';
@@ -351,7 +351,7 @@ export function Tag({ children, color, ...props }: TagProps) {
 
 ```tsx
 import {TagGroup, Tag} from 'vanilla-starter/TagGroup';
-import {useListData} from 'react-aria-components';
+import {useListData} from 'react-aria-components/useListData';
 
 function Example() {
   let list = useListData({
@@ -401,12 +401,12 @@ import {TagGroup, Tag} from 'vanilla-starter/TagGroup';
   <Content>Due to [HTML spec limitations](https://github.com/w3c/html-aria/issues/473), tags cannot be rendered as `<a>` elements. React Aria handles link clicks with JavaScript and triggers native navigation. When using a client-side router, use the `onAction` event to programmatically trigger navigation instead of the `href` prop.</Content>
 </InlineAlert>
 
-## Selection
+## Selection and actions
 
 Use the `selectionMode` prop to enable single or multiple selection. The selected items can be controlled via the `selectedKeys` prop, matching the `id` prop of the items. Items can be disabled with the `isDisabled` prop. See the [selection guide](selection.md?component=TagGroup) for more details.
 
 ```tsx
-import type {Selection} from 'react-aria-components';
+import type {Selection} from 'react-aria-components/TagGroup';
 import {TagGroup, Tag} from 'vanilla-starter/TagGroup';
 import {useState} from 'react';
 
@@ -430,6 +430,27 @@ function Example(props) {
       </TagGroup>
       <p>Current selection: {selected === 'all' ? 'all' : [...selected].join(', ')}</p>
     </div>
+  );
+}
+```
+
+Use the `onAction` prop to handle item actions.
+
+```tsx
+import {TagGroup, Tag} from 'vanilla-starter/TagGroup';
+
+function Example() {
+  return (
+    <TagGroup
+      label="Music genres"
+      onAction={key => alert(`Clicked ${key}`)}
+    >
+      <Tag id="rock">Rock</Tag>
+      <Tag id="jazz">Jazz</Tag>
+      <Tag id="pop">Pop</Tag>
+      <Tag id="classical">Classical</Tag>
+      <Tag id="edm">EDM</Tag>
+    </TagGroup>
   );
 }
 ```
@@ -471,11 +492,12 @@ function Example(props) {
 | `dir` | `string | undefined` | — |  |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. |
 | `disallowEmptySelection` | `boolean | undefined` | — | Whether the collection allows empty selection. |
-| `escapeKeyBehavior` | `"none" | "clearSelection" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the TagGroup or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
+| `escapeKeyBehavior` | `"clearSelection" | "none" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the TagGroup or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
 | `lang` | `string | undefined` | — |  |
+| `onAction` | `((key: Key) => void) | undefined` | — | Handler that is called when a user performs an action on an item. The exact user event depends on the collection's `selectionBehavior` prop and the interaction modality. |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAnimationIteration` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -544,7 +566,7 @@ function Example(props) {
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `selectedKeys` | `Iterable<Key> | "all" | undefined` | — | The currently selected keys in the collection (controlled). |
-| `selectionBehavior` | `SelectionBehavior | undefined` | — | How multiple selection should behave in the collection. |
+| `selectionBehavior` | `SelectionBehavior | undefined` | 'toggle' | How multiple selection should behave in the collection. |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
@@ -647,6 +669,7 @@ function Example(props) {
 | `inert` | `boolean | undefined` | — |  |
 | `isDisabled` | `boolean | undefined` | — | Whether the tag is disabled. |
 | `lang` | `string | undefined` | — |  |
+| `onAction` | `(() => void) | undefined` | — | Handler that is called when a user performs an action on the item. The exact user event depends on the collection's `selectionBehavior` prop and the interaction modality. |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAnimationIteration` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |

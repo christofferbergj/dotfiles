@@ -9,8 +9,7 @@ to mark one individual item as selected.
 
 ```tsx
 'use client';
-import {Checkbox as AriaCheckbox, CheckboxProps} from 'react-aria-components';
-
+import { Checkbox as AriaCheckbox, type CheckboxProps } from 'react-aria-components/Checkbox';
 import './Checkbox.css';
 
 export function Checkbox(
@@ -114,7 +113,8 @@ export function Checkbox(
 'use client';
 import { Check, Minus } from 'lucide-react';
 import React from 'react';
-import { Checkbox as AriaCheckbox, CheckboxProps, composeRenderProps } from 'react-aria-components';
+import { Checkbox as AriaCheckbox, type CheckboxProps } from 'react-aria-components/Checkbox';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 import { focusRing } from './utils';
 

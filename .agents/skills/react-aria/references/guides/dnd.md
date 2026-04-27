@@ -17,7 +17,7 @@ This example provides items as plain text, HTML, and a custom app-specific data 
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
 import {PokemonCOMPONENT, Pokemon} from './PokemonCOMPONENT';
 import {DroppableCOMPONENT} from './DroppableCOMPONENT';
 
@@ -52,7 +52,7 @@ This example renders a custom drag preview which shows the number of items being
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
 import {PokemonCOMPONENT, Pokemon} from './PokemonCOMPONENT';
 
 function DraggableCOMPONENT() {
@@ -103,9 +103,9 @@ function DraggableCOMPONENT() {
 
 Users can drop one or more **drop items**, each of which contains data to be transferred from the drag source to drop target. There are three kinds of drag items:
 
-* `text` – represents data inline as a string in one or more formats
-* `file` – references a file on the user's device
-* `directory` – references the contents of a directory
+- `text` – represents data inline as a string in one or more formats
+- `file` – references a file on the user's device
+- `directory` – references the contents of a directory
 
 ### Text
 
@@ -116,7 +116,7 @@ This example uses the `acceptedDragTypes` prop to accept items that include an a
 ## ListBox example
 
 ```tsx
-import {isTextDropItem, useDragAndDrop} from 'react-aria-components';
+import {isTextDropItem, useDragAndDrop} from 'react-aria-components/useDragAndDrop';
 import {useState} from 'react';
 import {PokemonCOMPONENT, Pokemon} from './PokemonCOMPONENT';
 import {DraggableCOMPONENT} from './DraggableCOMPONENT';
@@ -150,8 +150,8 @@ function DroppableCOMPONENT() {
 A `FileDropItem` references a file on the user's device. It includes the name and mime type of the file, and methods to read the contents as plain text, or retrieve a [File](https://developer.mozilla.org/en-US/docs/Web/API/File) object for uploading. This example accepts JPEG and PNG image files, and renders them by creating a local [object URL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL).
 
 ```tsx
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
-import {useDragAndDrop, isFileDropItem, Text} from 'react-aria-components';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
+import {useDragAndDrop, isFileDropItem} from 'react-aria-components/useDragAndDrop';
 import {useState} from 'react';
 
 interface ImageItem {
@@ -202,7 +202,8 @@ A `DirectoryDropItem` references the contents of a directory on the user's devic
 
 ```tsx
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
-import {useDragAndDrop, DIRECTORY_DRAG_TYPE, type DirectoryDropItem, isDirectoryDropItem, Collection} from 'react-aria-components';
+import {useDragAndDrop, DIRECTORY_DRAG_TYPE, type DirectoryDropItem, isDirectoryDropItem} from 'react-aria-components/useDragAndDrop';
+import {Collection} from 'react-aria-components/Collection';
 import {useState} from 'react';
 import File from '@react-spectrum/s2/icons/File';
 import Folder from '@react-spectrum/s2/icons/Folder';
@@ -270,9 +271,9 @@ function DroppableTree() {
 
 Collection components such as [ListBox](ListBox.md), [Table](Table.md), [Tree](Tree.md), and [GridList](GridList.md) support multiple **drop positions**.
 
-* The `"root"` drop position allows dropping on the collection as a whole.
-* The `"on"` drop position allows dropping on individual collection items, such as a folder within a list.
-* The `"before"` and `"after"` drop positions allow the user to insert or move items between other items. This is displayed by rendering a **drop indicator** between items.
+- The `"root"` drop position allows dropping on the collection as a whole.
+- The `"on"` drop position allows dropping on individual collection items, such as a folder within a list.
+- The `"before"` and `"after"` drop positions allow the user to insert or move items between other items. This is displayed by rendering a **drop indicator** between items.
 
 <Figure>
   <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 50, marginBottom: 4, background: 'var(--anatomy-gray-100)', padding: 32, width: 'calc(100% - 64px)', borderRadius: 'var(--anatomy-radius)'}}>
@@ -302,7 +303,7 @@ Use the `onRootDrop` event to enable dropping on the entire collection. When a v
 ## ListBox example
 
 ```tsx
-import {isTextDropItem, useDragAndDrop} from 'react-aria-components';
+import {isTextDropItem, useDragAndDrop} from 'react-aria-components/useDragAndDrop';
 import {useState} from 'react';
 import {PokemonCOMPONENT, Pokemon} from './PokemonCOMPONENT';
 import {DraggableCOMPONENT} from './DraggableCOMPONENT';
@@ -338,7 +339,7 @@ Use the `onItemDrop` event to enable dropping on items. When a valid drag hovers
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
 import {PokemonCOMPONENT} from './PokemonCOMPONENT';
 import {DraggableCOMPONENT} from './DraggableCOMPONENT';
 
@@ -374,7 +375,8 @@ Use the `onInsert` event to enable dropping between items. React Aria renders a 
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop, isTextDropItem, DropIndicator, useListData} from 'react-aria-components';
+import {useDragAndDrop, isTextDropItem, DropIndicator} from 'react-aria-components/useDragAndDrop';
+import {useListData} from 'react-aria-components/useListData';
 import {PokemonCOMPONENT} from './PokemonCOMPONENT';
 import {DraggableCOMPONENT} from './DraggableCOMPONENT';
 
@@ -431,7 +433,8 @@ Use the `onReorder` event to enable reordering items. For components with hierar
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop, useListData} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
+import {useListData} from 'react-aria-components/useListData';
 import {PokemonCOMPONENT, Pokemon, defaultItems} from './PokemonCOMPONENT';
 
 function ReorderableCOMPONENT() {
@@ -469,7 +472,8 @@ Use the `onMove` event to enable moving items within a collection. This allows r
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop, useTreeData} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
+import {useTreeData} from 'react-aria-components/useTreeData';
 import {PokemonCOMPONENT, Pokemon, defaultItems} from './PokemonCOMPONENT';
 
 function ReorderableCOMPONENT() {
@@ -525,7 +529,8 @@ This example puts together many of the examples described above, allowing users 
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop, isTextDropItem, useListData} from 'react-aria-components';
+import {useDragAndDrop, isTextDropItem} from 'react-aria-components/useDragAndDrop';
+import {useListData} from 'react-aria-components/useListData';
 import {PokemonCOMPONENT, Pokemon, defaultItems} from './PokemonCOMPONENT';
 
 interface DndCOMPONENTProps {
@@ -620,10 +625,10 @@ function DndCOMPONENT(props: DndCOMPONENTProps) {
 
 A `DropOperation` is an indication of what will happen when dragged data is dropped on a particular drop target. These are:
 
-* `move` – the dragged data will be moved from its source location to the target location.
-* `copy` – the dragged data will be copied to the target destination.
-* `link` – a relationship will be established between the source and target locations.
-* `cancel` – the drag and drop operation will be canceled, resulting in no changes made to the source or target.
+- `move` – the dragged data will be moved from its source location to the target location.
+- `copy` – the dragged data will be copied to the target destination.
+- `link` – a relationship will be established between the source and target locations.
+- `cancel` – the drag and drop operation will be canceled, resulting in no changes made to the source or target.
 
 Many operating systems display these in the form of a cursor change, e.g. a plus sign to indicate a copy operation. The user may also be able to use a modifier key to choose which drop operation to perform, such as <Keyboard>Option</Keyboard> or <Keyboard>Alt</Keyboard> to switch from move to copy.
 
@@ -643,7 +648,7 @@ Use `getDropOperation` option to provide feedback to the user when a drag hovers
 ## ListBox example
 
 ```tsx
-import {isTextDropItem, useDragAndDrop} from 'react-aria-components';
+import {isTextDropItem, useDragAndDrop} from 'react-aria-components/useDragAndDrop';
 import {useState} from 'react';
 import {PokemonCOMPONENT, Pokemon} from './PokemonCOMPONENT';
 import {DraggableCOMPONENT} from './DraggableCOMPONENT';
@@ -680,7 +685,8 @@ The drag source can also control which drop operations are allowed. In the examp
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop, useListData} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
+import {useListData} from 'react-aria-components/useListData';
 import {PokemonCOMPONENT, Pokemon, defaultItems} from './PokemonCOMPONENT';
 import {DroppableCOMPONENT} from './DroppableCOMPONENT';
 
@@ -720,7 +726,8 @@ This example removes the dragged items from the UI when a move operation is comp
 ## ListBox example
 
 ```tsx
-import {useDragAndDrop, useListData} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
+import {useListData} from 'react-aria-components/useListData';
 import {PokemonCOMPONENT, Pokemon, defaultItems} from './PokemonCOMPONENT';
 import {DroppableCOMPONENT} from './DroppableCOMPONENT';
 

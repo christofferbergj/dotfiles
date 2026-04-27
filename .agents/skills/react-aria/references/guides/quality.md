@@ -15,7 +15,7 @@ Be sure to create an accessible visual design with meaningful labels, sufficient
 Most components should have a visible label, which is usually provided by rendering a `<Label>` element within it. This is associated with the component automatically.
 
 ```tsx
-import {TextField, Label, Input} from 'react-aria-components';
+import {TextField, Label, Input} from 'react-aria-components/TextField';
 
 <TextField>
   {/*- begin highlight -*/}
@@ -28,7 +28,7 @@ import {TextField, Label, Input} from 'react-aria-components';
 When a component doesn't have a visible label, it must have an [aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label) or [aria-labelledby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby) prop to provide an accessible name.
 
 ```tsx
-import {ProgressBar} from 'react-aria-components';
+import {ProgressBar} from 'react-aria-components/ProgressBar';
 
 <ProgressBar
   /*- begin highlight -*/
@@ -40,11 +40,11 @@ import {ProgressBar} from 'react-aria-components';
 
 React Aria is tested across a variety of devices, browsers, and screen readers.
 
-* [VoiceOver on macOS](https://www.apple.com/accessibility/mac/vision/) in Safari and Chrome
-* [JAWS](https://www.freedomscientific.com/products/software/jaws/) on Windows in Firefox and Chrome
-* [NVDA](https://www.nvaccess.org) on Windows in Firefox and Chrome
-* [VoiceOver on iOS](https://www.apple.com/accessibility/iphone/vision/)
-* [TalkBack](https://www.android.com/accessibility/) on Android in Chrome
+- [VoiceOver on macOS](https://www.apple.com/accessibility/mac/vision/) in Safari and Chrome
+- [JAWS](https://www.freedomscientific.com/products/software/jaws/) on Windows in Firefox and Chrome
+- [NVDA](https://www.nvaccess.org) on Windows in Firefox and Chrome
+- [VoiceOver on iOS](https://www.apple.com/accessibility/iphone/vision/)
+- [TalkBack](https://www.android.com/accessibility/) on Android in Chrome
 
 ### Automated testing
 
@@ -61,7 +61,7 @@ Make sure your design supports right-to-left layout, and adapts to different lan
 React Aria automatically detects the user's current language by default. Use the `I18nProvider` component to set the locale to a specific value. You should also set the `lang` and `dir` attributes on the root-most element of your application.
 
 ```tsx
-import {I18nProvider, useLocale} from 'react-aria-components';
+import {I18nProvider, useLocale} from 'react-aria-components/I18nProvider';
 
 <I18nProvider locale="fr-FR">
   <App />
@@ -125,16 +125,16 @@ Modern web apps run on everything from desktops to mobile devices to TVs, with u
 
 React Aria components provide data attributes and render props to style these states:
 
-* `data-pressed` – like the `:active` pseudo class, but removed when the pointer is dragged off.
-* `data-hovered` – like `:hover`, but not applied on touch devices, preventing sticky hover states.
-* `data-focus-visible` – like `:focus-visible`, but not on input click or programmatic focus.
+- `data-pressed` – like the `:active` pseudo class, but removed when the pointer is dragged off.
+- `data-hovered` – like `:hover`, but not applied on touch devices, preventing sticky hover states.
+- `data-focus-visible` – like `:focus-visible`, but not on input click or programmatic focus.
 
 These states also come with corresponding events such as `onPress` and `onHoverStart`. To use these events in your own custom components, see hooks such as [usePress](usePress.md), [useHover](useHover.md), [useMove](useMove.md), and [useFocusRing](useFocusRing.md).
 
 Read our blog post series to learn more about the intricacies behind these interactions.
 
-* [Building a Button Part 1: Press Events](blog/building-a-button-part-1.md)
-* [Building a Button Part 2: Hover Interactions](blog/building-a-button-part-2.md)
-* [Building a Button Part 3: Keyboard Focus Behavior](blog/building-a-button-part-3.md)
+- [Building a Button Part 1: Press Events](blog/building-a-button-part-1.md)
+- [Building a Button Part 2: Hover Interactions](blog/building-a-button-part-2.md)
+- [Building a Button Part 3: Keyboard Focus Behavior](blog/building-a-button-part-3.md)
 
 Higher level interaction patterns such as [selection](selection.md) and [drag and drop](dnd.md) are also built on top of these low level primitives.

@@ -3,7 +3,7 @@
 A FileTrigger allows a user to access the file system with any pressable React Aria or React Spectrum component, or custom components built with usePress.
 
 ```tsx
-import {FileTrigger} from 'react-aria-components';
+import {FileTrigger} from 'react-aria-components/FileTrigger';
 import {Button} from 'vanilla-starter/Button';
 import {useState} from 'react';
 
@@ -36,7 +36,7 @@ function Example(props) {
 
 ```tsx
 "use client"
-import {Pressable, FileTrigger} from 'react-aria-components';
+import {Pressable, FileTrigger} from 'react-aria-components/FileTrigger';
 
 <FileTrigger>
   {/*- begin highlight -*/}

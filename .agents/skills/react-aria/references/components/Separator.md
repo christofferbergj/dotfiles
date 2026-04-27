@@ -8,7 +8,7 @@ A separator is a visual divider between two groups of content, e.g. groups of me
 
 ```tsx
 'use client';
-import {Separator as RACSeparator, SeparatorProps} from 'react-aria-components';
+import { Separator as RACSeparator, type SeparatorProps } from 'react-aria-components/Separator';
 import React from 'react';
 import './Separator.css';
 
@@ -45,7 +45,7 @@ export function Separator(props: SeparatorProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { Separator as RACSeparator, SeparatorProps } from 'react-aria-components';
+import { Separator as RACSeparator, type SeparatorProps } from 'react-aria-components/Separator';
 import { tv } from 'tailwind-variants';
 
 const styles = tv({

@@ -4,76 +4,103 @@ Learn how to use the React Aria MCP Server, Agent Skills, and more to help you b
 
 ## MCP Server
 
-### Pre-requisites
-
 [Node.js](https://nodejs.org/) must be installed on your system to run the MCP server.
 
-### Using with an MCP client
+<Tabs
+  aria-label="MCP Clients"
+  density="compact"
+>
+  <TabList><Tab id="cursor">Cursor</Tab><Tab id="vscode">VS Code</Tab><Tab id="claude-code">Claude Code</Tab><Tab id="codex">Codex</Tab><Tab id="gemini-cli">Gemini CLI</Tab><Tab id="other">Other</Tab></TabList>
 
-Add the server to your MCP client configuration (the exact file and schema may depend on your client).
+  <TabPanel id="cursor">
+    Click the button to install:
 
-```js
-{
-  "mcpServers": {
-    "React Aria": {
-      "command": "npx",
-      "args": ["@react-aria/mcp@latest"]
+    [Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install.md?name=React%20Aria\&config=eyJjb21tYW5kIjoibnB4IEByZWFjdC1hcmlhL21jcEBsYXRlc3QifQ%3D%3D)
+
+    Or follow Cursor's MCP install [guide](https://cursor.com/docs/context/mcp#installing-mcp-servers) and use the following config:
+
+    ```js
+    {
+      "mcpServers": {
+        "React Aria": {
+          "command": "npx",
+          "args": ["@react-aria/mcp@latest"]
+        }
+      }
     }
-  }
-}
-```
+    ```
+  </TabPanel>
 
-### Cursor
+  <TabPanel id="vscode">
+    Click the button to install:
 
-[Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install.md?name=React%20Aria\&config=eyJjb21tYW5kIjoibnB4IEByZWFjdC1hcmlhL21jcEBsYXRlc3QifQ%3D%3D)
+    [Add to Visual Studio Code](vscode:mcp/install.md?%7B%22name%22%3A%22React%20Aria%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22%40react-aria%2Fmcp%40latest%22%5D%7D)
 
-Or follow Cursor's MCP install [guide](https://cursor.com/docs/context/mcp#installing-mcp-servers) and use the standard config above.
+    Or follow VS Code's MCP install [guide](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server) and use the following config. You can also add the server using the VS Code CLI:
 
-### VS Code
+    ```bash
+    code --add-mcp '{"name":"React Aria","command":"npx","args":["@react-aria/mcp@latest"]}'
+    ```
 
-[Add to Visual Studio Code](vscode:mcp/install.md?%7B%22name%22%3A%22React%20Aria%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22%40react-aria%2Fmcp%40latest%22%5D%7D)
+    ```js
+    {
+      "mcpServers": {
+        "React Aria": {
+          "command": "npx",
+          "args": ["@react-aria/mcp@latest"]
+        }
+      }
+    }
+    ```
+  </TabPanel>
 
-Or follow VS Code's MCP install [guide](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server) and use the standard config above. You can also add the server using the VS Code CLI:
+  <TabPanel id="claude-code">
+    Use the Claude Code CLI to add the server:
 
-```bash
-code --add-mcp '{"name":"React Aria","command":"npx","args":["@react-aria/mcp@latest"]}'
-```
+    ```bash
+    claude mcp add react-aria npx @react-aria/mcp@latest
+    ```
 
-### Claude Code
+    For more information, see the [Claude Code MCP documentation](https://docs.claude.com/en/docs/claude-code/mcp).
+  </TabPanel>
 
-Use the Claude Code CLI to add the server:
+  <TabPanel id="codex">
+    Create or edit the configuration file `~/.codex/config.toml` and add:
 
-```bash
-claude mcp add react-aria npx @react-aria/mcp@latest
-```
+    ```
+    [mcp_servers.react-aria]
+    command = "npx"
+    args = ["@react-aria/mcp@latest"]
+    ```
 
-For more information, see the [Claude Code MCP documentation](https://docs.claude.com/en/docs/claude-code/mcp).
+    For more information, see the [Codex MCP documentation](https://github.com/openai/codex/blob/main/docs/config.md#mcp_servers).
+  </TabPanel>
 
-### Codex
+  <TabPanel id="gemini-cli">
+    Use the Gemini CLI to add the server:
 
-Create or edit the configuration file `~/.codex/config.toml` and add:
+    ```bash
+    gemini mcp add react-aria npx @react-aria/mcp@latest
+    ```
 
-```
-[mcp_servers.react-aria]
-command = "npx"
-args = ["@react-aria/mcp@latest"]
-```
+    For more information, see the [Gemini CLI MCP documentation](https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md#how-to-set-up-your-mcp-server).
+  </TabPanel>
 
-For more information, see the [Codex MCP documentation](https://github.com/openai/codex/blob/main/docs/config.md#mcp_servers).
+  <TabPanel id="other">
+    Add the server to your MCP client configuration (the exact file and schema may depend on your client).
 
-### Gemini CLI
-
-Use the Gemini CLI to add the server:
-
-```bash
-gemini mcp add react-aria npx @react-aria/mcp@latest
-```
-
-For more information, see the [Gemini CLI MCP documentation](https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md#how-to-set-up-your-mcp-server).
-
-### Windsurf
-
-Follow the Windsurf MCP [documentation](https://docs.windsurf.com/windsurf/cascade/mcp) and use the standard config above.
+    ```js
+    {
+      "mcpServers": {
+        "React Aria": {
+          "command": "npx",
+          "args": ["@react-aria/mcp@latest"]
+        }
+      }
+    }
+    ```
+  </TabPanel>
+</Tabs>
 
 ## Agent Skills
 

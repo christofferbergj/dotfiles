@@ -18,7 +18,7 @@ This example includes two textfields and compares the values of the two fields u
 ```tsx
 'use client';
 import React from 'react';
-import {useCollator} from 'react-aria';
+import {useCollator} from 'react-aria/useCollator';
 
 function Example() {
   let [first, setFirst] = React.useState('');

@@ -16,8 +16,7 @@ This example shows how to make a simple drop target that accepts plain text data
 ```tsx
 'use client';
 import React from 'react';
-import type {TextDropItem} from 'react-aria';
-import {useDrop} from 'react-aria';
+import {useDrop, type TextDropItem} from 'react-aria/useDrop';
 import {Draggable} from './Draggable';
 import './useDragExample.css';
 import 'vanilla-starter/theme.css';
@@ -54,9 +53,9 @@ function DropTarget() {
 
 `useDrop` allows users to drop one or more **drag items**, each of which contains data to be transferred from the drag source to drop target. There are three kinds of drag items:
 
-* `text` – represents data inline as a string in one or more formats
-* `file` – references a file on the user's device
-* `directory` – references the contents of a directory
+- `text` – represents data inline as a string in one or more formats
+- `file` – references a file on the user's device
+- `directory` – references the contents of a directory
 
 ### Text
 
@@ -67,8 +66,7 @@ The example below finds the first available item that includes a custom app-spec
 ```tsx
 'use client';
 import React from 'react';
-import type {TextDropItem} from 'react-aria';
-import {useDrop} from 'react-aria';
+import {useDrop, type TextDropItem} from 'react-aria/useDrop';
 import {Draggable} from './Draggable';
 
 function DropTarget() {
@@ -107,8 +105,8 @@ This example accepts JPEG and PNG image files, and renders them by creating a lo
 ```tsx
 'use client';
 import React from 'react';
-import type {FileDropItem} from 'react-aria';
-import {useDrop} from 'react-aria';
+import {useDrop, type FileDropItem} from 'react-aria/useDrop';
+
 function DropTarget() {
   let [file, setFile] = React.useState<string | null>(null);
   let ref = React.useRef(null);
@@ -141,10 +139,9 @@ This example renders the file names within a dropped directory in a grid.
 ```tsx
 'use client';
 import React from 'react';
-import type {DirectoryDropItem} from 'react-aria';
+import {useDrop, type DirectoryDropItem} from 'react-aria/useDrop';
 import File from '@react-spectrum/s2/icons/File';
 import Folder from '@react-spectrum/s2/icons/Folder';
-import {useDrop} from 'react-aria';
 import './useClipboardGrid.css';
 
 function DropTarget() {
@@ -195,10 +192,10 @@ function DropTarget() {
 
 A `DropOperation` is an indication of what will happen when dragged data is dropped on a particular drop target. These are:
 
-* `move` – indicates that the dragged data will be moved from its source location to the target location.
-* `copy` – indicates that the dragged data will be copied to the target destination.
-* `link` – indicates that there will be a relationship established between the source and target locations.
-* `cancel` – indicates that the drag and drop operation will be canceled, resulting in no changes made to the source or target.
+- `move` – indicates that the dragged data will be moved from its source location to the target location.
+- `copy` – indicates that the dragged data will be copied to the target destination.
+- `link` – indicates that there will be a relationship established between the source and target locations.
+- `cancel` – indicates that the drag and drop operation will be canceled, resulting in no changes made to the source or target.
 
 Many operating systems display these in the form of a cursor change, e.g. a plus sign to indicate a copy operation. The user may also be able to use a modifier key to choose which drop operation to perform, such as <Keyboard>Option</Keyboard> or <Keyboard>Alt</Keyboard> to switch from move to copy.
 The drag source can specify which drop operations are allowed for the dragged data (see the [useDrag docs](useDrag.md) for how to customize this). By default, the first allowed operation is allowed by drop targets, meaning that the drop target accepts data of any type and operation.
@@ -213,8 +210,8 @@ In the below example, the drop target only supports dropping PNG images. If a PN
 ```tsx
 'use client';
 import React from 'react';
-import {useDrop} from 'react-aria';
-import type {FileDropItem} from 'react-aria';
+import {useDrop, type FileDropItem} from 'react-aria/useDrop';
+
 function DropTarget() {
   let [file, setFile] = React.useState<string | null>(null);
   let ref = React.useRef(null);
@@ -292,7 +289,7 @@ This example logs all events that occur within the drop target:
 ```tsx
 'use client';
 import React from 'react';
-import {useDrop} from 'react-aria';
+import {useDrop} from 'react-aria/useDrop';
 import {Draggable} from './Draggable';
 
 function DropTarget() {
@@ -325,8 +322,7 @@ If you need to temporarily disable dropping, you can pass the `isDisabled` optio
 ```tsx
 'use client';
 import React from 'react';
-import type {TextDropItem} from 'react-aria';
-import {useDrop} from 'react-aria';
+import {useDrop, type TextDropItem} from 'react-aria/useDrop';
 import {Draggable} from './Draggable';
 
 function DropTarget() {

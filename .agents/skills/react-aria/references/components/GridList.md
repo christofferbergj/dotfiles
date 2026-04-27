@@ -6,8 +6,7 @@ single or multiple selection, and row actions.
 ## Vanilla CSS example
 
 ```tsx
-import {Text} from 'react-aria-components';
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
 
 <GridList>
   <GridListItem textValue="Desert Sunset">
@@ -71,11 +70,14 @@ import {
   Button,
   GridList as AriaGridList,
   GridListItem as AriaGridListItem,
-  GridListItemProps,
-  GridListProps,
   GridListLoadMoreItem as AriaGridListLoadMoreItem,
-  GridListLoadMoreItemProps
-} from 'react-aria-components';
+  Text,
+  GridListSection,
+  GridListHeader,
+  type GridListItemProps,
+  type GridListProps,
+  type GridListLoadMoreItemProps,
+} from 'react-aria-components/GridList';
 import {Checkbox} from './Checkbox';
 import {GripVertical} from 'lucide-react';
 import {ProgressCircle} from './ProgressCircle';
@@ -124,6 +126,8 @@ export function GridListLoadMoreItem(props: GridListLoadMoreItemProps) {
     </AriaGridListLoadMoreItem>
   );
 }
+
+export {GridListSection, GridListHeader, Text};
 
 ```
 
@@ -190,6 +194,26 @@ export function GridListLoadMoreItem(props: GridListLoadMoreItemProps) {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
+
+    &[data-orientation=horizontal] {
+      display: flex;
+      flex-direction: row;
+      justify-content: normal;
+
+      .react-aria-GridListItem {
+        flex-shrink: 0;
+        width: var(--grid-item-size);
+      }
+    }
+  }
+
+  &[data-layout=grid][data-orientation=horizontal] {
+    grid-auto-flow: column;
+    grid-template-rows: auto auto;
+    grid-template-columns: none;
+    grid-auto-columns: var(--grid-item-size);
+    justify-content: normal;
+    max-height: none;
   }
 
   &[data-focus-visible] {
@@ -441,21 +465,24 @@ import {
   GridListItem as AriaGridListItem,
   GridListHeader as AriaGridListHeader,
   Button,
-  composeRenderProps,
-  GridListItemProps,
-  GridListProps
-} from 'react-aria-components';
+  type GridListItemProps,
+  type GridListProps,
+} from 'react-aria-components/GridList';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 import { Checkbox } from './Checkbox';
 import { composeTailwindRenderProps, focusRing } from './utils';
-import {HTMLAttributes} from 'react';
+import {type HTMLAttributes} from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export function GridList<T extends object>(
   { children, ...props }: GridListProps<T>
 ) {
+  let isHorizontal = (props as {orientation?: 'horizontal' | 'vertical'}).orientation === 'horizontal';
   return (
-    <AriaGridList {...props} className={composeTailwindRenderProps(props.className, 'overflow-auto w-[200px] relative bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm')}>
+    <AriaGridList {...props} className={composeTailwindRenderProps(props.className, isHorizontal
+      ? 'flex flex-row flex-nowrap overflow-x-auto relative w-full max-w-[500px] bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm'
+      : 'overflow-auto w-[200px] relative bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm')}>
       {children}
     </AriaGridList>
   );
@@ -463,11 +490,19 @@ export function GridList<T extends object>(
 
 const itemStyles = tv({
   extend: focusRing,
-  base: 'relative flex gap-3 cursor-default select-none py-2 px-3 text-sm text-neutral-900 dark:text-neutral-200 border-t dark:border-t-neutral-700 border-transparent first:border-t-0 first:rounded-t-lg last:rounded-b-lg last:mb-0 -outline-offset-2',
+  base: [
+    'relative flex gap-3 cursor-default select-none py-2 px-3 text-sm text-neutral-900 dark:text-neutral-200 border-transparent -outline-offset-2',
+    '[[data-orientation=vertical]_&]:border-t [[data-orientation=vertical]_&]:dark:border-t-neutral-700 [[data-orientation=vertical]_&]:first:border-t-0 [[data-orientation=vertical]_&]:first:rounded-t-lg [[data-orientation=vertical]_&]:last:rounded-b-lg',
+    '[[data-orientation=horizontal]_&]:border-l [[data-orientation=horizontal]_&]:dark:border-l-neutral-700 [[data-orientation=horizontal]_&]:first:border-l-0 [[data-orientation=horizontal]_&]:first:rounded-s-lg [[data-orientation=horizontal]_&]:last:rounded-e-lg [[data-orientation=horizontal]_&]:flex-shrink-0'
+  ].join(' '),
   variants: {
     isSelected: {
       false: 'hover:bg-neutral-100 pressed:bg-neutral-100 dark:hover:bg-neutral-700/60 dark:pressed:bg-neutral-700/60',
-      true: 'bg-blue-100 dark:bg-blue-700/30 hover:bg-blue-200 pressed:bg-blue-200 dark:hover:bg-blue-700/40 dark:pressed:bg-blue-700/40 border-y-blue-200 dark:border-y-blue-900 z-20'
+      true: [
+        'bg-blue-100 dark:bg-blue-700/30 hover:bg-blue-200 pressed:bg-blue-200 dark:hover:bg-blue-700/40 dark:pressed:bg-blue-700/40 z-20',
+        '[[data-orientation=vertical]_&]:border-y-blue-200 [[data-orientation=vertical]_&]:dark:border-y-blue-900',
+        '[[data-orientation=horizontal]_&]:border-x-blue-200 [[data-orientation=horizontal]_&]:dark:border-x-blue-900 '
+      ].join(' ')
     },
     isDisabled: {
       true: 'text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText] z-10'
@@ -506,8 +541,7 @@ export function GridListHeader({children, ...props}: HTMLAttributes<HTMLElement>
 `GridList` follows the [Collection Components API](collections.md?component=GridList), accepting both static and dynamic collections. This example shows a dynamic collection, passing a list of objects to the `items` prop, and a function to render the children.
 
 ```tsx
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
-import {Text} from 'react-aria-components';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
 
 let images = [
   {
@@ -770,10 +804,10 @@ function Example() {
 Use [renderEmptyState](#empty-state) to display a spinner during initial load. To enable infinite scrolling, render a `<GridListLoadMoreItem>` at the end of the list. Use whatever data fetching library you prefer – this example uses `useAsyncList` from `react-stately`.
 
 ```tsx
-import {GridList, GridListItem, GridListLoadMoreItem} from 'vanilla-starter/GridList';
-import {Collection, Text} from 'react-aria-components';
+import {GridList, GridListItem, GridListLoadMoreItem, Text} from 'vanilla-starter/GridList';
+import {Collection} from 'react-aria-components/Collection';
+import {useAsyncList} from 'react-aria-components/useAsyncList';
 import {ProgressCircle} from 'vanilla-starter/ProgressCircle';
-import {useAsyncList} from '@react-stately/data';
 
 type Item = {
   id: string;
@@ -833,8 +867,7 @@ function AsyncLoadingExample() {
 Use the `href` prop on a `<GridListItem>` to create a link. Link interactions vary depending on the selection behavior. See the [selection guide](selection.md?component=GridList#selection-behavior) for more details.
 
 ```tsx
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
-import {Text} from 'react-aria-components';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
 
 let images = [
   {
@@ -943,8 +976,7 @@ import {GridList} from 'vanilla-starter/GridList';
 Use the `<GridListSection>` component to group options. A `<GridListHeader>` element may also be included to label the section. Sections without a header must have an `aria-label`.
 
 ```tsx
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
-import {GridListHeader, GridListSection, Text} from 'react-aria-components';
+import {GridList, GridListItem, GridListHeader, GridListSection, Text} from 'vanilla-starter/GridList';
 
 <GridList
   layout="grid"
@@ -993,8 +1025,8 @@ import {GridListHeader, GridListSection, Text} from 'react-aria-components';
 Use the `selectionMode` prop to enable single or multiple selection. The selected items can be controlled via the `selectedKeys` prop, matching the `id` prop of the items. The `onAction` event handles item actions. Items can be disabled with the `isDisabled` prop. See the [selection guide](selection.md?component=GridList) for more details.
 
 ```tsx
-import {type Selection, Text} from 'react-aria-components';
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
+import type {Selection} from 'react-aria-components/GridList';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
 import {useState} from 'react';
 
 function Example(props) {
@@ -1006,7 +1038,7 @@ function Example(props) {
         {...props}
         aria-label="Nature photos"
         layout="grid"
-        
+
         selectedKeys={selected}
         onSelectionChange={setSelected}
         onAction={key => alert(`Clicked ${key}`)}
@@ -1068,13 +1100,47 @@ function Example(props) {
 }
 ```
 
+## Layouts
+
+Use the `layout` and `orientation` props to arrange items in horizontal and vertical stacks and grids. This affects keyboard navigation and drag and drop behavior.
+
+```tsx
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
+
+let photos = [
+  {id: 1, title: 'Desert Sunset', description: 'PNG • 2/3/2024', src: 'https://images.unsplash.com/photo-1705034598432-1694e203cdf3?q=80&w=600&auto=format&fit=crop'},
+  {id: 2, title: 'Hiking Trail', description: 'JPEG • 1/10/2022', src: 'https://images.unsplash.com/photo-1722233987129-61dc344db8b6?q=80&w=600&auto=format&fit=crop'},
+  {id: 3, title: 'Lion', description: 'JPEG • 8/28/2021', src: 'https://images.unsplash.com/photo-1629812456605-4a044aa38fbc?q=80&w=600&auto=format&fit=crop'},
+  {id: 4, title: 'Mountain Sunrise', description: 'PNG • 3/15/2015', src: 'https://images.unsplash.com/photo-1722172118908-1a97c312ce8c?q=80&w=600&auto=format&fit=crop'},
+  {id: 5, title: 'Giraffe tongue', description: 'PNG • 11/27/2019', src: 'https://images.unsplash.com/photo-1574870111867-089730e5a72b?q=80&w=600&auto=format&fit=crop'},
+  {id: 6, title: 'Golden Hour', description: 'WEBP • 7/24/2024', src: 'https://images.unsplash.com/photo-1718378037953-ab21bf2cf771?q=80&w=600&auto=format&fit=crop'},
+];
+
+<GridList
+  /*- begin highlight -*/
+
+  /*- end highlight -*/
+  aria-label="Photos"
+  items={photos}
+  selectionMode="multiple">
+  {item => (
+    <GridListItem textValue={item.title}>
+      <img src={item.src} alt="" />
+      <Text>{item.title}</Text>
+      <Text slot="description">{item.description}</Text>
+    </GridListItem>
+  )}
+</GridList>
+```
+
 ## Drag and drop
 
 GridList supports drag and drop interactions when the `dragAndDropHooks` prop is provided using the `useDragAndDrop` hook. Users can drop data on the list as a whole, on individual items, insert new items between existing ones, or reorder items. React Aria supports drag and drop via mouse, touch, keyboard, and screen reader interactions. See the [drag and drop guide](dnd.md?component=GridList) to learn more.
 
 ```tsx
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
-import {useDragAndDrop, Text, useListData} from 'react-aria-components';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
+import {useListData} from 'react-aria-components/useListData';
 
 let images = [
   {
@@ -1385,7 +1451,7 @@ function Example() {
 | `autoFocus` | `boolean | FocusStrategy | undefined` | — | Whether to auto focus the gridlist or an option. |
 | `children` | `React.ReactNode | ((item: T) => ReactNode)` | — | The contents of the collection. |
 | `className` | `ClassNameOrFunction<GridListRenderProps> | undefined` | 'react-aria-GridList' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
-| `defaultSelectedKeys` | `Iterable<Key> | "all" | undefined` | — | The initial selected keys in the collection (uncontrolled). |
+| `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
 | `disabledBehavior` | `DisabledBehavior | undefined` | "all" | Whether `disabledKeys` applies to all interactions, or only selection. |
@@ -1393,7 +1459,7 @@ function Example() {
 | `disallowEmptySelection` | `boolean | undefined` | — | Whether the collection allows empty selection. |
 | `disallowTypeAhead` | `boolean | undefined` | false | Whether typeahead navigation is disabled. |
 | `dragAndDropHooks` | `DragAndDropHooks<NoInfer<T>> | undefined` | — | The drag and drop hooks returned by `useDragAndDrop` used to enable drag and drop behavior for the GridList. |
-| `escapeKeyBehavior` | `"none" | "clearSelection" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the grid list or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
+| `escapeKeyBehavior` | `"clearSelection" | "none" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the grid list or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
@@ -1467,9 +1533,10 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
+| `orientation` | `Orientation | undefined` | 'vertical' | The primary orientation of the items. Usually this is the direction that the collection scrolls. |
 | `render` | `DOMRenderFunction<"div", GridListRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `renderEmptyState` | `((props: GridListRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no items in the list. |
-| `selectedKeys` | `Iterable<Key> | "all" | undefined` | — | The currently selected keys in the collection (controlled). |
+| `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
 | `selectionBehavior` | `SelectionBehavior | undefined` | "toggle" | How multiple selection should behave in the collection. |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |

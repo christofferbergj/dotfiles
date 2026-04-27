@@ -8,11 +8,7 @@ A ColorSwatch displays a preview of a selected color.
 
 ```tsx
 'use client';
-import {
-  ColorSwatch as AriaColorSwatch,
-  ColorSwatchProps
-} from 'react-aria-components';
-
+import { ColorSwatch as AriaColorSwatch, type ColorSwatchProps } from 'react-aria-components/ColorSwatch';
 import './ColorSwatch.css';
 
 export function ColorSwatch(props: ColorSwatchProps) {
@@ -52,7 +48,7 @@ export function ColorSwatch(props: ColorSwatchProps) {
 ```tsx
 'use client';
 import React from 'react';
-import {ColorSwatch as AriaColorSwatch, ColorSwatchProps} from 'react-aria-components';
+import { ColorSwatch as AriaColorSwatch, type ColorSwatchProps } from 'react-aria-components/ColorSwatch';
 import { composeTailwindRenderProps } from './utils';
 
 export function ColorSwatch(props: ColorSwatchProps) {

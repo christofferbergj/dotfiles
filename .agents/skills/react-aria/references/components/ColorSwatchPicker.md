@@ -24,12 +24,10 @@ import {ColorSwatchPicker, ColorSwatchPickerItem} from 'vanilla-starter/ColorSwa
 import {
   ColorSwatchPicker as AriaColorSwatchPicker,
   ColorSwatchPickerItem as AriaColorSwatchPickerItem,
-  ColorSwatchPickerItemProps,
-  ColorSwatchPickerProps
-} from 'react-aria-components';
-
+  type ColorSwatchPickerItemProps,
+  type ColorSwatchPickerProps,
+} from 'react-aria-components/ColorSwatchPicker';
 import {ColorSwatch} from './ColorSwatch';
-
 import './ColorSwatchPicker.css';
 
 export function ColorSwatchPicker(
@@ -126,10 +124,10 @@ import React from 'react';
 import {
   ColorSwatchPicker as AriaColorSwatchPicker,
   ColorSwatchPickerItem as AriaColorSwatchPickerItem,
-  ColorSwatchPickerItemProps,
-  ColorSwatchPickerProps,
-  composeRenderProps
-} from 'react-aria-components';
+  type ColorSwatchPickerItemProps,
+  type ColorSwatchPickerProps,
+} from 'react-aria-components/ColorSwatchPicker';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {ColorSwatch} from './ColorSwatch';
 import {focusRing} from './utils';
 import {tv} from 'tailwind-variants';
@@ -177,7 +175,7 @@ Use the `value` or `defaultValue` prop to set the selected color, and `onChange`
 
 ```tsx
 import {ColorSwatchPicker, ColorSwatchPickerItem} from 'vanilla-starter/ColorSwatchPicker';
-import {parseColor} from 'react-aria-components';
+import {parseColor} from 'react-aria-components/ColorSwatchPicker';
 import {useState} from 'react';
 
 function Example() {
@@ -393,68 +391,6 @@ function Example() {
 ## Related Types
 
 ### Color
-
-Represents a color value.
-
-#### `toFormat(format: ColorFormat): Color`
-
-Converts the color to the given color format, and returns a new Color object.
-
-#### `toString(format?: ColorFormat | 'css'): string`
-
-Converts the color to a string in the given format.
-
-#### `clone(): Color`
-
-Returns a duplicate of the color value.
-
-#### `toHexInt(): number`
-
-Converts the color to hex, and returns an integer representation.
-
-#### `getChannelValue(channel: ColorChannel): number`
-
-Returns the numeric value for a given channel. Throws an error if the channel is unsupported in the current color format.
-
-#### `withChannelValue(channel: ColorChannel, value: number): Color`
-
-Sets the numeric value for a given channel, and returns a new Color object. Throws an error if the channel is unsupported in the current color format.
-
-#### `getChannelRange(channel: ColorChannel): ColorChannelRange`
-
-Returns the minimum, maximum, and step values for a given channel.
-
-#### `getChannelName(channel: ColorChannel, locale: string): string`
-
-Returns a localized color channel name for a given channel and locale, for use in visual or accessibility labels.
-
-#### `getChannelFormatOptions(channel: ColorChannel): Intl.NumberFormatOptions`
-
-Returns the number formatting options for the given channel.
-
-#### `formatChannelValue(channel: ColorChannel, locale: string): string`
-
-Formats the numeric value for a given channel for display according to the provided locale.
-
-#### `getColorSpace(): ColorSpace`
-
-Returns the color space, 'rgb', 'hsb' or 'hsl', for the current color.
-
-#### `getColorSpaceAxes(xyChannels: {xChannel?: ColorChannel, yChannel?: ColorChannel}): ColorAxes`
-
-Returns the color space axes, xChannel, yChannel, zChannel.
-
-#### `getColorChannels(): [ColorChannel, ColorChannel, ColorChannel]`
-
-Returns an array of the color channels within the current color space space.
-
-#### `getColorName(locale: string): string`
-
-Returns a localized name for the color, for use in visual or accessibility labels.
-
-#### `getHueName(locale: string): string`
-
-Returns a localized name for the hue, for use in visual or accessibility labels.
 
 ### parseColor
 

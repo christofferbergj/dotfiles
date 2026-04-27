@@ -9,18 +9,14 @@ It simplifies building color pickers with customizable layouts via composition.
 
 ```tsx
 'use client';
-import {
-  Button,
-  ColorPicker as AriaColorPicker,
-  ColorPickerProps as AriaColorPickerProps
-} from 'react-aria-components';
+import { Button } from 'react-aria-components/Button';
+import { ColorPicker as AriaColorPicker, type ColorPickerProps as AriaColorPickerProps } from 'react-aria-components/ColorPicker';
 import {DialogTrigger} from './Dialog';
 import {ColorSwatch} from './ColorSwatch';
 import {ColorSlider} from './ColorSlider';
 import {ColorArea} from './ColorArea';
 import {ColorField} from './ColorField';
 import {Popover} from './Popover';
-
 import './ColorPicker.css';
 
 export interface ColorPickerProps extends Omit<AriaColorPickerProps, 'children'> {
@@ -102,7 +98,9 @@ export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
 ```tsx
 'use client';
 import React from 'react';
-import {Button, ColorPicker as AriaColorPicker, ColorPickerProps as AriaColorPickerProps, DialogTrigger} from 'react-aria-components';
+import { Button } from 'react-aria-components/Button';
+import { ColorPicker as AriaColorPicker, type ColorPickerProps as AriaColorPickerProps } from 'react-aria-components/ColorPicker';
+import { DialogTrigger } from 'react-aria-components/Dialog';
 import {ColorSwatch} from './ColorSwatch';
 import {ColorArea} from './ColorArea';
 import {ColorSlider} from './ColorSlider';
@@ -157,7 +155,7 @@ export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
 Use the `value` or `defaultValue` prop to set the color value. This may be a string or `Color` object, parsed using the `parseColor` function. The `onChange` event is always called with a `Color` object.
 
 ```tsx
-import {parseColor} from 'react-aria-components';
+import {parseColor} from 'react-aria-components/ColorPicker';
 import {ColorPicker} from 'vanilla-starter/ColorPicker';
 import {useState} from 'react';
 
@@ -185,8 +183,7 @@ function Example() {
 This example uses [ColorSlider](ColorSlider.md) to allow a user to adjust each channel of a color value, with a [Select](Select.md) to switch between color spaces.
 
 ```tsx
-import type {ColorSpace} from 'react-aria-components';
-import {getColorChannels} from 'react-aria-components';
+import {getColorChannels, type ColorSpace} from 'react-aria-components/ColorPicker';
 import {ColorPicker} from 'vanilla-starter/ColorPicker';
 import {ColorSlider} from 'vanilla-starter/ColorSlider';
 import {Select, SelectItem} from 'vanilla-starter/Select';
@@ -243,9 +240,8 @@ import {ColorArea} from 'vanilla-starter/ColorArea';
 This example uses [ColorField](ColorField.md) to allow a user to edit the value of each color channel as a number, along with a [Select](Select.md) to switch between color spaces.
 
 ```tsx
-import type {ColorSpace} from 'react-aria-components';
+import {getColorChannels, type ColorSpace} from 'react-aria-components/ColorPicker';
 import {ColorPicker} from 'vanilla-starter/ColorPicker';
-import {getColorChannels} from 'react-aria-components';
 import {ColorArea} from 'vanilla-starter/ColorArea';
 import {ColorSlider} from 'vanilla-starter/ColorSlider';
 import {Select, SelectItem} from 'vanilla-starter/Select';
@@ -314,68 +310,6 @@ import {ColorSwatchPicker, ColorSwatchPickerItem} from 'vanilla-starter/ColorSwa
 ## Related Types
 
 ### Color
-
-Represents a color value.
-
-#### `toFormat(format: ColorFormat): Color`
-
-Converts the color to the given color format, and returns a new Color object.
-
-#### `toString(format?: ColorFormat | 'css'): string`
-
-Converts the color to a string in the given format.
-
-#### `clone(): Color`
-
-Returns a duplicate of the color value.
-
-#### `toHexInt(): number`
-
-Converts the color to hex, and returns an integer representation.
-
-#### `getChannelValue(channel: ColorChannel): number`
-
-Returns the numeric value for a given channel. Throws an error if the channel is unsupported in the current color format.
-
-#### `withChannelValue(channel: ColorChannel, value: number): Color`
-
-Sets the numeric value for a given channel, and returns a new Color object. Throws an error if the channel is unsupported in the current color format.
-
-#### `getChannelRange(channel: ColorChannel): ColorChannelRange`
-
-Returns the minimum, maximum, and step values for a given channel.
-
-#### `getChannelName(channel: ColorChannel, locale: string): string`
-
-Returns a localized color channel name for a given channel and locale, for use in visual or accessibility labels.
-
-#### `getChannelFormatOptions(channel: ColorChannel): Intl.NumberFormatOptions`
-
-Returns the number formatting options for the given channel.
-
-#### `formatChannelValue(channel: ColorChannel, locale: string): string`
-
-Formats the numeric value for a given channel for display according to the provided locale.
-
-#### `getColorSpace(): ColorSpace`
-
-Returns the color space, 'rgb', 'hsb' or 'hsl', for the current color.
-
-#### `getColorSpaceAxes(xyChannels: {xChannel?: ColorChannel, yChannel?: ColorChannel}): ColorAxes`
-
-Returns the color space axes, xChannel, yChannel, zChannel.
-
-#### `getColorChannels(): [ColorChannel, ColorChannel, ColorChannel]`
-
-Returns an array of the color channels within the current color space space.
-
-#### `getColorName(locale: string): string`
-
-Returns a localized name for the color, for use in visual or accessibility labels.
-
-#### `getHueName(locale: string): string`
-
-Returns a localized name for the hue, for use in visual or accessibility labels.
 
 ### parseColor
 

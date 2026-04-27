@@ -9,7 +9,7 @@ and selection.
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
 
 <Tree
-  
+
   aria-label="Files">
   <TreeItem title="Documents">
     <TreeItem title="Project">
@@ -32,13 +32,15 @@ import {
   Tree as AriaTree,
   TreeItem as AriaTreeItem,
   TreeItemContent as AriaTreeItemContent,
-  TreeItemContentProps,
-  TreeItemContentRenderProps,
-  TreeItemProps as AriaTreeItemProps,
-  TreeProps,
+  type TreeItemContentProps,
+  type TreeItemContentRenderProps,
+  type TreeItemProps as AriaTreeItemProps,
+  type TreeProps,
   TreeLoadMoreItem as AriaTreeLoadMoreItem,
-  TreeLoadMoreItemProps
-} from 'react-aria-components';
+  type TreeLoadMoreItemProps,
+  TreeSection as AriaTreeSection,
+  TreeHeader as AriaTreeHeader,
+} from 'react-aria-components/Tree';
 import {ChevronRight, GripVertical} from 'lucide-react';
 import {Checkbox} from './Checkbox';
 import {ProgressCircle} from './ProgressCircle';
@@ -96,6 +98,18 @@ export function TreeLoadMoreItem(props: TreeLoadMoreItemProps) {
   );
 }
 
+export function TreeSection<T extends object>(
+  props: React.ComponentProps<typeof AriaTreeSection>
+) {
+  return <AriaTreeSection {...props} />;
+}
+
+export function TreeHeader(
+  props: React.ComponentProps<typeof AriaTreeHeader>
+) {
+  return <AriaTreeHeader {...props} />;
+}
+
 ```
 
 ### Tree.css
@@ -118,6 +132,17 @@ export function TreeLoadMoreItem(props: TreeLoadMoreItemProps) {
   box-sizing: border-box;
   --drag-button-width: 0px;
   --checkbox-width: 0px;
+
+  .react-aria-TreeSection:not(:first-child) {
+    margin-top: var(--spacing-4);
+  }
+
+  .react-aria-TreeHeader {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    padding: var(--spacing-1) var(--spacing-2);
+    color: var(--text-color);
+  }
 
   &[data-focus-visible] {
     outline: 2px solid var(--focus-ring-color);
@@ -312,7 +337,7 @@ export function TreeLoadMoreItem(props: TreeLoadMoreItemProps) {
 import {Tree, TreeItem} from 'tailwind-starter/Tree';
 
 <Tree
-  
+
   aria-label="Files">
   <TreeItem title="Documents">
     <TreeItem title="Project">
@@ -336,9 +361,9 @@ import {
   TreeItem as AriaTreeItem,
   TreeItemContent as AriaTreeItemContent,
   Button,
-  TreeItemProps as AriaTreeItemProps,
-  TreeProps
-} from 'react-aria-components';
+  type TreeItemProps as AriaTreeItemProps,
+  type TreeProps,
+} from 'react-aria-components/Tree';
 import { ChevronRight } from "lucide-react";
 import { tv } from 'tailwind-variants';
 import { Checkbox } from './Checkbox';
@@ -426,7 +451,7 @@ export function TreeItem(props: TreeItemProps) {
 
 ```tsx
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
-import {Collection} from 'react-aria-components';
+import {Collection} from 'react-aria-components/Collection';
 
 let items = [
   {id: 1, title: 'Documents', type: 'directory', children: [
@@ -468,7 +493,8 @@ Use [renderEmptyState](#empty-state) to display a spinner during initial load. T
 ```tsx
 import {Tree, TreeItem, TreeLoadMoreItem} from 'vanilla-starter/Tree';
 import {ProgressCircle} from 'vanilla-starter/ProgressCircle';
-import {Collection, useAsyncList} from 'react-aria-components';
+import {Collection} from 'react-aria-components/Collection';
+import {useAsyncList} from 'react-aria-components/useAsyncList';
 
 interface Character {
   name: string
@@ -546,7 +572,7 @@ Use the `href` prop on a `<TreeItem>` to create a link. Link interactions vary d
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
 
 <Tree
-  
+
   aria-label="Tree with links"
   defaultExpandedKeys={['bulbasaur', 'ivysaur']}>
   <TreeItem
@@ -591,12 +617,45 @@ import {Tree} from 'vanilla-starter/Tree';
 </Tree>
 ```
 
+### Sections (alpha)
+
+Use the `<TreeSection>` component to group options. A `<TreeHeader>` element may also be included to label the section. Sections without a header must have an `aria-label`.
+
+```tsx
+import {Tree, TreeHeader, TreeItem, TreeSection} from 'vanilla-starter/Tree';
+
+<Tree aria-label="Files">
+  <TreeSection>
+    <TreeHeader>Photos</TreeHeader>
+    <TreeItem id="my-photos" title="My Photos">
+      <TreeItem id="photo-1" title="Photo 1" />
+      <TreeItem id="photo-2" title="Photo 2" />
+    </TreeItem>
+    <TreeItem id="shared-photos" title="Shared Photos">
+      <TreeItem id="shared-photo-1" title="Shared Photo 1" />
+      <TreeItem id="shared-photo-2" title="Shared Photo 2" />
+    </TreeItem>
+  </TreeSection>
+  <TreeSection>
+    <TreeHeader>Documents</TreeHeader>
+    <TreeItem id="my-documents" title="My Documents">
+      <TreeItem id="document-1" title="Document 1" />
+      <TreeItem id="document-2" title="Document 2" />
+    </TreeItem>
+    <TreeItem id="shared-documents" title="Shared Documents">
+      <TreeItem id="shared-document-1" title="Shared Document 1" />
+      <TreeItem id="shared-document-2" title="Shared Document 2" />
+    </TreeItem>
+  </TreeSection>
+</Tree>
+```
+
 ## Selection and actions
 
 Use the `selectionMode` prop to enable single or multiple selection. The selected items can be controlled via the `selectedKeys` prop, matching the `id` prop of the items. The `onAction` event handles item actions. Items can be disabled with the `isDisabled` prop. See the [selection guide](selection.md?component=Tree) for more details.
 
 ```tsx
-import type {Selection} from 'react-aria-components';
+import type {Selection} from 'react-aria-components/Tree';
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
 import {useState} from 'react';
 
@@ -610,7 +669,7 @@ function Example(props) {
         aria-label="Pokemon evolution"
         style={{height: 250}}
         defaultExpandedKeys={['bulbasaur', 'ivysaur']}
-        
+
         selectedKeys={selected}
         onSelectionChange={setSelected}
         onAction={key => alert(`Clicked ${key}`)}
@@ -643,7 +702,9 @@ Tree supports drag and drop interactions when the `dragAndDropHooks` prop is pro
 
 ```tsx
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
-import {useDragAndDrop, Collection, useTreeData} from 'react-aria-components';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
+import {Collection} from 'react-aria-components/Collection';
+import {useTreeData} from 'react-aria-components/useTreeData';
 
 function Example() {
   let tree = useTreeData({
@@ -723,8 +784,12 @@ function Example() {
     <TreeItem>
       {/* ... */}
     </TreeItem>
-    <TreeLoadMoreItem />
   </TreeItem>
+  <TreeSection>
+    <TreeHeader />
+    <TreeItem>{/* ... */}</TreeItem>
+  </TreeSection>
+  <TreeLoadMoreItem />
 </Tree>
 ```
 
@@ -740,14 +805,14 @@ function Example() {
 | `children` | `React.ReactNode | ((item: T) => ReactNode)` | — | The contents of the collection. |
 | `className` | `ClassNameOrFunction<TreeRenderProps> | undefined` | 'react-aria-Tree' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `defaultExpandedKeys` | `Iterable<Key> | undefined` | — | The initial expanded keys in the collection (uncontrolled). |
-| `defaultSelectedKeys` | `Iterable<Key> | "all" | undefined` | — | The initial selected keys in the collection (uncontrolled). |
+| `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
 | `disabledBehavior` | `DisabledBehavior | undefined` | 'all' | Whether `disabledKeys` applies to all interactions, or only selection. |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. |
 | `disallowEmptySelection` | `boolean | undefined` | — | Whether the collection allows empty selection. |
 | `dragAndDropHooks` | `DragAndDropHooks<NoInfer<T>> | undefined` | — | The drag and drop hooks returned by `useDragAndDrop` used to enable drag and drop behavior for the Tree. |
-| `escapeKeyBehavior` | `"none" | "clearSelection" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the grid list or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
+| `escapeKeyBehavior` | `"clearSelection" | "none" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the grid list or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
 | `expandedKeys` | `Iterable<Key> | undefined` | — | The currently expanded keys in the collection (controlled). |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
@@ -823,7 +888,7 @@ function Example() {
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", TreeRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `renderEmptyState` | `((props: TreeEmptyStateRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no items in the list. |
-| `selectedKeys` | `Iterable<Key> | "all" | undefined` | — | The currently selected keys in the collection (controlled). |
+| `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
 | `selectionBehavior` | `SelectionBehavior | undefined` | "toggle" | How multiple selection should behave in the tree. |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
@@ -937,6 +1002,12 @@ function Example() {
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `children` | `ChildrenOrFunction<TreeItemContentRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
+
+### TreeSection
+
+### TreeHeader
+
+`<TreeHeader>` labels the section within a Tree. It accepts all DOM attributes.
 
 ### TreeLoadMoreItem
 

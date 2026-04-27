@@ -233,10 +233,10 @@ toZoned(date, 'America/Los_Angeles'); // 2022-02-03T09:45-07:00[America/Los_Ange
 
 Some time values during daylight saving transitions may be *ambiguous*. For example, in the United States, the 2 AM hour is skipped in the spring, and the 1 AM hour occurs twice in the fall. When converting a `CalendarDateTime` to a `ZonedDateTime`, this ambiguity must be resolved to determine the exact time. By default, the later of the two possible times is chosen for "spring forward" transitions, and the earlier time is chosen for "fall back" transitions. This can be controlled by passing the `disambiguation` parameter to the `toZoned` function.
 
-* `'earlier'` – choose the earlier of the two possible times
-* `'later'` – choose the later of the two possible times
-* `'compatible'` (default) – choose the later of the two times during "spring forward" transitions, and the earlier time during "fall back" transitions.
-* `'reject'` – throws an error when the time is ambiguous
+- `'earlier'` – choose the earlier of the two possible times
+- `'later'` – choose the later of the two possible times
+- `'compatible'` (default) – choose the later of the two times during "spring forward" transitions, and the earlier time during "fall back" transitions.
+- `'reject'` – throws an error when the time is ambiguous
 
 ```tsx
 // A "spring forward" transition
@@ -295,10 +295,10 @@ b.compare(a) > 0; // true
 
 In addition, the following functions can be used to perform a partial comparison. These functions accept dates in different calendar systems, and the second date is converted to the calendar system of the first date before comparison.
 
-* `isSameYear` – <span>{docs.exports.isSameYear.description}</span>
-* `isSameMonth` – <span>{docs.exports.isSameMonth.description}</span>
-* `isSameDay` – <span>{docs.exports.isSameDay.description}</span>
-* `isToday` – <span>{docs.exports.isToday.description}</span>
+- `isSameYear` – <span>{docs.exports.isSameYear.description}</span>
+- `isSameMonth` – <span>{docs.exports.isSameMonth.description}</span>
+- `isSameDay` – <span>{docs.exports.isSameDay.description}</span>
+- `isToday` – <span>{docs.exports.isToday.description}</span>
 
 ```tsx
 import {isSameMonth, IslamicUmalquraCalendar} from '@internationalized/date';
@@ -310,9 +310,9 @@ isSameMonth(new CalendarDateTime(2021, 4, 16, 9, 45), new CalendarDateTime(new I
 
 A similar set of functions is also available that does not convert between calendar systems and requires the calendars to be equal.
 
-* `isEqualYear` – <span>{docs.exports.isEqualYear.description}</span>
-* `isEqualMonth` – <span>{docs.exports.isEqualMonth.description}</span>
-* `isEqualDay` – <span>{docs.exports.isEqualDay.description}</span>
+- `isEqualYear` – <span>{docs.exports.isEqualYear.description}</span>
+- `isEqualMonth` – <span>{docs.exports.isEqualMonth.description}</span>
+- `isEqualDay` – <span>{docs.exports.isEqualDay.description}</span>
 
 ```tsx
 import {isEqualMonth, IslamicUmalquraCalendar} from '@internationalized/date';
@@ -326,12 +326,12 @@ isEqualMonth(new CalendarDateTime(2021, 4, 16, 9, 45), new CalendarDateTime(new 
 
 The following functions can be used to find the start or end dates of a particular unit of time. These only affect the date components of a `CalendarDateTime`. The time fields are left unchanged.
 
-* `startOfYear` – <span>{docs.exports.startOfYear.description}</span>
-* `endOfYear` – <span>{docs.exports.endOfYear.description}</span>
-* `startOfMonth` – <span>{docs.exports.startOfMonth.description}</span>
-* `endOfMonth` – <span>{docs.exports.endOfMonth.description}</span>
-* `startOfWeek` – <span>{docs.exports.startOfWeek.description}</span>
-* `endOfWeek` – <span>{docs.exports.endOfWeek.description}</span>
+- `startOfYear` – <span>{docs.exports.startOfYear.description}</span>
+- `endOfYear` – <span>{docs.exports.endOfYear.description}</span>
+- `startOfMonth` – <span>{docs.exports.startOfMonth.description}</span>
+- `endOfMonth` – <span>{docs.exports.endOfMonth.description}</span>
+- `startOfWeek` – <span>{docs.exports.startOfWeek.description}</span>
+- `endOfWeek` – <span>{docs.exports.endOfWeek.description}</span>
 
 Note that `startOfWeek` and `endOfWeek` require a locale string to be provided. This is because the first day of the week changes depending on the locale. For example, in the United States, the first day of the week is on Sunday, but in France it is on Monday.
 

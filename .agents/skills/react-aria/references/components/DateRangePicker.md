@@ -11,11 +11,11 @@ to enter or select a date and time range.
 'use client';
 import {
   DateRangePicker as AriaDateRangePicker,
-  DateRangePickerProps as AriaDateRangePickerProps,
-  DateValue,
+  type DateRangePickerProps as AriaDateRangePickerProps,
+  type DateValue,
   Group,
-  ValidationResult
-} from 'react-aria-components';
+  type ValidationResult,
+} from 'react-aria-components/DateRangePicker';
 import {DateInput, DateSegment} from './DateField';
 import {Description, FieldButton} from './Form';
 import {Popover} from './Popover';
@@ -147,10 +147,10 @@ import { CalendarIcon } from 'lucide-react';
 import React from 'react';
 import {
   DateRangePicker as AriaDateRangePicker,
-  DateRangePickerProps as AriaDateRangePickerProps,
-  DateValue,
-  ValidationResult
-} from 'react-aria-components';
+  type DateRangePickerProps as AriaDateRangePickerProps,
+  type DateValue,
+  type ValidationResult,
+} from 'react-aria-components/DateRangePicker';
 import { DateInput } from './DateField';
 import { Description, FieldError, FieldGroup, Label } from './Field';
 import { Popover } from './Popover';
@@ -198,7 +198,8 @@ Use the `value` or `defaultValue` prop to set the selected date range, using obj
 
 ```tsx
 import {parseDate, getLocalTimeZone, type CalendarDate} from '@internationalized/date';
-import {useDateFormatter, type RangeValue} from 'react-aria';
+import {type RangeValue} from 'react-aria-components/DateRangePicker';
+import {useDateFormatter} from 'react-aria/useDateFormatter';
 import {DateRangePicker} from 'vanilla-starter/DateRangePicker';
 import {useState} from 'react';
 
@@ -245,7 +246,7 @@ import {DateRangePicker} from 'vanilla-starter/DateRangePicker';
 By default, `DateRangePicker` displays the value using the calendar system for the user's locale. Use `<I18nProvider>` to override the calendar system by setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string). The `onChange` event always receives a date in the same calendar as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
 
 ```tsx
-import {I18nProvider} from 'react-aria-components';
+import {I18nProvider} from 'react-aria-components/I18nProvider';
 import {parseDate} from '@internationalized/date';
 import {DateRangePicker} from 'vanilla-starter/DateRangePicker';
 
@@ -264,7 +265,7 @@ Use the `name` prop to submit the selected date to the server as an [ISO 8601](h
 
 ```tsx
 import {isWeekend, today, getLocalTimeZone} from '@internationalized/date';
-import {useLocale} from 'react-aria-components';
+import {useLocale} from 'react-aria-components/I18nProvider';
 import {DateRangePicker} from 'vanilla-starter/DateRangePicker';
 import {Button} from 'vanilla-starter/Button';
 import {Form} from 'vanilla-starter/Form';;
@@ -329,6 +330,7 @@ function Example(props) {
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | undefined` | — | Whether the element should receive focus on render. |
+| `commitBehavior` | `"clear" | "reset" | "select" | undefined` | 'select' | Controls the behavior when a pointer is released outside the calendar or a blur occurs mid selection: - `clear`: clear the currently selected range of dates. - `reset`: reset the selection to the previously selected range of dates. - `select`: select the currently hovered range of dates. |
 | `contextualHelp` | `ReactNode` | — | A ContextualHelp element to place next to the label. |
 | `createCalendar` | `((identifier: CalendarIdentifier) => Calendar) | undefined` | — | A function to create a new [Calendar](https://react-spectrum.adobe.com/internationalized/date/Calendar.html) object for a given calendar identifier. If not provided, the `createCalendar` function from `@internationalized/date` will be used. |
 | `defaultOpen` | `boolean | undefined` | — | Whether the overlay is open by default (uncontrolled). |

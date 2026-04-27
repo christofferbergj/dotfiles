@@ -10,12 +10,11 @@ A color field allows users to edit a hex color or individual color channel value
 'use client';
 import {
   ColorField as AriaColorField,
-  ColorFieldProps as AriaColorFieldProps,
+  type ColorFieldProps as AriaColorFieldProps,
   Input,
-  ValidationResult
-} from 'react-aria-components';
+  type ValidationResult,
+} from 'react-aria-components/ColorField';
 import {Label, FieldError, Description} from './Form';
-
 import './ColorField.css';
 
 export interface ColorFieldProps extends AriaColorFieldProps {
@@ -64,9 +63,9 @@ export function ColorField(
 import React from 'react';
 import {
   ColorField as AriaColorField,
-  ColorFieldProps as AriaColorFieldProps,
-  ValidationResult
-} from 'react-aria-components';
+  type ColorFieldProps as AriaColorFieldProps,
+  type ValidationResult,
+} from 'react-aria-components/ColorField';
 import { tv } from 'tailwind-variants';
 import { Description, FieldError, Input, Label, fieldBorderStyles } from './Field';
 import { composeTailwindRenderProps, focusRing } from './utils';
@@ -108,7 +107,7 @@ Use the `value` or `defaultValue` prop to set the color value, and `onChange` to
 
 ```tsx
 import {ColorField} from 'vanilla-starter/ColorField';
-import {parseColor, type Color} from 'react-aria-components';
+import {parseColor, type Color} from 'react-aria-components/ColorField';
 import {useState} from 'react';
 
 function Example() {
@@ -133,7 +132,7 @@ By default, ColorField displays a hex value. Set the `colorSpace` and `channel` 
 
 ```tsx
 import {ColorField} from 'vanilla-starter/ColorField';
-import {parseColor, type Color} from 'react-aria-components';
+import {parseColor, type Color} from 'react-aria-components/ColorField';
 import {useState} from 'react';
 
 function Example() {
@@ -322,68 +321,6 @@ function Example(props) {
 ## Related Types
 
 ### Color
-
-Represents a color value.
-
-#### `toFormat(format: ColorFormat): Color`
-
-Converts the color to the given color format, and returns a new Color object.
-
-#### `toString(format?: ColorFormat | 'css'): string`
-
-Converts the color to a string in the given format.
-
-#### `clone(): Color`
-
-Returns a duplicate of the color value.
-
-#### `toHexInt(): number`
-
-Converts the color to hex, and returns an integer representation.
-
-#### `getChannelValue(channel: ColorChannel): number`
-
-Returns the numeric value for a given channel. Throws an error if the channel is unsupported in the current color format.
-
-#### `withChannelValue(channel: ColorChannel, value: number): Color`
-
-Sets the numeric value for a given channel, and returns a new Color object. Throws an error if the channel is unsupported in the current color format.
-
-#### `getChannelRange(channel: ColorChannel): ColorChannelRange`
-
-Returns the minimum, maximum, and step values for a given channel.
-
-#### `getChannelName(channel: ColorChannel, locale: string): string`
-
-Returns a localized color channel name for a given channel and locale, for use in visual or accessibility labels.
-
-#### `getChannelFormatOptions(channel: ColorChannel): Intl.NumberFormatOptions`
-
-Returns the number formatting options for the given channel.
-
-#### `formatChannelValue(channel: ColorChannel, locale: string): string`
-
-Formats the numeric value for a given channel for display according to the provided locale.
-
-#### `getColorSpace(): ColorSpace`
-
-Returns the color space, 'rgb', 'hsb' or 'hsl', for the current color.
-
-#### `getColorSpaceAxes(xyChannels: {xChannel?: ColorChannel, yChannel?: ColorChannel}): ColorAxes`
-
-Returns the color space axes, xChannel, yChannel, zChannel.
-
-#### `getColorChannels(): [ColorChannel, ColorChannel, ColorChannel]`
-
-Returns an array of the color channels within the current color space space.
-
-#### `getColorName(locale: string): string`
-
-Returns a localized name for the color, for use in visual or accessibility labels.
-
-#### `getHueName(locale: string): string`
-
-Returns a localized name for the hue, for use in visual or accessibility labels.
 
 ### parseColor
 

@@ -10,18 +10,17 @@ A date picker combines a DateField and a Calendar popover to allow users to ente
 'use client';
 import {
   DatePicker as AriaDatePicker,
-  DatePickerProps as AriaDatePickerProps,
-  DateValue,
+  type DatePickerProps as AriaDatePickerProps,
+  type DateValue,
   Group,
-  ValidationResult
-} from 'react-aria-components';
+  type ValidationResult,
+} from 'react-aria-components/DatePicker';
 import {DateInput, DateSegment} from './DateField';
 import {Label, FieldError, Description} from './Form';
 import {FieldButton} from './Form';
 import {Calendar} from './Calendar';
 import {Popover} from './Popover';
 import {ChevronDown} from 'lucide-react';
-
 import './DatePicker.css';
 
 export interface DatePickerProps<T extends DateValue> extends AriaDatePickerProps<T> {
@@ -90,10 +89,10 @@ import { CalendarIcon } from 'lucide-react';
 import React from 'react';
 import {
   DatePicker as AriaDatePicker,
-  DatePickerProps as AriaDatePickerProps,
-  DateValue,
-  ValidationResult
-} from 'react-aria-components';
+  type DatePickerProps as AriaDatePickerProps,
+  type DateValue,
+  type ValidationResult,
+} from 'react-aria-components/DatePicker';
 import { Calendar } from './Calendar';
 import { DateInput } from './DateField';
 import { Description, FieldError, FieldGroup, Label } from './Field';
@@ -137,7 +136,7 @@ Use the `value` or `defaultValue` prop to set the date value, using objects in t
 
 ```tsx
 import {parseDate, getLocalTimeZone, type CalendarDate} from '@internationalized/date';
-import {useDateFormatter} from 'react-aria';
+import {useDateFormatter} from 'react-aria/useDateFormatter';
 import {DatePicker} from 'vanilla-starter/DatePicker';
 import {useState} from 'react';
 
@@ -175,7 +174,7 @@ import {DatePicker} from 'vanilla-starter/DatePicker';
 By default, `DatePicker` displays the value using the calendar system for the user's locale. Use `<I18nProvider>` to override the calendar system by setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string). The `onChange` event always receives a date in the same calendar as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
 
 ```tsx
-import {I18nProvider} from 'react-aria-components';
+import {I18nProvider} from 'react-aria-components/I18nProvider';
 import {parseZonedDateTime} from '@internationalized/date';
 import {DatePicker} from 'vanilla-starter/DatePicker';
 
@@ -190,10 +189,10 @@ Use the `name` prop to submit the selected date to the server as an [ISO 8601](h
 
 ```tsx
 import {isWeekend, today, getLocalTimeZone} from '@internationalized/date';
-import {useLocale} from 'react-aria-components';
+import {useLocale} from 'react-aria-components/I18nProvider';
 import {DatePicker} from 'vanilla-starter/DatePicker';
 import {Button} from 'vanilla-starter/Button';
-import {Form} from 'vanilla-starter/Form';;
+import {Form} from 'vanilla-starter/Form';
 
 function Example() {
   let {locale} = useLocale();

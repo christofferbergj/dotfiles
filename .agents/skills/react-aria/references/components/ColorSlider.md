@@ -10,10 +10,10 @@ A color slider allows users to adjust an individual channel of a color value.
 'use client';
 import {
   ColorSlider as AriaColorSlider,
-  ColorSliderProps as AriaColorSliderProps,
+  type ColorSliderProps as AriaColorSliderProps,
   SliderOutput,
-  SliderTrack
-} from 'react-aria-components';
+  SliderTrack,
+} from 'react-aria-components/ColorSlider';
 import {Label} from './Form';
 import {ColorThumb} from './ColorThumb';
 import './ColorSlider.css';
@@ -119,10 +119,10 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
 import React from 'react';
 import {
   ColorSlider as AriaColorSlider,
-  ColorSliderProps as AriaColorSliderProps,
+  type ColorSliderProps as AriaColorSliderProps,
   SliderOutput,
-  SliderTrack
-} from 'react-aria-components';
+  SliderTrack,
+} from 'react-aria-components/ColorSlider';
 import { tv } from 'tailwind-variants';
 import { Label } from './Field';
 import { composeTailwindRenderProps } from './utils';
@@ -170,7 +170,7 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
 ```tsx
 'use client';
 import React from 'react';
-import {ColorThumb as AriaColorThumb, ColorThumbProps} from 'react-aria-components';
+import { ColorThumb as AriaColorThumb, type ColorThumbProps } from 'react-aria-components/ColorThumb';
 import { tv } from 'tailwind-variants';
 
 const thumbStyles = tv({
@@ -210,7 +210,7 @@ Use the `value` or `defaultValue` prop to set the color value, and the `channel`
 The `onChange` event is called as the user drags, and `onChangeEnd` is called when the thumb is released. These are always called with a `Color` object.
 
 ```tsx
-import {parseColor} from 'react-aria-components';
+import {parseColor} from 'react-aria-components/ColorSlider';
 import {ColorSlider} from 'vanilla-starter/ColorSlider';
 import {useState} from 'react';
 
@@ -426,68 +426,6 @@ function Example() {
 ## Related Types
 
 ### Color
-
-Represents a color value.
-
-#### `toFormat(format: ColorFormat): Color`
-
-Converts the color to the given color format, and returns a new Color object.
-
-#### `toString(format?: ColorFormat | 'css'): string`
-
-Converts the color to a string in the given format.
-
-#### `clone(): Color`
-
-Returns a duplicate of the color value.
-
-#### `toHexInt(): number`
-
-Converts the color to hex, and returns an integer representation.
-
-#### `getChannelValue(channel: ColorChannel): number`
-
-Returns the numeric value for a given channel. Throws an error if the channel is unsupported in the current color format.
-
-#### `withChannelValue(channel: ColorChannel, value: number): Color`
-
-Sets the numeric value for a given channel, and returns a new Color object. Throws an error if the channel is unsupported in the current color format.
-
-#### `getChannelRange(channel: ColorChannel): ColorChannelRange`
-
-Returns the minimum, maximum, and step values for a given channel.
-
-#### `getChannelName(channel: ColorChannel, locale: string): string`
-
-Returns a localized color channel name for a given channel and locale, for use in visual or accessibility labels.
-
-#### `getChannelFormatOptions(channel: ColorChannel): Intl.NumberFormatOptions`
-
-Returns the number formatting options for the given channel.
-
-#### `formatChannelValue(channel: ColorChannel, locale: string): string`
-
-Formats the numeric value for a given channel for display according to the provided locale.
-
-#### `getColorSpace(): ColorSpace`
-
-Returns the color space, 'rgb', 'hsb' or 'hsl', for the current color.
-
-#### `getColorSpaceAxes(xyChannels: {xChannel?: ColorChannel, yChannel?: ColorChannel}): ColorAxes`
-
-Returns the color space axes, xChannel, yChannel, zChannel.
-
-#### `getColorChannels(): [ColorChannel, ColorChannel, ColorChannel]`
-
-Returns an array of the color channels within the current color space space.
-
-#### `getColorName(locale: string): string`
-
-Returns a localized name for the color, for use in visual or accessibility labels.
-
-#### `getHueName(locale: string): string`
-
-Returns a localized name for the hue, for use in visual or accessibility labels.
 
 ### parseColor
 

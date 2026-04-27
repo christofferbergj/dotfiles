@@ -34,13 +34,13 @@ import {Select, SelectItem} from 'vanilla-starter/Select';
 ```tsx
 'use client';
 import {
-  ListBoxItemProps,
+  type ListBoxItemProps,
   Select as AriaSelect,
-  SelectProps as AriaSelectProps,
+  type SelectProps as AriaSelectProps,
   SelectValue,
-  ValidationResult,
-  ListBoxProps
-} from 'react-aria-components';
+  type ValidationResult,
+  type ListBoxProps,
+} from 'react-aria-components/Select';
 import {Button} from './Button';
 import {DropdownItem, DropdownListBox} from './ListBox';
 import {ChevronDown} from 'lucide-react';
@@ -48,8 +48,7 @@ import {Popover} from './Popover';
 import {Label, FieldError, Description} from './Form';
 import './Select.css';
 
-export interface SelectProps<T extends object>
-  extends Omit<AriaSelectProps<T>, 'children'> {
+export interface SelectProps<T extends object, M extends 'single' | 'multiple'> extends Omit<AriaSelectProps<T, M>, 'children'> {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
@@ -57,10 +56,8 @@ export interface SelectProps<T extends object>
   children: React.ReactNode | ((item: T) => React.ReactNode);
 }
 
-export function Select<T extends object>(
-  { label, description, errorMessage, children, items, ...props }: SelectProps<
-    T
-  >
+export function Select<T extends object, M extends 'single' | 'multiple' = 'single'>(
+  { label, description, errorMessage, children, items, ...props }: SelectProps<T, M>
 ) {
   return (
     (
@@ -167,16 +164,16 @@ import { ChevronDown } from 'lucide-react';
 import React from 'react';
 import {
   Select as AriaSelect,
-  SelectProps as AriaSelectProps,
+  type SelectProps as AriaSelectProps,
   Button,
   ListBox,
-  ListBoxItemProps,
+  type ListBoxItemProps,
   SelectValue,
-  ValidationResult
-} from 'react-aria-components';
+  type ValidationResult,
+} from 'react-aria-components/Select';
 import { tv } from 'tailwind-variants';
 import { Description, FieldError, Label } from './Field';
-import { DropdownItem, DropdownSection, DropdownSectionProps } from './ListBox';
+import { DropdownItem, DropdownSection, type DropdownSectionProps } from './ListBox';
 import { Popover } from './Popover';
 import { composeTailwindRenderProps, focusRing } from './utils';
 
@@ -191,7 +188,7 @@ const styles = tv({
   }
 });
 
-export interface SelectProps<T extends object> extends Omit<AriaSelectProps<T>, 'children'> {
+export interface SelectProps<T extends object, M extends 'single' | 'multiple'> extends Omit<AriaSelectProps<T, M>, 'children'> {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
@@ -199,8 +196,8 @@ export interface SelectProps<T extends object> extends Omit<AriaSelectProps<T>, 
   children: React.ReactNode | ((item: T) => React.ReactNode);
 }
 
-export function Select<T extends object>(
-  { label, description, errorMessage, children, items, ...props }: SelectProps<T>
+export function Select<T extends object, M extends 'single' | 'multiple' = 'single'>(
+  { label, description, errorMessage, children, items, ...props }: SelectProps<T, M>
 ) {
   return (
     <AriaSelect {...props} className={composeTailwindRenderProps(props.className, 'group flex flex-col gap-1 relative font-sans')}>
@@ -259,7 +256,7 @@ In this tutorial, we'll build a custom [Select](Select.md) component.
     Each React Aria component renders a single DOM element. Complex components like `Select` compose together multiple parts to build a complete pattern.
 
     ```tsx
-    import {Button, Label, ListBox, ListBoxItem, Popover, Select, SelectValue} from 'react-aria-components';
+    import {Button, Label, ListBox, ListBoxItem, Popover, Select, SelectValue} from 'react-aria-components/Select';
 
     <Select>
       <Label>Favorite Animal</Label>
@@ -304,8 +301,8 @@ In this tutorial, we'll build a custom [Select](Select.md) component.
     To reuse styles throughout your project, wrap all of the parts into a reusable component. Create your own API by extending React Aria's types with additional props. Components such as Popover can also be shared with other patterns so they don't need be styled separately each time.
 
     ```tsx
-    import type {SelectProps as AriaSelectProps, ListBoxItemProps} from 'react-aria-components';
-    import {Select as AriaSelect, Button, Label, ListBox, ListBoxItem, SelectValue} from 'react-aria-components';
+    import type {SelectProps as AriaSelectProps, ListBoxItemProps} from 'react-aria-components/Select';
+    import {Select as AriaSelect, Button, Label, ListBox, ListBoxItem, SelectValue} from 'react-aria-components/Select';
     import {Popover} from './Popover';
     import './Select.css';
 

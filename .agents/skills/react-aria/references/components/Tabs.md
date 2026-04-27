@@ -68,17 +68,17 @@ import {Checkbox} from 'vanilla-starter/Checkbox';
 import {
   Tabs as RACTabs,
   TabList as RACTabList,
-  TabListProps,
-  TabProps,
+  type TabListProps,
+  type TabProps,
   Tab as RACTab,
-  TabsProps,
+  type TabsProps,
   TabPanels as RACTabPanels,
-  TabPanelProps,
+  type TabPanelProps,
   TabPanel as RACTabPanel,
-  composeRenderProps,
   SelectionIndicator,
-  TabPanelsProps
-} from 'react-aria-components';
+  type TabPanelsProps,
+} from 'react-aria-components/Tabs';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import './Tabs.css';
 
 export function Tabs(props: TabsProps) {
@@ -305,13 +305,13 @@ import {
   TabPanel as RACTabPanel,
   Tabs as RACTabs,
   SelectionIndicator,
-  TabListProps,
-  TabPanelProps,
-  TabPanelsProps,
-  TabProps,
-  TabsProps,
-  composeRenderProps
-} from 'react-aria-components';
+  type TabListProps,
+  type TabPanelProps,
+  type TabPanelsProps,
+  type TabProps,
+  type TabsProps,
+} from 'react-aria-components/Tabs';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 import { focusRing } from './utils';
 import { twMerge } from 'tailwind-merge';
@@ -498,7 +498,7 @@ Use the `href` prop on a `<Tab>` to create a link. By default, links are rendere
 Use the `defaultSelectedKey` or `selectedKey` prop to set the selected tab. The selected key corresponds to the `id` prop of a `<Tab>`. Tabs can be disabled with the `isDisabled` prop. See the [selection guide](selection.md?component=Tabs#single-selection) for more details.
 
 ```tsx
-import type {Key} from 'react-aria-components';
+import type {Key} from 'react-aria-components/Tabs';
 import {Tabs, TabList, Tab, TabPanels, TabPanel} from 'vanilla-starter/Tabs';
 import Home from '@react-spectrum/s2/illustrations/gradient/generic2/Home';
 import Folder from '@react-spectrum/s2/illustrations/gradient/generic2/FolderOpen';
@@ -574,14 +574,14 @@ function Example() {
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `children` | `ChildrenOrFunction<TabsRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<TabsRenderProps> | undefined` | 'react-aria-Tabs' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
-| `defaultSelectedKey` | `Key | undefined` | — | The initial selected key in the collection (uncontrolled). |
+| `defaultSelectedKey` | `Key | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dir` | `string | undefined` | — |  |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
 | `isDisabled` | `boolean | undefined` | — | Whether the TabList is disabled. Shows that a selection exists, but is not available in that circumstance. |
-| `keyboardActivation` | `"manual" | "automatic" | undefined` | 'automatic' | Whether tabs are activated automatically on focus or manually. |
+| `keyboardActivation` | `"automatic" | "manual" | undefined` | 'automatic' | Whether tabs are activated automatically on focus or manually. |
 | `lang` | `string | undefined` | — |  |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -650,7 +650,7 @@ function Example() {
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `orientation` | `Orientation | undefined` | 'horizontal' | The orientation of the tabs. |
 | `render` | `DOMRenderFunction<"div", TabsRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `selectedKey` | `Key | null | undefined` | — | The currently selected key in the collection (controlled). |
+| `selectedKey` | `Key | undefined` | — | The currently selected key in the collection (controlled). |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `style` | `(React.CSSProperties | ((values: TabsRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"yes" | "no" | undefined` | — |  |
@@ -836,7 +836,7 @@ function Example() {
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `((props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> | React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement>, renderProps: TabRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `((props: React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement> | React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, renderProps: TabRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
 | `style` | `(React.CSSProperties | ((values: TabRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |

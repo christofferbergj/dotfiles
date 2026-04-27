@@ -11,9 +11,9 @@ A text field allows a user to enter a plain text value with a keyboard.
 import {
   Input,
   TextField as AriaTextField,
-  TextFieldProps as AriaTextFieldProps,
-  ValidationResult
-} from 'react-aria-components';
+  type TextFieldProps as AriaTextFieldProps,
+  type ValidationResult,
+} from 'react-aria-components/TextField';
 import {Label, FieldError, Description} from './Form';
 import './TextField.css';
 
@@ -97,9 +97,9 @@ export function TextField(
 import React from 'react';
 import {
   TextField as AriaTextField,
-  TextFieldProps as AriaTextFieldProps,
-  ValidationResult
-} from 'react-aria-components';
+  type TextFieldProps as AriaTextFieldProps,
+  type ValidationResult,
+} from 'react-aria-components/TextField';
 import { tv } from 'tailwind-variants';
 import { Description, FieldError, Input, Label, fieldBorderStyles } from './Field';
 import { composeTailwindRenderProps, focusRing } from './utils';
@@ -191,7 +191,7 @@ function Example(props) {
 Use `<TextArea>` instead of `<Input>` to enable multi-line input.
 
 ```tsx
-import {TextField, Label, TextArea} from 'react-aria-components';
+import {TextField, Label, TextArea} from 'react-aria-components/TextField';
 
 <TextField>
   <Label>Comment</Label>
@@ -222,7 +222,7 @@ import {TextField, Label, TextArea} from 'react-aria-components';
 | `aria-describedby` | `string | undefined` | — | Identifies the element (or elements) that describes the object. |
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-errormessage` | `string | undefined` | — | Identifies the element that provides an error message for the object. |
-| `aria-haspopup` | `boolean | "dialog" | "menu" | "grid" | "true" | "false" | "listbox" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-haspopup` | `boolean | "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoComplete` | `string | undefined` | — | Describes the type of autocomplete functionality the input should provide if any. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). |
@@ -232,13 +232,13 @@ import {TextField, Label, TextArea} from 'react-aria-components';
 | `className` | `ClassNameOrFunction<TextFieldRenderProps> | undefined` | 'react-aria-TextField' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `defaultValue` | `string | undefined` | — | The default value (uncontrolled). |
 | `dir` | `string | undefined` | — |  |
-| `enterKeyHint` | `"search" | "enter" | "done" | "go" | "next" | "previous" | "send" | undefined` | — | An enumerated attribute that defines what action label or icon to preset for the enter key on virtual keyboards. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
+| `enterKeyHint` | `"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined` | — | An enumerated attribute that defines what action label or icon to preset for the enter key on virtual keyboards. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
 | `excludeFromTabOrder` | `boolean | undefined` | — | Whether to exclude the element from the sequential tab order. If true, the element will not be focusable via the keyboard by tabbing. This should be avoided except in rare scenarios where an alternative means of accessing the element or its functionality via the keyboard is available. |
 | `form` | `string | undefined` | — | The `<form>` element to associate the input with. The value of this attribute must be the id of a `<form>` in the same document. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#form). |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
-| `inputMode` | `"search" | "text" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents. See [MDN](https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute). |
+| `inputMode` | `"none" | "search" | "text" | "url" | "tel" | "email" | "numeric" | "decimal" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents. See [MDN](https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute). |
 | `isDisabled` | `boolean | undefined` | — | Whether the input is disabled. |
 | `isInvalid` | `boolean | undefined` | — | Whether the value is invalid. |
 | `isReadOnly` | `boolean | undefined` | — | Whether the input can be selected but not changed by the user. |
@@ -332,7 +332,7 @@ import {TextField, Label, TextArea} from 'react-aria-components';
 | `spellCheck` | `string | undefined` | — | An enumerated attribute that defines whether the element may be checked for spelling errors. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck). |
 | `style` | `(React.CSSProperties | ((values: TextFieldRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"yes" | "no" | undefined` | — |  |
-| `type` | `"search" | "text" | (string & {}) | "tel" | "url" | "email" | "password" | undefined` | 'text' | The type of input to render. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). |
+| `type` | `"search" | "text" | "url" | "tel" | "email" | "password" | (string & {}) | undefined` | 'text' | The type of input to render. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). |
 | `validate` | `((value: string) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
 | `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
 | `value` | `string | undefined` | — | The current value (controlled). |

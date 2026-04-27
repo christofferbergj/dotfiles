@@ -251,8 +251,8 @@ React Aria Components supports both [CSS transitions](https://developer.mozilla.
 
 Several components support entry and exit animations via the `data-entering` and `data-exiting` states, or via the corresponding render prop functions.
 
-* `data-entering` represents the starting state of the entry animation. The component will transition from the entering state to the default state when it opens.
-* `data-exiting` represents the ending state of the exit animation. The component will transition from the default state to the exiting state and wait for any animations to complete before being removed from the DOM.
+- `data-entering` represents the starting state of the entry animation. The component will transition from the entering state to the default state when it opens.
+- `data-exiting` represents the ending state of the exit animation. The component will transition from the default state to the exiting state and wait for any animations to complete before being removed from the DOM.
 
 ```css
 .react-aria-Popover {
@@ -330,7 +330,7 @@ If you are using Tailwind, we recommend using the [tailwindcss-animate](https://
 [Motion](https://motion.dev) and other JavaScript animation libraries can also be used with React Aria Components. Use [motion.create](https://motion.dev/docs/react-motion-component#custom-components) to create a wrapper component that adds support for Motion's animation props.
 
 ```tsx
-import {Modal, ModalOverlay} from 'react-aria-components';
+import {Modal, ModalOverlay} from 'react-aria-components/Modal';
 import {motion} from 'motion/react';
 
 // Create Motion wrappers.
@@ -398,7 +398,7 @@ function Example() {
 The [AnimatePresence](https://motion.dev/docs/react-animate-presence) component allows you to animate when items are added or removed in collection components. Use `array.map` to create children, and make sure each child has a unique `key` in addition to an `id` to ensure Motion can track it.
 
 ```tsx
-import {GridList, GridListItem} from 'react-aria-components';
+import {GridList, GridListItem} from 'react-aria-components/GridList';
 import {motion, AnimatePresence} from 'motion/react';
 
 const MotionItem = motion.create(GridListItem);

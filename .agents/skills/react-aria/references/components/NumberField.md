@@ -12,9 +12,9 @@ import {
   Group,
   Input,
   NumberField as AriaNumberField,
-  NumberFieldProps as AriaNumberFieldProps,
-  ValidationResult
-} from 'react-aria-components';
+  type NumberFieldProps as AriaNumberFieldProps,
+  type ValidationResult,
+} from 'react-aria-components/NumberField';
 import {Button} from './Button';
 import {Plus, Minus} from 'lucide-react';
 import {Label, FieldError, Description} from './Form';
@@ -133,11 +133,11 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import React from 'react';
 import {
   NumberField as AriaNumberField,
-  NumberFieldProps as AriaNumberFieldProps,
+  type NumberFieldProps as AriaNumberFieldProps,
   Button,
-  ButtonProps,
-  ValidationResult
-} from 'react-aria-components';
+  type ButtonProps,
+  type ValidationResult,
+} from 'react-aria-components/NumberField';
 import { Description, FieldError, FieldGroup, Input, Label, fieldBorderStyles } from './Field';
 import { composeTailwindRenderProps } from './utils';
 
@@ -228,7 +228,7 @@ import {VanillaNumberField} from '@react-spectrum/s2';
 By default, `NumberField` displays the value using the numbering system for the user's locale. Use `<I18nProvider>` to override the numbering system by setting the [Unicode numbering system locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/numberingSystem#adding_a_numbering_system_via_the_locale_string). The Latin, Arabic, Devanagari, Bengali, and Han positional decimal numbering systems are currently supported.
 
 ```tsx
-import {I18nProvider} from 'react-aria-components';
+import {I18nProvider} from 'react-aria-components/I18nProvider';
 import {NumberField} from 'vanilla-starter/NumberField';
 
 <I18nProvider>
@@ -243,7 +243,7 @@ Use the `name` prop to submit the raw number value (not a formatted string) to t
 ```tsx
 import {NumberField} from 'vanilla-starter/NumberField';
 import {Button} from 'vanilla-starter/Button';
-import {Form} from 'vanilla-starter/Form';;
+import {Form} from 'vanilla-starter/Form';
 
 <Form>
   <NumberField label="Width" name="width" isRequired />
@@ -277,6 +277,7 @@ import {Form} from 'vanilla-starter/Form';;
 | `autoFocus` | `boolean | undefined` | — | Whether the element should receive focus on render. |
 | `children` | `ChildrenOrFunction<NumberFieldRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<NumberFieldRenderProps> | undefined` | 'react-aria-NumberField' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
+| `commitBehavior` | `"validate" | "snap" | undefined` | 'snap' | Controls the behavior of the number field when the user blurs the field after editing. 'snap' will clamp the value to the min/max values, and snap to the nearest step value. 'validate' will not clamp the value, and will validate that the value is within the min/max range and on a valid step. |
 | `decrementAriaLabel` | `string | undefined` | — | A custom aria-label for the decrement button. If not provided, the localized string "Decrement" is used. |
 | `defaultValue` | `number | undefined` | — | The default value (uncontrolled). |
 | `dir` | `string | undefined` | — |  |

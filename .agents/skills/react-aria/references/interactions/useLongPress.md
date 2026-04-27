@@ -5,8 +5,9 @@ accessibility description, and normalizes behavior across browsers and devices.
 
 ```tsx
 import React from 'react';
-import {mergeProps} from 'react-aria';
-import {useLongPress, usePress} from '@react-aria/interactions';
+import {mergeProps} from 'react-aria/mergeProps';
+import {useLongPress} from 'react-aria/useLongPress';
+import {usePress} from 'react-aria/usePress';
 
 function Example() {
   let [events, setEvents] = React.useState<string[]>([]);
@@ -67,11 +68,11 @@ function Example() {
 
 A long press is triggered when a user presses and holds their pointer over a target for a minimum period of time. If the user moves their pointer off of the target before the time threshold, the interaction is canceled. Once a long press event is triggered, other pointer interactions that may be active such as `usePress` and `useMove` will be canceled so that only the long press is activated.
 
-* Handles mouse and touch events
-* Prevents text selection on touch devices while long pressing
-* Prevents browser and OS context menus from appearing while long pressing
-* Customizable time threshold for long press
-* Supports an accessibility description to indicate to assistive technology users that a long press action is available
+- Handles mouse and touch events
+- Prevents text selection on touch devices while long pressing
+- Prevents browser and OS context menus from appearing while long pressing
+- Customizable time threshold for long press
+- Supports an accessibility description to indicate to assistive technology users that a long press action is available
 
 ## API
 

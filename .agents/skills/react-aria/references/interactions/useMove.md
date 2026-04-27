@@ -6,7 +6,7 @@ platforms, and ignores emulated mouse events on touch devices.
 
 ```tsx
 import React from 'react';
-import {useMove} from 'react-aria';
+import {useMove} from 'react-aria/useMove';
 
 function Example() {
   const CONTAINER_SIZE = 200;
@@ -98,9 +98,9 @@ function Example() {
 
 Move events are emitted after the user presses down and then drags the pointer around. They specify the distance that the pointer traveled since the last event. In addition, after a user focuses the target element, move events are fired when the user presses the arrow keys.
 
-* Handles mouse and touch events
-* Handles arrow key presses
-* Disables text selection while the user drags
+- Handles mouse and touch events
+- Handles arrow key presses
+- Disables text selection while the user drags
 
 ## API
 

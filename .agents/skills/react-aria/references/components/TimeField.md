@@ -11,10 +11,10 @@ Each part of the time is displayed in an individually editable segment.
 'use client';
 import {
   TimeField as AriaTimeField,
-  TimeFieldProps as AriaTimeFieldProps,
-  TimeValue,
-  ValidationResult
-} from 'react-aria-components';
+  type TimeFieldProps as AriaTimeFieldProps,
+  type TimeValue,
+  type ValidationResult,
+} from 'react-aria-components/TimeField';
 import {Label, FieldError, Description} from './Form';
 import {DateInput, DateSegment} from './DateField';
 import './TimeField.css';
@@ -64,10 +64,10 @@ export function TimeField<T extends TimeValue>(
 import React from 'react';
 import {
   TimeField as AriaTimeField,
-  TimeFieldProps as AriaTimeFieldProps,
-  TimeValue,
-  ValidationResult
-} from 'react-aria-components';
+  type TimeFieldProps as AriaTimeFieldProps,
+  type TimeValue,
+  type ValidationResult,
+} from 'react-aria-components/TimeField';
 import { DateInput } from './DateField';
 import { Description, FieldError, Label } from './Field';
 import { composeTailwindRenderProps } from './utils';

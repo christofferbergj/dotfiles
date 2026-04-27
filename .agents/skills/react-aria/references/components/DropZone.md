@@ -5,8 +5,7 @@ A drop zone is an area into which one or multiple objects can be dragged and dro
 ## Vanilla CSS example
 
 ```tsx
-import {DropZone} from 'vanilla-starter/DropZone';
-import {Text} from 'react-aria-components';
+import {DropZone, Text} from 'vanilla-starter/DropZone';
 import {useState} from 'react';
 import React from 'react';
 
@@ -48,12 +47,14 @@ function Example() {
 
 ```tsx
 'use client';
-import {DropZoneProps, DropZone as RACDropZone} from 'react-aria-components';
+import { type DropZoneProps, DropZone as RACDropZone, Text } from 'react-aria-components/DropZone';
 import './DropZone.css'
 
 export function DropZone(props: DropZoneProps) {
   return <RACDropZone {...props} />;
 }
+
+export {Text};
 
 ```
 
@@ -99,8 +100,7 @@ export function DropZone(props: DropZoneProps) {
 ## Tailwind example
 
 ```tsx
-import {DropZone} from 'tailwind-starter/DropZone';
-import {Text} from 'react-aria-components';
+import {DropZone, Text} from 'tailwind-starter/DropZone';
 import {useState} from 'react';
 import React from 'react';
 
@@ -141,7 +141,8 @@ function Example() {
 ```tsx
 'use client';
 import React from "react";
-import {composeRenderProps, DropZoneProps, DropZone as RACDropZone} from 'react-aria-components';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import { type DropZoneProps, DropZone as RACDropZone, Text } from 'react-aria-components/DropZone';
 import { tv } from "tailwind-variants";
 
 const dropZone = tv({
@@ -163,6 +164,8 @@ export function DropZone(props: DropZoneProps) {
       className={composeRenderProps(props.className, (className, renderProps) => dropZone({ ...renderProps, className }))} />
   );
 }
+
+export {Text};
 
 ```
 

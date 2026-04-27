@@ -245,10 +245,10 @@ b.compare(a) > 0; // true
 
 In addition, the following functions can be used to perform a partial comparison. These functions accept dates in different calendar systems, and the second date is converted to the calendar system of the first date before comparison.
 
-* `isSameYear` – <span>{docs.exports.isSameYear.description}</span>
-* `isSameMonth` – <span>{docs.exports.isSameMonth.description}</span>
-* `isSameDay` – <span>{docs.exports.isSameDay.description}</span>
-* `isToday` – <span>{docs.exports.isToday.description}</span>
+- `isSameYear` – <span>{docs.exports.isSameYear.description}</span>
+- `isSameMonth` – <span>{docs.exports.isSameMonth.description}</span>
+- `isSameDay` – <span>{docs.exports.isSameDay.description}</span>
+- `isToday` – <span>{docs.exports.isToday.description}</span>
 
 ```tsx
 import {isSameMonth, IslamicUmalquraCalendar} from '@internationalized/date';
@@ -260,9 +260,9 @@ isSameMonth(new CalendarDate(2021, 4, 16), new CalendarDate(new IslamicUmalquraC
 
 A similar set of functions is also available that does not convert between calendar systems and requires the calendars to be equal.
 
-* `isEqualYear` – <span>{docs.exports.isEqualYear.description}</span>
-* `isEqualMonth` – <span>{docs.exports.isEqualMonth.description}</span>
-* `isEqualDay` – <span>{docs.exports.isEqualDay.description}</span>
+- `isEqualYear` – <span>{docs.exports.isEqualYear.description}</span>
+- `isEqualMonth` – <span>{docs.exports.isEqualMonth.description}</span>
+- `isEqualDay` – <span>{docs.exports.isEqualDay.description}</span>
 
 ```tsx
 import {isEqualMonth, IslamicUmalquraCalendar} from '@internationalized/date';
@@ -276,12 +276,12 @@ isEqualMonth(new CalendarDate(2021, 4, 16), new CalendarDate(new IslamicUmalqura
 
 The following functions can be used to find the start or end dates of a particular unit of time.
 
-* `startOfYear` – <span>{docs.exports.startOfYear.description}</span>
-* `endOfYear` – <span>{docs.exports.endOfYear.description}</span>
-* `startOfMonth` – <span>{docs.exports.startOfMonth.description}</span>
-* `endOfMonth` – <span>{docs.exports.endOfMonth.description}</span>
-* `startOfWeek` – <span>{docs.exports.startOfWeek.description}</span>
-* `endOfWeek` – <span>{docs.exports.endOfWeek.description}</span>
+- `startOfYear` – <span>{docs.exports.startOfYear.description}</span>
+- `endOfYear` – <span>{docs.exports.endOfYear.description}</span>
+- `startOfMonth` – <span>{docs.exports.startOfMonth.description}</span>
+- `endOfMonth` – <span>{docs.exports.endOfMonth.description}</span>
+- `startOfWeek` – <span>{docs.exports.startOfWeek.description}</span>
+- `endOfWeek` – <span>{docs.exports.endOfWeek.description}</span>
 
 Note that `startOfWeek` and `endOfWeek` require a locale string to be provided. This is because the first day of the week changes depending on the locale. For example, in the United States, the first day of the week is on Sunday, but in France it is on Monday.
 

@@ -21,9 +21,9 @@ import {Checkbox} from 'vanilla-starter/Checkbox';
 'use client';
 import {
   CheckboxGroup as AriaCheckboxGroup,
-  CheckboxGroupProps as AriaCheckboxGroupProps,
-  ValidationResult
-} from 'react-aria-components';
+  type CheckboxGroupProps as AriaCheckboxGroupProps,
+  type ValidationResult,
+} from 'react-aria-components/CheckboxGroup';
 import {Label, FieldError, Description} from './Form';
 import './CheckboxGroup.css';
 
@@ -103,8 +103,12 @@ import {Checkbox} from 'tailwind-starter/Checkbox';
 
 ```tsx
 'use client';
-import React, { ReactNode } from 'react';
-import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupProps as AriaCheckboxGroupProps, ValidationResult } from 'react-aria-components';
+import React, { type ReactNode } from 'react';
+import {
+  CheckboxGroup as AriaCheckboxGroup,
+  type CheckboxGroupProps as AriaCheckboxGroupProps,
+  type ValidationResult,
+} from 'react-aria-components/CheckboxGroup';
 import { Description, FieldError, Label } from './Field';
 import { composeTailwindRenderProps } from './utils';
 

@@ -4,7 +4,7 @@ A group represents a set of related UI controls, and supports interactive states
 
 ```tsx
 import {InputGroup} from 'vanilla-starter/InputGroup';
-import {Input} from 'react-aria-components';
+import {Input} from 'react-aria-components/Input';
 
 <InputGroup>
   <Input
@@ -45,17 +45,15 @@ import {Input} from 'react-aria-components';
 | `aria-colindextext` | `string | undefined` | — | Defines a human readable text alternative of aria-colindex. |
 | `aria-colspan` | `number | undefined` | — | Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid. |
 | `aria-controls` | `string | undefined` | — | Identifies the element (or elements) whose contents or presence are controlled by the current element. |
-| `aria-current` | `boolean | "time" | "true" | "false" | "page" | "step" | "location" | "date" | undefined` | — | Indicates the element that represents the current item within a container or set of related elements. |
+| `aria-current` | `boolean | "true" | "false" | "page" | "step" | "location" | "date" | "time" | undefined` | — | Indicates the element that represents the current item within a container or set of related elements. |
 | `aria-describedby` | `string | undefined` | — | Identifies the element (or elements) that describes the object. |
 | `aria-description` | `string | undefined` | — | Defines a string value that describes or annotates the current element. |
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-disabled` | `(boolean | "true" | "false") | undefined` | — | Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable. |
-| `aria-dropeffect` | `"link" | "copy" | "move" | "none" | "execute" | "popup" | undefined` | — | Indicates what functions can be performed when a dragged object is released on the drop target. |
 | `aria-errormessage` | `string | undefined` | — | Identifies the element that provides an error message for the object. |
 | `aria-expanded` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
 | `aria-flowto` | `string | undefined` | — | Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion, allows assistive technology to override the general default of reading in document source order. |
-| `aria-grabbed` | `(boolean | "true" | "false") | undefined` | — | Indicates an element's "grabbed" state in a drag-and-drop operation. |
-| `aria-haspopup` | `boolean | "dialog" | "menu" | "grid" | "true" | "false" | "listbox" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-haspopup` | `boolean | "grid" | "true" | "false" | "menu" | "listbox" | "tree" | "dialog" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-hidden` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element is exposed to an accessibility API. |
 | `aria-invalid` | `boolean | "true" | "false" | "grammar" | "spelling" | undefined` | — | Indicates the entered value does not conform to the format expected by the application. |
 | `aria-keyshortcuts` | `string | undefined` | — | Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. |
@@ -72,7 +70,7 @@ import {Input} from 'react-aria-components';
 | `aria-posinset` | `number | undefined` | — | Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. |
 | `aria-pressed` | `boolean | "true" | "false" | "mixed" | undefined` | — | Indicates the current "pressed" state of toggle buttons. |
 | `aria-readonly` | `(boolean | "true" | "false") | undefined` | — | Indicates that the element is not editable, but is otherwise operable. |
-| `aria-relevant` | `"text" | "all" | "additions" | "additions removals" | "additions text" | "removals" | "removals additions" | "removals text" | "text additions" | "text removals" | undefined` | — | Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified. |
+| `aria-relevant` | `"all" | "text" | "additions" | "additions removals" | "additions text" | "removals" | "removals additions" | "removals text" | "text additions" | "text removals" | undefined` | — | Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified. |
 | `aria-required` | `(boolean | "true" | "false") | undefined` | — | Indicates that user input is required on the element before a form may be submitted. |
 | `aria-roledescription` | `string | undefined` | — | Defines a human-readable, author-localized description for the role of an element. |
 | `aria-rowcount` | `number | undefined` | — | Defines the total number of rows in a table, grid, or treegrid. |
@@ -86,7 +84,7 @@ import {Input} from 'react-aria-components';
 | `aria-valuemin` | `number | undefined` | — | Defines the minimum allowed value for a range widget. |
 | `aria-valuenow` | `number | undefined` | — | Defines the current value for a range widget. |
 | `aria-valuetext` | `string | undefined` | — | Defines the human readable text alternative of aria-valuenow for a range widget. |
-| `autoCapitalize` | `"off" | "on" | "none" | "sentences" | "words" | "characters" | (string & {}) | undefined` | — |  |
+| `autoCapitalize` | `"none" | (string & {}) | "off" | "on" | "sentences" | "words" | "characters" | undefined` | — |  |
 | `autoCorrect` | `string | undefined` | — |  |
 | `autoFocus` | `boolean | undefined` | — |  |
 | `autoSave` | `string | undefined` | — |  |
@@ -102,13 +100,13 @@ import {Input} from 'react-aria-components';
 | `defaultValue` | `string | number | readonly string[] | undefined` | — |  |
 | `dir` | `string | undefined` | — |  |
 | `draggable` | `(boolean | "true" | "false") | undefined` | — |  |
-| `enterKeyHint` | `"search" | "enter" | "done" | "go" | "next" | "previous" | "send" | undefined` | — |  |
+| `enterKeyHint` | `"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined` | — |  |
 | `exportparts` | `string | undefined` | — |  |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — |  |
 | `inert` | `boolean | undefined` | — |  |
 | `inlist` | `any` | — |  |
-| `inputMode` | `"search" | "text" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents |
+| `inputMode` | `"none" | "search" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents |
 | `is` | `string | undefined` | — | Specify that a standard HTML element should behave like a defined custom built-in element |
 | `isDisabled` | `boolean | undefined` | — | Whether the group is disabled. |
 | `isInvalid` | `boolean | undefined` | — | Whether the group is invalid. |
@@ -196,8 +194,6 @@ import {Input} from 'react-aria-components';
 | `onInvalidCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
 | `onKeyDown` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
 | `onKeyDownCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
-| `onKeyPress` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
-| `onKeyPressCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
 | `onKeyUp` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
 | `onKeyUpCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
 | `onLoad` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |

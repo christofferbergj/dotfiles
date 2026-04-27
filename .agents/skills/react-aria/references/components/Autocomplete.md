@@ -6,10 +6,10 @@ An autocomplete allows users to search or filter a list of suggestions.
 
 ```tsx
 import {CommandPalette} from 'vanilla-starter/CommandPalette';
-import {MenuItem} from 'vanilla-starter/Menu';
+import {MenuItem, Text} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 import {FilePlus2, FolderPlus, User, UserPen, CircleDotDashed, ChartPie, Tag} from 'lucide-react';
-import {DialogTrigger, Text} from 'react-aria-components';
+import {DialogTrigger} from 'react-aria-components/Dialog';
 import {useState} from 'react';
 
 function Example(props) {
@@ -68,11 +68,11 @@ function Example(props) {
 'use client';
 import {
   Autocomplete as AriaAutocomplete,
-  AutocompleteProps as AriaAutocompleteProps,
-  MenuProps as AriaMenuProps,
+  type AutocompleteProps as AriaAutocompleteProps,
   useFilter,
-  Dialog
-} from 'react-aria-components';
+} from 'react-aria-components/Autocomplete';
+import { type MenuProps as AriaMenuProps } from 'react-aria-components/Menu';
+import { Dialog } from 'react-aria-components/Dialog';
 import {Menu} from './Menu';
 import {SearchField} from './SearchField';
 import { Modal } from './Modal';
@@ -155,7 +155,7 @@ export function CommandPalette<T extends object>(props: CommandPaletteProps<T>) 
 import {CommandPalette} from 'tailwind-starter/CommandPalette';
 import {MenuItem} from 'tailwind-starter/Menu';
 import {Button} from 'tailwind-starter/Button';
-import {DialogTrigger} from 'react-aria-components';
+import {DialogTrigger} from 'react-aria-components/Dialog';
 import {useState} from 'react';
 
 function Example(props) {
@@ -190,11 +190,11 @@ function Example(props) {
 'use client';
 import {
   Autocomplete as AriaAutocomplete,
-  AutocompleteProps as AriaAutocompleteProps,
-  MenuProps as AriaMenuProps,
+  type AutocompleteProps as AriaAutocompleteProps,
   useFilter,
-  Dialog
-} from 'react-aria-components';
+} from 'react-aria-components/Autocomplete';
+import { type MenuProps as AriaMenuProps } from 'react-aria-components/Menu';
+import { Dialog } from 'react-aria-components/Dialog';
 import {Menu} from './Menu';
 import {SearchField} from './SearchField';
 import {Modal} from './Modal';
@@ -255,7 +255,7 @@ Autocomplete filters a collection component using a [TextField](TextField.md) or
 ## Menu example
 
 ```tsx
-import {Autocomplete, useFilter} from 'react-aria-components';
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
 import {MenuTrigger, Menu, MenuItem} from 'vanilla-starter/Menu';
 import {Button} from 'vanilla-starter/Button';
 import {SearchField} from 'vanilla-starter/SearchField';
@@ -296,7 +296,8 @@ function Example(props) {
 ## Select example
 
 ```tsx
-import {Select, Label, SelectValue, Autocomplete, useFilter} from 'react-aria-components';
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
+import {Select, Label, SelectValue} from 'react-aria-components/Select';
 import {Button} from 'vanilla-starter/Button';
 import {SelectListBox, SelectItem} from 'vanilla-starter/Select';
 import {Popover} from 'vanilla-starter/Popover';
@@ -394,7 +395,7 @@ function Example(props) {
 ## ListBox example
 
 ```tsx
-import {Autocomplete, useFilter} from 'react-aria-components';
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
 import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
 import {SearchField} from 'vanilla-starter/SearchField';
 
@@ -432,7 +433,7 @@ function Example(props) {
 ## TagGroup example
 
 ```tsx
-import {Autocomplete, useFilter} from 'react-aria-components';
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
 import {TagGroup, Tag} from 'vanilla-starter/TagGroup';
 import {SearchField} from 'vanilla-starter/SearchField';
 
@@ -470,8 +471,8 @@ function Example() {
 ## GridList example
 
 ```tsx
-import {Autocomplete, Text, useFilter} from 'react-aria-components';
-import {GridList, GridListItem} from 'vanilla-starter/GridList';
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
 import {SearchField} from 'vanilla-starter/SearchField';
 
 let images = [
@@ -734,7 +735,8 @@ function Example() {
 ## Table example
 
 ```tsx
-import {Autocomplete, ResizableTableContainer, useFilter} from 'react-aria-components';
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
+import {ResizableTableContainer} from 'react-aria-components/Table';
 import {Table, TableHeader, TableBody, Column, Row, Cell} from 'vanilla-starter/Table';
 import {SearchField} from 'vanilla-starter/SearchField';
 
@@ -1194,7 +1196,8 @@ function Example() {
 When the `filter` prop is not set, the items are controlled. This example uses a backend API to perform searching instead of filtering a static list on the client.
 
 ```tsx
-import {Autocomplete, useAsyncList} from 'react-aria-components';
+import {Autocomplete} from 'react-aria-components/Autocomplete';
+import {useAsyncList} from 'react-aria-components/useAsyncList';
 import {SearchField} from 'vanilla-starter/SearchField';
 import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
 

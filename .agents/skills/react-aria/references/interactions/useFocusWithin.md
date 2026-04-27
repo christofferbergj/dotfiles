@@ -4,7 +4,7 @@ Handles focus events for the target and its descendants.
 
 ```tsx
 import React from 'react';
-import {useFocusWithin} from 'react-aria';
+import {useFocusWithin} from 'react-aria/useFocusWithin';
 
 function Example() {
   let [events, setEvents] = React.useState<string[]>([]);

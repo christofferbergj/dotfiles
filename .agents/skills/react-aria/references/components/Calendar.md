@@ -12,16 +12,14 @@ import {
   Calendar as AriaCalendar,
   CalendarCell as AriaCalendarCell,
   CalendarGrid as AriaCalendarGrid,
-  CalendarProps as AriaCalendarProps,
-  DateValue,
-  CalendarCellProps,
-  CalendarGridProps
-} from 'react-aria-components';
+  type CalendarProps as AriaCalendarProps,
+  type DateValue,
+  type CalendarCellProps,
+  type CalendarGridProps,
+} from 'react-aria-components/Calendar';
 import {Heading, Text} from './Content';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
-
 import {Button} from './Button';
-
 import './Calendar.css';
 
 export interface CalendarProps<T extends DateValue>
@@ -155,16 +153,16 @@ import React from 'react';
 import {
   Calendar as AriaCalendar,
   CalendarGridHeader as AriaCalendarGridHeader,
-  CalendarProps as AriaCalendarProps,
+  type CalendarProps as AriaCalendarProps,
   CalendarCell,
   CalendarGrid,
   CalendarGridBody,
   CalendarHeaderCell,
-  DateValue,
   Heading,
   Text,
-  useLocale
-} from 'react-aria-components';
+  type DateValue,
+} from 'react-aria-components/Calendar';
+import { useLocale } from 'react-aria-components/I18nProvider';
 import { tv } from 'tailwind-variants';
 import { Button } from './Button';
 import { composeTailwindRenderProps, focusRing } from './utils';
@@ -240,7 +238,7 @@ Use the `value` or `defaultValue` prop to set the date value, using objects in t
 
 ```tsx
 import {parseDate, getLocalTimeZone} from '@internationalized/date';
-import {useDateFormatter} from 'react-aria';
+import {useDateFormatter} from 'react-aria/useDateFormatter';
 import {Calendar} from 'vanilla-starter/Calendar';
 import {useState} from 'react';
 
@@ -265,7 +263,7 @@ function Example() {
 By default, `Calendar` displays the value using the calendar system for the user's locale. Use `<I18nProvider>` to override the calendar system by setting the [Unicode calendar locale extension](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string). The `onChange` event always receives a date in the same calendar as the `value` or `defaultValue` (Gregorian if no value is provided), regardless of the displayed locale.
 
 ```tsx
-import {I18nProvider} from 'react-aria-components';
+import {I18nProvider} from 'react-aria-components/I18nProvider';
 import {parseDate} from '@internationalized/date';
 import {Calendar} from 'vanilla-starter/Calendar';
 
@@ -363,7 +361,7 @@ Use the `minValue` and `maxValue` props to set the valid date range. The `isDate
 
 ```tsx
 import {isWeekend, today, getLocalTimeZone} from '@internationalized/date';
-import {useLocale} from 'react-aria-components';
+import {useLocale} from 'react-aria-components/I18nProvider';
 import {Calendar} from 'vanilla-starter/Calendar';
 
 function Example(props) {
@@ -396,10 +394,10 @@ function Example(props) {
 Set the `visibleDuration` prop and render multiple `CalendarGrid` elements to display more than one month at a time. The `pageBehavior` prop controls whether pagination advances by a single month or multiple. The `firstDayOfWeek` prop overrides the locale-specified first day of the week.
 
 ```tsx
-import {Calendar, Heading} from 'react-aria-components';
+import {Calendar, Heading} from 'react-aria-components/Calendar';
 import {CalendarGrid, CalendarCell} from 'vanilla-starter/Calendar';
 import {Button} from 'vanilla-starter/Button';
-import {useDateFormatter} from 'react-aria';
+import {useDateFormatter} from 'react-aria/useDateFormatter';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 
 // TODO: move this into the starter example.
@@ -479,7 +477,7 @@ function Example() {
 You can also control the focused date via `CalendarStateContext`. This example shows month and year dropdown components that work inside any `<Calendar>`.
 
 ```tsx
-import {Calendar} from 'react-aria-components';
+import {Calendar} from 'react-aria-components/Calendar';
 import {CalendarGrid, CalendarCell} from 'vanilla-starter/Calendar';
 import {MonthDropdown} from './MonthDropdown';
 import {YearDropdown} from './YearDropdown';

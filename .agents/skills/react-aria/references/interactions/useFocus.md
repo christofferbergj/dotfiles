@@ -6,7 +6,7 @@ Focus events on child elements will be ignored.
 ```tsx
 
 import React from 'react';
-import {useFocus} from 'react-aria';
+import {useFocus} from 'react-aria/useFocus';
 
 function Example() {
   let [events, setEvents] = React.useState<string[]>([]);

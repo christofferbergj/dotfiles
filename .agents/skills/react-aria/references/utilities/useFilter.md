@@ -19,7 +19,7 @@ and diacritics.
 ```tsx
 'use client';
 import React from 'react';
-import {useFilter} from 'react-aria';
+import {useFilter} from 'react-aria/useFilter';
 
 function Example() {
   const composers = [

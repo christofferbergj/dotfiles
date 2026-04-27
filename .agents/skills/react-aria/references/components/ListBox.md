@@ -20,18 +20,19 @@ import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
 ### ListBox.tsx
 
 ```tsx
-'use client';
+'use client';;
 import {
   ListBox as AriaListBox,
   ListBoxItem as AriaListBoxItem,
   ListBoxSection as AriaListBoxSection,
-  composeRenderProps,
-  ListBoxItemProps,
   ListBoxLoadMoreItem as AriaListBoxLoadMoreItem,
-  ListBoxLoadMoreItemProps,
-  ListBoxProps,
-  ListBoxSectionProps
-} from 'react-aria-components';
+  Header,
+  type ListBoxItemProps,
+  type ListBoxLoadMoreItemProps,
+  type ListBoxProps,
+  type ListBoxSectionProps,
+} from 'react-aria-components/ListBox';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import {Check} from 'lucide-react';
 import {Text} from './Content';
 import {ProgressCircle} from './ProgressCircle';
@@ -88,6 +89,8 @@ export function DropdownItem(props: ListBoxItemProps) {
     </ListBoxItem>
   );
 }
+
+export {Text, Header};
 
 ```
 
@@ -472,14 +475,14 @@ import React from 'react';
 import {
   ListBox as AriaListBox,
   ListBoxItem as AriaListBoxItem,
-  ListBoxProps as AriaListBoxProps,
-  Collection,
-  Header,
-  ListBoxItemProps,
   ListBoxSection,
-  SectionProps,
-  composeRenderProps
-} from 'react-aria-components';
+  Header,
+  Collection,
+  type ListBoxProps as AriaListBoxProps,
+  type ListBoxItemProps,
+  type ListBoxSectionProps
+} from 'react-aria-components/ListBox';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 import { composeTailwindRenderProps, focusRing } from './utils';
 
@@ -560,7 +563,7 @@ export function DropdownItem(props: ListBoxItemProps) {
   );
 }
 
-export interface DropdownSectionProps<T> extends SectionProps<T> {
+export interface DropdownSectionProps<T> extends ListBoxSectionProps<T> {
   title?: string
   items?: any
 }
@@ -583,7 +586,7 @@ export function DropdownSection<T extends object>(props: DropdownSectionProps<T>
 `ListBox` follows the [Collection Components API](collections.md?component=ListBox), accepting both static and dynamic collections. This example shows a dynamic collection, passing a list of objects to the `items` prop, and a function to render the children.
 
 ```tsx
-import {ListBox, ListBoxItem} from 'react-aria-components';
+import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
 
 function Example() {
   let options = [
@@ -613,7 +616,7 @@ function Example() {
 Use the `"label"` and `"description"` slots to separate primary and secondary content within a `<ListBoxItem>`. This improves screen reader announcements and can also be used for styling purposes.
 
 ```tsx
-import {ListBox, ListBoxItem, Text} from 'react-aria-components';
+import {ListBox, ListBoxItem, Text} from 'vanilla-starter/ListBox';
 
 <ListBox aria-label="Permissions" selectionMode="single">
   <ListBoxItem textValue="Read">
@@ -643,7 +646,7 @@ import {ListBox, ListBoxItem, Text} from 'react-aria-components';
 Use the `<ListBoxSection>` component to group options. A `<Header>` element may also be included to label the section. Sections without a header must have an `aria-label`.
 
 ```tsx
-import {ListBox, ListBoxItem, ListBoxSection, Header} from 'react-aria-components';
+import {ListBox, ListBoxItem, ListBoxSection, Header} from 'vanilla-starter/ListBox';
 
 <ListBox aria-label="Sandwich contents" selectionMode="multiple">
   {/*- begin highlight -*/}
@@ -676,7 +679,8 @@ Use [renderEmptyState](#empty-state) to display a spinner during initial load. T
 ```tsx
 import {ListBox, ListBoxItem, ListBoxLoadMoreItem} from 'vanilla-starter/ListBox';
 import {ProgressCircle} from 'vanilla-starter/ProgressCircle';
-import {Collection, useAsyncList} from 'react-aria-components';
+import {Collection} from 'react-aria-components/Collection';
+import {useAsyncList} from 'react-aria-components/useAsyncList';
 
 interface Character {
   name: string
@@ -725,7 +729,7 @@ Use the `href` prop on a `<ListBoxItem>` to create a link.
 By default, link items in a ListBox are not selectable, and only perform navigation when the user interacts with them. However, with `selectionBehavior="replace"`, items will be selected when single clicking or pressing the <Keyboard>Space</Keyboard> key, and navigate to the link when double clicking or pressing the <Keyboard>Enter</Keyboard> key.
 
 ```tsx
-import {ListBox, ListBoxItem} from 'react-aria-components';
+import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
 
 <ListBox aria-label="Links" selectionMode="multiple">
   {/*- begin highlight -*/}
@@ -752,7 +756,7 @@ By default, links are rendered as an `<a>` element. Use the `render` prop to int
 ### Empty state
 
 ```tsx
-import {ListBox} from 'react-aria-components';
+import {ListBox} from 'vanilla-starter/ListBox';
 
 <ListBox
   aria-label="Search results"
@@ -766,8 +770,8 @@ import {ListBox} from 'react-aria-components';
 Use the `selectionMode` prop to enable single or multiple selection. The selected items can be controlled via the `selectedKeys` prop, matching the `id` prop of the items. Items can be disabled with the `isDisabled` prop. See the [selection guide](selection.md?component=ListBox) for more details.
 
 ```tsx
-import type {Selection} from 'react-aria-components';
-import {ListBox, ListBoxItem} from 'react-aria-components';
+import type {Selection} from 'react-aria-components/ListBox';
+import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
 import {useState} from 'react';
 
 function Example(props) {
@@ -800,7 +804,7 @@ function Example(props) {
 Use the `layout` and `orientation` props to create horizontal and vertical stacks and grids. This affects keyboard navigation and drag and drop behavior.
 
 ```tsx
-import {ListBox, ListBoxItem, Text} from 'react-aria-components';
+import {ListBox, ListBoxItem, Text} from 'vanilla-starter/ListBox';
 
 let planets = [
   {
@@ -866,7 +870,9 @@ let planets = [
 ListBox supports drag and drop interactions when the `dragAndDropHooks` prop is provided using the `useDragAndDrop` hook. Users can drop data on the list as a whole, on individual items, insert new items between existing ones, or reorder items. React Aria supports drag and drop via mouse, touch, keyboard, and screen reader interactions. See the [drag and drop guide](dnd.md?component=ListBox) to learn more.
 
 ```tsx
-import {ListBox, ListBoxItem, useDragAndDrop, useListData} from 'react-aria-components';
+import {ListBox, ListBoxItem} from 'vanilla-starter/ListBox';
+import {useDragAndDrop} from 'react-aria-components/useDragAndDrop';
+import {useListData} from 'react-aria-components/useListData';
 
 function Example() {
   let list = useListData({
@@ -938,13 +944,13 @@ function Example() {
 | `autoFocus` | `boolean | FocusStrategy | undefined` | — | Whether to auto focus the listbox or an option. |
 | `children` | `React.ReactNode | ((item: T) => ReactNode)` | — | The contents of the collection. |
 | `className` | `ClassNameOrFunction<ListBoxRenderProps> | undefined` | 'react-aria-ListBox' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
-| `defaultSelectedKeys` | `Iterable<Key> | "all" | undefined` | — | The initial selected keys in the collection (uncontrolled). |
+| `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. |
 | `disallowEmptySelection` | `boolean | undefined` | — | Whether the collection allows empty selection. |
 | `dragAndDropHooks` | `DragAndDropHooks<NoInfer<T>> | undefined` | — | The drag and drop hooks returned by `useDragAndDrop` used to enable drag and drop behavior for the ListBox. |
-| `escapeKeyBehavior` | `"none" | "clearSelection" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the listbox or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
+| `escapeKeyBehavior` | `"clearSelection" | "none" | undefined` | 'clearSelection' | Whether pressing the escape key should clear selection in the listbox or not. Most experiences should not modify this option as it eliminates a keyboard user's ability to easily clear selection. Only use if the escape key is being handled externally or should not trigger selection clearing contextually. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
@@ -1023,7 +1029,7 @@ function Example() {
 | `orientation` | `Orientation | undefined` | 'vertical' | The primary orientation of the items. Usually this is the direction that the collection scrolls. |
 | `render` | `DOMRenderFunction<"div", ListBoxRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `renderEmptyState` | `((props: ListBoxRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no items in the list. |
-| `selectedKeys` | `Iterable<Key> | "all" | undefined` | — | The currently selected keys in the collection (controlled). |
+| `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
 | `selectionBehavior` | `SelectionBehavior | undefined` | "toggle" | How multiple selection should behave in the collection. |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldFocusOnHover` | `boolean | undefined` | — | Whether options should be focused when the user hovers over them. |
@@ -1072,6 +1078,8 @@ function Example() {
 | `onHoverChange` | `((isHovering: boolean) => void) | undefined` | — | Handler that is called when the hover state changes. |
 | `onHoverEnd` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction ends. |
 | `onHoverStart` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction starts. |
+| `onKeyDown` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is pressed. |
+| `onKeyUp` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is released. |
 | `onLostPointerCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onMouseDown` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -1128,7 +1136,7 @@ function Example() {
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `((props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> | React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement>, renderProps: ListBoxItemRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `((props: React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement> | React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, renderProps: ListBoxItemRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
 | `style` | `(React.CSSProperties | ((values: ListBoxItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |

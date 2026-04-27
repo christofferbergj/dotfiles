@@ -5,7 +5,7 @@ A tooltip displays a description of an element on hover or focus.
 ## Vanilla CSS example
 
 ```tsx
-import {TooltipTrigger} from 'react-aria-components';
+import {TooltipTrigger} from 'react-aria-components/Tooltip';
 import {Tooltip} from 'vanilla-starter/Tooltip';
 import {Button} from 'vanilla-starter/Button';
 import {Edit} from 'lucide-react';
@@ -33,11 +33,10 @@ function Example(props) {
 import {
   OverlayArrow,
   Tooltip as AriaTooltip,
-  TooltipProps as AriaTooltipProps,
+  type TooltipProps as AriaTooltipProps,
   TooltipTrigger as AriaTooltipTrigger,
-  TooltipTriggerComponentProps
-} from 'react-aria-components';
-
+  type TooltipTriggerComponentProps,
+} from 'react-aria-components/Tooltip';
 import './Tooltip.css';
 
 export interface TooltipProps extends Omit<AriaTooltipProps, 'children'> {
@@ -130,7 +129,7 @@ export function TooltipTrigger(props: TooltipTriggerComponentProps) {
 ## Tailwind example
 
 ```tsx
-import {TooltipTrigger} from 'react-aria-components';
+import {TooltipTrigger} from 'react-aria-components/Tooltip';
 import {Tooltip} from 'tailwind-starter/Tooltip';
 import {Button} from 'tailwind-starter/Button';
 import {Edit} from 'lucide-react';
@@ -156,12 +155,8 @@ function Example(props) {
 ```tsx
 'use client';
 import React from 'react';
-import {
-  Tooltip as AriaTooltip,
-  TooltipProps as AriaTooltipProps,
-  OverlayArrow,
-  composeRenderProps
-} from 'react-aria-components';
+import { Tooltip as AriaTooltip, type TooltipProps as AriaTooltipProps, OverlayArrow } from 'react-aria-components/Tooltip';
+import { composeRenderProps } from 'react-aria-components/composeRenderProps';
 import { tv } from 'tailwind-variants';
 
 export interface TooltipProps extends Omit<AriaTooltipProps, 'children'> {
@@ -200,7 +195,7 @@ export function Tooltip({ children, ...props }: TooltipProps) {
 Tooltips appear after a "warmup" delay when hovering, or instantly on focus. Once a tooltip is displayed, other tooltips display immediately. If the user waits for the "cooldown period" before hovering another element, the warmup timer restarts.
 
 ```tsx
-import {TooltipTrigger} from 'react-aria-components';
+import {TooltipTrigger} from 'react-aria-components/Tooltip';
 import {Tooltip} from 'vanilla-starter/Tooltip';
 import {Button} from 'vanilla-starter/Button';
 import {Edit} from 'lucide-react';
@@ -246,7 +241,7 @@ function Example(props) {
 
 ```tsx
 "use client"
-import {Focusable, TooltipTrigger} from 'react-aria-components';
+import {Focusable, TooltipTrigger} from 'react-aria-components/Tooltip';
 import {Tooltip} from 'vanilla-starter/Tooltip';
 
 <TooltipTrigger>
@@ -378,7 +373,6 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `style` | `(React.CSSProperties | ((values: TooltipRenderProps & { defaultStyle: CSSProperties; }) => CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"yes" | "no" | undefined` | — |  |
 | `triggerRef` | `RefObject<Element | null> | undefined` | — | The ref for the element which the tooltip positions itself with respect to. When used within a TooltipTrigger this is set automatically. It is only required when used standalone. |
-| `UNSTABLE_portalContainer` | `Element | undefined` | document.body | The container element in which the overlay portal will be placed. This may have unknown behavior depending on where it is portalled to. |
 
 ### OverlayArrow
 
@@ -388,7 +382,7 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `accessKey` | `string | undefined` | — |  |
 | `aria-activedescendant` | `string | undefined` | — | Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. |
 | `aria-atomic` | `(boolean | "true" | "false") | undefined` | — | Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. |
-| `aria-autocomplete` | `"none" | "inline" | "list" | "both" | undefined` | — | Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be presented if they are made. |
+| `aria-autocomplete` | `"none" | "list" | "inline" | "both" | undefined` | — | Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be presented if they are made. |
 | `aria-braillelabel` | `string | undefined` | — | Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user. |
 | `aria-brailleroledescription` | `string | undefined` | — | Defines a human-readable, author-localized abbreviated description for the role of an element, which is intended to be converted into Braille. |
 | `aria-busy` | `(boolean | "true" | "false") | undefined` | — |  |
@@ -398,17 +392,15 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `aria-colindextext` | `string | undefined` | — | Defines a human readable text alternative of aria-colindex. |
 | `aria-colspan` | `number | undefined` | — | Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid. |
 | `aria-controls` | `string | undefined` | — | Identifies the element (or elements) whose contents or presence are controlled by the current element. |
-| `aria-current` | `boolean | "time" | "true" | "false" | "page" | "step" | "location" | "date" | undefined` | — | Indicates the element that represents the current item within a container or set of related elements. |
+| `aria-current` | `boolean | "step" | "true" | "false" | "page" | "location" | "date" | "time" | undefined` | — | Indicates the element that represents the current item within a container or set of related elements. |
 | `aria-describedby` | `string | undefined` | — | Identifies the element (or elements) that describes the object. |
 | `aria-description` | `string | undefined` | — | Defines a string value that describes or annotates the current element. |
 | `aria-details` | `string | undefined` | — | Identifies the element that provides a detailed, extended description for the object. |
 | `aria-disabled` | `(boolean | "true" | "false") | undefined` | — | Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable. |
-| `aria-dropeffect` | `"link" | "copy" | "move" | "none" | "execute" | "popup" | undefined` | — | Indicates what functions can be performed when a dragged object is released on the drop target. |
 | `aria-errormessage` | `string | undefined` | — | Identifies the element that provides an error message for the object. |
 | `aria-expanded` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
 | `aria-flowto` | `string | undefined` | — | Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion, allows assistive technology to override the general default of reading in document source order. |
-| `aria-grabbed` | `(boolean | "true" | "false") | undefined` | — | Indicates an element's "grabbed" state in a drag-and-drop operation. |
-| `aria-haspopup` | `boolean | "dialog" | "menu" | "grid" | "true" | "false" | "listbox" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-haspopup` | `boolean | "true" | "false" | "dialog" | "grid" | "listbox" | "menu" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-hidden` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element is exposed to an accessibility API. |
 | `aria-invalid` | `boolean | "true" | "false" | "grammar" | "spelling" | undefined` | — | Indicates the entered value does not conform to the format expected by the application. |
 | `aria-keyshortcuts` | `string | undefined` | — | Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. |
@@ -425,7 +417,7 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `aria-posinset` | `number | undefined` | — | Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. |
 | `aria-pressed` | `boolean | "true" | "false" | "mixed" | undefined` | — | Indicates the current "pressed" state of toggle buttons. |
 | `aria-readonly` | `(boolean | "true" | "false") | undefined` | — | Indicates that the element is not editable, but is otherwise operable. |
-| `aria-relevant` | `"text" | "all" | "additions" | "additions removals" | "additions text" | "removals" | "removals additions" | "removals text" | "text additions" | "text removals" | undefined` | — | Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified. |
+| `aria-relevant` | `"text" | "additions" | "additions removals" | "additions text" | "all" | "removals" | "removals additions" | "removals text" | "text additions" | "text removals" | undefined` | — | Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified. |
 | `aria-required` | `(boolean | "true" | "false") | undefined` | — | Indicates that user input is required on the element before a form may be submitted. |
 | `aria-roledescription` | `string | undefined` | — | Defines a human-readable, author-localized description for the role of an element. |
 | `aria-rowcount` | `number | undefined` | — | Defines the total number of rows in a table, grid, or treegrid. |
@@ -439,7 +431,7 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `aria-valuemin` | `number | undefined` | — | Defines the minimum allowed value for a range widget. |
 | `aria-valuenow` | `number | undefined` | — | Defines the current value for a range widget. |
 | `aria-valuetext` | `string | undefined` | — | Defines the human readable text alternative of aria-valuenow for a range widget. |
-| `autoCapitalize` | `"off" | "on" | "none" | "sentences" | "words" | "characters" | (string & {}) | undefined` | — |  |
+| `autoCapitalize` | `"off" | "none" | "on" | "sentences" | "words" | "characters" | (string & {}) | undefined` | — |  |
 | `autoCorrect` | `string | undefined` | — |  |
 | `autoFocus` | `boolean | undefined` | — |  |
 | `autoSave` | `string | undefined` | — |  |
@@ -455,13 +447,13 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `defaultValue` | `string | number | readonly string[] | undefined` | — |  |
 | `dir` | `string | undefined` | — |  |
 | `draggable` | `(boolean | "true" | "false") | undefined` | — |  |
-| `enterKeyHint` | `"search" | "enter" | "done" | "go" | "next" | "previous" | "send" | undefined` | — |  |
+| `enterKeyHint` | `"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined` | — |  |
 | `exportparts` | `string | undefined` | — |  |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — |  |
 | `inert` | `boolean | undefined` | — |  |
 | `inlist` | `any` | — |  |
-| `inputMode` | `"search" | "text" | "none" | "tel" | "url" | "email" | "numeric" | "decimal" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents |
+| `inputMode` | `"none" | "search" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents |
 | `is` | `string | undefined` | — | Specify that a standard HTML element should behave like a defined custom built-in element |
 | `itemID` | `string | undefined` | — |  |
 | `itemProp` | `string | undefined` | — |  |
@@ -543,8 +535,6 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `onInvalidCapture` | `React.FormEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onKeyDown` | `React.KeyboardEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onKeyDownCapture` | `React.KeyboardEventHandler<HTMLDivElement> | undefined` | — |  |
-| `onKeyPress` | `React.KeyboardEventHandler<HTMLDivElement> | undefined` | — |  |
-| `onKeyPressCapture` | `React.KeyboardEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onKeyUp` | `React.KeyboardEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onKeyUpCapture` | `React.KeyboardEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onLoad` | `React.ReactEventHandler<HTMLDivElement> | undefined` | — |  |

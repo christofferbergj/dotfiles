@@ -5,9 +5,9 @@ A modal is an overlay element which blocks interaction with elements outside it.
 ## Vanilla CSS example
 
 ```tsx
-import {DialogTrigger, Heading} from 'react-aria-components';
+import {DialogTrigger} from 'react-aria-components/Modal';
 import {Modal} from 'vanilla-starter/Modal';
-import {Dialog} from 'vanilla-starter/Dialog';
+import {Dialog, Heading} from 'vanilla-starter/Dialog';
 import {Form} from 'vanilla-starter/Form';
 import {TextField} from 'vanilla-starter/TextField';
 import {Button} from 'vanilla-starter/Button';
@@ -39,7 +39,7 @@ function Example(props) {
 
 ```tsx
 'use client';
-import {Modal as RACModal, ModalOverlayProps} from 'react-aria-components';
+import { Modal as RACModal, type ModalOverlayProps } from 'react-aria-components/Modal';
 import './Modal.css';
 
 export function Modal(props: ModalOverlayProps) {
@@ -121,9 +121,9 @@ export function Modal(props: ModalOverlayProps) {
 ## Tailwind example
 
 ```tsx
-import {DialogTrigger, Heading} from 'react-aria-components';
+import {DialogTrigger} from 'react-aria-components/Modal';
 import {Modal} from 'tailwind-starter/Modal';
-import {Dialog} from 'tailwind-starter/Dialog';
+import {Dialog, Heading} from 'tailwind-starter/Dialog';
 import {Form} from 'tailwind-starter/Form';
 import {TextField} from 'tailwind-starter/TextField';
 import {Button} from 'tailwind-starter/Button';
@@ -156,7 +156,7 @@ function Example(props) {
 ```tsx
 'use client';
 import React from 'react';
-import { ModalOverlay, ModalOverlayProps, Modal as RACModal } from 'react-aria-components';
+import { ModalOverlay, type ModalOverlayProps, Modal as RACModal } from 'react-aria-components/Modal';
 import { tv } from 'tailwind-variants';
 
 const overlayStyles = tv({
@@ -200,8 +200,8 @@ export function Modal(props: ModalOverlayProps) {
 Overlays such as trays, drawers, and sheets can be built using a `Modal` with custom entry and exit animations.
 
 ```tsx
-import {DialogTrigger, Heading} from 'react-aria-components';
-import {Sheet} from 'vanilla-starter/Sheet';
+import {DialogTrigger} from 'react-aria-components/Modal';
+import {Sheet, Heading} from 'vanilla-starter/Sheet';
 import {Button} from 'vanilla-starter/Button';
 
 <DialogTrigger>
@@ -220,10 +220,9 @@ Use the `isOpen` prop to show a modal programmatically or mount in a different p
 
 ```tsx
 import {useState} from 'react';
-import {Heading} from 'react-aria-components';
 import {MenuTrigger, Menu, MenuItem} from 'vanilla-starter/Menu';
 import {Modal} from 'vanilla-starter/Modal';
-import {Dialog} from 'vanilla-starter/Dialog';
+import {Dialog, Heading} from 'vanilla-starter/Dialog';
 import {Button} from 'vanilla-starter/Button';
 
 function Example() {
@@ -254,9 +253,9 @@ function Example() {
 
 ```tsx
 "use client"
-import {Pressable, DialogTrigger, Heading} from 'react-aria-components';
+import {Pressable, DialogTrigger} from 'react-aria-components/Modal';
 import {Modal} from 'vanilla-starter/Modal';
-import {Dialog} from 'vanilla-starter/Dialog';
+import {Dialog, Heading} from 'vanilla-starter/Dialog';
 import {Button} from 'vanilla-starter/Button';
 
 <DialogTrigger>
@@ -406,7 +405,6 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `style` | `(React.CSSProperties | ((values: ModalRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"yes" | "no" | undefined` | — |  |
-| `UNSTABLE_portalContainer` | `Element | undefined` | document.body | The container element in which the overlay portal will be placed. This may have unknown behavior depending on where it is portalled to. |
 
 ### Dialog
 

@@ -6,7 +6,7 @@ of dealing with pointer and keyboard events.
 
 ```tsx
 import React from 'react';
-import {usePress} from 'react-aria';
+import {usePress} from 'react-aria/usePress';
 
 function Example() {
   let [events, setEvents] = React.useState<string[]>([]);
@@ -54,13 +54,13 @@ function Example() {
 
 `usePress` returns the current press state, which can be used to adjust the visual appearance of the target. If the pointer is released over the target, then an `onPress` event is fired.
 
-* Handles mouse and touch events
-* Handles <Keyboard>Enter</Keyboard> or <Keyboard>Space</Keyboard> key presses
-* Handles screen reader virtual clicks
-* Normalizes focus behavior on mouse and touch interactions across browsers
-* Disables text selection while the press interaction is active
-* Cancels press interactions on scroll
-* Normalizes many cross browser inconsistencies
+- Handles mouse and touch events
+- Handles <Keyboard>Enter</Keyboard> or <Keyboard>Space</Keyboard> key presses
+- Handles screen reader virtual clicks
+- Normalizes focus behavior on mouse and touch interactions across browsers
+- Disables text selection while the press interaction is active
+- Cancels press interactions on scroll
+- Normalizes many cross browser inconsistencies
 
 Read our [blog post](blog/building-a-button-part-1.md) learn more.
 
