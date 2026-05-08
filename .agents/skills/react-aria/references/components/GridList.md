@@ -1038,7 +1038,7 @@ function Example(props) {
         {...props}
         aria-label="Nature photos"
         layout="grid"
-
+        
         selectedKeys={selected}
         onSelectionChange={setSelected}
         onAction={key => alert(`Clicked ${key}`)}
@@ -1118,7 +1118,7 @@ let photos = [
 
 <GridList
   /*- begin highlight -*/
-
+  
   /*- end highlight -*/
   aria-label="Photos"
   items={photos}

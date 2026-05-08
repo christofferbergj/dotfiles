@@ -16,7 +16,7 @@ for (let i = 0; i < 5000; i++) {
 <Virtualizer
   /*- begin focus -*/
   layout={ListLayout}
-
+  
 >
   {/*- end focus -*/}
   <ListBox
@@ -52,7 +52,7 @@ for (let i = 0; i < 5000; i++) {
 <Virtualizer
   /*- begin highlight -*/
   layout={ListLayout}
-
+  
 >
   {/*- end highlight -*/}
   <ListBox
@@ -291,7 +291,7 @@ for (let i = 0; imageOptions.length < 500; i++) {
 <Virtualizer
   /*- begin highlight -*/
   layout={ListLayout}
-
+  
 >
   {/*- end highlight -*/}
   <ListBox
@@ -362,7 +362,7 @@ function Example(props) {
       <Virtualizer
         /*- begin highlight -*/
         layout={GridLayout}
-
+        
         {...props}>
         {/*- end highlight -*/}
         <GridList
@@ -626,7 +626,7 @@ for (let i = 0; images.length < 500; i++) {
 <Virtualizer
   /*- begin highlight -*/
   layout={WaterfallLayout}
-
+  
   /*- end highlight -*/
 >
   <GridList
@@ -664,7 +664,7 @@ for (let i = 0; i < 1000; i++) {
 <Virtualizer
   /*- begin highlight -*/
   layout={TableLayout}
-
+  
   /*- end highlight -*/
 >
   <Table

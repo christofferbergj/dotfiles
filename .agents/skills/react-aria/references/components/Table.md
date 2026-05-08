@@ -190,7 +190,7 @@ export function Cell(props: CellProps) {
   return (
     <AriaCell {...props}>
       {composeRenderProps(props.children, (children, {hasChildItems, isTreeColumn}) => (<>
-        {isTreeColumn && hasChildItems &&
+        {isTreeColumn && hasChildItems && 
           <Button slot="chevron">
             <ChevronRight />
           </Button>
@@ -823,7 +823,7 @@ export function Cell(props: CellProps) {
         paddingInlineStart: isTreeColumn ? 4 + (hasChildItems ? 0 : 20) + (level - 1) * 16 : undefined
       })}>
       {composeRenderProps(props.children, (children, {hasChildItems, isTreeColumn, isExpanded, isDisabled}) => (<>
-        {hasChildItems && isTreeColumn &&
+        {hasChildItems && isTreeColumn && 
           <Button slot="chevron" className={expandButton({ isDisabled })}>
             <ChevronRight aria-hidden className={chevron({ isExpanded, isDisabled })} />
           </Button>
@@ -1139,7 +1139,7 @@ function Example(props) {
       <Table
         {...props}
         aria-label="Favorite pokemon"
-
+        
         selectedKeys={selected}
         onSelectionChange={setSelected}
         onRowAction={key => alert(`Clicked ${key}`)}

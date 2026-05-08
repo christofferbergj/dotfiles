@@ -9,7 +9,7 @@ and selection.
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
 
 <Tree
-
+  
   aria-label="Files">
   <TreeItem title="Documents">
     <TreeItem title="Project">
@@ -337,7 +337,7 @@ export function TreeHeader(
 import {Tree, TreeItem} from 'tailwind-starter/Tree';
 
 <Tree
-
+  
   aria-label="Files">
   <TreeItem title="Documents">
     <TreeItem title="Project">
@@ -572,7 +572,7 @@ Use the `href` prop on a `<TreeItem>` to create a link. Link interactions vary d
 import {Tree, TreeItem} from 'vanilla-starter/Tree';
 
 <Tree
-
+  
   aria-label="Tree with links"
   defaultExpandedKeys={['bulbasaur', 'ivysaur']}>
   <TreeItem
@@ -634,7 +634,7 @@ import {Tree, TreeHeader, TreeItem, TreeSection} from 'vanilla-starter/Tree';
     <TreeItem id="shared-photos" title="Shared Photos">
       <TreeItem id="shared-photo-1" title="Shared Photo 1" />
       <TreeItem id="shared-photo-2" title="Shared Photo 2" />
-    </TreeItem>
+    </TreeItem> 
   </TreeSection>
   <TreeSection>
     <TreeHeader>Documents</TreeHeader>
@@ -669,7 +669,7 @@ function Example(props) {
         aria-label="Pokemon evolution"
         style={{height: 250}}
         defaultExpandedKeys={['bulbasaur', 'ivysaur']}
-
+        
         selectedKeys={selected}
         onSelectionChange={setSelected}
         onAction={key => alert(`Clicked ${key}`)}
