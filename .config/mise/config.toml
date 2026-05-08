@@ -1,0 +1,24 @@
+[tools]
+bun = "latest"
+node = "lts"
+pnpm = "11"
+usage = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = []
+
+[settings.aqua]
+baked_registry = false
+
+[tasks.update-all]
+description = "Update Homebrew, Mise tools, and Bun globals"
+run = [
+    "brew upgrade",
+    "brew cleanup",
+    "brew autoremove",
+    "mise upgrade",
+    "mise prune -y",
+    "pnpm dlx skills update -y -g",
+    "bun update -g --latest",
+    "pnpm up-g --latest",
+]
