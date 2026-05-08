@@ -18,7 +18,6 @@ run = [
     "brew autoremove",
     "mise upgrade",
     "mise prune -y",
-    "pnpm dlx skills update -y -g",
-    "bun update -g --latest",
-    "pnpm up-g --latest",
+    "pnx skills update -y -g",
+    "pnpm update --global --latest",
 ]
