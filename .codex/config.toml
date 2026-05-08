@@ -1,5 +1,5 @@
 model = "gpt-5.5"
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 
 [mcp_servers.playwright]
@@ -24,7 +24,10 @@ env_http_headers = { Authorization = "UIDOTSH_MCP_AUTHORIZATION" }
 approval_mode = "approve"
 
 [features]
+goals = true
 multi_agent = true
+prevent_idle_sleep = true
+terminal_resize_reflow = true
 
 [plugins."github@openai-curated"]
 enabled = true
@@ -38,9 +41,6 @@ enabled = true
 [plugins."figma@openai-curated"]
 enabled = true
 
-[plugins."browser-use@openai-bundled"]
-enabled = true
-
 [plugins."vercel@openai-curated"]
 enabled = true
 
@@ -52,3 +52,40 @@ enabled = true
 
 [plugins."presentations@openai-primary-runtime"]
 enabled = true
+
+[plugins."browser-use@openai-bundled"]
+enabled = true
+
+[marketplaces.openai-bundled]
+last_updated = "2026-05-08T07:52:06Z"
+source_type = "local"
+source = "/Users/christofferbergj/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-05-07T08:01:35Z"
+source_type = "local"
+source = "/Users/christofferbergj/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[projects."/Users/christofferbergj/code/andel-energi"]
+trust_level = "trusted"
+
+[projects."/"]
+trust_level = "trusted"
+
+[projects."/Users/christofferbergj/code/fysioscout-web"]
+trust_level = "trusted"
+
+[projects."/Users/christofferbergj/code/andel-energi-assets"]
+trust_level = "trusted"
+
+[projects."/Users/christofferbergj/code/aure"]
+trust_level = "trusted"
+
+[projects."/Users/christofferbergj/Documents/Codex/2026-05-08/use-yadm-status-to-check-my"]
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[tui]
+notification_condition = "always"
