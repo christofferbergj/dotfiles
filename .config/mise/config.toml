@@ -7,9 +7,6 @@ usage = "latest"
 [settings]
 idiomatic_version_file_enable_tools = []
 
-[settings.aqua]
-baked_registry = false
-
 [tasks.update-all]
 description = "Update Homebrew, Mise tools, and Bun globals"
 run = [
