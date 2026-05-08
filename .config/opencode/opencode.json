@@ -3,8 +3,11 @@
   "plugin": [
     "oh-my-openagent@latest"
   ],
-  "model": "opencode-go/minimax-m2.7",
+  "model": "github-copilot/claude-opus-4.7",
   "permission": {
+    "codesearch": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
     "bash": {
       "git commit *": "ask",
       "git push *": "ask"
