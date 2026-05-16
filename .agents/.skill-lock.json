@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/turborepo.git",
       "skillPath": "skills/turborepo/SKILL.md",
-      "skillFolderHash": "5b7541e7a58415d4a1bb06e698abf0c2bddb4152",
+      "skillFolderHash": "4df4745eeb35dd0e3d53810d7ba63c934cff5454",
       "installedAt": "2026-01-23T10:55:47.272Z",
-      "updatedAt": "2026-05-08T07:51:08.498Z"
+      "updatedAt": "2026-05-15T06:28:53.175Z"
     },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
@@ -124,16 +124,16 @@
       "sourceUrl": "https://react-aria.adobe.com/.well-known/skills/react-aria/SKILL.md",
       "skillFolderHash": "",
       "installedAt": "2026-02-05T11:46:23.948Z",
-      "updatedAt": "2026-05-08T07:51:43.671Z"
+      "updatedAt": "2026-05-15T06:32:33.392Z"
     },
     "mise-expert": {
       "source": "samhvw8/dotfiles",
       "sourceType": "github",
       "sourceUrl": "https://github.com/samhvw8/dotfiles.git",
       "skillPath": "dot_ccp/hub/skills/mise-expert/SKILL.md",
-      "skillFolderHash": "cc2778e4ad1050c7c3d070aef9e2d6e09ea174dc",
+      "skillFolderHash": "9d0e83e54e2b44861126c0e378e9ab0934d67f4e",
       "installedAt": "2026-02-06T18:30:14.434Z",
-      "updatedAt": "2026-02-06T18:30:14.434Z"
+      "updatedAt": "2026-05-09T11:48:37.460Z"
     },
     "sentry-fix-issues": {
       "source": "getsentry/sentry-for-ai",
@@ -359,9 +359,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/tw93/waza.git",
       "skillPath": "skills/check/SKILL.md",
-      "skillFolderHash": "91abbbe7c56ff993a05878a225b3816522e7b398",
+      "skillFolderHash": "54f1d31913f327b4981d209ef789402f813353ea",
       "installedAt": "2026-04-15T09:41:45.835Z",
-      "updatedAt": "2026-05-07T07:05:45.296Z"
+      "updatedAt": "2026-05-15T06:28:55.311Z"
     },
     "sentry-code-review": {
       "source": "getsentry/sentry-for-ai",
@@ -386,9 +386,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/getsentry/sentry-for-ai.git",
       "skillPath": "skills/sentry-nextjs-sdk/SKILL.md",
-      "skillFolderHash": "248ef14f4607f72cb7c29eff02e06a9879564aff",
+      "skillFolderHash": "ad43567acd4ac6f0ab14f581f206036fa921a545",
       "installedAt": "2026-04-28T07:44:11.414Z",
-      "updatedAt": "2026-05-07T07:21:17.618Z"
+      "updatedAt": "2026-05-13T06:13:51.083Z"
     },
     "sentry-react-sdk": {
       "source": "getsentry/sentry-for-ai",
@@ -458,9 +458,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/oxc-project/oxc.git",
       "skillPath": ".agents/skills/migrate-oxlint/SKILL.md",
-      "skillFolderHash": "a1953f2692634e51c45f4501dc495e9b6eb5d930",
+      "skillFolderHash": "a21257269149e85f2613d93f20258dc5cc921cda",
       "installedAt": "2026-05-01T06:39:51.791Z",
-      "updatedAt": "2026-05-01T06:39:51.791Z"
+      "updatedAt": "2026-05-13T06:13:56.655Z"
     },
     "caveman": {
       "source": "mattpocock/skills",
@@ -487,10 +487,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
-      "skillFolderHash": "2969a1224c70fe41b9dd2ddbe32c2ec62f2815bd",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "3c4ac970c404e8d32c24f2725bfe679e455a925b",
       "installedAt": "2026-05-02T13:07:42.816Z",
-      "updatedAt": "2026-05-02T13:07:42.816Z"
+      "updatedAt": "2026-05-15T06:28:56.990Z"
     },
     "setup-matt-pocock-skills": {
       "source": "mattpocock/skills",
