@@ -120,9 +120,25 @@ brew install --cask font-jetbrains-mono
 
 ## Local secrets
 
-Secrets do not belong in this public repository. Machine-local values are loaded from ignored files such as:
+Secrets do not belong in this public repository. Tracked config should only reference environment variable names, never raw credentials.
 
-- `~/.config/codex/env.fish`
+Machine-local values are loaded from ignored files such as:
+
+- `~/.config/local/env.fish`
+
+That file is sourced by `~/.config/fish/conf.d/local-env.fish`, which also publishes selected variables through `launchctl` on macOS so GUI-launched apps can read them.
+
+Current examples:
+
+- `UIDOTSH_MCP_AUTHORIZATION` is stored in `~/.config/local/env.fish` and referenced from Codex with `env_http_headers`.
+- `CONTEXT7_API_KEY` follows the same pattern for the Context7 MCP server: the key lives in `~/.config/local/env.fish`, while `~/.codex/config.toml` only contains `env_http_headers = { CONTEXT7_API_KEY = "CONTEXT7_API_KEY" }`.
+
+When adding a new local secret:
+
+1. Add the value to `~/.config/local/env.fish`.
+2. If a GUI app needs it, add the variable name to `launchctl_vars` in `~/.config/fish/conf.d/local-env.fish`.
+3. Reference the variable name from tracked config instead of committing the value.
+4. Restart the app that needs the new environment variable.
 
 ## Raycast extensions
 
