@@ -12,7 +12,7 @@
                                     "key_code": "caps_lock",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 300 },
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 200 },
                                 "to": [
                                     {
                                         "key_code": "left_shift",
