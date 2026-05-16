@@ -2,7 +2,7 @@
     "profiles": [
         {
             "complex_modifications": {
-                "parameters": { "basic.to_if_held_down_threshold_milliseconds": 200 },
+                "parameters": { "basic.to_if_held_down_threshold_milliseconds": 160},
                 "rules": [
                     {
                         "manipulators": [
@@ -12,7 +12,7 @@
                                     "key_code": "caps_lock",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 200 },
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 160 },
                                 "to": [
                                     {
                                         "key_code": "left_shift",
