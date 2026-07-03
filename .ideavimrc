@@ -9,6 +9,7 @@ set rnu
 set scrolloff=8
 set showmode
 set visualbell
+set VimEverywhere
 
 " Idea specific settings
 set ideajoin
