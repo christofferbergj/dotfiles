@@ -69,22 +69,23 @@ function Example(props) {
 import {
   Autocomplete as AriaAutocomplete,
   type AutocompleteProps as AriaAutocompleteProps,
-  useFilter,
+  useFilter
 } from 'react-aria-components/Autocomplete';
-import { type MenuProps as AriaMenuProps } from 'react-aria-components/Menu';
-import { Dialog } from 'react-aria-components/Dialog';
+import {type MenuProps as AriaMenuProps} from 'react-aria-components/Menu';
+import {Dialog} from 'react-aria-components/Dialog';
 import {Menu} from './Menu';
 import {SearchField} from './SearchField';
-import { Modal } from './Modal';
-import { useEffect } from 'react';
+import {Modal} from './Modal';
+import {useEffect} from 'react';
 import './CommandPalette.css';
 
-export interface CommandPaletteProps<T extends object> extends Omit<AriaAutocompleteProps, 'children'>, AriaMenuProps<T> {
-  isOpen: boolean,
-  onOpenChange: (isOpen?: boolean) => void
+export interface CommandPaletteProps<T>
+  extends Omit<AriaAutocompleteProps, 'children'>, AriaMenuProps<T> {
+  isOpen: boolean;
+  onOpenChange: (isOpen?: boolean) => void;
 }
 
-export function CommandPalette<T extends object>(props: CommandPaletteProps<T>) {
+export function CommandPalette<T>(props: CommandPaletteProps<T>) {
   let {isOpen, onOpenChange} = props;
   let {contains} = useFilter({sensitivity: 'base'});
 
@@ -108,13 +109,8 @@ export function CommandPalette<T extends object>(props: CommandPaletteProps<T>) 
     <Modal isDismissable isOpen={isOpen} onOpenChange={onOpenChange}>
       <Dialog className="command-palette-dialog">
         <AriaAutocomplete filter={contains} {...props}>
-          <SearchField
-            autoFocus
-            aria-label="Search commands"
-            placeholder="Search commands" />
-          <Menu
-            {...props}
-            renderEmptyState={() => 'No results found.'} />
+          <SearchField autoFocus aria-label="Search commands" placeholder="Search commands" />
+          <Menu {...props} renderEmptyState={() => 'No results found.'} />
         </AriaAutocomplete>
       </Dialog>
     </Modal>
@@ -126,7 +122,7 @@ export function CommandPalette<T extends object>(props: CommandPaletteProps<T>) 
 ### CommandPalette.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .command-palette-dialog {
   width: min(90vw, 500px);
@@ -191,21 +187,22 @@ function Example(props) {
 import {
   Autocomplete as AriaAutocomplete,
   type AutocompleteProps as AriaAutocompleteProps,
-  useFilter,
+  useFilter
 } from 'react-aria-components/Autocomplete';
-import { type MenuProps as AriaMenuProps } from 'react-aria-components/Menu';
-import { Dialog } from 'react-aria-components/Dialog';
+import {type MenuProps as AriaMenuProps} from 'react-aria-components/Menu';
+import {Dialog} from 'react-aria-components/Dialog';
 import {Menu} from './Menu';
 import {SearchField} from './SearchField';
 import {Modal} from './Modal';
 import React, {useEffect} from 'react';
 
-export interface CommandPaletteProps<T extends object> extends Omit<AriaAutocompleteProps, 'children'>, AriaMenuProps<T> {
-  isOpen: boolean,
-  onOpenChange: (isOpen?: boolean) => void
+export interface CommandPaletteProps<T>
+  extends Omit<AriaAutocompleteProps, 'children'>, AriaMenuProps<T> {
+  isOpen: boolean;
+  onOpenChange: (isOpen?: boolean) => void;
 }
 
-export function CommandPalette<T extends object>(props: CommandPaletteProps<T>) {
+export function CommandPalette<T>(props: CommandPaletteProps<T>) {
   let {isOpen, onOpenChange} = props;
   let {contains} = useFilter({sensitivity: 'base'});
 
@@ -233,11 +230,13 @@ export function CommandPalette<T extends object>(props: CommandPaletteProps<T>) 
             autoFocus
             aria-label="Search commands"
             placeholder="Search commands"
-            className="m-2" />
+            className="m-2"
+          />
           <Menu
             {...props}
             className="flex-1 min-h-0"
-            renderEmptyState={() => 'No results found.'} />
+            renderEmptyState={() => 'No results found.'}
+          />
         </AriaAutocomplete>
       </Dialog>
     </Modal>
@@ -1233,6 +1232,136 @@ function AsyncLoadingExample() {
         style={{height: 300}}>
         {(item) => <ListBoxItem id={item.name}>{item.name}</ListBoxItem>}
       </ListBox>
+    </Autocomplete>
+  );
+}
+```
+
+## Inline completions
+
+Set the Autocomplete `inputValue` to a substring of the full input value to enable inline completions such as @mentions. Completions can be displayed in a popover by controlling its `isOpen` state. For inline suggestions, use the `getTargetRect` prop to position the popover relative to the anchor character.
+
+```tsx
+import {Autocomplete, useFilter} from 'react-aria-components/Autocomplete';
+import {TextArea} from 'vanilla-starter/TextField';
+import {Popover} from 'vanilla-starter/Popover';
+import {Menu, MenuItem} from 'vanilla-starter/Menu';
+import {useState, useRef} from 'react';
+import {flushSync} from 'react-dom';
+import getCaretRect from 'textarea-caret';
+
+/*- begin collapse -*/
+const usernames = [
+  'alexmiller',
+  'sarahjones',
+  'davidkim',
+  'emmawatson',
+  'oliverliu',
+  'ellagreen',
+  'lucasbrown',
+  'amandarivera',
+  'masonlee',
+  'nataliasmith',
+  'benjamintaylor',
+  'zoewilson',
+  'henrywalker',
+  'madelineyoung',
+  'noahscott',
+  'lucygonzalez',
+  'jacobmartin',
+  'averymoore',
+  'loganmurphy',
+  'miahernandez',
+  'danieladair',
+  'sofiacox',
+  'jackharris',
+  'chloebaker',
+  'liamrodriguez'
+];
+/*- end collapse -*/
+
+function Example() {
+  let {startsWith} = useFilter({sensitivity: 'base'});
+  let [inputValue, setInputValue] = useState('');
+  let [anchorIndex, setAnchorIndex] = useState(-1);
+  let [filterValue, setFilterValue] = useState('');
+  let inputRef = useRef<HTMLTextAreaElement>(null);
+
+  let updateFilter = () => {
+    let {selectionStart, selectionEnd, value} = inputRef.current!;
+    if (selectionStart === selectionEnd && document.activeElement === inputRef.current!) {
+      // The current filter value is the substring between 
+      // the anchor character '@' and the caret position.
+      let index = value.lastIndexOf('@', selectionStart);
+      if (index >= 0) {
+        let slice = value.slice(index + 1, selectionStart);
+        // Spaces are not allowed in the filter value.
+        if (!slice.includes(' ')) { 
+          setAnchorIndex(index);
+          setFilterValue(slice);
+          return;
+        }
+      }
+    }
+
+    // Reset the anchor index, but not the filter value so 
+    // that the menu does not flicker during the close animation.
+    setAnchorIndex(-1);
+  };
+  
+  return (
+    /*- begin highlight -*/
+    // Pass the filter substring to Autocomplete.
+    <Autocomplete inputValue={filterValue} filter={startsWith}>
+    {/*- end highlight -*/}
+      <TextArea
+        label="Comment"
+        placeholder="Type @ for autocomplete"
+        style={{width: '100%'}}
+        /*- begin highlight -*/
+        // Pass the full input value to the TextArea.
+        value={inputValue}
+        /*- end highlight -*/
+        onChange={value => {
+          setInputValue(value);
+          updateFilter();
+        }}
+        onSelect={updateFilter}
+        onBlur={updateFilter}
+        inputRef={inputRef} />
+      <Popover
+        triggerRef={inputRef}
+        /*- begin highlight -*/
+        // Open the popover when there is an active anchor character.
+        isOpen={anchorIndex >= 0}
+        /*- end highlight -*/
+        isNonModal
+        placement="bottom start"
+        trigger="MenuTrigger"
+        /*- begin highlight -*/
+        // Calculate the position of the popover relative to the anchor character.
+        getTargetRect={target => {
+          let {top, left} = getCaretRect(inputRef.current!, anchorIndex!);
+          let {top: targetTop, left: targetLeft} = target.getBoundingClientRect();
+          return new DOMRect(targetLeft + left, targetTop + top, 1, 16);
+        }}>
+        {/*- end highlight -*/}
+        <Menu
+          items={usernames}
+          renderEmptyState={() => 'No results found.'}
+          onAction={value => {
+            /*- begin highlight -*/
+            // Insert the completion at the anchor index and update the caret position.
+            let prefix = inputValue.slice(0, anchorIndex!) + '@' + value + ' ';
+            let suffix = inputValue.slice(inputRef.current!.selectionEnd!);
+            flushSync(() => setInputValue(prefix + suffix));
+            inputRef.current!.setSelectionRange(prefix.length, prefix.length);
+            updateFilter();
+            /*- end highlight -*/
+          }}>
+          {(item) => <MenuItem id={item}>{item}</MenuItem>}
+        </Menu>
+      </Popover>
     </Autocomplete>
   );
 }

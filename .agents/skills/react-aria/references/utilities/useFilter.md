@@ -1,7 +1,8 @@
 # useFilter
 
-Provides localized string search functionality that is useful for filtering or matching items
-in a list. Options can be provided to adjust the sensitivity to case, diacritics, and other parameters.
+Provides localized string search functionality that is useful for filtering or matching items in
+a list. Options can be provided to adjust the sensitivity to case, diacritics, and other
+parameters.
 
 ## Introduction
 

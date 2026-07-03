@@ -76,46 +76,45 @@ import {
   GridListHeader,
   type GridListItemProps,
   type GridListProps,
-  type GridListLoadMoreItemProps,
+  type GridListLoadMoreItemProps
 } from 'react-aria-components/GridList';
 import {Checkbox} from './Checkbox';
 import {GripVertical} from 'lucide-react';
 import {ProgressCircle} from './ProgressCircle';
 import './GridList.css';
 
-export function GridList<T extends object>(
-  { children, layout = 'grid', ...props }: GridListProps<T>
-) {
+export function GridList<T>({children, layout = 'grid', ...props}: GridListProps<T>) {
   return (
-    (
-      <AriaGridList {...props} layout={layout}>
-        {children}
-      </AriaGridList>
-    )
+    <AriaGridList {...props} layout={layout}>
+      {children}
+    </AriaGridList>
   );
 }
 
-export function GridListItem(
-  { children, ...props }: Omit<GridListItemProps, 'children'> & {
-    children?: React.ReactNode;
-  }
-) {
+export function GridListItem({
+  children,
+  ...props
+}: Omit<GridListItemProps, 'children'> & {
+  children?: React.ReactNode;
+}) {
   let textValue = typeof children === 'string' ? children : undefined;
   return (
-    (
-      <AriaGridListItem textValue={textValue} {...props}>
-        {({ selectionMode, selectionBehavior, allowsDragging }) => (
-          <>
-            {/* Add elements for drag and drop and selection. */}
-            {allowsDragging && <Button slot="drag"><GripVertical size={16} /></Button>}
-            {selectionMode === 'multiple' && selectionBehavior === 'toggle' && (
-              <Checkbox slot="selection" />
-            )}
-            {children}
-          </>
-        )}
-      </AriaGridListItem>
-    )
+    <AriaGridListItem textValue={textValue} {...props}>
+      {({selectionMode, selectionBehavior, allowsDragging}) => (
+        <>
+          {/* Add elements for drag and drop and selection. */}
+          {allowsDragging && (
+            <Button slot="drag">
+              <GripVertical size={16} />
+            </Button>
+          )}
+          {selectionMode === 'multiple' && selectionBehavior === 'toggle' && (
+            <Checkbox slot="selection" />
+          )}
+          {children}
+        </>
+      )}
+    </AriaGridListItem>
   );
 }
 
@@ -134,7 +133,7 @@ export {GridListSection, GridListHeader, Text};
 ### GridList.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-GridList {
   justify-content: center;
@@ -156,13 +155,16 @@ export {GridListSection, GridListHeader, Text};
     scroll-padding: 50px;
   }
 
-  &[data-layout=grid]:not(:has(.react-aria-GridListSection)) {
+  &[data-layout='grid']:not(:has(.react-aria-GridListSection)):not([data-empty]) {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, var(--grid-item-size)));
     grid-auto-rows: min-content;
+
+    &:not([data-orientation='horizontal']) {
+      grid-template-columns: repeat(auto-fit, minmax(100px, var(--grid-item-size)));
+    }
   }
 
-  &[data-layout=grid] > .react-aria-GridListSection {
+  &[data-layout='grid'] > .react-aria-GridListSection {
     grid-template-columns: repeat(auto-fit, minmax(100px, var(--grid-item-size)));
     grid-auto-rows: min-content;
   }
@@ -171,31 +173,31 @@ export {GridListSection, GridListHeader, Text};
     margin-top: var(--spacing-4);
   }
 
-  &[data-layout=stack] > .react-aria-GridListSection {
+  &[data-layout='stack'] > .react-aria-GridListSection {
     grid-template-columns: auto;
     align-items: center;
   }
 
-  &[data-size=small] {
+  &[data-size='small'] {
     --grid-item-size: 150px;
   }
 
   @media (width < 500px) {
-    &[data-layout=grid] {
+    &[data-layout='grid'] {
       --grid-item-size: 150px;
     }
 
-    &[data-layout=grid]:not(:has(.react-aria-GridListSection)) {
+    &[data-layout='grid']:not(:has(.react-aria-GridListSection)) {
       grid-template-columns: 1fr 1fr;
     }
   }
 
-  &[data-layout=stack] {
+  &[data-layout='stack']:not([data-empty]) {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
 
-    &[data-orientation=horizontal] {
+    &[data-orientation='horizontal'] {
       display: flex;
       flex-direction: row;
       justify-content: normal;
@@ -207,7 +209,7 @@ export {GridListSection, GridListHeader, Text};
     }
   }
 
-  &[data-layout=grid][data-orientation=horizontal] {
+  &[data-layout='grid'][data-orientation='horizontal'] {
     grid-auto-flow: column;
     grid-template-rows: auto auto;
     grid-template-columns: none;
@@ -303,38 +305,41 @@ export {GridListSection, GridListHeader, Text};
     color: var(--text-color-disabled);
   }
 
-  .react-aria-Checkbox {
+  .react-aria-CheckboxField {
     position: absolute;
     top: var(--spacing-4);
     inset-inline-start: var(--spacing-4);
-    --focus-ring-color: var(--highlight-foreground);
-    --checkmark-color: light-dark(white, black);
 
-    .indicator {
-      --indicator-border: light-dark(rgb(0 0 0 / 0.9), rgb(255 255 255 / 0.7));
+    .react-aria-CheckboxButton {
+      --focus-ring-color: var(--highlight-foreground);
+      --checkmark-color: light-dark(white, black);
 
-      @media (forced-colors: active) {
-        --indicator-border: ButtonBorder;
+      .indicator {
+        --indicator-border: light-dark(rgb(0 0 0 / 0.9), rgb(255 255 255 / 0.7));
+
+        @media (forced-colors: active) {
+          --indicator-border: ButtonBorder;
+        }
       }
-    }
 
-    &[data-selected] .indicator {
-      --indicator-color: light-dark(black, var(--highlight-foreground));
-      --indicator-shadow: transparent;
+      &[data-selected] .indicator {
+        --indicator-color: light-dark(black, var(--highlight-foreground));
+        --indicator-shadow: transparent;
 
-      @media (forced-colors: active) {
-        --indicator-color: Highlight;
-        --checkmark-color: HighlightText;
+        @media (forced-colors: active) {
+          --indicator-color: Highlight;
+          --checkmark-color: HighlightText;
+        }
       }
-    }
 
-    &::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      background: light-dark(rgb(255 255 255 / 0.51), rgb(0 0 0 / 0.56));
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 8px 0px;
-      border-radius: var(--radius);
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        background: light-dark(rgb(255 255 255 / 0.51), rgb(0 0 0 / 0.56));
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 8px 0px;
+        border-radius: var(--radius);
+      }
     }
   }
 
@@ -359,12 +364,12 @@ export {GridListSection, GridListHeader, Text};
       font-weight: 500;
     }
 
-    &[slot=description] {
+    &[slot='description'] {
       font-size: var(--font-size-sm);
     }
   }
 
-  .react-aria-Button[slot=drag] {
+  .react-aria-Button[slot='drag'] {
     all: unset;
     display: inline-flex;
     align-items: center;
@@ -415,7 +420,7 @@ export {GridListSection, GridListHeader, Text};
   width: 100%;
 
   > .react-aria-GridListHeader {
-      grid-column: 1 / -1;
+    grid-column: 1 / -1;
   }
 }
 
@@ -429,7 +434,9 @@ export {GridListSection, GridListHeader, Text};
   border: 0.5px solid var(--gray-400);
   cursor: default;
   user-select: none;
-  box-shadow: inset 0px 1px 0px white, inset 0px -4px 8px var(--gray-200);
+  box-shadow:
+    inset 0px 1px 0px white,
+    inset 0px -4px 8px var(--gray-200);
   border-radius: var(--radius);
   padding: var(--spacing-1) var(--spacing-4);
 
@@ -466,23 +473,27 @@ import {
   GridListHeader as AriaGridListHeader,
   Button,
   type GridListItemProps,
-  type GridListProps,
+  type GridListProps
 } from 'react-aria-components/GridList';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { tv } from 'tailwind-variants';
-import { Checkbox } from './Checkbox';
-import { composeTailwindRenderProps, focusRing } from './utils';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {tv} from 'tailwind-variants';
+import {Checkbox} from './Checkbox';
+import {composeTailwindRenderProps, focusRing} from './utils';
 import {type HTMLAttributes} from 'react';
-import { twMerge } from 'tailwind-merge';
+import {twMerge} from 'tailwind-merge';
 
-export function GridList<T extends object>(
-  { children, ...props }: GridListProps<T>
-) {
-  let isHorizontal = (props as {orientation?: 'horizontal' | 'vertical'}).orientation === 'horizontal';
+export function GridList<T>({children, ...props}: GridListProps<T>) {
+  let isHorizontal =
+    (props as {orientation?: 'horizontal' | 'vertical'}).orientation === 'horizontal';
   return (
-    <AriaGridList {...props} className={composeTailwindRenderProps(props.className, isHorizontal
-      ? 'flex flex-row flex-nowrap overflow-x-auto relative w-full max-w-[500px] bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm'
-      : 'overflow-auto w-[200px] relative bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm')}>
+    <AriaGridList
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        isHorizontal
+          ? 'flex flex-row flex-nowrap overflow-x-auto relative w-full max-w-[500px] bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm'
+          : 'overflow-auto w-[200px] relative bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg font-sans empty:flex empty:items-center empty:justify-center empty:italic empty:text-sm'
+      )}>
       {children}
     </AriaGridList>
   );
@@ -497,7 +508,8 @@ const itemStyles = tv({
   ].join(' '),
   variants: {
     isSelected: {
-      false: 'hover:bg-neutral-100 pressed:bg-neutral-100 dark:hover:bg-neutral-700/60 dark:pressed:bg-neutral-700/60',
+      false:
+        'hover:bg-neutral-100 pressed:bg-neutral-100 dark:hover:bg-neutral-700/60 dark:pressed:bg-neutral-700/60',
       true: [
         'bg-blue-100 dark:bg-blue-700/30 hover:bg-blue-200 pressed:bg-blue-200 dark:hover:bg-blue-700/40 dark:pressed:bg-blue-700/40 z-20',
         '[[data-orientation=vertical]_&]:border-y-blue-200 [[data-orientation=vertical]_&]:dark:border-y-blue-900',
@@ -510,28 +522,38 @@ const itemStyles = tv({
   }
 });
 
-export function GridListItem({ children, ...props }: GridListItemProps) {
+export function GridListItem({children, ...props}: GridListItemProps) {
   let textValue = typeof children === 'string' ? children : undefined;
   return (
     <AriaGridListItem textValue={textValue} {...props} className={itemStyles}>
-      {composeRenderProps(children, (children, {selectionMode, selectionBehavior, allowsDragging}) => (
-        <>
-          {/* Add elements for drag and drop and selection. */}
-          {allowsDragging && <Button slot="drag">≡</Button>}
-          {selectionMode !== 'none' && selectionBehavior === 'toggle' && (
-            <Checkbox slot="selection" />
-          )}
-          {children}
-        </>
-      ))}
+      {composeRenderProps(
+        children,
+        (children, {selectionMode, selectionBehavior, allowsDragging}) => (
+          <>
+            {/* Add elements for drag and drop and selection. */}
+            {allowsDragging && <Button slot="drag">≡</Button>}
+            {selectionMode !== 'none' && selectionBehavior === 'toggle' && (
+              <Checkbox slot="selection" />
+            )}
+            {children}
+          </>
+        )
+      )}
     </AriaGridListItem>
   );
 }
 
 export function GridListHeader({children, ...props}: HTMLAttributes<HTMLElement>) {
   return (
-    <AriaGridListHeader {...props} className={twMerge("text-sm font-semibold text-neutral-500 dark:text-neutral-300 px-4 py-1 -mt-px z-10 bg-neutral-100/60 dark:bg-neutral-700/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 border-y border-y-neutral-200 dark:border-y-neutral-700", props.className)}>{children}</AriaGridListHeader>
-  )
+    <AriaGridListHeader
+      {...props}
+      className={twMerge(
+        'text-sm font-semibold text-neutral-500 dark:text-neutral-300 px-4 py-1 -mt-px z-10 bg-neutral-100/60 dark:bg-neutral-700/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 border-y border-y-neutral-200 dark:border-y-neutral-700',
+        props.className
+      )}>
+      {children}
+    </AriaGridListHeader>
+  );
 }
 
 ```
@@ -1133,6 +1155,43 @@ let photos = [
 </GridList>
 ```
 
+## Keyboard navigation
+
+By default, GridList uses arrow key navigation to move focus into rows. Set `keyboardNavigationBehavior="tab"` to have <Keyboard>Tab</Keyboard> move focus in and out of a row.
+Use this when rows contain interactive elements such as text fields, where arrow keys and typing in the field should not trigger grid navigation or selection.
+
+```tsx
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
+import {TextField} from 'vanilla-starter/TextField';
+
+let photos = [
+  {id: 1, title: 'Desert Sunset', description: 'PNG • 2/3/2024', src: 'https://images.unsplash.com/photo-1705034598432-1694e203cdf3?q=80&w=600&auto=format&fit=crop'},
+  {id: 2, title: 'Hiking Trail', description: 'JPEG • 1/10/2022', src: 'https://images.unsplash.com/photo-1722233987129-61dc344db8b6?q=80&w=600&auto=format&fit=crop'},
+  {id: 3, title: 'Lion', description: 'JPEG • 8/28/2021', src: 'https://images.unsplash.com/photo-1629812456605-4a044aa38fbc?q=80&w=600&auto=format&fit=crop'},
+  {id: 4, title: 'Mountain Sunrise', description: 'PNG • 3/15/2015', src: 'https://images.unsplash.com/photo-1722172118908-1a97c312ce8c?q=80&w=600&auto=format&fit=crop'},
+  {id: 5, title: 'Giraffe tongue', description: 'PNG • 11/27/2019', src: 'https://images.unsplash.com/photo-1574870111867-089730e5a72b?q=80&w=600&auto=format&fit=crop'},
+  {id: 6, title: 'Golden Hour', description: 'WEBP • 7/24/2024', src: 'https://images.unsplash.com/photo-1718378037953-ab21bf2cf771?q=80&w=600&auto=format&fit=crop'},
+];
+
+<GridList
+  /*- begin highlight -*/
+  keyboardNavigationBehavior="tab"
+  /*- end highlight -*/
+  items={photos}
+  selectionMode="multiple"
+  aria-label="Shared files">
+    {item => (
+    <GridListItem textValue={item.title}>
+      <img src={item.src} alt="" />
+      <Text>
+        <TextField style={{paddingTop: 2, paddingBottom: 2}} aria-label="title" defaultValue={item.title} />
+      </Text>
+      <Text slot="description">{item.description}</Text>
+    </GridListItem>
+  )}
+</GridList>
+```
+
 ## Drag and drop
 
 GridList supports drag and drop interactions when the `dragAndDropHooks` prop is provided using the `useDragAndDrop` hook. Users can drop data on the list as a whole, on individual items, insert new items between existing ones, or reorder items. React Aria supports drag and drop via mouse, touch, keyboard, and screen reader interactions. See the [drag and drop guide](dnd.md?component=GridList) to learn more.
@@ -1449,12 +1508,12 @@ function Example() {
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | FocusStrategy | undefined` | — | Whether to auto focus the gridlist or an option. |
-| `children` | `React.ReactNode | ((item: T) => ReactNode)` | — | The contents of the collection. |
+| `children` | `((item: T) => ReactNode) | React.ReactNode` | — | The contents of the collection. |
 | `className` | `ClassNameOrFunction<GridListRenderProps> | undefined` | 'react-aria-GridList' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
-| `disabledBehavior` | `DisabledBehavior | undefined` | "all" | Whether `disabledKeys` applies to all interactions, or only selection. |
+| `disabledBehavior` | `DisabledBehavior | undefined` | 'all' | Whether `disabledKeys` applies to all interactions, or only selection. |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. |
 | `disallowEmptySelection` | `boolean | undefined` | — | Whether the collection allows empty selection. |
 | `disallowTypeAhead` | `boolean | undefined` | false | Whether typeahead navigation is disabled. |
@@ -1466,7 +1525,7 @@ function Example() {
 | `items` | `Iterable<T> | undefined` | — | Item objects in the collection. |
 | `keyboardNavigationBehavior` | `"arrow" | "tab" | undefined` | 'arrow' | Whether keyboard navigation to focusable elements within grid list items is via the left/right arrow keys or the tab key. |
 | `lang` | `string | undefined` | — |  |
-| `layout` | `"stack" | "grid" | undefined` | 'stack' | Whether the items are arranged in a stack or grid. |
+| `layout` | `"grid" | "stack" | undefined` | 'stack' | Whether the items are arranged in a stack or grid. |
 | `onAction` | `((key: Key) => void) | undefined` | — | Handler that is called when a user performs an action on an item. The exact user event depends on the collection's `selectionBehavior` prop and the interaction modality. |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -1534,22 +1593,22 @@ function Example() {
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `orientation` | `Orientation | undefined` | 'vertical' | The primary orientation of the items. Usually this is the direction that the collection scrolls. |
-| `render` | `DOMRenderFunction<"div", GridListRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", GridListRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `renderEmptyState` | `((props: GridListRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no items in the list. |
 | `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
-| `selectionBehavior` | `SelectionBehavior | undefined` | "toggle" | How multiple selection should behave in the collection. |
+| `selectionBehavior` | `SelectionBehavior | undefined` | 'toggle' | How multiple selection should behave in the collection. |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: GridListRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: GridListRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### GridListSection
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `aria-label` | `string | undefined` | — | An accessibility label for the section. |
-| `children` | `React.ReactNode | ((item: T) => React.ReactElement)` | — | Static child items or a function to render children. |
+| `children` | `((item: T) => React.ReactElement) | React.ReactNode` | — | Static child items or a function to render children. |
 | `className` | `string | undefined` | 'react-aria-GridListSection' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
@@ -1622,9 +1681,9 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `T | undefined` | — | The object value that this section represents. When using dynamic collections, this is set automatically. |
 
 ### GridListHeader
@@ -1638,7 +1697,7 @@ function Example() {
 | `children` | `ChildrenOrFunction<GridListItemRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<GridListItemRenderProps> | undefined` | 'react-aria-GridListItem' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
-| `download` | `string | boolean | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
+| `download` | `boolean | string | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
 | `hidden` | `boolean | undefined` | — |  |
 | `href` | `string | undefined` | — | A URL to link to. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). |
 | `hrefLang` | `string | undefined` | — | Hints at the human language of the linked URL. See[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#hreflang). |
@@ -1655,7 +1714,7 @@ function Example() {
 | `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
 | `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -1722,12 +1781,12 @@ function Example() {
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `DOMRenderFunction<"div", GridListItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", GridListItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
-| `style` | `(React.CSSProperties | ((values: GridListItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `(((values: GridListItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string | undefined` | — | A string representation of the item's contents, used for features like typeahead. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `T | undefined` | — | The object value that this item represents. When using dynamic collections, this is set automatically. |
 
 ### GridListLoadMoreItem
@@ -1806,10 +1865,10 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `scrollOffset` | `number | undefined` | 1 | The amount of offset from the bottom of your scrollable region that should trigger load more. Uses a percentage value relative to the scroll body's client height. Load more is then triggered when your current scroll position's distance from the bottom of the currently loaded list of items is less than or equal to the provided value. (e.g. 1 = 100% of the scroll region's height). |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ## Related Types
 
@@ -1817,28 +1876,29 @@ function Example() {
 
 `useDragAndDrop(options: DragAndDropOptions<T>): DragAndDrop<T>`
 
-Provides the hooks required to enable drag and drop behavior for a drag and drop compatible collection component.
+Provides the hooks required to enable drag and drop behavior for a drag and drop compatible
+collection component.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `acceptedDragTypes` | `"all" | (string | symbol)[] | undefined` | 'all' | The drag types that the droppable collection accepts. If the collection accepts directories, include `DIRECTORY_DRAG_TYPE` in your array of allowed types. |
+| `dropTargetDelegate` | `DropTargetDelegate | undefined` | — | A custom delegate object that provides drop targets for pointer coordinates within the collection. |
+| `getAllowedDropOperations` | `(() => DropOperation[]) | undefined` | — | Function that returns the drop operations that are allowed for the dragged items. If not provided, all drop operations are allowed. |
+| `getDropOperation` | `((target: DropTarget, types: DragTypes, allowedOperations: DropOperation[]) => DropOperation) | undefined` | — | A function returning the drop operation to be performed when items matching the given types are dropped on the drop target. |
 | `getItems` | `((keys: Set<Key>, items: T[]) => DragItem[]) | undefined` | () => \[] | A function that returns the items being dragged. If not specified, we assume that the collection is not draggable. |
+| `isDisabled` | `boolean | undefined` | — | Whether the drag and drop events should be disabled. |
+| `onDragEnd` | `((e: DraggableCollectionEndEvent) => void) | undefined` | — | Handler that is called when the drag operation is ended, either as a result of a drop or a cancellation. |
+| `onDragMove` | `((e: DraggableCollectionMoveEvent) => void) | undefined` | — | Handler that is called when the drag is moved. |
+| `onDragStart` | `((e: DraggableCollectionStartEvent) => void) | undefined` | — | Handler that is called when a drag operation is started. |
+| `onDrop` | `((e: DroppableCollectionDropEvent) => void) | undefined` | — | Handler that is called when a valid drag is dropped on a drop target. When defined, this overrides other drop handlers such as `onInsert`, and `onItemDrop`. |
+| `onDropActivate` | `((e: DroppableCollectionActivateEvent) => void) | undefined` | — | Handler that is called after a valid drag is held over a drop target for a period of time. |
+| `onDropEnter` | `((e: DroppableCollectionEnterEvent) => void) | undefined` | — | Handler that is called when a valid drag enters a drop target. |
+| `onDropExit` | `((e: DroppableCollectionExitEvent) => void) | undefined` | — | Handler that is called when a valid drag exits a drop target. |
+| `onInsert` | `((e: DroppableCollectionInsertDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped "between" items. |
+| `onItemDrop` | `((e: DroppableCollectionOnItemDropEvent) => void) | undefined` | — | Handler that is called when items are dropped "on" an item. |
+| `onMove` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are moved within the source collection. This handler allows dropping both on or between items, and items may be moved to a different parent item within a tree. |
+| `onReorder` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are reordered within the collection. This handler only allows dropping between items, not on items. It does not allow moving items to a different parent item within a tree. |
+| `onRootDrop` | `((e: DroppableCollectionRootDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped on the droppable collection's root. |
 | `renderDragPreview` | `((items: DragItem[]) => JSX.Element | { element: JSX.Element; x: number; y: number; }) | undefined` | — | A function that renders a drag preview, which is shown under the user's cursor while dragging. By default, a copy of the dragged element is rendered. |
 | `renderDropIndicator` | `((target: DropTarget) => JSX.Element) | undefined` | — | A function that renders a drop indicator element between two items in a collection. This should render a `<DropIndicator>` element. If this function is not provided, a default DropIndicator is provided. |
-| `dropTargetDelegate` | `DropTargetDelegate | undefined` | — | A custom delegate object that provides drop targets for pointer coordinates within the collection. |
-| `isDisabled` | `boolean | undefined` | — | Whether the drag and drop events should be disabled. |
-| `onDragStart` | `((e: DraggableCollectionStartEvent) => void) | undefined` | — | Handler that is called when a drag operation is started. |
-| `onDragMove` | `((e: DraggableCollectionMoveEvent) => void) | undefined` | — | Handler that is called when the drag is moved. |
-| `onDragEnd` | `((e: DraggableCollectionEndEvent) => void) | undefined` | — | Handler that is called when the drag operation is ended, either as a result of a drop or a cancellation. |
-| `getAllowedDropOperations` | `(() => DropOperation[]) | undefined` | — | Function that returns the drop operations that are allowed for the dragged items. If not provided, all drop operations are allowed. |
-| `acceptedDragTypes` | `"all" | (string | symbol)[] | undefined` | 'all' | The drag types that the droppable collection accepts. If the collection accepts directories, include `DIRECTORY_DRAG_TYPE` in your array of allowed types. |
-| `onInsert` | `((e: DroppableCollectionInsertDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped "between" items. |
-| `onRootDrop` | `((e: DroppableCollectionRootDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped on the droppable collection's root. |
-| `onItemDrop` | `((e: DroppableCollectionOnItemDropEvent) => void) | undefined` | — | Handler that is called when items are dropped "on" an item. |
-| `onReorder` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are reordered within the collection. This handler only allows dropping between items, not on items. It does not allow moving items to a different parent item within a tree. |
-| `onMove` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are moved within the source collection. This handler allows dropping both on or between items, and items may be moved to a different parent item within a tree. |
 | `shouldAcceptItemDrop` | `((target: ItemDropTarget, types: DragTypes) => boolean) | undefined` | — | A function returning whether a given target in the droppable collection is a valid "on" drop target for the current drag types. |
-| `onDropEnter` | `((e: DroppableCollectionEnterEvent) => void) | undefined` | — | Handler that is called when a valid drag enters a drop target. |
-| `onDropActivate` | `((e: DroppableCollectionActivateEvent) => void) | undefined` | — | Handler that is called after a valid drag is held over a drop target for a period of time. |
-| `onDropExit` | `((e: DroppableCollectionExitEvent) => void) | undefined` | — | Handler that is called when a valid drag exits a drop target. |
-| `onDrop` | `((e: DroppableCollectionDropEvent) => void) | undefined` | — | Handler that is called when a valid drag is dropped on a drop target. When defined, this overrides other drop handlers such as `onInsert`, and `onItemDrop`. |
-| `getDropOperation` | `((target: DropTarget, types: DragTypes, allowedOperations: DropOperation[]) => DropOperation) | undefined` | — | A function returning the drop operation to be performed when items matching the given types are dropped on the drop target. |

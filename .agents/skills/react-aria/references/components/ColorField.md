@@ -12,7 +12,7 @@ import {
   ColorField as AriaColorField,
   type ColorFieldProps as AriaColorFieldProps,
   Input,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/ColorField';
 import {Label, FieldError, Description} from './Form';
 import './ColorField.css';
@@ -21,21 +21,23 @@ export interface ColorFieldProps extends AriaColorFieldProps {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
-  placeholder?: string
+  placeholder?: string;
 }
 
-export function ColorField(
-  { label, description, errorMessage, placeholder, ...props }: ColorFieldProps
-) {
+export function ColorField({
+  label,
+  description,
+  errorMessage,
+  placeholder,
+  ...props
+}: ColorFieldProps) {
   return (
-    (
-      <AriaColorField {...props}>
-        {label && <Label>{label}</Label>}
-        <Input className="react-aria-Input inset" placeholder={placeholder} />
-        {description && <Description>{description}</Description>}
-        <FieldError>{errorMessage}</FieldError>
-      </AriaColorField>
-    )
+    <AriaColorField {...props}>
+      {label && <Label>{label}</Label>}
+      <Input className="react-aria-Input inset" placeholder={placeholder} />
+      {description && <Description>{description}</Description>}
+      <FieldError>{errorMessage}</FieldError>
+    </AriaColorField>
   );
 }
 
@@ -44,8 +46,8 @@ export function ColorField(
 ### ColorField.css
 
 ```css
-@import "./theme.css";
-@import "./TextField.css";
+@import './theme.css';
+@import './TextField.css';
 
 .react-aria-ColorField {
   display: flex;
@@ -64,11 +66,11 @@ import React from 'react';
 import {
   ColorField as AriaColorField,
   type ColorFieldProps as AriaColorFieldProps,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/ColorField';
-import { tv } from 'tailwind-variants';
-import { Description, FieldError, Input, Label, fieldBorderStyles } from './Field';
-import { composeTailwindRenderProps, focusRing } from './utils';
+import {tv} from 'tailwind-variants';
+import {Description, FieldError, Input, Label, fieldBorderStyles} from './Field';
+import {composeTailwindRenderProps, focusRing} from './utils';
 
 const inputStyles = tv({
   extend: focusRing,
@@ -86,11 +88,11 @@ export interface ColorFieldProps extends AriaColorFieldProps {
   errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
-export function ColorField(
-  { label, description, errorMessage, ...props }: ColorFieldProps
-) {
+export function ColorField({label, description, errorMessage, ...props}: ColorFieldProps) {
   return (
-    <AriaColorField {...props} className={composeTailwindRenderProps(props.className, 'flex flex-col gap-1 font-sans')}>
+    <AriaColorField
+      {...props}
+      className={composeTailwindRenderProps(props.className, 'flex flex-col gap-1 font-sans')}>
       {label && <Label>{label}</Label>}
       <Input className={inputStyles} />
       {description && <Description>{description}</Description>}
@@ -213,7 +215,7 @@ function Example(props) {
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | undefined` | — | Whether the element should receive focus on render. |
-| `channel` | `ColorChannel | undefined` | — | The color channel that this field edits. If not provided,  the color is edited as a hex value. |
+| `channel` | `ColorChannel | undefined` | — | The color channel that this field edits. If not provided, the color is edited as a hex value. |
 | `children` | `ChildrenOrFunction<ColorFieldRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<ColorFieldRenderProps> | undefined` | 'react-aria-ColorField' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `colorSpace` | `ColorSpace | undefined` | — | The color space that the color field operates in if a `channel` prop is provided. If no `channel` is provided, the color field always displays the color as an RGB hex value. |
@@ -310,17 +312,32 @@ function Example(props) {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", ColorFieldRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", ColorFieldRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ColorFieldRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
-| `validate` | `((value: Color | null) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
-| `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
+| `style` | `(((values: ColorFieldRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+| `validate` | `((value: Color | null) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
 | `value` | `string | Color | null | undefined` | — | The current value (controlled). |
 
 ## Related Types
 
 ### Color
+
+`Color(props: IconProps & {size?: 'L' | 'S' | 'M'}): ReactNode`
+
+| Name | Type | Description |
+|------|------|-------------|
+| `aria-describedby` | `string | undefined` | Identifies the element (or elements) that describes the object. |
+| `aria-details` | `string | undefined` | Identifies the element (or elements) that provide a detailed, extended description for the object. |
+| `aria-hidden` | `boolean | "true" | "false" | undefined` | — |
+| `aria-label` | `string | undefined` | Defines a string value that labels the current element. |
+| `aria-labelledby` | `string | undefined` | Identifies the element (or elements) that labels the current element. |
+| `id` | `string | undefined` | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
+| `slot` | `string | null | undefined` | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
+| `styles` | `StyleString<AllowedOverrides> | undefined` | — |
+| `UNSAFE_className` | `UnsafeClassName | undefined` | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
+| `UNSAFE_style` | `CSSProperties | undefined` | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 
 ### parseColor
 

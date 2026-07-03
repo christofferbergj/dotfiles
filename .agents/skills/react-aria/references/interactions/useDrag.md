@@ -289,13 +289,13 @@ function Draggable() {
 
 | Name | Type | Description |
 |------|------|-------------|
-| `onDragStart` | `((e: DragStartEvent) => void) | undefined` | Handler that is called when a drag operation is started. |
-| `onDragMove` | `((e: DragMoveEvent) => void) | undefined` | Handler that is called when the drag is moved. |
-| `onDragEnd` | `((e: DragEndEvent) => void) | undefined` | Handler that is called when the drag operation is ended, either as a result of a drop or a cancellation. |
-| `preview` | `RefObject<DragPreviewRenderer | null> | undefined` | The ref of the element that will be rendered as the drag preview while dragging. |
 | `getAllowedDropOperations` | `(() => DropOperation[]) | undefined` | Function that returns the drop operations that are allowed for the dragged items. If not provided, all drop operations are allowed. |
 | `hasDragButton` | `boolean | undefined` | Whether the item has an explicit focusable drag affordance to initiate accessible drag and drop mode. If true, the dragProps will omit these event handlers, and they will be applied to dragButtonProps instead. |
 | `isDisabled` | `boolean | undefined` | Whether the drag operation is disabled. If true, the element will not be draggable. |
+| `onDragEnd` | `((e: DragEndEvent) => void) | undefined` | Handler that is called when the drag operation is ended, either as a result of a drop or a cancellation. |
+| `onDragMove` | `((e: DragMoveEvent) => void) | undefined` | Handler that is called when the drag is moved. |
+| `onDragStart` | `((e: DragStartEvent) => void) | undefined` | Handler that is called when a drag operation is started. |
+| `preview` | `RefObject<DragPreviewRenderer | null> | undefined` | The ref of the element that will be rendered as the drag preview while dragging. |
 
 ### Methods
 
@@ -307,8 +307,8 @@ A function that returns the items being dragged.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `dragProps` \* | `HTMLAttributes<HTMLElement>` | Props for the draggable element. |
 | `dragButtonProps` \* | `AriaButtonProps<"button">` | Props for the explicit drag button affordance, if any. |
+| `dragProps` \* | `HTMLAttributes<HTMLElement>` | Props for the draggable element. |
 | `isDragging` \* | `boolean` | Whether the element is currently being dragged. |
 
 ## Related Types

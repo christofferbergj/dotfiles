@@ -1,6 +1,7 @@
 # TagGroup
 
-A tag group is a focusable list of labels, categories, keywords, filters, or other items, with support for keyboard navigation, selection, and removal.
+A tag group is a focusable list of labels, categories, keywords, filters, or other items, with
+support for keyboard navigation, selection, and removal.
 
 ## Vanilla CSS example
 
@@ -26,7 +27,7 @@ import {
   type TagGroupProps as AriaTagGroupProps,
   TagList,
   type TagListProps,
-  type TagProps,
+  type TagProps
 } from 'react-aria-components/TagGroup';
 import {Description, Label} from './Form';
 import {Text} from './Content';
@@ -42,48 +43,47 @@ export interface TagGroupProps<T>
   errorMessage?: string;
 }
 
-export function TagGroup<T extends object>(
-  {
-    label,
-    description,
-    errorMessage,
-    items,
-    children,
-    renderEmptyState,
-    ...props
-  }: TagGroupProps<T>
-) {
+export function TagGroup<T>({
+  label,
+  description,
+  errorMessage,
+  items,
+  children,
+  renderEmptyState,
+  ...props
+}: TagGroupProps<T>) {
   return (
-    (
-      <AriaTagGroup {...props}>
-        {label && <Label>{label}</Label>}
-        <TagList items={items} renderEmptyState={renderEmptyState}>
-          {children}
-        </TagList>
-        {description && <Description>{description}</Description>}
-        {errorMessage && <Text slot="errorMessage">{errorMessage}</Text>}
-      </AriaTagGroup>
-    )
+    <AriaTagGroup {...props}>
+      {label && <Label>{label}</Label>}
+      <TagList items={items} renderEmptyState={renderEmptyState}>
+        {children}
+      </TagList>
+      {description && <Description>{description}</Description>}
+      {errorMessage && <Text slot="errorMessage">{errorMessage}</Text>}
+    </AriaTagGroup>
   );
 }
 
-export function Tag(
-  { children, ...props }: Omit<TagProps, 'children'> & {
-    children?: React.ReactNode;
-  }
-) {
+export function Tag({
+  children,
+  ...props
+}: Omit<TagProps, 'children'> & {
+  children?: React.ReactNode;
+}) {
   let textValue = typeof children === 'string' ? children : undefined;
   return (
-    (
-      <AriaTag textValue={textValue} {...props} className="react-aria-Tag button-base">
-        {({ allowsRemoving }) => (
-          <>
-            {children}
-            {allowsRemoving && <Button slot="remove" className="remove-button"><X /></Button>}
-          </>
-        )}
-      </AriaTag>
-    )
+    <AriaTag textValue={textValue} {...props} className="react-aria-Tag button-base">
+      {({allowsRemoving}) => (
+        <>
+          {children}
+          {allowsRemoving && (
+            <Button slot="remove" className="remove-button">
+              <X />
+            </Button>
+          )}
+        </>
+      )}
+    </AriaTag>
   );
 }
 
@@ -92,8 +92,8 @@ export function Tag(
 ### TagGroup.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
 .react-aria-TagGroup {
   display: flex;
@@ -101,7 +101,7 @@ export function Tag(
   font: var(--font-size) system-ui;
   color: var(--text-color);
 
-  [slot=errorMessage] {
+  [slot='errorMessage'] {
     margin-top: var(--spacing);
     font-size: var(--font-size-sm);
     color: var(--invalid-color);
@@ -128,7 +128,7 @@ export function Tag(
   align-items: center;
   gap: var(--spacing-1);
   transition-property: scale, background, border-color, box-shadow, text-shadow;
-  transition-duration: 200ms;;
+  transition-duration: 200ms;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -221,8 +221,8 @@ import {TagGroup, Tag} from 'tailwind-starter/TagGroup';
 
 ```tsx
 'use client';
-import { XIcon } from 'lucide-react';
-import React, { createContext, useContext } from 'react';
+import {XIcon} from 'lucide-react';
+import React, {createContext, useContext} from 'react';
 import {
   Tag as AriaTag,
   TagGroup as AriaTagGroup,
@@ -231,18 +231,20 @@ import {
   Button,
   TagList,
   type TagListProps,
-  Text,
+  Text
 } from 'react-aria-components/TagGroup';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { twMerge } from 'tailwind-merge';
-import { tv } from 'tailwind-variants';
-import { Description, Label } from './Field';
-import { focusRing } from './utils';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {twMerge} from 'tailwind-merge';
+import {tv} from 'tailwind-variants';
+import {Description, Label} from './Field';
+import {focusRing} from './utils';
 
 const colors = {
   gray: 'bg-white text-neutral-600 border-neutral-200 hover:border-neutral-300 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-600 dark:hover:border-neutral-500',
-  green: 'bg-green-100 text-green-700 border-green-200 hover:border-green-300 dark:bg-green-300/20 dark:text-green-400 dark:border-green-300/10 dark:hover:border-green-300/20',
-  yellow: 'bg-yellow-100 text-yellow-700 border-yellow-200 hover:border-yellow-300 dark:bg-yellow-300/20 dark:text-yellow-400 dark:border-yellow-300/10 dark:hover:border-yellow-300/20',
+  green:
+    'bg-green-100 text-green-700 border-green-200 hover:border-green-300 dark:bg-green-300/20 dark:text-green-400 dark:border-green-300/10 dark:hover:border-green-300/20',
+  yellow:
+    'bg-yellow-100 text-yellow-700 border-yellow-200 hover:border-yellow-300 dark:bg-yellow-300/20 dark:text-yellow-400 dark:border-yellow-300/10 dark:hover:border-yellow-300/20',
   blue: 'bg-blue-100 text-blue-700 border-blue-200 hover:border-blue-300 dark:bg-blue-400/20 dark:text-blue-300 dark:border-blue-400/10 dark:hover:border-blue-400/20'
 };
 
@@ -269,7 +271,7 @@ const tagStyles = tv({
       true: 'bg-neutral-100 dark:bg-transparent dark:border-white/20 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]'
     }
   },
-  compoundVariants: (Object.keys(colors) as Color[]).map((color) => ({
+  compoundVariants: (Object.keys(colors) as Color[]).map(color => ({
     isSelected: false,
     isDisabled: false,
     color,
@@ -277,7 +279,10 @@ const tagStyles = tv({
   }))
 });
 
-export interface TagGroupProps<T> extends Omit<AriaTagGroupProps, 'children'>, Pick<TagListProps<T>, 'items' | 'children' | 'renderEmptyState'> {
+export interface TagGroupProps<T>
+  extends
+    Omit<AriaTagGroupProps, 'children'>,
+    Pick<TagListProps<T>, 'items' | 'children' | 'renderEmptyState'> {
   color?: Color;
   label?: string;
   description?: string;
@@ -285,20 +290,18 @@ export interface TagGroupProps<T> extends Omit<AriaTagGroupProps, 'children'>, P
 }
 
 export interface TagProps extends AriaTagProps {
-  color?: Color
+  color?: Color;
 }
 
-export function TagGroup<T extends object>(
-  {
-    label,
-    description,
-    errorMessage,
-    items,
-    children,
-    renderEmptyState,
-    ...props
-  }: TagGroupProps<T>
-) {
+export function TagGroup<T>({
+  label,
+  description,
+  errorMessage,
+  items,
+  children,
+  renderEmptyState,
+  ...props
+}: TagGroupProps<T>) {
   return (
     <AriaTagGroup {...props} className={twMerge('flex flex-col gap-2 font-sans', props.className)}>
       <Label>{label}</Label>
@@ -308,7 +311,11 @@ export function TagGroup<T extends object>(
         </TagList>
       </ColorContext.Provider>
       {description && <Description>{description}</Description>}
-      {errorMessage && <Text slot="errorMessage" className="text-sm text-red-600">{errorMessage}</Text>}
+      {errorMessage && (
+        <Text slot="errorMessage" className="text-sm text-red-600">
+          {errorMessage}
+        </Text>
+      )}
     </AriaTagGroup>
   );
 }
@@ -318,25 +325,24 @@ const removeButtonStyles = tv({
   base: 'cursor-default rounded-full transition-[background-color] p-0.5 flex items-center justify-center bg-transparent text-[inherit] border-0 hover:bg-black/10 dark:hover:bg-white/10 pressed:bg-black/20 dark:pressed:bg-white/20'
 });
 
-export function Tag({ children, color, ...props }: TagProps) {
+export function Tag({children, color, ...props}: TagProps) {
   let textValue = typeof children === 'string' ? children : undefined;
   let groupColor = useContext(ColorContext);
   return (
     <AriaTag
       textValue={textValue}
       {...props}
-      className={composeRenderProps(
-        props.className,
-        (className, renderProps) => tagStyles({...renderProps, className, color: color || groupColor})
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        tagStyles({...renderProps, className, color: color || groupColor})
       )}>
-      {composeRenderProps(children, (children, { allowsRemoving }) => (
+      {composeRenderProps(children, (children, {allowsRemoving}) => (
         <>
           {children}
-          {allowsRemoving &&
+          {allowsRemoving && (
             <Button slot="remove" className={removeButtonStyles}>
               <XIcon aria-hidden className="w-3 h-3" />
             </Button>
-          }
+          )}
         </>
       ))}
     </AriaTag>
@@ -488,7 +494,7 @@ function Example() {
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `children` | `React.ReactNode` | — | The children of the component. |
 | `className` | `string | undefined` | 'react-aria-TagGroup' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
-| `defaultSelectedKeys` | `Iterable<Key> | "all" | undefined` | — | The initial selected keys in the collection (uncontrolled). |
+| `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
 | `dir` | `string | undefined` | — |  |
 | `disabledKeys` | `Iterable<Key> | undefined` | — | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. |
 | `disallowEmptySelection` | `boolean | undefined` | — | Whether the collection allows empty selection. |
@@ -564,20 +570,20 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `selectedKeys` | `Iterable<Key> | "all" | undefined` | — | The currently selected keys in the collection (controlled). |
+| `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
 | `selectionBehavior` | `SelectionBehavior | undefined` | 'toggle' | How multiple selection should behave in the collection. |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### TagList
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode | ((item: T) => ReactNode)` | — | The contents of the collection. |
+| `children` | `((item: T) => ReactNode) | React.ReactNode` | — | The contents of the collection. |
 | `className` | `ClassNameOrFunction<TagListRenderProps> | undefined` | 'react-aria-TagList' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
@@ -649,10 +655,10 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", TagListRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", TagListRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `renderEmptyState` | `((props: TagListRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no items in the tag list. |
-| `style` | `(React.CSSProperties | ((values: TagListRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: TagListRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### Tag
 
@@ -661,7 +667,7 @@ function Example() {
 | `children` | `ChildrenOrFunction<TagRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<TagRenderProps> | undefined` | 'react-aria-Tag' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
-| `download` | `string | boolean | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
+| `download` | `boolean | string | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
 | `hidden` | `boolean | undefined` | — |  |
 | `href` | `string | undefined` | — | A URL to link to. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). |
 | `hrefLang` | `string | undefined` | — | Hints at the human language of the linked URL. See[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#hreflang). |
@@ -679,7 +685,7 @@ function Example() {
 | `onAuxClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
 | `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -748,9 +754,9 @@ function Example() {
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `DOMRenderFunction<"div", TagRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", TagRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
-| `style` | `(React.CSSProperties | ((values: TagRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `(((values: TagRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string | undefined` | — | A string representation of the tags's contents, used for accessibility. Required if children is not a plain text string. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |

@@ -24,13 +24,13 @@ import {Button} from 'vanilla-starter/Button';
 
 ```tsx
 'use client';
-import { Form as RACForm, type FormProps } from 'react-aria-components/Form';
-import { type LabelProps, Label as RACLabel } from 'react-aria-components/Label';
-import { type FieldErrorProps, FieldError as RACFieldError } from 'react-aria-components/FieldError';
-import { type ButtonProps, Button } from 'react-aria-components/Button';
-import { type TextProps } from 'react-aria-components/Text';
+import {Form as RACForm, type FormProps} from 'react-aria-components/Form';
+import {type LabelProps, Label as RACLabel} from 'react-aria-components/Label';
+import {type FieldErrorProps, FieldError as RACFieldError} from 'react-aria-components/FieldError';
+import {type ButtonProps, Button} from 'react-aria-components/Button';
+import {type TextProps} from 'react-aria-components/Text';
 import './Form.css';
-import { Text } from './Content';
+import {Text} from './Content';
 
 export function Form(props: FormProps) {
   return <RACForm {...props} />;
@@ -45,7 +45,7 @@ export function FieldError(props: FieldErrorProps) {
 }
 
 export function Description(props: TextProps) {
-  return <Text slot="description" className="field-description" {...props} />
+  return <Text slot="description" className="field-description" {...props} />;
 }
 
 export function FieldButton(props: ButtonProps) {
@@ -57,7 +57,7 @@ export function FieldButton(props: ButtonProps) {
 ### Form.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-Form {
   display: flex;
@@ -69,7 +69,7 @@ export function FieldButton(props: ButtonProps) {
   }
 }
 
-.react-aria-Form [role=alert] {
+.react-aria-Form [role='alert'] {
   border: 2px solid var(--invalid-color);
   background: var(--overlay-background);
   border-radius: 6px;
@@ -164,6 +164,7 @@ export function FieldButton(props: ButtonProps) {
     color: var(--text-color-disabled);
   }
 }
+
 ```
 
 ## Tailwind example
@@ -188,8 +189,8 @@ import {Button} from 'tailwind-starter/Button';
 ```tsx
 'use client';
 import React from 'react';
-import { type FormProps, Form as RACForm } from 'react-aria-components/Form';
-import { twMerge } from 'tailwind-merge';
+import {type FormProps, Form as RACForm} from 'react-aria-components/Form';
+import {twMerge} from 'tailwind-merge';
 
 export function Form(props: FormProps) {
   return <RACForm {...props} className={twMerge('flex flex-col gap-6', props.className)} />;
@@ -201,7 +202,7 @@ export function Form(props: FormProps) {
 
 When using React 19, use the `action` prop to handle form submission. This receives a [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object containing the values for each form field. In React 18 or earlier, use the `onSubmit` event instead. See the [Forms](forms.md) guide details about integrating with frameworks.
 
-## Vanilla CSS example
+## React 19 example
 
 ```tsx
 import {Form} from 'vanilla-starter/Form';
@@ -219,6 +220,8 @@ import {Button} from 'vanilla-starter/Button';
   <Button type="submit">Submit</Button>
 </Form>
 ```
+
+## React 18 example
 
 ```tsx
 import {Form} from 'vanilla-starter/Form';
@@ -356,7 +359,7 @@ function Example() {
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
-| `autoCapitalize` | `"off" | "on" | "none" | "sentences" | "words" | "characters" | undefined` | — | Controls whether inputted text is automatically capitalized and, if so, in what manner.  See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize). |
+| `autoCapitalize` | `"characters" | "none" | "off" | "on" | "sentences" | "words" | undefined` | — | Controls whether inputted text is automatically capitalized and, if so, in what manner. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autocapitalize). |
 | `autoComplete` | `"off" | "on" | undefined` | — | Indicates whether input elements can by default have their values automatically completed by the browser. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#autocomplete). |
 | `children` | `React.ReactNode` | — | The children of the component. |
 | `className` | `string | undefined` | 'react-aria-Form' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
@@ -366,7 +369,7 @@ function Example() {
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
 | `lang` | `string | undefined` | — |  |
-| `method` | `"get" | "post" | "dialog" | undefined` | — | The HTTP method to submit the form with. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#method). |
+| `method` | `"dialog" | "get" | "post" | undefined` | — | The HTTP method to submit the form with. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#method). |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLFormElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLFormElement> | undefined` | — |  |
 | `onAnimationIteration` | `React.AnimationEventHandler<HTMLFormElement> | undefined` | — |  |
@@ -434,10 +437,10 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLFormElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLFormElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLFormElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"form", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `role` | `"search" | "presentation" | undefined` | — | An ARIA role override to apply to the form element. |
+| `render` | `DOMRenderFunction<"form", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `role` | `"presentation" | "search" | undefined` | — | An ARIA role override to apply to the form element. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `target` | `"_blank" | "_self" | "_parent" | "_top" | undefined` | — | The target attribute specifies a name or a keyword that indicates where to display the response that is received after submitting the form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#target). |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `target` | `"_blank" | "_parent" | "_self" | "_top" | undefined` | — | The target attribute specifies a name or a keyword that indicates where to display the response that is received after submitting the form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#target). |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when a field value is missing or invalid, or mark fields as required or invalid via ARIA. |
 | `validationErrors` | `ValidationErrors | undefined` | — | Validation errors for the form, typically returned by a server. This should be set to an object mapping from input names to errors. |

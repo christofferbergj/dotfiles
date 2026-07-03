@@ -8,20 +8,21 @@ A ColorSwatch displays a preview of a selected color.
 
 ```tsx
 'use client';
-import { ColorSwatch as AriaColorSwatch, type ColorSwatchProps } from 'react-aria-components/ColorSwatch';
+import {
+  ColorSwatch as AriaColorSwatch,
+  type ColorSwatchProps
+} from 'react-aria-components/ColorSwatch';
 import './ColorSwatch.css';
 
 export function ColorSwatch(props: ColorSwatchProps) {
   return (
-    (
-      <AriaColorSwatch
-        {...props}
-        style={({ color }) => ({
-          background: `linear-gradient(${color}, ${color}),
+    <AriaColorSwatch
+      {...props}
+      style={({color}) => ({
+        background: `linear-gradient(${color}, ${color}),
           repeating-conic-gradient(#CCC 0% 25%, white 0% 50%) 50% / 16px 16px`
-        })}
-      />
-    )
+      })}
+    />
   );
 }
 
@@ -30,7 +31,7 @@ export function ColorSwatch(props: ColorSwatchProps) {
 ### ColorSwatch.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-ColorSwatch {
   width: var(--spacing-8);
@@ -48,18 +49,25 @@ export function ColorSwatch(props: ColorSwatchProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { ColorSwatch as AriaColorSwatch, type ColorSwatchProps } from 'react-aria-components/ColorSwatch';
-import { composeTailwindRenderProps } from './utils';
+import {
+  ColorSwatch as AriaColorSwatch,
+  type ColorSwatchProps
+} from 'react-aria-components/ColorSwatch';
+import {composeTailwindRenderProps} from './utils';
 
 export function ColorSwatch(props: ColorSwatchProps) {
   return (
-    <AriaColorSwatch 
+    <AriaColorSwatch
       {...props}
-      className={composeTailwindRenderProps(props.className, 'w-8 h-8 box-border rounded-md border border-black/10')}
+      className={composeTailwindRenderProps(
+        props.className,
+        'w-8 h-8 box-border rounded-md border border-black/10'
+      )}
       style={({color}) => ({
         background: `linear-gradient(${color}, ${color}),
           repeating-conic-gradient(#CCC 0% 25%, white 0% 50%) 50% / 16px 16px`
-      })} />
+      })}
+    />
   );
 }
 
@@ -158,7 +166,7 @@ import {ColorSwatch} from 'vanilla-starter/ColorSwatch';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", ColorSwatchRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", ColorSwatchRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ColorSwatchRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: ColorSwatchRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

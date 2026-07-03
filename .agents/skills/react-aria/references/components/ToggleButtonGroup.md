@@ -1,6 +1,7 @@
 # ToggleButtonGroup
 
-A toggle button group allows a user to toggle multiple options, with single or multiple selection.
+A toggle button group allows a user to toggle multiple options, with single or multiple
+selection.
 
 ## Vanilla CSS example
 
@@ -19,7 +20,10 @@ import {ToggleButton} from 'vanilla-starter/ToggleButton';
 
 ```tsx
 'use client';
-import { ToggleButtonGroup as RACToggleButtonGroup, type ToggleButtonGroupProps } from 'react-aria-components/ToggleButtonGroup';
+import {
+  ToggleButtonGroup as RACToggleButtonGroup,
+  type ToggleButtonGroupProps
+} from 'react-aria-components/ToggleButtonGroup';
 import './ToggleButtonGroup.css';
 
 export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
@@ -31,7 +35,7 @@ export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
 ### ToggleButtonGroup.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-ToggleButtonGroup {
   display: flex;
@@ -62,7 +66,7 @@ export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
   }
 }
 
-.react-aria-ToggleButtonGroup[data-orientation=horizontal] {
+.react-aria-ToggleButtonGroup[data-orientation='horizontal'] {
   flex-direction: row;
 
   > .react-aria-ToggleButton {
@@ -80,7 +84,7 @@ export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
   }
 }
 
-.react-aria-ToggleButtonGroup[data-orientation=vertical] {
+.react-aria-ToggleButtonGroup[data-orientation='vertical'] {
   flex-direction: column;
   width: fit-content;
 
@@ -119,9 +123,12 @@ import {ToggleButton} from 'tailwind-starter/ToggleButton';
 ```tsx
 'use client';
 import React from 'react';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { ToggleButtonGroup as RACToggleButtonGroup, type ToggleButtonGroupProps } from 'react-aria-components/ToggleButtonGroup';
-import { tv } from 'tailwind-variants';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {
+  ToggleButtonGroup as RACToggleButtonGroup,
+  type ToggleButtonGroupProps
+} from 'react-aria-components/ToggleButtonGroup';
+import {tv} from 'tailwind-variants';
 
 const styles = tv({
   base: 'flex gap-1',
@@ -137,7 +144,10 @@ export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
   return (
     <RACToggleButtonGroup
       {...props}
-      className={composeRenderProps(props.className, (className, renderProps) => styles({...renderProps, className}))} />
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        styles({...renderProps, className})
+      )}
+    />
   );
 }
 
@@ -314,9 +324,9 @@ function SegmentedControlItem(props: ToggleButtonProps) {
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `orientation` | `Orientation | undefined` | 'horizontal' | The orientation of the the toggle button group. |
-| `render` | `DOMRenderFunction<"div", ToggleButtonGroupRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", ToggleButtonGroupRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `selectedKeys` | `Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
-| `selectionMode` | `"single" | "multiple" | undefined` | 'single' | Whether single or multiple selection is enabled. |
+| `selectionMode` | `"multiple" | "single" | undefined` | 'single' | Whether single or multiple selection is enabled. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ToggleButtonGroupRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: ToggleButtonGroupRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

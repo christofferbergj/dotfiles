@@ -52,18 +52,22 @@ Sentry.init({
 
   // Tracing MUST be enabled for AI monitoring
   tracesSampleRate: 1.0,
-  streamGenAiSpans: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
 
   integrations: [
-    Sentry.openAIIntegration({
-      recordInputs: true,   // capture prompts sent to OpenAI
-      recordOutputs: true,  // capture completions from OpenAI
-    }),
+    Sentry.openAIIntegration(), // recordInputs/recordOutputs default to true (governed by dataCollection.genAI)
   ],
 });
 ```
 
 ### Client-Side / Manual Wrapping
+
+With `dataCollection`, genAI input/output capture is **on by default**. To disable it, set `dataCollection: { genAI: { inputs: false, outputs: false } }` in the matching client-side `Sentry.init()`.
 
 ```typescript
 import OpenAI from "openai";
@@ -73,11 +77,9 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // ⚠️ Never expose this in the browser!
 });
 
-// Wrap once at module level — reuse this client everywhere
-const client = Sentry.instrumentOpenAiClient(openai, {
-  recordInputs: true,
-  recordOutputs: true,
-});
+// Wrap once at module level — reuse this client everywhere.
+// Input/output recording is on by default (governed by dataCollection.genAI) unless explicitly overridden.
+const client = Sentry.instrumentOpenAiClient(openai);
 
 const response = await client.chat.completions.create({
   model: "gpt-4o",
@@ -102,8 +104,8 @@ const stream = await client.chat.completions.create({
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `recordInputs` | `boolean` | `true` if `sendDefaultPii: true` | Capture prompts/messages sent to OpenAI |
-| `recordOutputs` | `boolean` | `true` if `sendDefaultPii: true` | Capture generated text/responses |
+| `recordInputs` | `boolean` | `true` (governed by `dataCollection.genAI`) | Capture prompts/messages sent to OpenAI |
+| `recordOutputs` | `boolean` | `true` (governed by `dataCollection.genAI`) | Capture generated text/responses |
 
 **Supported versions:** `openai` ≥4.0.0 <7
 
@@ -122,12 +124,15 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 1.0,
-  streamGenAiSpans: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
   integrations: [
     Sentry.vercelAIIntegration({
       force: true, // ← Required for Vercel production deployments (see note below)
-      recordInputs: true,
-      recordOutputs: true,
     }),
   ],
 });
@@ -140,7 +145,12 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 1.0,
-  streamGenAiSpans: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
   integrations: [
     Sentry.vercelAIIntegration(),
   ],
@@ -197,8 +207,8 @@ Sentry.vercelAIIntegration({ force: true })
 | Option | Type | Default | Min SDK | Description |
 |--------|------|---------|---------|-------------|
 | `force` | `boolean` | `false` | 9.29.0 | Force-enable regardless of module detection. Use on Vercel. |
-| `recordInputs` | `boolean` | `true`* | 9.27.0 | Capture inputs. *Defaults to `true` when `sendDefaultPii: true`. |
-| `recordOutputs` | `boolean` | `true`* | 9.27.0 | Capture outputs. *Defaults to `true` when `sendDefaultPii: true`. |
+| `recordInputs` | `boolean` | `true`* | 9.27.0 | Capture inputs. *Defaults to `true` (governed by `dataCollection.genAI`). |
+| `recordOutputs` | `boolean` | `true`* | 9.27.0 | Capture outputs. *Defaults to `true` (governed by `dataCollection.genAI`). |
 
 **Supported versions:** `ai` ≥3.0.0 ≤6
 
@@ -215,12 +225,14 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 1.0,
-  streamGenAiSpans: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
   integrations: [
-    Sentry.anthropicAIIntegration({
-      recordInputs: true,
-      recordOutputs: true,
-    }),
+    Sentry.anthropicAIIntegration(),
   ],
 });
 ```
@@ -235,10 +247,8 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY, // ⚠️ Never expose in the browser!
 });
 
-const client = Sentry.instrumentAnthropicAiClient(anthropic, {
-  recordInputs: true,
-  recordOutputs: true,
-});
+// Input/output recording is on by default (governed by dataCollection.genAI) unless explicitly overridden.
+const client = Sentry.instrumentAnthropicAiClient(anthropic);
 
 const response = await client.messages.create({
   model: "claude-3-5-sonnet-20241022",
@@ -268,6 +278,7 @@ Sentry automatically captures token usage following OpenTelemetry GenAI semantic
 | Span Attribute | Description |
 |----------------|-------------|
 | `gen_ai.request.model` | Model name |
+| `gen_ai.request.reasoning_effort` | Reasoning effort level for reasoning models (e.g., `low`, `medium`, `high`). Supported values vary by provider. |
 | `gen_ai.usage.input_tokens` | Prompt/input token count |
 | `gen_ai.usage.output_tokens` | Completion/output token count |
 | `gen_ai.usage.input_tokens.cached` | Cached input tokens |
@@ -283,24 +294,25 @@ Sentry automatically captures token usage following OpenTelemetry GenAI semantic
 `recordInputs` captures prompts sent to the AI API.  
 `recordOutputs` captures the generated text/completions returned.
 
-Both default to `true` only when `sendDefaultPii: true` is set:
+With `dataCollection`, genAI input/output capture is **on by default**. To disable it, set `dataCollection: { genAI: { inputs: false, outputs: false } }`:
 
 ```typescript
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
-  sendDefaultPii: true, // ← enables input/output recording by default
+  dataCollection: {
+    genAI: { inputs: false, outputs: false },
+  },
   tracesSampleRate: 1.0,
-  streamGenAiSpans: true,
 });
 ```
 
-Or enable explicitly without `sendDefaultPii`:
+Use explicit integration options only when you need per-integration overrides instead of the SDK-level default:
 
 ```typescript
 integrations: [
   Sentry.openAIIntegration({
-    recordInputs: true,   // explicitly opt in
-    recordOutputs: true,
+    recordInputs: false,  // opt out for this integration despite genAI capture being on by default
+    recordOutputs: false,
   }),
 ],
 ```
@@ -318,11 +330,16 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 1.0,
-  streamGenAiSpans: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
   integrations: [
-    Sentry.openAIIntegration({ recordInputs: true, recordOutputs: true }),
-    Sentry.vercelAIIntegration({ force: true, recordInputs: true, recordOutputs: true }),
-    Sentry.anthropicAIIntegration({ recordInputs: true, recordOutputs: true }),
+    Sentry.openAIIntegration(),
+    Sentry.vercelAIIntegration({ force: true }),
+    Sentry.anthropicAIIntegration(),
   ],
 });
 ```
@@ -405,6 +422,35 @@ If your `tracesSampleRate` is below 1.0, you may be losing entire agent runs. Se
 
 ---
 
+## Conversation Tracking
+
+Link AI spans across turns into a chat-style timeline at **Explore > Conversations**.
+
+**Prerequisites:** `streamGenAiSpans` defaults to `true` (SDK >=10.61.0, so AI spans stream as standalone items) and genAI input/output capture enabled (on by default via `dataCollection`) in your server config — Conversations reconstructs the chat from input/output attributes, so without input/output capture the view will be empty.
+
+```typescript
+import * as Sentry from "@sentry/nextjs";
+
+// Set at the start of a conversation (server-side)
+Sentry.setConversationId("conv_abc123");
+
+// All subsequent AI calls carry gen_ai.conversation.id: "conv_abc123"
+await openai.chat.completions.create({
+  model: "gpt-5.5",
+  messages: [{ role: "user", content: "Hello" }],
+});
+```
+
+A single conversation can span multiple traces, and a single trace can contain multiple conversations.
+
+### User Attribution
+
+To populate the **User** column in Conversations, call `setUser` once per request or session before any AI calls:
+
+```typescript
+Sentry.setUser({ id: "user_123", email: "jane@example.com", username: "jane" });
+```
+
 ## Troubleshooting
 
 | Issue | Solution |
@@ -412,9 +458,10 @@ If your `tracesSampleRate` is below 1.0, you may be losing entire agent runs. Se
 | No AI spans appearing | Verify `tracesSampleRate` > 0; AI monitoring requires tracing |
 | Token counts missing in streams | Add `stream_options: { include_usage: true }` to all OpenAI streaming calls |
 | Vercel AI spans show raw names (`ai.toolCall`) | Add `vercelAIIntegration({ force: true })` in server config |
-| `recordInputs`/`recordOutputs` not capturing | Set `sendDefaultPii: true` or explicitly pass `recordInputs: true` to the integration |
+| `recordInputs`/`recordOutputs` not capturing | genAI capture is on by default; ensure you haven't set `dataCollection: { genAI: { inputs: false } }`, or explicitly pass `recordInputs: true` / `recordOutputs: true` to the integration |
 | Anthropic spans missing | Check SDK version supports Anthropic integration; add `anthropicAIIntegration()` explicitly |
 | Cost estimates not showing | Model name must match models.dev/OpenRouter pricing data; custom/fine-tuned models may show no estimate |
 | Edge runtime AI spans missing | Add `vercelAIIntegration()` to `sentry.edge.config.ts` explicitly (not auto-enabled for Edge) |
+| User column shows "Unknown" | Call `Sentry.setUser()` once per request or session |
 | OpenAI browser-side spans missing | Use `instrumentOpenAiClient()` wrapper — `openAIIntegration()` only works server-side |
 | No data in AI Agents dashboard | Ensure traces are being sent; check DSN and `tracesSampleRate` |

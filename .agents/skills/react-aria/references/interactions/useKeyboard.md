@@ -56,64 +56,11 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `defaultChecked` | `boolean | undefined` | — |
-| `defaultValue` | `string | number | readonly string[] | undefined` | — |
-| `suppressContentEditableWarning` | `boolean | undefined` | — |
-| `suppressHydrationWarning` | `boolean | undefined` | — |
-| `accessKey` | `string | undefined` | — |
-| `autoCapitalize` | `"off" | "none" | "on" | "sentences" | "words" | "characters" | (string & {}) | undefined` | — |
-| `autoFocus` | `boolean | undefined` | — |
-| `className` | `string | undefined` | — |
-| `contentEditable` | `(boolean | "true" | "false") | "inherit" | "plaintext-only" | undefined` | — |
-| `contextMenu` | `string | undefined` | — |
-| `dir` | `string | undefined` | — |
-| `draggable` | `(boolean | "true" | "false") | undefined` | — |
-| `enterKeyHint` | `"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined` | — |
-| `hidden` | `boolean | undefined` | — |
-| `id` | `string | undefined` | — |
-| `lang` | `string | undefined` | — |
-| `nonce` | `string | undefined` | — |
-| `slot` | `string | undefined` | — |
-| `spellCheck` | `(boolean | "true" | "false") | undefined` | — |
-| `style` | `React.CSSProperties | undefined` | — |
-| `tabIndex` | `number | undefined` | — |
-| `title` | `string | undefined` | — |
-| `translate` | `"yes" | "no" | undefined` | — |
-| `radioGroup` | `string | undefined` | — |
-| `role` | `React.AriaRole | undefined` | — |
 | `about` | `string | undefined` | — |
-| `content` | `string | undefined` | — |
-| `datatype` | `string | undefined` | — |
-| `inlist` | `any` | — |
-| `prefix` | `string | undefined` | — |
-| `property` | `string | undefined` | — |
-| `rel` | `string | undefined` | — |
-| `resource` | `string | undefined` | — |
-| `rev` | `string | undefined` | — |
-| `typeof` | `string | undefined` | — |
-| `vocab` | `string | undefined` | — |
-| `autoCorrect` | `string | undefined` | — |
-| `autoSave` | `string | undefined` | — |
-| `color` | `string | undefined` | — |
-| `itemProp` | `string | undefined` | — |
-| `itemScope` | `boolean | undefined` | — |
-| `itemType` | `string | undefined` | — |
-| `itemID` | `string | undefined` | — |
-| `itemRef` | `string | undefined` | — |
-| `results` | `number | undefined` | — |
-| `security` | `string | undefined` | — |
-| `unselectable` | `"off" | "on" | undefined` | — |
-| `popover` | `"" | "auto" | "manual" | undefined` | — |
-| `popoverTargetAction` | `"toggle" | "show" | "hide" | undefined` | — |
-| `popoverTarget` | `string | undefined` | — |
-| `inert` | `boolean | undefined` | — |
-| `inputMode` | `"none" | "search" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | undefined` | Hints at the type of data that might be entered by the user while editing the element or its contents |
-| `is` | `string | undefined` | Specify that a standard HTML element should behave like a defined custom built-in element |
-| `exportparts` | `string | undefined` | — |
-| `part` | `string | undefined` | — |
+| `accessKey` | `string | undefined` | — |
 | `aria-activedescendant` | `string | undefined` | Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. |
 | `aria-atomic` | `(boolean | "true" | "false") | undefined` | Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. |
-| `aria-autocomplete` | `"none" | "list" | "inline" | "both" | undefined` | Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be presented if they are made. |
+| `aria-autocomplete` | `"both" | "inline" | "list" | "none" | undefined` | Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be presented if they are made. |
 | `aria-braillelabel` | `string | undefined` | Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user. |
 | `aria-brailleroledescription` | `string | undefined` | Defines a human-readable, author-localized abbreviated description for the role of an element, which is intended to be converted into Braille. |
 | `aria-busy` | `(boolean | "true" | "false") | undefined` | — |
@@ -123,7 +70,7 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `aria-colindextext` | `string | undefined` | Defines a human readable text alternative of aria-colindex. |
 | `aria-colspan` | `number | undefined` | Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid. |
 | `aria-controls` | `string | undefined` | Identifies the element (or elements) whose contents or presence are controlled by the current element. |
-| `aria-current` | `boolean | "true" | "false" | "page" | "step" | "location" | "date" | "time" | undefined` | Indicates the element that represents the current item within a container or set of related elements. |
+| `aria-current` | `boolean | "true" | "false" | "date" | "location" | "page" | "step" | "time" | undefined` | Indicates the element that represents the current item within a container or set of related elements. |
 | `aria-describedby` | `string | undefined` | Identifies the element (or elements) that describes the object. |
 | `aria-description` | `string | undefined` | Defines a string value that describes or annotates the current element. |
 | `aria-details` | `string | undefined` | Identifies the element that provides a detailed, extended description for the object. |
@@ -138,7 +85,7 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `aria-label` | `string | undefined` | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | Identifies the element (or elements) that labels the current element. |
 | `aria-level` | `number | undefined` | Defines the hierarchical level of an element within a structure. |
-| `aria-live` | `"off" | "assertive" | "polite" | undefined` | Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region. |
+| `aria-live` | `"assertive" | "off" | "polite" | undefined` | Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region. |
 | `aria-modal` | `(boolean | "true" | "false") | undefined` | Indicates whether an element is modal when displayed. |
 | `aria-multiline` | `(boolean | "true" | "false") | undefined` | Indicates whether a text box accepts multiple lines of input or only a single line. |
 | `aria-multiselectable` | `(boolean | "true" | "false") | undefined` | Indicates that the user may select more than one item from the current selectable descendants. |
@@ -148,7 +95,7 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `aria-posinset` | `number | undefined` | Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. |
 | `aria-pressed` | `boolean | "true" | "false" | "mixed" | undefined` | Indicates the current "pressed" state of toggle buttons. |
 | `aria-readonly` | `(boolean | "true" | "false") | undefined` | Indicates that the element is not editable, but is otherwise operable. |
-| `aria-relevant` | `"text" | "additions" | "additions removals" | "additions text" | "all" | "removals" | "removals additions" | "removals text" | "text additions" | "text removals" | undefined` | Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified. |
+| `aria-relevant` | `"additions" | "additions removals" | "additions text" | "all" | "removals" | "removals additions" | "removals text" | "text" | "text additions" | "text removals" | undefined` | Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified. |
 | `aria-required` | `(boolean | "true" | "false") | undefined` | Indicates that user input is required on the element before a form may be submitted. |
 | `aria-roledescription` | `string | undefined` | Defines a human-readable, author-localized description for the role of an element. |
 | `aria-rowcount` | `number | undefined` | Defines the total number of rows in a table, grid, or treegrid. |
@@ -157,99 +104,77 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `aria-rowspan` | `number | undefined` | Defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid. |
 | `aria-selected` | `(boolean | "true" | "false") | undefined` | Indicates the current "selected" state of various widgets. |
 | `aria-setsize` | `number | undefined` | Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. |
-| `aria-sort` | `"none" | "ascending" | "descending" | "other" | undefined` | Indicates if items in a table or grid are sorted in ascending or descending order. |
+| `aria-sort` | `"ascending" | "descending" | "none" | "other" | undefined` | Indicates if items in a table or grid are sorted in ascending or descending order. |
 | `aria-valuemax` | `number | undefined` | Defines the maximum allowed value for a range widget. |
 | `aria-valuemin` | `number | undefined` | Defines the minimum allowed value for a range widget. |
 | `aria-valuenow` | `number | undefined` | Defines the current value for a range widget. |
 | `aria-valuetext` | `string | undefined` | Defines the human readable text alternative of aria-valuenow for a range widget. |
+| `autoCapitalize` | `"characters" | "none" | "off" | "on" | "sentences" | "words" | (string & {}) | undefined` | — |
+| `autoCorrect` | `string | undefined` | — |
+| `autoFocus` | `boolean | undefined` | — |
+| `autoSave` | `string | undefined` | — |
 | `children` | `React.ReactNode` | — |
+| `className` | `string | undefined` | — |
+| `color` | `string | undefined` | — |
+| `content` | `string | undefined` | — |
+| `contentEditable` | `"inherit" | "plaintext-only" | (boolean | "true" | "false") | undefined` | — |
+| `contextMenu` | `string | undefined` | — |
 | `dangerouslySetInnerHTML` | `{ __html: string | TrustedHTML; } | undefined` | — |
-| `onCopy` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
-| `onCopyCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
-| `onCut` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
-| `onCutCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
-| `onPaste` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
-| `onPasteCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
+| `datatype` | `string | undefined` | — |
+| `defaultChecked` | `boolean | undefined` | — |
+| `defaultValue` | `number | string | readonly string[] | undefined` | — |
+| `dir` | `string | undefined` | — |
+| `draggable` | `(boolean | "true" | "false") | undefined` | — |
+| `enterKeyHint` | `"done" | "enter" | "go" | "next" | "previous" | "search" | "send" | undefined` | — |
+| `exportparts` | `string | undefined` | — |
+| `hidden` | `boolean | undefined` | — |
+| `id` | `string | undefined` | — |
+| `inert` | `boolean | undefined` | — |
+| `inlist` | `any` | — |
+| `inputMode` | `"decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url" | undefined` | Hints at the type of data that might be entered by the user while editing the element or its contents |
+| `is` | `string | undefined` | Specify that a standard HTML element should behave like a defined custom built-in element |
+| `itemID` | `string | undefined` | — |
+| `itemProp` | `string | undefined` | — |
+| `itemRef` | `string | undefined` | — |
+| `itemScope` | `boolean | undefined` | — |
+| `itemType` | `string | undefined` | — |
+| `lang` | `string | undefined` | — |
+| `nonce` | `string | undefined` | — |
+| `onAbort` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onAbortCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onAnimationEnd` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
+| `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
+| `onAnimationIteration` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
+| `onAnimationIterationCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
+| `onAnimationStart` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
+| `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
+| `onAuxClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
+| `onAuxClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
+| `onBeforeInput` | `React.InputEventHandler<HTMLElement> | undefined` | — |
+| `onBeforeInputCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onBeforeToggle` | `React.ToggleEventHandler<HTMLElement> | undefined` | — |
+| `onBlur` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
+| `onBlurCapture` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
+| `onCanPlay` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onCanPlayCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onCanPlayThrough` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onCanPlayThroughCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onChange` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onChangeCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
+| `onClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onCompositionEnd` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |
 | `onCompositionEndCapture` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |
 | `onCompositionStart` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |
 | `onCompositionStartCapture` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |
 | `onCompositionUpdate` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |
 | `onCompositionUpdateCapture` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |
-| `onFocus` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
-| `onFocusCapture` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
-| `onBlur` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
-| `onBlurCapture` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
-| `onChange` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onChangeCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onBeforeInput` | `React.InputEventHandler<HTMLElement> | undefined` | — |
-| `onBeforeInputCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onInput` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onInputCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onReset` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onResetCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onSubmit` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onSubmitCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onInvalid` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onInvalidCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
-| `onLoad` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onLoadCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onError` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onErrorCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onKeyDown` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
-| `onKeyDownCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
-| `onKeyUp` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
-| `onKeyUpCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
-| `onAbort` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onAbortCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onCanPlay` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onCanPlayCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onCanPlayThrough` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onCanPlayThroughCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onDurationChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onDurationChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onEmptied` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onEmptiedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onEncrypted` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onEncryptedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onEnded` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onEndedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onLoadedData` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onLoadedDataCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onLoadedMetadata` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onLoadedMetadataCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onLoadStart` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onLoadStartCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onPause` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onPauseCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onPlay` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onPlayCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onPlaying` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onPlayingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onProgress` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onProgressCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onRateChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onRateChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onSeeked` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onSeekedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onSeeking` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onSeekingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onStalled` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onStalledCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onSuspend` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onSuspendCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onTimeUpdate` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onTimeUpdateCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onVolumeChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onVolumeChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onWaiting` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onWaitingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
-| `onAuxClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
-| `onAuxClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
-| `onClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
-| `onClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onContextMenu` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
+| `onCopy` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
+| `onCopyCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
+| `onCut` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
+| `onCutCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
 | `onDoubleClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onDoubleClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onDrag` | `React.DragEventHandler<HTMLElement> | undefined` | — |
@@ -268,6 +193,38 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `onDragStartCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |
 | `onDrop` | `React.DragEventHandler<HTMLElement> | undefined` | — |
 | `onDropCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |
+| `onDurationChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onDurationChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onEmptied` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onEmptiedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onEncrypted` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onEncryptedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onEnded` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onEndedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onError` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onErrorCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onFocus` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
+| `onFocusCapture` | `React.FocusEventHandler<HTMLElement> | undefined` | — |
+| `onGotPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onInput` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onInputCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onInvalid` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onInvalidCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onKeyDown` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
+| `onKeyDownCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
+| `onKeyUp` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
+| `onKeyUpCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |
+| `onLoad` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLoadCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLoadedData` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLoadedDataCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLoadedMetadata` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLoadedMetadataCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLoadStart` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLoadStartCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onLostPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
 | `onMouseDown` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onMouseDownCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onMouseEnter` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
@@ -280,8 +237,53 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `onMouseOverCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onMouseUp` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
 | `onMouseUpCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |
+| `onPaste` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
+| `onPasteCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |
+| `onPause` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onPauseCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onPlay` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onPlayCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onPlaying` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onPlayingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onPointerCancel` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerCancelCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerDown` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerDownCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerEnter` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerLeave` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerMove` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerMoveCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerOut` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerOutCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerOver` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerOverCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerUp` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onPointerUpCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
+| `onProgress` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onProgressCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onRateChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onRateChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onReset` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onResetCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onScroll` | `React.UIEventHandler<HTMLElement> | undefined` | — |
+| `onScrollCapture` | `React.UIEventHandler<HTMLElement> | undefined` | — |
+| `onScrollEnd` | `React.UIEventHandler<HTMLElement> | undefined` | — |
+| `onScrollEndCapture` | `React.UIEventHandler<HTMLElement> | undefined` | — |
+| `onSeeked` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onSeekedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onSeeking` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onSeekingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
 | `onSelect` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
 | `onSelectCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onStalled` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onStalledCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onSubmit` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onSubmitCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |
+| `onSuspend` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onSuspendCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onTimeUpdate` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onTimeUpdateCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onToggle` | `React.ToggleEventHandler<HTMLElement> | undefined` | — |
 | `onTouchCancel` | `React.TouchEventHandler<HTMLElement> | undefined` | — |
 | `onTouchCancelCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |
 | `onTouchEnd` | `React.TouchEventHandler<HTMLElement> | undefined` | — |
@@ -290,38 +292,6 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `onTouchMoveCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |
 | `onTouchStart` | `React.TouchEventHandler<HTMLElement> | undefined` | — |
 | `onTouchStartCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |
-| `onPointerDown` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerDownCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerMove` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerMoveCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerUp` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerUpCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerCancel` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerCancelCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerEnter` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerLeave` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerOver` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerOverCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerOut` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onPointerOutCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onGotPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onLostPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |
-| `onScroll` | `React.UIEventHandler<HTMLElement> | undefined` | — |
-| `onScrollCapture` | `React.UIEventHandler<HTMLElement> | undefined` | — |
-| `onScrollEnd` | `React.UIEventHandler<HTMLElement> | undefined` | — |
-| `onScrollEndCapture` | `React.UIEventHandler<HTMLElement> | undefined` | — |
-| `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |
-| `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |
-| `onAnimationStart` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
-| `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
-| `onAnimationEnd` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
-| `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
-| `onAnimationIteration` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
-| `onAnimationIterationCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |
-| `onToggle` | `React.ToggleEventHandler<HTMLElement> | undefined` | — |
-| `onBeforeToggle` | `React.ToggleEventHandler<HTMLElement> | undefined` | — |
 | `onTransitionCancel` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |
 | `onTransitionCancelCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |
 | `onTransitionEnd` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |
@@ -330,7 +300,37 @@ it can call `event.continuePropagation()` to allow parents to handle the event.
 | `onTransitionRunCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |
 | `onTransitionStart` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |
-| `render` | `DOMRenderFunction<"kbd", undefined> | undefined` | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `onVolumeChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onVolumeChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onWaiting` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onWaitingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |
+| `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |
+| `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |
+| `part` | `string | undefined` | — |
+| `popover` | `"" | "auto" | "manual" | undefined` | — |
+| `popoverTarget` | `string | undefined` | — |
+| `popoverTargetAction` | `"hide" | "show" | "toggle" | undefined` | — |
+| `prefix` | `string | undefined` | — |
+| `property` | `string | undefined` | — |
+| `radioGroup` | `string | undefined` | — |
+| `rel` | `string | undefined` | — |
+| `render` | `DOMRenderFunction<"kbd", undefined> | undefined` | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `resource` | `string | undefined` | — |
+| `results` | `number | undefined` | — |
+| `rev` | `string | undefined` | — |
+| `role` | `React.AriaRole | undefined` | — |
+| `security` | `string | undefined` | — |
+| `slot` | `string | undefined` | — |
+| `spellCheck` | `(boolean | "true" | "false") | undefined` | — |
+| `style` | `React.CSSProperties | undefined` | — |
+| `suppressContentEditableWarning` | `boolean | undefined` | — |
+| `suppressHydrationWarning` | `boolean | undefined` | — |
+| `tabIndex` | `number | undefined` | — |
+| `title` | `string | undefined` | — |
+| `translate` | `"no" | "yes" | undefined` | — |
+| `typeof` | `string | undefined` | — |
+| `unselectable` | `"off" | "on" | undefined` | — |
+| `vocab` | `string | undefined` | — |
 
 ### KeyboardResult
 

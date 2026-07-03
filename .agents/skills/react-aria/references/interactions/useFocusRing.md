@@ -52,14 +52,14 @@ If CSS classes are being used for styling, see the [FocusRing](FocusRing.md) com
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `within` | `boolean | undefined` | 'false' | Whether to show the focus ring when something inside the container element has focus (true), or only if the container itself has focus (false). |
-| `isTextInput` | `boolean | undefined` | — | Whether the element is a text input. |
 | `autoFocus` | `boolean | undefined` | — | Whether the element will be auto focused. |
+| `isTextInput` | `boolean | undefined` | — | Whether the element is a text input. |
+| `within` | `boolean | undefined` | 'false' | Whether to show the focus ring when something inside the container element has focus (true), or only if the container itself has focus (false). |
 
 ### FocusRingAria
 
 | Name | Type | Description |
 |------|------|-------------|
+| `focusProps` \* | `DOMAttributes<FocusableElement>` | Props to apply to the container element with the focus ring. |
 | `isFocused` \* | `boolean` | Whether the element is currently focused. |
 | `isFocusVisible` \* | `boolean` | Whether keyboard focus should be visible. |
-| `focusProps` \* | `DOMAttributes<FocusableElement>` | Props to apply to the container element with the focus ring. |

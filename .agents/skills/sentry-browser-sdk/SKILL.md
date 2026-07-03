@@ -183,7 +183,12 @@ Sentry.init({
   environment: import.meta.env.MODE,
   release: import.meta.env.VITE_APP_VERSION, // inject at build time
 
-  sendDefaultPii: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
 
   integrations: [
     Sentry.browserTracingIntegration(),
@@ -531,7 +536,8 @@ For each feature: `Read ${SKILL_ROOT}/references/<feature>.md`, follow steps exa
 | `dsn` | `string` | — | **Required.** SDK disabled when empty |
 | `environment` | `string` | `"production"` | e.g., `"staging"`, `"development"` |
 | `release` | `string` | — | e.g., `"my-app@1.0.0"` or git SHA — links errors to releases |
-| `sendDefaultPii` | `boolean` | `false` | Includes IP addresses and request headers |
+| `sendDefaultPii` | `boolean` | `false` | Includes IP addresses and request headers. **Will be deprecated in v11** — use `dataCollection` instead |
+| `dataCollection` | `object` | — | Fine-grained control over collected data (v10.54+). See table below |
 | `tracesSampleRate` | `number` | — | 0–1; `1.0` in dev, `0.1–0.2` in prod |
 | `tracesSampler` | `function` | — | Per-transaction sampling; overrides rate |
 | `tracePropagationTargets` | `(string\|RegExp)[]` | same-origin | Outgoing URLs that receive distributed tracing headers |
@@ -553,6 +559,37 @@ For each feature: `Read ${SKILL_ROOT}/references/<feature>.md`, follow steps exa
 |--------|------|---------|-------|
 | `cdnBaseUrl` | `string` | — | Base URL for lazy-loading integrations |
 | `skipBrowserExtensionCheck` | `boolean` | `false` | Skip check for browser extension context |
+
+### `dataCollection` Option (v10.54+)
+
+Fine-grained control over what data the SDK collects. Replaces the simple `sendDefaultPii` boolean with granular settings. When omitted, falls back to `sendDefaultPii` for backwards compatibility.
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| `userInfo` | `boolean` | `true` | Auto-populate `user.*` fields from instrumentation |
+| `cookies` | `boolean \| { allow: string[] } \| { deny: string[] }` | `true` | Cookie collection; `true` = all (filtered), `false` = none, `allow`/`deny` = specific keys |
+| `httpHeaders` | `{ request?, response? }` | `{ request: true, response: true }` | HTTP header collection; each can be `boolean` or `allow`/`deny` object |
+| `httpBodies` | `string[]` | `["incomingRequest", "outgoingRequest", "incomingResponse", "outgoingResponse"]` | HTTP body types to collect (when `dataCollection` is explicitly set) |
+| `queryParams` | `boolean \| { allow: string[] } \| { deny: string[] }` | `true` | Query parameter collection with sensitive value filtering |
+| `genAI` | `{ inputs?, outputs? }` | `{ inputs: true, outputs: true }` | Generative AI input/output recording |
+| `stackFrameVariables` | `boolean` | `true` | Capture local variable values in stack frames |
+| `frameContextLines` | `number` | `5` | Source code context lines around stack frames |
+
+**Example:**
+```typescript
+Sentry.init({
+  dsn: "...",
+  dataCollection: {
+    userInfo: true,
+    cookies: { deny: ["session_id", "auth_token"] },
+    httpHeaders: {
+      request: { deny: ["authorization", "cookie"] },
+      response: true,
+    },
+    queryParams: { allow: ["utm_source", "utm_campaign"] },
+  },
+});
+```
 
 ### `window.SENTRY_RELEASE` Global (CDN / Loader Path)
 

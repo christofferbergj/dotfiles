@@ -75,6 +75,8 @@ export default defineConfig({
     presentationTool({
       resolve, // Document locations (see below)
       previewUrl: {
+        // The front-end origin — required when the Studio runs standalone
+        origin: process.env.SANITY_STUDIO_PREVIEW_ORIGIN || 'http://localhost:3000',
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
@@ -185,7 +187,7 @@ import { stegaClean } from "@sanity/client/stega";
 
 export async function generateMetadata({ params }) {
   const { data } = await sanityFetch({ query: PAGE_QUERY })
-  return {
+  return { 
     title: stegaClean(data.title),
     description: stegaClean(data.description),
     openGraph: { url: stegaClean(data.canonicalUrl) }

@@ -9,7 +9,7 @@ or application.
 
 ```tsx
 'use client';
-import { Link as RACLink, type LinkProps } from 'react-aria-components/Link';
+import {Link as RACLink, type LinkProps} from 'react-aria-components/Link';
 import './Link.css';
 
 export function Link(props: LinkProps) {
@@ -21,7 +21,7 @@ export function Link(props: LinkProps) {
 ### Link.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-Link {
   color: var(--link-color);
@@ -62,13 +62,13 @@ export function Link(props: LinkProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { Link as AriaLink, type LinkProps as AriaLinkProps } from 'react-aria-components/Link';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { tv } from 'tailwind-variants';
-import { focusRing } from './utils';
+import {Link as AriaLink, type LinkProps as AriaLinkProps} from 'react-aria-components/Link';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {tv} from 'tailwind-variants';
+import {focusRing} from './utils';
 
 interface LinkProps extends AriaLinkProps {
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary';
 }
 
 const styles = tv({
@@ -76,8 +76,10 @@ const styles = tv({
   base: 'underline disabled:no-underline disabled:cursor-default forced-colors:disabled:text-[GrayText] transition rounded-xs [-webkit-tap-highlight-color:transparent]',
   variants: {
     variant: {
-      primary: 'text-blue-600 dark:text-blue-500 underline decoration-blue-600/60 hover:decoration-blue-600 dark:decoration-blue-500/60 dark:hover:decoration-blue-500',
-      secondary: 'text-neutral-700 dark:text-neutral-300 underline decoration-neutral-700/50 hover:decoration-neutral-700 dark:decoration-neutral-300/70 dark:hover:decoration-neutral-300'
+      primary:
+        'text-blue-600 dark:text-blue-500 underline decoration-blue-600/60 hover:decoration-blue-600 dark:decoration-blue-500/60 dark:hover:decoration-blue-500',
+      secondary:
+        'text-neutral-700 dark:text-neutral-300 underline decoration-neutral-700/50 hover:decoration-neutral-700 dark:decoration-neutral-300/70 dark:hover:decoration-neutral-300'
     }
   },
   defaultVariants: {
@@ -86,14 +88,45 @@ const styles = tv({
 });
 
 export function Link(props: LinkProps) {
-  return <AriaLink {...props} className={composeRenderProps(props.className, (className, renderProps) =>  styles({...renderProps, className, variant: props.variant}))} />;
+  return (
+    <AriaLink
+      {...props}
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        styles({...renderProps, className, variant: props.variant})
+      )}
+    />
+  );
 }
 
 ```
 
+## Client side routing
+
+By default, links with an `href` are handled by the browser as regular page navigations. To integrate with a client side router, use the `render` prop to delegate to your router's link component. This supports features like prefetching on hover and avoids full page reloads.
+
+```tsx
+import {Link} from 'react-aria-components/Link';
+import NextLink from 'next/link';
+
+<Link href="/about" render={props => <NextLink {...props} />}>
+  About
+</Link>
+```
+
+```tsx
+import {Link} from 'react-aria-components/Link';
+import {Link as RouterLink} from 'react-router';
+
+<Link href="/about" render={props => <RouterLink {...props} to={props.href} />}>
+  About
+</Link>
+```
+
+See the [customization](customization.md#dom-elements) guide for more details on the `render` prop.
+
 ## Events
 
-Links with an `href` will be handled by the browser, or via a [client side router](./frameworks.md). Links without an `href` will be rendered as a `<span role="link">` instead of an `<a>`. Use the `onPress` event to handle user interaction.
+Links without an `href` will be rendered as a `<span role="link">` instead of an `<a>`. Use the `onPress` event to handle user interaction.
 
 ```tsx
 import {Link} from 'vanilla-starter/Link';
@@ -113,7 +146,7 @@ import {Link} from 'vanilla-starter/Link';
 | `children` | `ChildrenOrFunction<LinkRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<LinkRenderProps> | undefined` | 'react-aria-Link' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
-| `download` | `string | boolean | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
+| `download` | `boolean | string | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
 | `hidden` | `boolean | undefined` | — |  |
 | `href` | `string | undefined` | — | A URL to link to. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). |
 | `hrefLang` | `string | undefined` | — | Hints at the human language of the linked URL. See[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#hreflang). |
@@ -130,7 +163,7 @@ import {Link} from 'vanilla-starter/Link';
 | `onAuxClick` | `React.MouseEventHandler<HTMLAnchorElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLAnchorElement> | undefined` | — |  |
 | `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
 | `onClickCapture` | `React.MouseEventHandler<HTMLAnchorElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLAnchorElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLAnchorElement> | undefined` | — |  |
@@ -201,9 +234,9 @@ import {Link} from 'vanilla-starter/Link';
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `((props: React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement> | React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, renderProps: LinkRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: \* You must render the expected element type (e.g. if `<a>` is expected, you cannot render a `<button>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `((props: React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement> | React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, renderProps: LinkRenderProps) => React.ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: - You must render the expected element type (e.g. if `<a>` is expected, you cannot render a   `<button>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: LinkRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `(((values: LinkRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |

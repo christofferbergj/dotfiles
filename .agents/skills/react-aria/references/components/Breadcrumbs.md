@@ -24,22 +24,24 @@ import {
   Breadcrumb as RACBreadcrumb,
   type BreadcrumbProps,
   type LinkProps,
-  Link,
+  Link
 } from 'react-aria-components/Breadcrumbs';
 import {ChevronRight} from 'lucide-react';
 import './Breadcrumbs.css';
 
-export function Breadcrumbs<T extends object>(props: BreadcrumbsProps<T>) {
+export function Breadcrumbs<T>(props: BreadcrumbsProps<T>) {
   return <RACBreadcrumbs {...props} />;
 }
 
 export function Breadcrumb(props: BreadcrumbProps & Omit<LinkProps, 'className'>) {
   return (
     <RACBreadcrumb {...props}>
-      {({isCurrent}) => (<>
-        <Link {...props} />
-        {!isCurrent && <ChevronRight size={14} />}
-      </>)}
+      {({isCurrent}) => (
+        <>
+          <Link {...props} />
+          {!isCurrent && <ChevronRight size={14} />}
+        </>
+      )}
     </RACBreadcrumb>
   );
 }
@@ -49,7 +51,7 @@ export function Breadcrumb(props: BreadcrumbProps & Omit<LinkProps, 'className'>
 ### Breadcrumbs.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-Breadcrumbs {
   display: flex;
@@ -116,30 +118,36 @@ import {Breadcrumbs, Breadcrumb} from 'tailwind-starter/Breadcrumbs';
 
 ```tsx
 'use client';
-import { ChevronRight } from 'lucide-react';
+import {ChevronRight} from 'lucide-react';
 import React from 'react';
 import {
   Breadcrumb as AriaBreadcrumb,
   Breadcrumbs as AriaBreadcrumbs,
   type BreadcrumbProps,
   type BreadcrumbsProps,
-  type LinkProps,
+  type LinkProps
 } from 'react-aria-components/Breadcrumbs';
-import { twMerge } from 'tailwind-merge';
-import { Link } from './Link';
-import { composeTailwindRenderProps } from './utils';
+import {twMerge} from 'tailwind-merge';
+import {Link} from './Link';
+import {composeTailwindRenderProps} from './utils';
 
-export function Breadcrumbs<T extends object>(props: BreadcrumbsProps<T>) {
+export function Breadcrumbs<T>(props: BreadcrumbsProps<T>) {
   return <AriaBreadcrumbs {...props} className={twMerge('flex gap-1', props.className)} />;
 }
 
 export function Breadcrumb(props: BreadcrumbProps & Omit<LinkProps, 'className'>) {
   return (
-    <AriaBreadcrumb {...props} className={composeTailwindRenderProps(props.className, 'flex items-center gap-1')}>
-      {({isCurrent}) => (<>
-       <Link variant="secondary" {...props} />
-        {!isCurrent && <ChevronRight className="w-3 h-3 text-neutral-600 dark:text-neutral-400" />}
-      </>)}
+    <AriaBreadcrumb
+      {...props}
+      className={composeTailwindRenderProps(props.className, 'flex items-center gap-1')}>
+      {({isCurrent}) => (
+        <>
+          <Link variant="secondary" {...props} />
+          {!isCurrent && (
+            <ChevronRight className="w-3 h-3 text-neutral-600 dark:text-neutral-400" />
+          )}
+        </>
+      )}
     </AriaBreadcrumb>
   );
 }
@@ -200,7 +208,7 @@ function Example() {
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
-| `children` | `React.ReactNode | ((item: T) => React.ReactNode)` | — | The contents of the collection. |
+| `children` | `((item: T) => React.ReactNode) | React.ReactNode` | — | The contents of the collection. |
 | `className` | `string | undefined` | 'react-aria-Breadcrumbs' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
 | `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
 | `dir` | `string | undefined` | — |  |
@@ -275,10 +283,10 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLOListElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLOListElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLOListElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"ol", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"ol", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### Breadcrumb
 
@@ -359,6 +367,6 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLLIElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLLIElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLLIElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"li", BreadcrumbRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `style` | `(React.CSSProperties | ((values: BreadcrumbRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `render` | `DOMRenderFunction<"li", BreadcrumbRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `style` | `(((values: BreadcrumbRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

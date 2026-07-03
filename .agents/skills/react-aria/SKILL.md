@@ -10,77 +10,141 @@ metadata:
 
 # React Aria Components
 
-React Aria Components is a library of unstyled, accessible UI components that you can style with any CSS solution. Built on top of React Aria hooks, it provides the accessibility and behavior without prescribing any visual design.
+## Test utilities
+
+`@react-aria/test-utils` provides ARIA pattern testers that simulate mouse, keyboard, and touch interactions for components built with React Aria Components.
+
+### Installation
+
+```bash
+npm install @react-aria/test-utils --save-dev
+```
+
+### Core pattern
+
+External consumers should import from `@react-aria/test-utils`.
+
+Initialize a `User` once per test file. Call `createTester` to get a tester for a specific ARIA pattern, then call tester methods to simulate interactions.
+
+```ts
+import {User} from '@react-aria/test-utils';
+
+// Provide whatever method of advancing timers you use in your test, this example assumes Jest with fake timers.
+// 'interactionType' specifies what mode of interaction should be simulated by the tester
+// 'advanceTimer' is used by the tester to advance the timers in the tests for specific interactions (e.g. long press)
+let testUtilUser = new User({interactionType: 'mouse', advanceTimer: jest.advanceTimersByTime});
+
+it('my test case', async function () {
+  // Render your test component/app
+  let {getByTestId} = render();
+  // Initialize the table tester via providing the 'Table' pattern name and the root element of said table
+  let tableTester = testUtilUser.createTester('Table', {root: getByTestId('test_table')});
+  expect(tableTester.getSelectedRows()).toHaveLength(0);
+
+  await tableTester.toggleSelectAll();
+  expect(tableTester.getSelectedRows()).toHaveLength(10);
+  ...
+});
+```
+
+Set `interactionType` to `'mouse'`, `'keyboard'`, or `'touch'`. Override per tester via `createTester(..., {interactionType})` or per method call.
+
+When using fake timers, pass `advanceTimer: jest.advanceTimersByTime` and flush timers after each test:
+
+```ts
+afterEach(() => {
+  act(() => jest.runAllTimers());
+});
+```
+
+### Tips and Tricks
+- The testers typically offers these things: a way to simulate common user interactions for the given component via a specified user modality (e.g. using mouse vs keyboard to toggle a menu), a way to get the various common elements that make up the component (e.g. the rows in a table), and a way to query the state of the component (e.g. get the selected rows in a table). Prefer using the testers for these use cases so that the user doesn't need to know what specific roles/elements/etc to target in their tests.
+- You can still simulate interactions manually in your test alongside the utilities provided by the tester. This can come in handy if you find that the tester doesn't cover a specific user flow or if one of its utilities isn't quite working as expected. After simulating your interaction, you can still
+use the tester to query for the component's state or trigger a different interaction utility.
+- Mouse drag interactions, simulated scrolling, and other mock reliant interactions are not available in these test utils since they depend heavily on how the user mocks things like clientHeight/Width/etc in their tests. These interactions need to be simulated manually by the user.
+- Some testers may support the notion of "long press" for certain interactions (e.g. long pressing a button to trigger its menu). To simulate this, you will need mock PointerEvent globally (see the installPointerEvent util) and provide a way to advance timers to the User via `advanceTimer`.
+- These test utils are compatible with not only JSDOM unit tests but browser tests as well (e.g. vitest-browser-react).
+- Methods that accept a target (`option`, `row`, `column`, `checkbox`, `radio`, `tab`) take a `number` (index), `string` (text content), or `HTMLElement`. Use the tester's own query methods (e.g. `getRows()`, `getOptions()`) to obtain an `HTMLElement` when you need one.
+- Link navigation assertions must be simulated manually. The testers do not assert navigation side effects.
+
+### When not to use the testers
+
+Skip the testers and write manual interactions for the following cases:
+
+- When testing a Menu or Dialog rendered without a trigger, or when testing interactive elements embedded inside rows or cells (e.g. an ActionMenu inside a TreeView row). The testers assume a trigger exists and do not reach into row/cell content.
+- tests that verify exact focus order, arrow key cycling, or specific modifier key behavior. Use `fireEvent.keyDown` or `userEvent.keyboard` directly so the test is actually testing the desired keyboard flow.
+- when `isOpen` or `defaultOpen` is set, `open()` will no-op but the tester's `root` must still resolve to the trigger element. Use `getByLabelText` or `getByTestId` rather than `getByRole('button')` to avoid ambiguity when multiple buttons are in the DOM.
+- testing `isDismissible`, `isKeyboardDismissDisabled`, or outside-click behavior. Use `userEvent.click(document.body)` or `user.keyboard('[Escape]')` directly and assert the expected state afterwards.
+- when a Dialog closes via an action button (not the explicit close/dismiss button) you should instead click that button manually, then use `dialogTester.getDialog()` to assert whether the dialog is still present.
+
+### Draggable handle components
+
+Components with draggable handles (Slider, ColorArea, ColorSlider, ColorWheel) need `getBoundingClientRect` mocked so move calculations work:
+
+```ts
+import {installMouseEvent} from '@react-aria/test-utils';
+installMouseEvent();
+
+beforeAll(() => {
+  jest.spyOn(window.HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(
+    () => ({top: 0, left: 0, width: 100, height: 10, bottom: 10, right: 100})
+  );
+});
+```
+
+### Available testers
+
+| Pattern name | Component | Key methods |
+|---|---|---|
+| `'CheckboxGroup'` | CheckboxGroup | `getCheckboxGroup()`, `getCheckboxes()`, `getSelectedCheckboxes()`, `toggleCheckbox({checkbox})` |
+| `'ComboBox'` | ComboBox | `getCombobox()`, `getListbox()`, `getOptions()`, `open()`, `toggleOptionSelection({option})` |
+| `'Dialog'` | Modal, Popover | `getTrigger()`, `getDialog()`, `open()`, `close()` — pass `overlayType: 'modal'` or `'popover'` to `createTester` |
+| `'GridList'` | GridList | `getGridlist()`, `getRows()`, `getSelectedRows()`, `toggleRowSelection({row})`, `triggerRowAction({row})` |
+| `'ListBox'` | ListBox | `getListbox()`, `getOptions()`, `getSelectedOptions()`, `toggleOptionSelection({option})`, `triggerOptionAction({option})` |
+| `'Menu'` | Menu | `getTrigger()`, `getMenu()`, `getOptions()`, `open()`, `toggleOptionSelection({option})`, `openSubmenu({submenuTrigger})`, `close()` |
+| `'RadioGroup'` | RadioGroup | `getRadioGroup()`, `getRadios()`, `getSelectedRadio()`, `triggerRadio({radio})` |
+| `'Select'` | Select | `getTrigger()`, `getListbox()`, `getOptions()`, `toggleOptionSelection({option})` |
+| `'Table'` | Table | `getTable()`, `getRows()`, `getFooterRows()`, `getColumns()`, `getSelectedRows()`, `toggleRowSelection({row})`, `toggleSort({column})`, `triggerRowAction({row})` |
+| `'Tabs'` | Tabs | `getTablist()`, `getTabs()`, `getTabpanels()`, `getSelectedTab()`, `triggerTab({tab})` |
+| `'Tree'` | Tree | `getTree()`, `getRows()`, `getSelectedRows()`, `toggleRowSelection({row})`, `toggleRowExpansion({row})`, `triggerRowAction({row})` |
+
+### Per-component reference
+
+- [CheckboxGroup](references/testing/CheckboxGroup/testing.md)
+- [ComboBox](references/testing/ComboBox/testing.md)
+- [GridList](references/testing/GridList/testing.md)
+- [ListBox](references/testing/ListBox/testing.md)
+- [Menu](references/testing/Menu/testing.md)
+- [Modal](references/testing/Modal/testing.md)
+- [Popover](references/testing/Popover/testing.md)
+- [RadioGroup](references/testing/RadioGroup/testing.md)
+- [Select](references/testing/Select/testing.md)
+- [Table](references/testing/Table/testing.md)
+- [Tabs](references/testing/Tabs/testing.md)
+- [Tree](references/testing/Tree/testing.md)
+
 ## Documentation Structure
 
 The `references/` directory contains detailed documentation organized as follows:
 
 ### Guides
-- [Collections](references/guides/collections.md): Many components display a collection of items, and provide functionality such as keyboard navigation, and selection. Learn how to load and render collections using React Aria's compositional API.
-- [Customization](references/guides/customization.md): React Aria is built using a flexible and composable API. Learn how to use contexts and slots to create custom component patterns, or mix and match with the lower level Hook-based API for even more control over rendering and behavior.
-- [Drag and Drop](references/guides/dnd.md): React Aria collection components support drag and drop with mouse and touch interactions, and full keyboard and screen reader accessibility. Learn how to provide drag data and handle drop events to move, insert, or reorder items.
-- [Forms](references/guides/forms.md): Learn how to integrate with HTML forms, validate and submit data, and use React Aria with form libraries.
-- [Framework setup](references/guides/frameworks.md): Learn how to integrate React Aria with your framework.
-- [Getting started](references/guides/getting-started.md): How to install React Aria and build your first component.
-- [Quality](references/guides/quality.md): React Aria is built around three core principles: , , and . Learn how to apply these tools to build high quality UIs that work for everyone, everywhere, and on every device.
-- [Selection](references/guides/selection.md): Many collection components support selecting items by clicking or tapping them, or by using the keyboard. Learn how to handle selection events, how to control selection programmatically, and the data structures used to represent a selection.
-- [Styling](references/guides/styling.md): React Aria does not include any styles by default. Learn how to build custom designs to fit your application or design system using any styling solution.
-- [Testing](references/guides/testing.md): Learn how to test components and applications built with React Aria using test utilities to simulate common user interactions.
-- [Working with AI](references/guides/ai.md): Learn how to use the React Aria MCP Server, Agent Skills, and more to help you build with AI.
+- [Collections](references/guides/collections.md)
+- [Customization](references/guides/customization.md)
+- [Drag and Drop](references/guides/dnd.md)
+- [Forms](references/guides/forms.md)
+- [Framework setup](references/guides/frameworks.md)
+- [Getting started](references/guides/getting-started.md)
+- [Quality](references/guides/quality.md)
+- [Selection](references/guides/selection.md)
+- [Styling](references/guides/styling.md)
+- [Testing](references/guides/testing.md)
+- [Working with AI](references/guides/ai.md)
 
 ### Components
-- [Autocomplete](references/components/Autocomplete.md): An autocomplete allows users to search or filter a list of suggestions.
-- [Breadcrumbs](references/components/Breadcrumbs.md): Breadcrumbs display a hierarchy of links to the current page or resource in an application.
-- [Button](references/components/Button.md): A button allows a user to perform an action, with mouse, touch, and keyboard interactions.
-- [Calendar](references/components/Calendar.md): A calendar displays one or more date grids and allows users to select a single date.
-- [Checkbox](references/components/Checkbox.md): A checkbox allows a user to select multiple items from a list of individual items, or
-- [CheckboxGroup](references/components/CheckboxGroup.md): A CheckboxGroup allows users to select one or more items from a list of choices.
-- [ColorArea](references/components/ColorArea.md): A color area allows users to adjust two channels of an RGB, HSL or HSB color value against a two-dimensional gradient background.
-- [ColorField](references/components/ColorField.md): A color field allows users to edit a hex color or individual color channel value.
-- [ColorPicker](references/components/ColorPicker.md): A ColorPicker synchronizes a color value between multiple React Aria color components.
-- [ColorSlider](references/components/ColorSlider.md): A color slider allows users to adjust an individual channel of a color value.
-- [ColorSwatch](references/components/ColorSwatch.md): A ColorSwatch displays a preview of a selected color.
-- [ColorSwatchPicker](references/components/ColorSwatchPicker.md): A ColorSwatchPicker displays a list of color swatches and allows a user to select one of them.
-- [ColorWheel](references/components/ColorWheel.md): A color wheel allows users to adjust the hue of an HSL or HSB color value on a circular track.
-- [ComboBox](references/components/ComboBox.md): A combo box combines a text input with a listbox, allowing users to filter a list of options to items matching a query.
-- [DateField](references/components/DateField.md): A date field allows users to enter and edit date and time values using a keyboard.
-- [DatePicker](references/components/DatePicker.md): A date picker combines a DateField and a Calendar popover to allow users to enter or select a date and time value.
-- [DateRangePicker](references/components/DateRangePicker.md): DateRangePickers combine two DateFields and a RangeCalendar popover to allow users
-- [Disclosure](references/components/Disclosure.md): A disclosure is a collapsible section of content. It is composed of a a header with a heading and trigger button, and a panel that contains the content.
-- [DisclosureGroup](references/components/DisclosureGroup.md): A DisclosureGroup is a grouping of related disclosures, sometimes called an accordion.
-- [DropZone](references/components/DropZone.md): A drop zone is an area into which one or multiple objects can be dragged and dropped.
-- [FileTrigger](references/components/FileTrigger.md): A FileTrigger allows a user to access the file system with any pressable React Aria or React Spectrum component, or custom components built with usePress.
-- [Form](references/components/Form.md): A form is a group of inputs that allows users to submit data to a server,
-- [GridList](references/components/GridList.md): A grid list displays a list of interactive items, with support for keyboard navigation,
-- [Group](references/components/Group.md): A group represents a set of related UI controls, and supports interactive states for styling.
-- [Link](references/components/Link.md): A link allows a user to navigate to another page or resource within a web page
-- [ListBox](references/components/ListBox.md): A listbox displays a list of options and allows a user to select one or more of them.
-- [mcp](references/components/mcp.md)
-- [Menu](references/components/Menu.md): A menu displays a list of actions or options that a user can choose.
-- [Meter](references/components/Meter.md): A meter represents a quantity within a known range, or a fractional value.
-- [Modal](references/components/Modal.md): A modal is an overlay element which blocks interaction with elements outside it.
-- [NumberField](references/components/NumberField.md): A number field allows a user to enter a number, and increment or decrement the value using stepper buttons.
-- [Popover](references/components/Popover.md): A popover is an overlay element positioned relative to a trigger.
-- [ProgressBar](references/components/ProgressBar.md): Progress bars show either determinate or indeterminate progress of an operation
-- [RadioGroup](references/components/RadioGroup.md): A radio group allows a user to select a single item from a list of mutually exclusive options.
-- [RangeCalendar](references/components/RangeCalendar.md): RangeCalendars display a grid of days in one or more months and allow users to select a contiguous range of dates.
-- [SearchField](references/components/SearchField.md): A search field allows a user to enter and clear a search query.
-- [Select](references/components/Select.md): A select displays a collapsible list of options and allows a user to select one of them.
-- [Separator](references/components/Separator.md): A separator is a visual divider between two groups of content, e.g. groups of menu items or sections of a page.
-- [Slider](references/components/Slider.md): A slider allows a user to select one or more values within a range.
-- [Switch](references/components/Switch.md): A switch allows a user to turn a setting on or off.
-- [Table](references/components/Table.md): A table displays data in rows and columns and enables a user to navigate its contents via directional navigation keys,
-- [Tabs](references/components/Tabs.md): Tabs organize content into multiple sections and allow users to navigate between them.
-- [TagGroup](references/components/TagGroup.md): A tag group is a focusable list of labels, categories, keywords, filters, or other items, with support for keyboard navigation, selection, and removal.
-- [TextField](references/components/TextField.md): A text field allows a user to enter a plain text value with a keyboard.
-- [TimeField](references/components/TimeField.md): TimeFields allow users to enter and edit time values using a keyboard.
-- [Toast](references/components/Toast.md)
-- [ToggleButton](references/components/ToggleButton.md): A toggle button allows a user to toggle a selection on or off, for example switching between two states or modes.
-- [ToggleButtonGroup](references/components/ToggleButtonGroup.md): A toggle button group allows a user to toggle multiple options, with single or multiple selection.
-- [Toolbar](references/components/Toolbar.md): A toolbar is a container for a set of interactive controls, such as buttons, dropdown menus, or checkboxes,
-- [Tooltip](references/components/Tooltip.md): A tooltip displays a description of an element on hover or focus.
-- [Tree](references/components/Tree.md): A tree provides users with a way to navigate nested hierarchical information, with support for keyboard navigation
-- [Virtualizer](references/components/Virtualizer.md): A Virtualizer renders a scrollable collection of data using customizable layouts.
+
+Component documentation is in `references/components/` — one Markdown file per component (e.g. `references/components/Button.md`). Read the file for a component when you need its API, props, examples, or accessibility notes.
+
+Available components: Autocomplete, Breadcrumbs, Button, Calendar, Checkbox, CheckboxGroup, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatch, ColorSwatchPicker, ColorWheel, ComboBox, DateField, DatePicker, DateRangePicker, Disclosure, DisclosureGroup, DropZone, FileTrigger, Form, GridList, Group, Link, ListBox, Menu, Meter, Modal, NumberField, Popover, ProgressBar, RadioGroup, RangeCalendar, SearchField, Select, Separator, Slider, Switch, Table, Tabs, TagGroup, TextField, TimeField, Toast, ToggleButton, ToggleButtonGroup, Toolbar, Tooltip, Tree, Virtualizer.
 
 ### Interactions
 - [FocusRing](references/interactions/FocusRing.md): A utility component that applies a CSS class when an element has keyboard focus.
@@ -94,8 +158,8 @@ The `references/` directory contains detailed documentation organized as follows
 - [useFocusWithin](references/interactions/useFocusWithin.md): Handles focus events for the target and its descendants.
 - [useHover](references/interactions/useHover.md): Handles pointer hover interactions for an element. Normalizes behavior
 - [useKeyboard](references/interactions/useKeyboard.md): Handles keyboard interactions for a focusable element.
-- [useLandmark](references/interactions/useLandmark.md): Provides landmark navigation in an application. Call this with a role and label to register a landmark navigable with F6.
-- [useLongPress](references/interactions/useLongPress.md): Handles long press interactions across mouse and touch devices. Supports a customizable time threshold,
+- [useLandmark](references/interactions/useLandmark.md): Provides landmark navigation in an application. Call this with a role and label to register a
+- [useLongPress](references/interactions/useLongPress.md): Handles long press interactions across mouse and touch devices. Supports a customizable time
 - [useMove](references/interactions/useMove.md): Handles move interactions across mouse, touch, and keyboard, including dragging with
 - [usePress](references/interactions/usePress.md): Handles press interactions across mouse, touch, keyboard, and screen readers.
 
@@ -104,15 +168,15 @@ The `references/` directory contains detailed documentation organized as follows
 - [mergeProps](references/utilities/mergeProps.md): Merges multiple props objects together. Event handlers are chained,
 - [PortalProvider](references/utilities/PortalProvider.md): Sets the portal container for all overlay elements rendered by its children.
 - [SSRProvider](references/utilities/SSRProvider.md): When using SSR with React Aria in React 16 or 17, applications must be wrapped in an SSRProvider.
-- [useCollator](references/utilities/useCollator.md): Provides localized string collation for the current locale. Automatically updates when the locale changes,
-- [useDateFormatter](references/utilities/useDateFormatter.md): Provides localized date formatting for the current locale. Automatically updates when the locale changes,
-- [useField](references/utilities/useField.md): Provides the accessibility implementation for input fields.
-- [useFilter](references/utilities/useFilter.md): Provides localized string search functionality that is useful for filtering or matching items
+- [useCollator](references/utilities/useCollator.md): Provides localized string collation for the current locale. Automatically updates when the locale
+- [useDateFormatter](references/utilities/useDateFormatter.md): Provides localized date formatting for the current locale. Automatically updates when the locale
+- [useField](references/utilities/useField.md): Provides the accessibility implementation for input fields. Fields accept user input, gain
+- [useFilter](references/utilities/useFilter.md): Provides localized string search functionality that is useful for filtering or matching items in
 - [useId](references/utilities/useId.md): If a default is not provided, generate an id.
 - [useIsSSR](references/utilities/useIsSSR.md): Returns whether the component is currently being server side rendered or
 - [useLabel](references/utilities/useLabel.md): Provides the accessibility implementation for labels and their associated elements.
 - [useLocale](references/utilities/useLocale.md): Returns the current locale and layout direction.
-- [useNumberFormatter](references/utilities/useNumberFormatter.md): Provides localized number formatting for the current locale. Automatically updates when the locale changes,
+- [useNumberFormatter](references/utilities/useNumberFormatter.md): Provides localized number formatting for the current locale. Automatically updates when the
 - [useObjectRef](references/utilities/useObjectRef.md): Offers an object ref for a given callback ref or an object ref. Especially
 - [VisuallyHidden](references/utilities/VisuallyHidden.md): VisuallyHidden hides its children visually, while keeping content visible
 
@@ -127,15 +191,3 @@ The `references/` directory contains detailed documentation organized as follows
 - [NumberParser](references/internationalized/number/NumberParser.md)
 - [Time](references/internationalized/date/Time.md)
 - [ZonedDateTime](references/internationalized/date/ZonedDateTime.md)
-
-### Testing
-- [Testing CheckboxGroup](references/testing/CheckboxGroup/testing.md)
-- [Testing ComboBox](references/testing/ComboBox/testing.md)
-- [Testing GridList](references/testing/GridList/testing.md)
-- [Testing ListBox](references/testing/ListBox/testing.md)
-- [Testing Menu](references/testing/Menu/testing.md)
-- [Testing RadioGroup](references/testing/RadioGroup/testing.md)
-- [Testing Select](references/testing/Select/testing.md)
-- [Testing Table](references/testing/Table/testing.md)
-- [Testing Tabs](references/testing/Tabs/testing.md)
-- [Testing Tree](references/testing/Tree/testing.md)

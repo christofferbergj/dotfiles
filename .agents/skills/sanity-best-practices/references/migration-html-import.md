@@ -68,14 +68,14 @@ Clean HTML before conversion:
 function cleanHtml(html) {
   const dom = new JSDOM(html)
   const doc = dom.window.document
-
+  
   // Remove layout elements
   doc.querySelectorAll('header, footer, nav, .sidebar').forEach(el => el.remove())
-
+  
   // Extract metadata before processing body
   const title = doc.querySelector('title')?.textContent
   const description = doc.querySelector('meta[name="description"]')?.content
-
+  
   return {
     body: doc.body.innerHTML,
     metadata: { title, description }
@@ -91,11 +91,11 @@ Don't just link external images—upload them:
 async function uploadImage(client, imageUrl) {
   const response = await fetch(imageUrl)
   const buffer = await response.arrayBuffer()
-
+  
   const asset = await client.assets.upload('image', Buffer.from(buffer), {
     filename: imageUrl.split('/').pop()
   })
-
+  
   return {
     _type: 'image',
     asset: { _type: 'reference', _ref: asset._id }
@@ -105,33 +105,36 @@ async function uploadImage(client, imageUrl) {
 
 ### Using in a Migration
 
-Wrap this in `defineMigration` for reproducible imports:
+Wrap this in `defineMigration` for controlled imports:
 
 ```typescript
 // migrations/import-wordpress-posts/index.ts
-import {defineMigration, createOrReplace} from 'sanity/migrate'
+import {defineMigration, create} from 'sanity/migrate'
 import {htmlToBlocks} from '@portabletext/block-tools'
 
 export default defineMigration({
   title: 'Import WordPress posts',
   async *migrate(documents, context) {
     const posts = await fetchWordPressPosts() // Your import source
-
+    
     for (const post of posts) {
       const blocks = htmlToBlocks(post.content, blockContentType, {
         parseHtml: html => new JSDOM(html).window.document,
       })
-
-      yield createOrReplace({
-        _id: `post-${post.slug}`,
+      
+      yield create({
         _type: 'post',
         title: post.title,
+        slug: {_type: 'slug', current: post.slug},
+        legacyId: String(post.id),
         body: blocks,
       })
     }
   }
 })
 ```
+
+Let Sanity generate document IDs for ordinary imported content. Add schema fields for legacy identifiers or slugs, then use GROQ lookups against those fields when you need to rerun an import, patch existing documents, or create references between imported records. Set `_id` directly only for singleton documents.
 
 Run with: `sanity migration run import-wordpress-posts --no-dry-run`
 

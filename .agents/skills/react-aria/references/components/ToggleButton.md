@@ -1,6 +1,7 @@
 # ToggleButton
 
-A toggle button allows a user to toggle a selection on or off, for example switching between two states or modes.
+A toggle button allows a user to toggle a selection on or off, for example switching between two
+states or modes.
 
 ## Vanilla CSS example
 
@@ -8,21 +9,28 @@ A toggle button allows a user to toggle a selection on or off, for example switc
 
 ```tsx
 'use client';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { ToggleButton as RACToggleButton, type ToggleButtonProps as RACToggleButtonProps } from 'react-aria-components/ToggleButton';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {
+  ToggleButton as RACToggleButton,
+  type ToggleButtonProps as RACToggleButtonProps
+} from 'react-aria-components/ToggleButton';
 import './ToggleButton.css';
 
 interface ToggleButtonProps extends RACToggleButtonProps {
   /**
    * The visual style of the button (Vanilla CSS implementation specific).
+   *
    * @default 'primary'
    */
-  variant?: 'primary' | 'secondary' | 'quiet'
+  variant?: 'primary' | 'secondary' | 'quiet';
 }
 
 export function ToggleButton(props: ToggleButtonProps) {
   return (
-    <RACToggleButton {...props} className="react-aria-ToggleButton button-base" data-variant={props.variant || 'primary'}>
+    <RACToggleButton
+      {...props}
+      className="react-aria-ToggleButton button-base"
+      data-variant={props.variant || 'primary'}>
       {composeRenderProps(props.children, children => (
         <span>{children}</span>
       ))}
@@ -35,8 +43,8 @@ export function ToggleButton(props: ToggleButtonProps) {
 ### ToggleButton.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
 .react-aria-ToggleButton {
   border: none;
@@ -88,17 +96,21 @@ export function ToggleButton(props: ToggleButtonProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { ToggleButton as RACToggleButton, type ToggleButtonProps } from 'react-aria-components/ToggleButton';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { tv } from 'tailwind-variants';
-import { focusRing } from './utils';
+import {
+  ToggleButton as RACToggleButton,
+  type ToggleButtonProps
+} from 'react-aria-components/ToggleButton';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {tv} from 'tailwind-variants';
+import {focusRing} from './utils';
 
 let styles = tv({
   extend: focusRing,
   base: 'relative inline-flex items-center justify-center gap-2 border border-black/10 dark:border-white/10 h-9 box-border px-3.5 [&:has(>svg:only-child)]:px-0 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:aspect-square font-sans text-sm text-center transition rounded-lg cursor-default forced-color-adjust-none [-webkit-tap-highlight-color:transparent]',
   variants: {
     isSelected: {
-      false: 'bg-neutral-50 hover:bg-neutral-100 pressed:bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:pressed:bg-neutral-500 dark:text-neutral-100 forced-colors:bg-[ButtonFace]! forced-colors:text-[ButtonText]!',
+      false:
+        'bg-neutral-50 hover:bg-neutral-100 pressed:bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:pressed:bg-neutral-500 dark:text-neutral-100 forced-colors:bg-[ButtonFace]! forced-colors:text-[ButtonText]!',
       true: 'bg-neutral-700 hover:bg-neutral-800 pressed:bg-neutral-900 text-white dark:bg-neutral-300 dark:hover:bg-neutral-200 dark:pressed:bg-neutral-100 dark:text-black forced-colors:bg-[Highlight]! forced-colors:text-[HighlightText]!'
     },
     isDisabled: {
@@ -111,10 +123,10 @@ export function ToggleButton(props: ToggleButtonProps) {
   return (
     <RACToggleButton
       {...props}
-      className={composeRenderProps(
-        props.className,
-        (className, renderProps) => styles({...renderProps, className})
-      )} />
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        styles({...renderProps, className})
+      )}
+    />
   );
 }
 
@@ -158,7 +170,7 @@ function Example(props) {
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-disabled` | `boolean | "true" | "false" | undefined` | — | Indicates whether the element is disabled to users of assistive technology. |
 | `aria-expanded` | `boolean | "true" | "false" | undefined` | — | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
-| `aria-haspopup` | `boolean | "true" | "false" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-haspopup` | `boolean | "true" | "false" | "dialog" | "grid" | "listbox" | "menu" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `aria-pressed` | `boolean | "true" | "false" | "mixed" | undefined` | — | Indicates the current "pressed" state of toggle buttons. |
@@ -184,7 +196,7 @@ function Example(props) {
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
 | `onChange` | `((isSelected: boolean) => void) | undefined` | — | Handler that is called when the element's selection state changes. |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
 | `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -253,7 +265,7 @@ function Example(props) {
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `preventFocusOnPress` | `boolean | undefined` | — | Whether to prevent focus from moving to the button when pressing it. Caution, this can make the button inaccessible and should only be used when alternative keyboard interaction is provided, such as ComboBox's MenuTrigger or a NumberField's increment/decrement control. |
-| `render` | `DOMRenderFunction<"button", ToggleButtonRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"button", ToggleButtonRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ToggleButtonRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: ToggleButtonRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

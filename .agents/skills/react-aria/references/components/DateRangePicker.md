@@ -14,7 +14,7 @@ import {
   type DateRangePickerProps as AriaDateRangePickerProps,
   type DateValue,
   Group,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/DateRangePicker';
 import {DateInput, DateSegment} from './DateField';
 import {Description, FieldButton} from './Form';
@@ -24,30 +24,30 @@ import {RangeCalendar} from './RangeCalendar';
 import {ChevronDown} from 'lucide-react';
 import './DateRangePicker.css';
 
-export interface DateRangePickerProps<T extends DateValue>
-  extends AriaDateRangePickerProps<T> {
+export interface DateRangePickerProps<T extends DateValue> extends AriaDateRangePickerProps<T> {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
-export function DateRangePicker<T extends DateValue>(
-  { label, description, errorMessage, ...props }: DateRangePickerProps<T>
-) {
+export function DateRangePicker<T extends DateValue>({
+  label,
+  description,
+  errorMessage,
+  ...props
+}: DateRangePickerProps<T>) {
   return (
     <AriaDateRangePicker {...props}>
       <Label>{label}</Label>
       <Group className="react-aria-Group inset">
         <div className="date-fields">
-          <DateInput slot="start">
-            {(segment) => <DateSegment segment={segment} />}
-          </DateInput>
+          <DateInput slot="start">{segment => <DateSegment segment={segment} />}</DateInput>
           <span aria-hidden="true">–</span>
-          <DateInput slot="end">
-            {(segment) => <DateSegment segment={segment} />}
-          </DateInput>
+          <DateInput slot="end">{segment => <DateSegment segment={segment} />}</DateInput>
         </div>
-        <FieldButton><ChevronDown /></FieldButton>
+        <FieldButton>
+          <ChevronDown />
+        </FieldButton>
       </Group>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
@@ -63,8 +63,8 @@ export function DateRangePicker<T extends DateValue>(
 ### DateRangePicker.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
 .react-aria-DateRangePicker {
   color: var(--text-color);
@@ -111,11 +111,11 @@ export function DateRangePicker<T extends DateValue>(
     margin-left: auto;
   }
 
-  [slot=start] ~ span {
+  [slot='start'] ~ span {
     padding: 0 4px;
   }
 
-  [slot=end] {
+  [slot='end'] {
     margin-right: 1.75rem;
     flex: 1;
   }
@@ -143,38 +143,49 @@ export function DateRangePicker<T extends DateValue>(
 
 ```tsx
 'use client';
-import { CalendarIcon } from 'lucide-react';
+import {CalendarIcon} from 'lucide-react';
 import React from 'react';
 import {
   DateRangePicker as AriaDateRangePicker,
   type DateRangePickerProps as AriaDateRangePickerProps,
   type DateValue,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/DateRangePicker';
-import { DateInput } from './DateField';
-import { Description, FieldError, FieldGroup, Label } from './Field';
-import { Popover } from './Popover';
-import { RangeCalendar } from './RangeCalendar';
-import { composeTailwindRenderProps } from './utils';
-import { FieldButton } from './FieldButton';
+import {DateInput} from './DateField';
+import {Description, FieldError, FieldGroup, Label} from './Field';
+import {Popover} from './Popover';
+import {RangeCalendar} from './RangeCalendar';
+import {composeTailwindRenderProps} from './utils';
+import {FieldButton} from './FieldButton';
 
-export interface DateRangePickerProps<T extends DateValue>
-  extends AriaDateRangePickerProps<T> {
+export interface DateRangePickerProps<T extends DateValue> extends AriaDateRangePickerProps<T> {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
-export function DateRangePicker<T extends DateValue>(
-  { label, description, errorMessage, ...props }: DateRangePickerProps<T>
-) {
+export function DateRangePicker<T extends DateValue>({
+  label,
+  description,
+  errorMessage,
+  ...props
+}: DateRangePickerProps<T>) {
   return (
-    <AriaDateRangePicker {...props} className={composeTailwindRenderProps(props.className, 'group flex flex-col gap-1 font-sans max-w-full')}>
+    <AriaDateRangePicker
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'group flex flex-col gap-1 font-sans max-w-full'
+      )}>
       {label && <Label>{label}</Label>}
       <FieldGroup className="min-w-[208px] w-auto cursor-text disabled:cursor-default">
         <div className="flex-1 w-fit flex items-center overflow-x-auto overflow-y-clip [scrollbar-width:none]">
           <DateInput slot="start" className="ps-3 pe-2 text-sm" />
-          <span aria-hidden="true" className="text-neutral-800 dark:text-neutral-200 forced-colors:text-[ButtonText] group-disabled:text-neutral-200 dark:group-disabled:text-neutral-600 forced-colors:group-disabled:text-[GrayText]">–</span>
+          <span
+            aria-hidden="true"
+            className="text-neutral-800 dark:text-neutral-200 forced-colors:text-[ButtonText] group-disabled:text-neutral-200 dark:group-disabled:text-neutral-600 forced-colors:group-disabled:text-[GrayText]">
+            –
+          </span>
           <DateInput slot="end" className="flex-1 ps-2 pe-3 text-sm" />
         </div>
         <FieldButton className="w-6 mr-1 outline-offset-0">
@@ -337,14 +348,14 @@ function Example(props) {
 | `defaultValue` | `RangeValue<T> | null | undefined` | — | The default value (uncontrolled). |
 | `description` | `ReactNode` | — | A description for the field. Provides a hint such as specific requirements for what to choose. |
 | `endName` | `string | undefined` | — | The name of the end date input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). |
-| `errorMessage` | `ReactNode | ((v: ValidationResult) => ReactNode)` | — | An error message for the field. |
-| `firstDayOfWeek` | `"sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | undefined` | — | The day that starts the week. |
+| `errorMessage` | `((v: ValidationResult) => ReactNode) | ReactNode` | — | An error message for the field. |
+| `firstDayOfWeek` | `"fri" | "mon" | "sat" | "sun" | "thu" | "tue" | "wed" | undefined` | — | The day that starts the week. |
 | `form` | `string | undefined` | — | The `<form>` element to associate the input with. The value of this attribute must be the id of a `<form>` in the same document. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#form). |
 | `granularity` | `Granularity | undefined` | — | Determines the smallest unit that is displayed in the date picker. By default, this is `"day"` for dates, and `"minute"` for times. |
 | `hideTimeZone` | `boolean | undefined` | false | Whether to hide the time zone abbreviation. |
 | `hourCycle` | `12 | 24 | undefined` | — | Whether to display the time in 12 or 24 hour format. By default, this is determined by the user's locale. |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
-| `isDateUnavailable` | `((date: DateValue) => boolean) | undefined` | — | Callback that is called for each date of the calendar. If it returns true, then the date is unavailable. |
+| `isDateUnavailable` | `((date: DateValue, anchorDate: CalendarDate | null) => boolean) | undefined` | — | Callback that is called for each date of the calendar. If it returns true, then the date is unavailable. |
 | `isDisabled` | `boolean | undefined` | — | Whether the input is disabled. |
 | `isInvalid` | `boolean | undefined` | — | Whether the input value is invalid. |
 | `isOpen` | `boolean | undefined` | — | Whether the overlay is open by default (controlled). |
@@ -369,12 +380,12 @@ function Example(props) {
 | `shouldCloseOnSelect` | `boolean | (() => boolean) | undefined` | true | Determines whether the date picker popover should close automatically when a date is selected. |
 | `shouldFlip` | `boolean | undefined` | true | Whether the element should flip its orientation (e.g. top to bottom or left to right) when there is insufficient room for it to render completely. |
 | `shouldForceLeadingZeros` | `boolean | undefined` | — | Whether to always show leading zeros in the month, day, and hour fields. By default, this is determined by the user's locale. |
-| `size` | `"S" | "M" | "L" | "XL" | undefined` | 'M' | The size of the DateField. |
+| `size` | `"L" | "M" | "S" | "XL" | undefined` | 'M' | The size of the DateField. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `startName` | `string | undefined` | — | The name of the start date input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). |
 | `styles` | `StylesProp | undefined` | — | Spectrum-defined styles, returned by the `style()` macro. |
 | `UNSAFE_className` | `UnsafeClassName | undefined` | — | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 | `UNSAFE_style` | `CSSProperties | undefined` | — | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
-| `validate` | `((value: RangeValue<MappedDateValue<T>>) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
-| `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
+| `validate` | `((value: RangeValue<MappedDateValue<T>>) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
 | `value` | `RangeValue<T> | null | undefined` | — | The current value (controlled). |

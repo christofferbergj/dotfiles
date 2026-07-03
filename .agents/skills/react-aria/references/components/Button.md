@@ -8,28 +8,33 @@ A button allows a user to perform an action, with mouse, touch, and keyboard int
 
 ```tsx
 'use client';
-import { Button as RACButton, type ButtonProps as RACButtonProps } from 'react-aria-components/Button';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import {
+  Button as RACButton,
+  type ButtonProps as RACButtonProps
+} from 'react-aria-components/Button';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
 import {ProgressCircle} from './ProgressCircle';
 import './Button.css';
 
 interface ButtonProps extends RACButtonProps {
   /**
    * The visual style of the button (Vanilla CSS implementation specific).
+   *
    * @default 'primary'
    */
-  variant?: 'primary' | 'secondary' | 'quiet'
+  variant?: 'primary' | 'secondary' | 'quiet';
 }
 
 export function Button(props: ButtonProps) {
   return (
-    <RACButton {...props} className="react-aria-Button button-base" data-variant={props.variant || 'primary'}>
+    <RACButton
+      {...props}
+      className="react-aria-Button button-base"
+      data-variant={props.variant || 'primary'}>
       {composeRenderProps(props.children, (children, {isPending}) => (
         <>
           {!isPending && children}
-          {isPending && (
-            <ProgressCircle aria-label="Saving..." isIndeterminate />
-          )}
+          {isPending && <ProgressCircle aria-label="Saving..." isIndeterminate />}
         </>
       ))}
     </RACButton>
@@ -41,8 +46,8 @@ export function Button(props: ButtonProps) {
 ### Button.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
 .react-aria-Button {
   border: none;
@@ -101,14 +106,17 @@ export function Button(props: ButtonProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { Button as RACButton, type ButtonProps as RACButtonProps } from 'react-aria-components/Button';
-import { tv } from 'tailwind-variants';
-import { focusRing } from './utils';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {
+  Button as RACButton,
+  type ButtonProps as RACButtonProps
+} from 'react-aria-components/Button';
+import {tv} from 'tailwind-variants';
+import {focusRing} from './utils';
 
 export interface ButtonProps extends RACButtonProps {
   /** @default 'primary' */
-  variant?: 'primary' | 'secondary' | 'destructive' | 'quiet'
+  variant?: 'primary' | 'secondary' | 'destructive' | 'quiet';
 }
 
 let button = tv({
@@ -117,9 +125,11 @@ let button = tv({
   variants: {
     variant: {
       primary: 'bg-blue-600 hover:bg-blue-700 pressed:bg-blue-800 text-white',
-      secondary: 'border-black/10 bg-neutral-50 hover:bg-neutral-100 pressed:bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:pressed:bg-neutral-500 dark:text-neutral-100',
+      secondary:
+        'border-black/10 bg-neutral-50 hover:bg-neutral-100 pressed:bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:pressed:bg-neutral-500 dark:text-neutral-100',
       destructive: 'bg-red-700 hover:bg-red-800 pressed:bg-red-900 text-white',
-      quiet: 'border-0 bg-transparent hover:bg-neutral-200 pressed:bg-neutral-300 text-neutral-800 dark:hover:bg-neutral-700 dark:pressed:bg-neutral-600 dark:text-neutral-100'
+      quiet:
+        'border-0 bg-transparent hover:bg-neutral-200 pressed:bg-neutral-300 text-neutral-800 dark:hover:bg-neutral-700 dark:pressed:bg-neutral-600 dark:text-neutral-100'
     },
     isDisabled: {
       true: 'border-transparent dark:border-transparent bg-neutral-100 dark:bg-neutral-800 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]'
@@ -144,19 +154,34 @@ export function Button(props: ButtonProps) {
   return (
     <RACButton
       {...props}
-      className={composeRenderProps(
-        props.className,
-        (className, renderProps) => button({...renderProps, variant: props.variant, className})
-      )}
-    >
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        button({...renderProps, variant: props.variant, className})
+      )}>
       {composeRenderProps(props.children, (children, {isPending}) => (
         <>
           {children}
           {isPending && (
             <span aria-hidden className="flex absolute inset-0 justify-center items-center">
-              <svg className="w-4 h-4 text-white animate-spin" viewBox="0 0 24 24" stroke={props.variant === 'secondary' || props.variant === 'quiet' ? 'light-dark(black, white)' : 'white'}>
+              <svg
+                className="w-4 h-4 text-white animate-spin"
+                viewBox="0 0 24 24"
+                stroke={
+                  props.variant === 'secondary' || props.variant === 'quiet'
+                    ? 'light-dark(black, white)'
+                    : 'white'
+                }>
                 <circle cx="12" cy="12" r="10" strokeWidth="4" fill="none" className="opacity-25" />
-                <circle cx="12" cy="12" r="10" strokeWidth="4" strokeLinecap="round" fill="none" pathLength="100" strokeDasharray="60 140" strokeDashoffset="0" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  fill="none"
+                  pathLength="100"
+                  strokeDasharray="60 140"
+                  strokeDashoffset="0"
+                />
               </svg>
             </span>
           )}
@@ -252,12 +277,12 @@ import {Link} from 'react-aria-components/Link';
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `aria-controls` | `string | undefined` | — | Identifies the element (or elements) whose contents or presence are controlled by the current element. |
-| `aria-current` | `boolean | "true" | "false" | "page" | "step" | "location" | "date" | "time" | undefined` | — | Indicates whether this element represents the current item within a container or set of related elements. |
+| `aria-current` | `boolean | "true" | "false" | "date" | "location" | "page" | "step" | "time" | undefined` | — | Indicates whether this element represents the current item within a container or set of related elements. |
 | `aria-describedby` | `string | undefined` | — | Identifies the element (or elements) that describes the object. |
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-disabled` | `boolean | "true" | "false" | undefined` | — | Indicates whether the element is disabled to users of assistive technology. |
 | `aria-expanded` | `boolean | "true" | "false" | undefined` | — | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
-| `aria-haspopup` | `boolean | "true" | "false" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-haspopup` | `boolean | "true" | "false" | "dialog" | "grid" | "listbox" | "menu" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `aria-pressed` | `boolean | "true" | "false" | "mixed" | undefined` | — | Indicates the current "pressed" state of toggle buttons. |
@@ -288,7 +313,7 @@ import {Link} from 'react-aria-components/Link';
 | `onAuxClick` | `React.MouseEventHandler<HTMLButtonElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLButtonElement> | undefined` | — |  |
 | `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
 | `onClickCapture` | `React.MouseEventHandler<HTMLButtonElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLButtonElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLButtonElement> | undefined` | — |  |
@@ -357,11 +382,11 @@ import {Link} from 'react-aria-components/Link';
 | `onWheel` | `React.WheelEventHandler<HTMLButtonElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLButtonElement> | undefined` | — |  |
 | `preventFocusOnPress` | `boolean | undefined` | — | Whether to prevent focus from moving to the button when pressing it. Caution, this can make the button inaccessible and should only be used when alternative keyboard interaction is provided, such as ComboBox's MenuTrigger or a NumberField's increment/decrement control. |
-| `render` | `DOMRenderFunction<"button", ButtonRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"button", ButtonRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ButtonRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
-| `type` | `"button" | "submit" | "reset" | undefined` | 'button' | The behavior of the button when used in an HTML form. |
+| `style` | `(((values: ButtonRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+| `type` | `"button" | "reset" | "submit" | undefined` | 'button' | The behavior of the button when used in an HTML form. |
 | `value` | `string | undefined` | — | The value associated with the button's name when it's submitted with the form data. |
 
 ## Related Types
@@ -372,13 +397,13 @@ import {Link} from 'react-aria-components/Link';
 
 | Name | Type | Description |
 |------|------|-------------|
-| `type` \* | `"pressstart" | "pressend" | "pressup" | "press"` | The type of press event being fired. |
-| `pointerType` \* | `PointerType` | The pointer type that triggered the press event. |
-| `target` \* | `Element` | The target element of the press event. |
-| `shiftKey` \* | `boolean` | Whether the shift keyboard modifier was held during the press event. |
+| `altKey` \* | `boolean` | Whether the alt keyboard modifier was held during the press event. |
 | `ctrlKey` \* | `boolean` | Whether the ctrl keyboard modifier was held during the press event. |
 | `metaKey` \* | `boolean` | Whether the meta keyboard modifier was held during the press event. |
-| `altKey` \* | `boolean` | Whether the alt keyboard modifier was held during the press event. |
+| `pointerType` \* | `PointerType` | The pointer type that triggered the press event. |
+| `shiftKey` \* | `boolean` | Whether the shift keyboard modifier was held during the press event. |
+| `target` \* | `Element` | The target element of the press event. |
+| `type` \* | `"press" | "pressend" | "pressstart" | "pressup"` | The type of press event being fired. |
 | `x` \* | `number` | X position relative to the target. |
 | `y` \* | `number` | Y position relative to the target. |
 | `key` | `string | undefined` | The key that triggered the press event, if it was triggered by a keyboard interaction. This is useful for differentiating between Space and Enter key presses. |

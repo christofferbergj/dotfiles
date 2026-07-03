@@ -9,7 +9,10 @@ over time.
 
 ```tsx
 'use client';
-import { ProgressBar as AriaProgressBar, type ProgressBarProps as AriaProgressBarProps } from 'react-aria-components/ProgressBar';
+import {
+  ProgressBar as AriaProgressBar,
+  type ProgressBarProps as AriaProgressBarProps
+} from 'react-aria-components/ProgressBar';
 import {Label} from './Form';
 import './ProgressBar.css';
 
@@ -17,21 +20,22 @@ export interface ProgressBarProps extends AriaProgressBarProps {
   label?: string;
 }
 
-export function ProgressBar({ label, ...props }: ProgressBarProps) {
+export function ProgressBar({label, ...props}: ProgressBarProps) {
   return (
-    (
-      <AriaProgressBar {...props}>
-        {({ percentage, valueText, isIndeterminate }) => (
-          <>
-            <Label>{label}</Label>
-            <span className="value">{valueText}</span>
-            <div className="track inset">
-              <div className="fill" style={{ '--percent': (isIndeterminate ? 100 : percentage) + '%' } as any} />
-            </div>
-          </>
-        )}
-      </AriaProgressBar>
-    )
+    <AriaProgressBar {...props}>
+      {({percentage, valueText, isIndeterminate}) => (
+        <>
+          <Label>{label}</Label>
+          <span className="value">{valueText}</span>
+          <div className="track inset">
+            <div
+              className="fill"
+              style={{'--percent': (isIndeterminate ? 100 : percentage) + '%'} as any}
+            />
+          </div>
+        </>
+      )}
+    </AriaProgressBar>
   );
 }
 
@@ -40,13 +44,14 @@ export function ProgressBar({ label, ...props }: ProgressBarProps) {
 ### ProgressBar.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
 .react-aria-ProgressBar {
   display: grid;
-  grid-template-areas: "label value"
-                       "bar bar";
+  grid-template-areas:
+    'label value'
+    'bar bar';
   grid-template-columns: 1fr auto;
   width: 250px;
   color: var(--text-color);
@@ -79,17 +84,17 @@ export function ProgressBar({ label, ...props }: ProgressBarProps) {
     border-radius: inherit;
     animation: progress-fill 1s infinite linear;
     box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.3), /* top specular highlight */
-      inset 0 2px 2px rgb(255 255 255 / 0.2), /* 3d effect */
-      0 1px 0 lch(from var(--tint) 42% c h), /* bottom shadow */
-      0 0 0 1px var(--tint-900); /* border */
+      inset 0 1px 0 rgb(255 255 255 / 0.3),
+      /* top specular highlight */ inset 0 2px 2px rgb(255 255 255 / 0.2),
+      /* 3d effect */ 0 1px 0 lch(from var(--tint) 42% c h),
+      /* bottom shadow */ 0 0 0 1px var(--tint-900); /* border */
 
     @media (prefers-color-scheme: dark) {
       box-shadow:
-        0 -1px 0 rgb(255 255 255 / 0.6), /* top specular highlight */
-        inset 0 2px 2px rgb(255 255 255 / 0.2), /* 3d effect */
-        0 1px 0 lch(from var(--tint) 42% c h), /* bottom shadow */
-        0 0 0 1px var(--tint-900); /* border */
+        0 -1px 0 rgb(255 255 255 / 0.6),
+        /* top specular highlight */ inset 0 2px 2px rgb(255 255 255 / 0.2),
+        /* 3d effect */ 0 1px 0 lch(from var(--tint) 42% c h),
+        /* bottom shadow */ 0 0 0 1px var(--tint-900); /* border */
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -134,6 +139,7 @@ export function ProgressBar({ label, ...props }: ProgressBarProps) {
     background-position-x: -40px;
   }
 }
+
 ```
 
 ## Tailwind example
@@ -143,25 +149,36 @@ export function ProgressBar({ label, ...props }: ProgressBarProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { ProgressBar as AriaProgressBar, type ProgressBarProps as AriaProgressBarProps } from 'react-aria-components/ProgressBar';
-import { Label } from './Field';
-import { composeTailwindRenderProps } from './utils';
+import {
+  ProgressBar as AriaProgressBar,
+  type ProgressBarProps as AriaProgressBarProps
+} from 'react-aria-components/ProgressBar';
+import {Label} from './Field';
+import {composeTailwindRenderProps} from './utils';
 
 export interface ProgressBarProps extends AriaProgressBarProps {
   label?: string;
 }
 
-export function ProgressBar({ label, ...props }: ProgressBarProps) {
+export function ProgressBar({label, ...props}: ProgressBarProps) {
   return (
-    <AriaProgressBar {...props} className={composeTailwindRenderProps(props.className, 'flex flex-col gap-2 font-sans w-64 max-w-full')}>
-      {({ percentage, valueText, isIndeterminate }) => (
+    <AriaProgressBar
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'flex flex-col gap-2 font-sans w-64 max-w-full'
+      )}>
+      {({percentage, valueText, isIndeterminate}) => (
         <>
           <div className="flex justify-between gap-2">
             <Label>{label}</Label>
             <span className="text-sm text-neutral-600 dark:text-neutral-400">{valueText}</span>
           </div>
           <div className="max-w-full h-2 rounded-full bg-neutral-300 dark:bg-neutral-700 outline outline-1 -outline-offset-1 outline-transparent relative overflow-hidden">
-            <div className={`absolute top-0 h-full rounded-full bg-blue-500 forced-colors:bg-[Highlight] ${isIndeterminate ? 'left-full animate-in duration-1000 slide-in-from-left-[20rem] repeat-infinite ease-out' : 'left-0'}`} style={{ width: (isIndeterminate ? 40 : percentage) + '%' }} />
+            <div
+              className={`absolute top-0 h-full rounded-full bg-blue-500 forced-colors:bg-[Highlight] ${isIndeterminate ? 'left-full animate-in duration-1000 slide-in-from-left-[20rem] repeat-infinite ease-out' : 'left-0'}`}
+              style={{width: (isIndeterminate ? 40 : percentage) + '%'}}
+            />
           </div>
         </>
       )}
@@ -210,7 +227,7 @@ import {VanillaProgressCircle} from '@react-spectrum/s2';
 | `children` | `ChildrenOrFunction<ProgressBarRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<ProgressBarRenderProps> | undefined` | 'react-aria-ProgressBar' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
-| `formatOptions` | `Intl.NumberFormatOptions | undefined` | \{style: 'percent'} | The display format of the value label. |
+| `formatOptions` | `Intl.NumberFormatOptions | undefined` | \{ style: 'percent' } | The display format of the value label. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
@@ -282,9 +299,9 @@ import {VanillaProgressCircle} from '@react-spectrum/s2';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", ProgressBarRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", ProgressBarRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ProgressBarRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: ProgressBarRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `number | undefined` | 0 | The current value (controlled). |
 | `valueLabel` | `React.ReactNode` | — | The content to display as the value's label (e.g. 1 of 4). |

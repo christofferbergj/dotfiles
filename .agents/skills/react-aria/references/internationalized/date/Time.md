@@ -193,9 +193,9 @@ Represents an amount of time, for use whe performing arithmetic.
 | Name | Type | Description |
 |------|------|-------------|
 | `hours` | `number | undefined` | The number of hours to add or subtract. |
+| `milliseconds` | `number | undefined` | The number of milliseconds to add or subtract. |
 | `minutes` | `number | undefined` | The number of minutes to add or subtract. |
 | `seconds` | `number | undefined` | The number of seconds to add or subtract. |
-| `milliseconds` | `number | undefined` | The number of milliseconds to add or subtract. |
 
 ### parseDuration
 
@@ -205,34 +205,35 @@ Parses an ISO 8601 duration string (e.g. "P3Y6M6W4DT12H30M5S").
 
 ### DateTimeDuration
 
-Represents an amount of time with both date and time components, for use when performing arithmetic.
+Represents an amount of time with both date and time components, for use when performing
+arithmetic.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `years` | `number | undefined` | The number of years to add or subtract. |
-| `months` | `number | undefined` | The number of months to add or subtract. |
-| `weeks` | `number | undefined` | The number of weeks to add or subtract. |
 | `days` | `number | undefined` | The number of days to add or subtract. |
 | `hours` | `number | undefined` | The number of hours to add or subtract. |
-| `minutes` | `number | undefined` | The number of minutes to add or subtract. |
-| `seconds` | `number | undefined` | The number of seconds to add or subtract. |
 | `milliseconds` | `number | undefined` | The number of milliseconds to add or subtract. |
+| `minutes` | `number | undefined` | The number of minutes to add or subtract. |
+| `months` | `number | undefined` | The number of months to add or subtract. |
+| `seconds` | `number | undefined` | The number of seconds to add or subtract. |
+| `weeks` | `number | undefined` | The number of weeks to add or subtract. |
+| `years` | `number | undefined` | The number of years to add or subtract. |
 
 ### toCalendarDateTime
 
 `toCalendarDateTime(date: CalendarDate | CalendarDateTime | ZonedDateTime, time?: AnyTime): CalendarDateTime`
 
-Converts a date value to a \`CalendarDateTime\`. An optional \`Time\` value can be passed to set the time
-of the resulting value, otherwise it will default to midnight.
+Converts a date value to a \`CalendarDateTime\`. An optional \`Time\` value can be passed to set the
+time of the resulting value, otherwise it will default to midnight.
 
 ### Properties
 
 | Name | Type | Description |
 |------|------|-------------|
 | `hour` \* | `number` | — |
+| `millisecond` \* | `number` | — |
 | `minute` \* | `number` | — |
 | `second` \* | `number` | — |
-| `millisecond` \* | `number` | — |
 
 ### Methods
 
@@ -250,5 +251,5 @@ A ZonedDateTime represents a date and time in a specific time zone and calendar 
 
 `toZoned(date: CalendarDate | CalendarDateTime | ZonedDateTime, timeZone: string, disambiguation?: Disambiguation): ZonedDateTime`
 
-Converts a date value to a \`ZonedDateTime\` in the provided time zone. The \`disambiguation\` option can be set
-to control how values that fall on daylight saving time changes are interpreted.
+Converts a date value to a \`ZonedDateTime\` in the provided time zone. The \`disambiguation\` option
+can be set to control how values that fall on daylight saving time changes are interpreted.

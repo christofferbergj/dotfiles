@@ -9,8 +9,11 @@ It simplifies building color pickers with customizable layouts via composition.
 
 ```tsx
 'use client';
-import { Button } from 'react-aria-components/Button';
-import { ColorPicker as AriaColorPicker, type ColorPickerProps as AriaColorPickerProps } from 'react-aria-components/ColorPicker';
+import {Button} from 'react-aria-components/Button';
+import {
+  ColorPicker as AriaColorPicker,
+  type ColorPickerProps as AriaColorPickerProps
+} from 'react-aria-components/ColorPicker';
 import {DialogTrigger} from './Dialog';
 import {ColorSwatch} from './ColorSwatch';
 import {ColorSlider} from './ColorSlider';
@@ -24,31 +27,25 @@ export interface ColorPickerProps extends Omit<AriaColorPickerProps, 'children'>
   children?: React.ReactNode;
 }
 
-export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
+export function ColorPicker({label, children, ...props}: ColorPickerProps) {
   return (
-    (
-      <AriaColorPicker {...props}>
-        <DialogTrigger>
-          <Button className="color-picker">
-            <ColorSwatch />
-            <span>{label}</span>
-          </Button>
-          <Popover hideArrow placement="bottom start" className="color-picker-dialog">
-            {children || (
-              <>
-                <ColorArea
-                  colorSpace="hsb"
-                  xChannel="saturation"
-                  yChannel="brightness"
-                />
-                <ColorSlider colorSpace="hsb" channel="hue" />
-                <ColorField label="Hex" />
-              </>
-            )}
-          </Popover>
-        </DialogTrigger>
-      </AriaColorPicker>
-    )
+    <AriaColorPicker {...props}>
+      <DialogTrigger>
+        <Button className="color-picker">
+          <ColorSwatch />
+          <span>{label}</span>
+        </Button>
+        <Popover hideArrow placement="bottom start" className="color-picker-dialog">
+          {children || (
+            <>
+              <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness" />
+              <ColorSlider colorSpace="hsb" channel="hue" />
+              <ColorField label="Hex" />
+            </>
+          )}
+        </Popover>
+      </DialogTrigger>
+    </AriaColorPicker>
   );
 }
 
@@ -57,7 +54,7 @@ export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
 ### ColorPicker.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .color-picker {
   background: none;
@@ -98,17 +95,20 @@ export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { Button } from 'react-aria-components/Button';
-import { ColorPicker as AriaColorPicker, type ColorPickerProps as AriaColorPickerProps } from 'react-aria-components/ColorPicker';
-import { DialogTrigger } from 'react-aria-components/Dialog';
+import {Button} from 'react-aria-components/Button';
+import {
+  ColorPicker as AriaColorPicker,
+  type ColorPickerProps as AriaColorPickerProps
+} from 'react-aria-components/ColorPicker';
+import {DialogTrigger} from 'react-aria-components/Dialog';
 import {ColorSwatch} from './ColorSwatch';
 import {ColorArea} from './ColorArea';
 import {ColorSlider} from './ColorSlider';
 import {ColorField} from './ColorField';
 import {Dialog} from './Dialog';
 import {Popover} from './Popover';
-import { tv } from 'tailwind-variants';
-import { focusRing } from './utils';
+import {tv} from 'tailwind-variants';
+import {focusRing} from './utils';
 
 const buttonStyles = tv({
   extend: focusRing,
@@ -120,7 +120,7 @@ export interface ColorPickerProps extends Omit<AriaColorPickerProps, 'children'>
   children?: React.ReactNode;
 }
 
-export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
+export function ColorPicker({label, children, ...props}: ColorPickerProps) {
   return (
     <AriaColorPicker {...props}>
       <DialogTrigger>
@@ -132,11 +132,7 @@ export function ColorPicker({ label, children, ...props }: ColorPickerProps) {
           <Dialog className="flex flex-col gap-2">
             {children || (
               <>
-                <ColorArea
-                  colorSpace="hsb"
-                  xChannel="saturation"
-                  yChannel="brightness"
-                />
+                <ColorArea colorSpace="hsb" xChannel="saturation" yChannel="brightness" />
                 <ColorSlider colorSpace="hsb" channel="hue" />
                 <ColorField label="Hex" />
               </>
@@ -310,6 +306,21 @@ import {ColorSwatchPicker, ColorSwatchPickerItem} from 'vanilla-starter/ColorSwa
 ## Related Types
 
 ### Color
+
+`Color(props: IconProps & {size?: 'L' | 'S' | 'M'}): ReactNode`
+
+| Name | Type | Description |
+|------|------|-------------|
+| `aria-describedby` | `string | undefined` | Identifies the element (or elements) that describes the object. |
+| `aria-details` | `string | undefined` | Identifies the element (or elements) that provide a detailed, extended description for the object. |
+| `aria-hidden` | `boolean | "true" | "false" | undefined` | — |
+| `aria-label` | `string | undefined` | Defines a string value that labels the current element. |
+| `aria-labelledby` | `string | undefined` | Identifies the element (or elements) that labels the current element. |
+| `id` | `string | undefined` | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
+| `slot` | `string | null | undefined` | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
+| `styles` | `StyleString<AllowedOverrides> | undefined` | — |
+| `UNSAFE_className` | `UnsafeClassName | undefined` | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
+| `UNSAFE_style` | `CSSProperties | undefined` | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 
 ### parseColor
 

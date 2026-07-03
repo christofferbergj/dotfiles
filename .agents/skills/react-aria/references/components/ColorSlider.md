@@ -12,7 +12,7 @@ import {
   ColorSlider as AriaColorSlider,
   type ColorSliderProps as AriaColorSliderProps,
   SliderOutput,
-  SliderTrack,
+  SliderTrack
 } from 'react-aria-components/ColorSlider';
 import {Label} from './Form';
 import {ColorThumb} from './ColorThumb';
@@ -22,22 +22,19 @@ export interface ColorSliderProps extends AriaColorSliderProps {
   label?: string;
 }
 
-export function ColorSlider({ label, ...props }: ColorSliderProps) {
+export function ColorSlider({label, ...props}: ColorSliderProps) {
   return (
-    (
-      <AriaColorSlider {...props}>
-        <Label>{label}</Label>
-        <SliderOutput />
-        <SliderTrack
-          style={({ defaultStyle }) => ({
-            background: `${defaultStyle.background},
+    <AriaColorSlider {...props}>
+      <Label>{label}</Label>
+      <SliderOutput />
+      <SliderTrack
+        style={({defaultStyle}) => ({
+          background: `${defaultStyle.background},
             repeating-conic-gradient(#CCC 0% 25%, white 0% 50%) 50% / 16px 16px`
-          })}
-        >
-          <ColorThumb />
-        </SliderTrack>
-      </AriaColorSlider>
-    )
+        })}>
+        <ColorThumb />
+      </SliderTrack>
+    </AriaColorSlider>
   );
 }
 
@@ -48,8 +45,9 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
 ```css
 .react-aria-ColorSlider {
   display: grid;
-  grid-template-areas: "label output"
-                       "track track";
+  grid-template-areas:
+    'label output'
+    'track track';
   grid-template-columns: 1fr auto;
   gap: var(--spacing-1);
 
@@ -69,7 +67,7 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
     border-radius: var(--radius);
   }
 
-  &[data-orientation=horizontal] {
+  &[data-orientation='horizontal'] {
     width: 100%;
     max-width: 300px;
 
@@ -82,7 +80,7 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
     }
   }
 
-  &[data-orientation=vertical] {
+  &[data-orientation='vertical'] {
     height: 200px;
     display: block;
 
@@ -121,12 +119,12 @@ import {
   ColorSlider as AriaColorSlider,
   type ColorSliderProps as AriaColorSliderProps,
   SliderOutput,
-  SliderTrack,
+  SliderTrack
 } from 'react-aria-components/ColorSlider';
-import { tv } from 'tailwind-variants';
-import { Label } from './Field';
-import { composeTailwindRenderProps } from './utils';
-import { ColorThumb } from './ColorThumb';
+import {tv} from 'tailwind-variants';
+import {Label} from './Field';
+import {composeTailwindRenderProps} from './utils';
+import {ColorThumb} from './ColorThumb';
 
 const trackStyles = tv({
   base: 'group col-span-2 rounded-md',
@@ -145,18 +143,24 @@ interface ColorSliderProps extends AriaColorSliderProps {
   label?: string;
 }
 
-export function ColorSlider({ label, ...props }: ColorSliderProps) {
+export function ColorSlider({label, ...props}: ColorSliderProps) {
   return (
-    <AriaColorSlider {...props} className={composeTailwindRenderProps(props.className, 'font-sans orientation-horizontal:grid orientation-vertical:flex grid-cols-[1fr_auto] flex-col items-center gap-2 orientation-horizontal:w-56')}>
+    <AriaColorSlider
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'font-sans orientation-horizontal:grid orientation-vertical:flex grid-cols-[1fr_auto] flex-col items-center gap-2 orientation-horizontal:w-56'
+      )}>
       <Label>{label}</Label>
       <SliderOutput className="text-sm text-neutral-500 dark:text-neutral-400 font-medium orientation-vertical:hidden" />
       <SliderTrack
         className={trackStyles}
-        style={({ defaultStyle, isDisabled }) => ({
+        style={({defaultStyle, isDisabled}) => ({
           ...defaultStyle,
-          background: isDisabled ? undefined : `${defaultStyle.background}, repeating-conic-gradient(#CCC 0% 25%, white 0% 50%) 50% / 16px 16px`
-        })}
-      >
+          background: isDisabled
+            ? undefined
+            : `${defaultStyle.background}, repeating-conic-gradient(#CCC 0% 25%, white 0% 50%) 50% / 16px 16px`
+        })}>
         <ColorThumb />
       </SliderTrack>
     </AriaColorSlider>
@@ -170,8 +174,8 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { ColorThumb as AriaColorThumb, type ColorThumbProps } from 'react-aria-components/ColorThumb';
-import { tv } from 'tailwind-variants';
+import {ColorThumb as AriaColorThumb, type ColorThumbProps} from 'react-aria-components/ColorThumb';
+import {tv} from 'tailwind-variants';
 
 const thumbStyles = tv({
   base: 'w-4.5 h-4.5 top-[50%] left-[50%] rounded-full border-2 border-white box-border',
@@ -192,12 +196,13 @@ export function ColorThumb(props: ColorThumbProps) {
   return (
     <AriaColorThumb
       {...props}
-      style={({ defaultStyle, isDisabled }) => ({
+      style={({defaultStyle, isDisabled}) => ({
         ...defaultStyle,
         backgroundColor: isDisabled ? undefined : defaultStyle.backgroundColor,
-        boxShadow: '0 0 0 1px black, inset 0 0 0 1px black'}
-      )}
-      className={thumbStyles} />
+        boxShadow: '0 0 0 1px black, inset 0 0 0 1px black'
+      })}
+      className={thumbStyles}
+    />
   );
 }
 
@@ -336,10 +341,10 @@ function Example() {
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `orientation` | `Orientation | undefined` | 'horizontal' | The orientation of the Slider. |
-| `render` | `DOMRenderFunction<"div", ColorSliderRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", ColorSliderRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ColorSliderRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: ColorSliderRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `string | Color | undefined` | — | The current value (controlled). |
 
 ### ColorThumb
@@ -419,13 +424,28 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", ColorThumbRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `style` | `(React.CSSProperties | ((values: ColorThumbRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", ColorThumbRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `style` | `(((values: ColorThumbRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ## Related Types
 
 ### Color
+
+`Color(props: IconProps & {size?: 'L' | 'S' | 'M'}): ReactNode`
+
+| Name | Type | Description |
+|------|------|-------------|
+| `aria-describedby` | `string | undefined` | Identifies the element (or elements) that describes the object. |
+| `aria-details` | `string | undefined` | Identifies the element (or elements) that provide a detailed, extended description for the object. |
+| `aria-hidden` | `boolean | "true" | "false" | undefined` | — |
+| `aria-label` | `string | undefined` | Defines a string value that labels the current element. |
+| `aria-labelledby` | `string | undefined` | Identifies the element (or elements) that labels the current element. |
+| `id` | `string | undefined` | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
+| `slot` | `string | null | undefined` | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
+| `styles` | `StyleString<AllowedOverrides> | undefined` | — |
+| `UNSAFE_className` | `UnsafeClassName | undefined` | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
+| `UNSAFE_style` | `CSSProperties | undefined` | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 
 ### parseColor
 

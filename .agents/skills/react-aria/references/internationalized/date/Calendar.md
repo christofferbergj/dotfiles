@@ -67,8 +67,9 @@ function createCalendar(identifier) {
 
 | Class | Identifier | Description |
 | ------ | ------ | ------ |
-| GregorianCalendar | `'gregory'` | The Gregorian calendar is the most commonly used calendar system in the world. It supports two eras: BC, and AD.
-Years always contain 12 months, and 365 or 366 days depending on whether it is a leap year. |
+| GregorianCalendar | `'gregory'` | The Gregorian calendar is the most commonly used calendar system in the world. It supports two
+eras: BC, and AD. Years always contain 12 months, and 365 or 366 days depending on whether it is
+a leap year. |
 | BuddhistCalendar | `'buddhist'` | The Buddhist calendar is the same as the Gregorian calendar, but counts years
 starting from the birth of Buddha in 543 BC (Gregorian). It supports only one
 era, identified as 'BE'. |
@@ -86,24 +87,28 @@ In leap years, an extra month is inserted at month 6. |
 | IndianCalendar | `'indian'` | The Indian National Calendar is similar to the Gregorian calendar, but with
 years numbered since the Saka era in 78 AD (Gregorian). There are 12 months
 in each year, with either 30 or 31 days. Only one era identifier is supported: 'saka'. |
-| IslamicCivilCalendar | `'islamic-civil'` | The Islamic calendar, also known as the "Hijri" calendar, is used throughout much of the Arab world.
-The civil variant uses simple arithmetic rules rather than astronomical calculations to approximate
-the traditional calendar, which is based on sighting of the crescent moon. It uses Friday, July 16 622 CE (Julian) as the epoch.
-Each year has 12 months, with either 354 or 355 days depending on whether it is a leap year.
-Learn more about the available Islamic calendars [here](https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types). |
-| IslamicTabularCalendar | `'islamic-tbla'` | The Islamic calendar, also known as the "Hijri" calendar, is used throughout much of the Arab world.
-The tabular variant uses simple arithmetic rules rather than astronomical calculations to approximate
-the traditional calendar, which is based on sighting of the crescent moon. It uses Thursday, July 15 622 CE (Julian) as the epoch.
-Each year has 12 months, with either 354 or 355 days depending on whether it is a leap year.
-Learn more about the available Islamic calendars [here](https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types). |
-| IslamicUmalquraCalendar | `'islamic-umalqura'` | The Islamic calendar, also known as the "Hijri" calendar, is used throughout much of the Arab world.
-The Umalqura variant is primarily used in Saudi Arabia. It is a lunar calendar, based on astronomical
-calculations that predict the sighting of a crescent moon. Month and year lengths vary between years
-depending on these calculations.
-Learn more about the available Islamic calendars [here](https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types). |
-| JapaneseCalendar | `'japanese'` | The Japanese calendar is based on the Gregorian calendar, but with eras for the reign of each Japanese emperor.
-Whenever a new emperor ascends to the throne, a new era begins and the year starts again from 1.
-Note that eras before 1868 (Gregorian) are not currently supported by this implementation. |
+| IslamicCivilCalendar | `'islamic-civil'` | The Islamic calendar, also known as the "Hijri" calendar, is used throughout much of the Arab
+world. The civil variant uses simple arithmetic rules rather than astronomical calculations to
+approximate the traditional calendar, which is based on sighting of the crescent moon. It uses
+Friday, July 16 622 CE (Julian) as the epoch. Each year has 12 months, with either 354 or 355
+days depending on whether it is a leap year. Learn more about the available Islamic calendars
+[here](https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types). |
+| IslamicTabularCalendar | `'islamic-tbla'` | The Islamic calendar, also known as the "Hijri" calendar, is used throughout much of the Arab
+world. The tabular variant uses simple arithmetic rules rather than astronomical calculations to
+approximate the traditional calendar, which is based on sighting of the crescent moon. It uses
+Thursday, July 15 622 CE (Julian) as the epoch. Each year has 12 months, with either 354 or 355
+days depending on whether it is a leap year. Learn more about the available Islamic calendars
+[here](https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types). |
+| IslamicUmalquraCalendar | `'islamic-umalqura'` | The Islamic calendar, also known as the "Hijri" calendar, is used throughout much of the Arab
+world. The Umalqura variant is primarily used in Saudi Arabia. It is a lunar calendar, based on
+astronomical calculations that predict the sighting of a crescent moon. Month and year lengths
+vary between years depending on these calculations. Learn more about the available Islamic
+calendars
+[here](https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types). |
+| JapaneseCalendar | `'japanese'` | The Japanese calendar is based on the Gregorian calendar, but with eras for the reign of each
+Japanese emperor. Whenever a new emperor ascends to the throne, a new era begins and the year
+starts again from 1. Note that eras before 1868 (Gregorian) are not currently supported by this
+implementation. |
 | PersianCalendar | `'persian'` | The Persian calendar is the main calendar used in Iran and Afghanistan. It has 12 months
 in each year, the first 6 of which have 31 days, and the next 5 have 30 days. The 12th month
 has either 29 or 30 days depending on whether it is a leap year. The Persian year starts

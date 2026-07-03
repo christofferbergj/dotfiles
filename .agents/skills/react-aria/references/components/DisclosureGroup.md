@@ -25,7 +25,10 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'vanilla-starter/Dis
 
 ```tsx
 'use client';
-import { DisclosureGroup as RACDisclosureGroup, type DisclosureGroupProps } from 'react-aria-components/DisclosureGroup';
+import {
+  DisclosureGroup as RACDisclosureGroup,
+  type DisclosureGroupProps
+} from 'react-aria-components/DisclosureGroup';
 import './DisclosureGroup.css';
 
 export function DisclosureGroup(props: DisclosureGroupProps) {
@@ -37,7 +40,7 @@ export function DisclosureGroup(props: DisclosureGroupProps) {
 ### DisclosureGroup.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-DisclosureGroup {
   width: 200px;
@@ -67,22 +70,18 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'tailwind-starter/Di
 
 ```tsx
 'use client';
-import React from "react";
+import React from 'react';
 import {
   DisclosureGroup as AriaDisclosureGroup,
-  type DisclosureGroupProps as AriaDisclosureGroupProps,
+  type DisclosureGroupProps as AriaDisclosureGroupProps
 } from 'react-aria-components/DisclosureGroup';
 
 export interface DisclosureGroupProps extends AriaDisclosureGroupProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export function DisclosureGroup({ children, ...props }: DisclosureGroupProps) {
-  return (
-    <AriaDisclosureGroup {...props}>
-      {children}
-    </AriaDisclosureGroup>
-  );
+export function DisclosureGroup({children, ...props}: DisclosureGroupProps) {
+  return <AriaDisclosureGroup {...props}>{children}</AriaDisclosureGroup>;
 }
 
 ```
@@ -211,6 +210,6 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", DisclosureGroupRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `style` | `(React.CSSProperties | ((values: DisclosureGroupRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", DisclosureGroupRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `style` | `(((values: DisclosureGroupRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

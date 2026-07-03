@@ -404,10 +404,10 @@ function Pasteable() {
 | Name | Type | Description |
 |------|------|-------------|
 | `getItems` | `((details: { action: "cut" | "copy"; }) => DragItem[]) | undefined` | A function that returns the items to copy. |
+| `isDisabled` | `boolean | undefined` | Whether the clipboard is disabled. |
 | `onCopy` | `(() => void) | undefined` | Handler that is called when the user triggers a copy interaction. |
 | `onCut` | `(() => void) | undefined` | Handler that is called when the user triggers a cut interaction. |
 | `onPaste` | `((items: DropItem[]) => void) | undefined` | Handler that is called when the user triggers a paste interaction. |
-| `isDisabled` | `boolean | undefined` | Whether the clipboard is disabled. |
 
 ### ClipboardResult
 
@@ -427,10 +427,10 @@ data types, and integrates with the operating system native clipboard.
 | Name | Type | Description |
 |------|------|-------------|
 | `getItems` | `((details: { action: "cut" | "copy"; }) => DragItem[]) | undefined` | A function that returns the items to copy. |
+| `isDisabled` | `boolean | undefined` | Whether the clipboard is disabled. |
 | `onCopy` | `(() => void) | undefined` | Handler that is called when the user triggers a copy interaction. |
 | `onCut` | `(() => void) | undefined` | Handler that is called when the user triggers a cut interaction. |
 | `onPaste` | `((items: DropItem[]) => void) | undefined` | Handler that is called when the user triggers a paste interaction. |
-| `isDisabled` | `boolean | undefined` | Whether the clipboard is disabled. |
 
 ### TextDropItem
 
@@ -454,8 +454,8 @@ Returns the data for the given type as a string.
 | Name | Type | Description |
 |------|------|-------------|
 | `kind` \* | `"file"` | The item kind. |
-| `type` \* | `string` | The file type (usually a mime type). |
 | `name` \* | `string` | The file name. |
+| `type` \* | `string` | The file type (usually a mime type). |
 
 ### Methods
 
@@ -478,6 +478,6 @@ Returns the contents of the file as a string.
 
 ### Methods
 
-#### `getEntries(): AsyncIterable<FileDropItem | DirectoryDropItem>`
+#### `getEntries(): AsyncIterable<DirectoryDropItem | FileDropItem>`
 
 Returns the entries contained within the directory.

@@ -9,9 +9,21 @@ import {CheckboxGroup} from 'vanilla-starter/CheckboxGroup';
 import {Checkbox} from 'vanilla-starter/Checkbox';
 
 <CheckboxGroup>
-  <Checkbox value="soccer">Soccer</Checkbox>
-  <Checkbox value="baseball">Baseball</Checkbox>
-  <Checkbox value="basketball">Basketball</Checkbox>
+  <Checkbox
+    value="product"
+    description="Get notified about new features and improvements">
+    Product Updates
+  </Checkbox>
+  <Checkbox
+    value="security"
+    description="Important notifications about your account safety">
+    Security Alerts
+  </Checkbox>
+  <Checkbox
+    value="marketing"
+    description="Receive promotions, offers, and newsletters">
+    Marketing Emails
+  </Checkbox>
 </CheckboxGroup>
 ```
 
@@ -22,36 +34,31 @@ import {Checkbox} from 'vanilla-starter/Checkbox';
 import {
   CheckboxGroup as AriaCheckboxGroup,
   type CheckboxGroupProps as AriaCheckboxGroupProps,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/CheckboxGroup';
 import {Label, FieldError, Description} from './Form';
 import './CheckboxGroup.css';
 
-export interface CheckboxGroupProps
-  extends Omit<AriaCheckboxGroupProps, 'children'> {
+export interface CheckboxGroupProps extends Omit<AriaCheckboxGroupProps, 'children'> {
   children?: React.ReactNode;
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
-  orientation?: 'horizontal' | 'vertical'
+  orientation?: 'horizontal' | 'vertical';
 }
 
-export function CheckboxGroup(
-  {
-    label,
-    description,
-    errorMessage,
-    children,
-    orientation = 'vertical',
-    ...props
-  }: CheckboxGroupProps
-) {
+export function CheckboxGroup({
+  label,
+  description,
+  errorMessage,
+  children,
+  orientation = 'vertical',
+  ...props
+}: CheckboxGroupProps) {
   return (
     <AriaCheckboxGroup {...props} data-orientation={orientation}>
       {label && <Label>{label}</Label>}
-      <div className="checkbox-items">
-        {children}
-      </div>
+      <div className="checkbox-items">{children}</div>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
     </AriaCheckboxGroup>
@@ -63,23 +70,24 @@ export function CheckboxGroup(
 ### CheckboxGroup.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-CheckboxGroup {
   display: flex;
   flex-direction: column;
-  
+  gap: var(--spacing-1);
+
   .checkbox-items {
     display: flex;
     gap: var(--spacing-3);
     flex-direction: column;
   }
 
-  &[data-orientation=vertical] .checkbox-items {
+  &[data-orientation='vertical'] .checkbox-items {
     flex-direction: column;
   }
 
-  &[data-orientation=horizontal] .checkbox-items {
+  &[data-orientation='horizontal'] .checkbox-items {
     flex-direction: row;
   }
 }
@@ -93,9 +101,21 @@ import {CheckboxGroup} from 'tailwind-starter/CheckboxGroup';
 import {Checkbox} from 'tailwind-starter/Checkbox';
 
 <CheckboxGroup>
-  <Checkbox value="soccer">Soccer</Checkbox>
-  <Checkbox value="baseball">Baseball</Checkbox>
-  <Checkbox value="basketball">Basketball</Checkbox>
+  <Checkbox
+    value="product"
+    description="Get notified about new features and improvements">
+    Product Updates
+  </Checkbox>
+  <Checkbox
+    value="security"
+    description="Important notifications about your account safety">
+    Security Alerts
+  </Checkbox>
+  <Checkbox
+    value="marketing"
+    description="Receive promotions, offers, and newsletters">
+    Marketing Emails
+  </Checkbox>
 </CheckboxGroup>
 ```
 
@@ -103,25 +123,27 @@ import {Checkbox} from 'tailwind-starter/Checkbox';
 
 ```tsx
 'use client';
-import React, { type ReactNode } from 'react';
+import React, {type ReactNode} from 'react';
 import {
   CheckboxGroup as AriaCheckboxGroup,
   type CheckboxGroupProps as AriaCheckboxGroupProps,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/CheckboxGroup';
-import { Description, FieldError, Label } from './Field';
-import { composeTailwindRenderProps } from './utils';
+import {Description, FieldError, Label} from './Field';
+import {composeTailwindRenderProps} from './utils';
 
 export interface CheckboxGroupProps extends Omit<AriaCheckboxGroupProps, 'children'> {
-  label?: string,
-  children?: ReactNode,
-  description?: string,
-  errorMessage?: string | ((validation: ValidationResult) => string)
+  label?: string;
+  children?: ReactNode;
+  description?: string;
+  errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
 export function CheckboxGroup(props: CheckboxGroupProps) {
   return (
-    <AriaCheckboxGroup {...props} className={composeTailwindRenderProps(props.className, 'flex flex-col gap-2 font-sans')}>
+    <AriaCheckboxGroup
+      {...props}
+      className={composeTailwindRenderProps(props.className, 'flex flex-col gap-2 font-sans')}>
       <Label>{props.label}</Label>
       {props.children}
       {props.description && <Description>{props.description}</Description>}
@@ -202,7 +224,7 @@ import {Form} from 'vanilla-starter/Form';;
 ```tsx
 <CheckboxGroup>
   <Label />
-  <Checkbox />
+  <CheckboxField />
   <Text slot="description" />
   <FieldError />
 </CheckboxGroup>
@@ -221,7 +243,7 @@ import {Form} from 'vanilla-starter/Form';;
 | `contextualHelp` | `ReactNode` | — | A ContextualHelp element to place next to the label. |
 | `defaultValue` | `string[] | undefined` | — | The default value (uncontrolled). |
 | `description` | `ReactNode` | — | A description for the field. Provides a hint such as specific requirements for what to choose. |
-| `errorMessage` | `ReactNode | ((v: ValidationResult) => ReactNode)` | — | An error message for the field. |
+| `errorMessage` | `((v: ValidationResult) => ReactNode) | ReactNode` | — | An error message for the field. |
 | `form` | `string | undefined` | — | The `<form>` element to associate the input with. The value of this attribute must be the id of a `<form>` in the same document. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#form). |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `isDisabled` | `boolean | undefined` | — | Whether the input is disabled. |
@@ -239,11 +261,11 @@ import {Form} from 'vanilla-starter/Form';;
 | `onFocus` | `((e: FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element receives focus. |
 | `onFocusChange` | `((isFocused: boolean) => void) | undefined` | — | Handler that is called when the element's focus status changes. |
 | `orientation` | `Orientation | undefined` | 'vertical' | The axis the checkboxes should align with. |
-| `size` | `"S" | "M" | "L" | "XL" | undefined` | 'M' | The size of the Checkboxes in the CheckboxGroup. |
+| `size` | `"L" | "M" | "S" | "XL" | undefined` | 'M' | The size of the Checkboxes in the CheckboxGroup. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `styles` | `StylesProp | undefined` | — | Spectrum-defined styles, returned by the `style()` macro. |
 | `UNSAFE_className` | `UnsafeClassName | undefined` | — | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 | `UNSAFE_style` | `CSSProperties | undefined` | — | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
-| `validate` | `((value: string[]) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
-| `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
+| `validate` | `((value: string[]) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
 | `value` | `string[] | undefined` | — | The current value (controlled). |

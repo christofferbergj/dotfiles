@@ -47,8 +47,8 @@ function Example() {
 
 ```tsx
 'use client';
-import { type DropZoneProps, DropZone as RACDropZone, Text } from 'react-aria-components/DropZone';
-import './DropZone.css'
+import {type DropZoneProps, DropZone as RACDropZone, Text} from 'react-aria-components/DropZone';
+import './DropZone.css';
 
 export function DropZone(props: DropZoneProps) {
   return <RACDropZone {...props} />;
@@ -61,7 +61,7 @@ export {Text};
 ### DropZone.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-DropZone {
   color: var(--text-color);
@@ -140,19 +140,19 @@ function Example() {
 
 ```tsx
 'use client';
-import React from "react";
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { type DropZoneProps, DropZone as RACDropZone, Text } from 'react-aria-components/DropZone';
-import { tv } from "tailwind-variants";
+import React from 'react';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {type DropZoneProps, DropZone as RACDropZone, Text} from 'react-aria-components/DropZone';
+import {tv} from 'tailwind-variants';
 
 const dropZone = tv({
-  base: "flex items-center justify-center p-8 min-h-24 w-[30%] font-sans text-base text-balance text-center rounded-lg border border-1 border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900",
+  base: 'flex items-center justify-center p-8 min-h-24 w-[30%] font-sans text-base text-balance text-center rounded-lg border border-1 border-neutral-300 dark:border-neutral-800 bg-white dark:bg-neutral-900',
   variants: {
     isFocusVisible: {
-      true: "outline outline-2 -outline-offset-1 outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight]"
+      true: 'outline outline-2 -outline-offset-1 outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight]'
     },
     isDropTarget: {
-      true: "bg-blue-200 dark:bg-blue-800 outline outline-2 -outline-offset-1 outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight]",
+      true: 'bg-blue-200 dark:bg-blue-800 outline outline-2 -outline-offset-1 outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight]'
     }
   }
 });
@@ -161,7 +161,10 @@ export function DropZone(props: DropZoneProps) {
   return (
     <RACDropZone
       {...props}
-      className={composeRenderProps(props.className, (className, renderProps) => dropZone({ ...renderProps, className }))} />
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        dropZone({...renderProps, className})
+      )}
+    />
   );
 }
 
@@ -272,7 +275,7 @@ export {Text};
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", DropZoneRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", DropZoneRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: DropZoneRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: DropZoneRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

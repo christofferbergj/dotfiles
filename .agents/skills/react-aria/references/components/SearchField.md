@@ -13,7 +13,7 @@ import {
   Input,
   SearchField as AriaSearchField,
   type SearchFieldProps as AriaSearchFieldProps,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/SearchField';
 import {Label, FieldError, Description} from './Form';
 import {Search, X} from 'lucide-react';
@@ -26,20 +26,24 @@ export interface SearchFieldProps extends AriaSearchFieldProps {
   placeholder?: string;
 }
 
-export function SearchField(
-  { label, description, errorMessage, placeholder, ...props }: SearchFieldProps
-) {
+export function SearchField({
+  label,
+  description,
+  errorMessage,
+  placeholder,
+  ...props
+}: SearchFieldProps) {
   return (
-    (
-      <AriaSearchField {...props}>
-        {label && <Label>{label}</Label>}
-        <Search size={18} />
-        <Input placeholder={placeholder} className="react-aria-Input inset" />
-        <Button className="clear-button"><X size={14} /></Button>
-        {description && <Description>{description}</Description>}
-        <FieldError>{errorMessage}</FieldError>
-      </AriaSearchField>
-    )
+    <AriaSearchField {...props}>
+      {label && <Label>{label}</Label>}
+      <Search size={18} />
+      <Input placeholder={placeholder} className="react-aria-Input inset" />
+      <Button className="clear-button">
+        <X size={14} />
+      </Button>
+      {description && <Description>{description}</Description>}
+      <FieldError>{errorMessage}</FieldError>
+    </AriaSearchField>
   );
 }
 
@@ -48,14 +52,15 @@ export function SearchField(
 ### SearchField.css
 
 ```css
-@import "./theme.css";
-@import "./TextField.css";
+@import './theme.css';
+@import './TextField.css';
 
 .react-aria-SearchField {
   display: grid;
-  grid-template-areas: "label label label"
-                       "icon input button"
-                       "help help  help";
+  grid-template-areas:
+    'label label label'
+    'icon input button'
+    'help help  help';
   grid-template-columns: 0px 1fr auto;
   align-items: center;
   width: auto;
@@ -118,7 +123,7 @@ export function SearchField(
   }
 
   .react-aria-FieldError,
-  [slot=description] {
+  [slot='description'] {
     grid-area: help;
   }
 }
@@ -131,16 +136,16 @@ export function SearchField(
 
 ```tsx
 'use client';
-import { SearchIcon, XIcon } from 'lucide-react';
+import {SearchIcon, XIcon} from 'lucide-react';
 import React from 'react';
 import {
   SearchField as AriaSearchField,
   type SearchFieldProps as AriaSearchFieldProps,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/SearchField';
-import { Description, FieldError, FieldGroup, Input, Label } from './Field';
-import { composeTailwindRenderProps } from './utils';
-import { FieldButton } from './FieldButton';
+import {Description, FieldError, FieldGroup, Input, Label} from './Field';
+import {composeTailwindRenderProps} from './utils';
+import {FieldButton} from './FieldButton';
 
 export interface SearchFieldProps extends AriaSearchFieldProps {
   label?: string;
@@ -149,15 +154,30 @@ export interface SearchFieldProps extends AriaSearchFieldProps {
   placeholder?: string;
 }
 
-export function SearchField(
-  { label, description, errorMessage, placeholder, ...props }: SearchFieldProps
-) {
+export function SearchField({
+  label,
+  description,
+  errorMessage,
+  placeholder,
+  ...props
+}: SearchFieldProps) {
   return (
-    <AriaSearchField {...props} className={composeTailwindRenderProps(props.className, 'group flex flex-col gap-1 min-w-[40px] font-sans max-w-full')}>
+    <AriaSearchField
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'group flex flex-col gap-1 min-w-[40px] font-sans max-w-full'
+      )}>
       {label && <Label>{label}</Label>}
       <FieldGroup>
-        <SearchIcon aria-hidden className="w-4 h-4 ml-2 text-neutral-500 dark:text-neutral-400 forced-colors:text-[ButtonText] group-disabled:text-neutral-200 dark:group-disabled:text-neutral-600 forced-colors:group-disabled:text-[GrayText]" />
-        <Input placeholder={placeholder} className="pl-2 [&::-webkit-search-cancel-button]:hidden" />
+        <SearchIcon
+          aria-hidden
+          className="w-4 h-4 ml-2 text-neutral-500 dark:text-neutral-400 forced-colors:text-[ButtonText] group-disabled:text-neutral-200 dark:group-disabled:text-neutral-600 forced-colors:group-disabled:text-[GrayText]"
+        />
+        <Input
+          placeholder={placeholder}
+          className="pl-2 [&::-webkit-search-cancel-button]:hidden"
+        />
         <FieldButton className="mr-1 w-6 group-empty:invisible">
           <XIcon aria-hidden className="w-4 h-4" />
         </FieldButton>
@@ -249,12 +269,12 @@ function Example(props) {
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `aria-activedescendant` | `string | undefined` | — | Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. |
-| `aria-autocomplete` | `"none" | "inline" | "list" | "both" | undefined` | — | Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be presented if they are made. |
+| `aria-autocomplete` | `"both" | "inline" | "list" | "none" | undefined` | — | Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be presented if they are made. |
 | `aria-controls` | `string | undefined` | — | Identifies the element (or elements) whose contents or presence are controlled by the current element. |
 | `aria-describedby` | `string | undefined` | — | Identifies the element (or elements) that describes the object. |
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-errormessage` | `string | undefined` | — | Identifies the element that provides an error message for the object. |
-| `aria-haspopup` | `boolean | "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-haspopup` | `boolean | "true" | "false" | "dialog" | "grid" | "listbox" | "menu" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoComplete` | `string | undefined` | — | Describes the type of autocomplete functionality the input should provide if any. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefautocomplete). |
@@ -264,13 +284,13 @@ function Example(props) {
 | `className` | `ClassNameOrFunction<SearchFieldRenderProps> | undefined` | 'react-aria-SearchField' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `defaultValue` | `string | undefined` | — | The default value (uncontrolled). |
 | `dir` | `string | undefined` | — |  |
-| `enterKeyHint` | `"search" | "enter" | "done" | "go" | "next" | "previous" | "send" | undefined` | — | An enumerated attribute that defines what action label or icon to preset for the enter key on virtual keyboards. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
+| `enterKeyHint` | `"done" | "enter" | "go" | "next" | "previous" | "search" | "send" | undefined` | — | An enumerated attribute that defines what action label or icon to preset for the enter key on virtual keyboards. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
 | `excludeFromTabOrder` | `boolean | undefined` | — | Whether to exclude the element from the sequential tab order. If true, the element will not be focusable via the keyboard by tabbing. This should be avoided except in rare scenarios where an alternative means of accessing the element or its functionality via the keyboard is available. |
 | `form` | `string | undefined` | — | The `<form>` element to associate the input with. The value of this attribute must be the id of a `<form>` in the same document. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#form). |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
-| `inputMode` | `"text" | "search" | "url" | "tel" | "email" | "none" | "numeric" | "decimal" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents. See [MDN](https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute). |
+| `inputMode` | `"decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents. See [MDN](https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute). |
 | `isDisabled` | `boolean | undefined` | — | Whether the input is disabled. |
 | `isInvalid` | `boolean | undefined` | — | Whether the input value is invalid. |
 | `isReadOnly` | `boolean | undefined` | — | Whether the input can be selected but not changed by the user. |
@@ -361,12 +381,12 @@ function Example(props) {
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `pattern` | `string | undefined` | — | Regex pattern that the value of the input must match to be valid. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefpattern). |
-| `render` | `DOMRenderFunction<"div", SearchFieldRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", SearchFieldRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `spellCheck` | `string | undefined` | — | An enumerated attribute that defines whether the element may be checked for spelling errors. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/spellcheck). |
-| `style` | `(React.CSSProperties | ((values: SearchFieldRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
-| `type` | `"text" | "search" | "url" | "tel" | "email" | "password" | (string & {}) | undefined` | 'search' | The type of input to render. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). |
-| `validate` | `((value: string) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
-| `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
+| `style` | `(((values: SearchFieldRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+| `type` | `"email" | "password" | "search" | "tel" | "text" | "url" | (string & {}) | undefined` | 'search' | The type of input to render. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdeftype). |
+| `validate` | `((value: string) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
 | `value` | `string | undefined` | — | The current value (controlled). |

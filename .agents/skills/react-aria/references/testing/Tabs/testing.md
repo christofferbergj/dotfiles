@@ -10,7 +10,7 @@ npm install @react-aria/test-utils --dev
 
 <InlineAlert variant="notice">
   <Heading>Requirements</Heading>
-  <Content>Please note that this library uses [@testing-library/react@16](https://www.npmjs.com/package/@testing-library/react) and [@testing-library/user-event@14](https://www.npmjs.com/package/@testing-library/user-event). This means that you need to be on React 18+ in order for these utilities to work.</Content>
+  <Content>Please note that this library uses [@testing-library/dom@10](https://www.npmjs.com/package/@testing-library/dom) and [@testing-library/user-event@14](https://www.npmjs.com/package/@testing-library/user-event). This means that you need to be on React 18+ in order for these utilities to work.</Content>
 </InlineAlert>
 
 Initialize a `User` object at the top of your test file, and use it to create a `Tabs` pattern tester in your test cases. The tester has methods that you can call within your test to query for specific subcomponents or simulate common interactions.
@@ -34,11 +34,11 @@ it('Tabs can change selection via keyboard', async function () {
   );
   let tabsTester = testUtilUser.createTester('Tabs', {root: getByTestId('test-tabs'), interactionType: 'keyboard'});
 
-  let tabs = tabsTester.tabs;
-  expect(tabsTester.selectedTab).toBe(tabs[0]);
+  let tabs = tabsTester.getTabs();
+  expect(tabsTester.getSelectedTab()).toBe(tabs[0]);
 
   await tabsTester.triggerTab({tab: 1});
-  expect(tabsTester.selectedTab).toBe(tabs[1]);
+  expect(tabsTester.getSelectedTab()).toBe(tabs[1]);
 });
 ```
 

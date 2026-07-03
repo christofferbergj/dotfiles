@@ -24,19 +24,25 @@ Reference these guidelines when:
 - Managing infrastructure with Blueprints
 - Automating content workflows with Sanity Functions
 
+## Global Rules
+
+- Let Sanity generate `_id` values for ordinary documents. Do not create deterministic UUIDs, slug-derived IDs, or legacy-system IDs when creating documents.
+- Model relationships with `reference` fields, then resolve related documents with GROQ lookups, source-key fields, or returned `_id` values from created documents.
+- Use explicit document IDs mainly for singleton documents controlled by Studio Structure, including localized singletons such as `homePage-en`.
+
 ## Quick Reference
 
 ### Integration Guides
 
 - `get-started` - Interactive onboarding for new Sanity projects
-- `nextjs` - Next.js App Router, Live Content API, embedded Studio
+- `nextjs` - Next.js App Router, Live Content API, standalone Studio
 - `nuxt` - Nuxt integration with @nuxtjs/sanity
 - `angular` - Angular integration with @sanity/client, signals, resource API
 - `astro` - Astro integration with @sanity/astro
 - `remix` - React Router / Remix integration
 - `svelte` - SvelteKit integration with @sanity/svelte-loader
 - `hydrogen` - Shopify Hydrogen with Sanity
-- `project-structure` - Monorepo and embedded Studio patterns
+- `project-structure` - Standalone Studio and monorepo patterns
 - `app-sdk` - Custom applications with Sanity App SDK
 - `blueprints` - Infrastructure as Code with Sanity Blueprints
 - `functions` - Automating content workflows with Sanity Functions

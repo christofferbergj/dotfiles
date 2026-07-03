@@ -1,6 +1,7 @@
 # Disclosure
 
-A disclosure is a collapsible section of content. It is composed of a a header with a heading and trigger button, and a panel that contains the content.
+A disclosure is a collapsible section of content. It is composed of a a header with a heading and
+trigger button, and a panel that contains the content.
 
 ## Vanilla CSS example
 
@@ -17,7 +18,7 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'vanilla-starter/Dis
 
 ```tsx
 'use client';
-import { Button } from 'react-aria-components/Button';
+import {Button} from 'react-aria-components/Button';
 import {
   Disclosure as AriaDisclosure,
   DisclosurePanel as AriaDisclosurePanel,
@@ -57,7 +58,7 @@ export function DisclosurePanel(props: DisclosurePanelProps) {
 ### Disclosure.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-Disclosure {
   width: calc(var(--spacing) * 50);
@@ -88,7 +89,7 @@ export function DisclosurePanel(props: DisclosurePanelProps) {
     &[data-hovered],
     &[data-pressed] {
       background: var(--gray-300);
-      color: var(--text-color-hover)
+      color: var(--text-color-hover);
     }
 
     &[data-pressed] {
@@ -149,30 +150,30 @@ import {Disclosure, DisclosureHeader, DisclosurePanel} from 'tailwind-starter/Di
 
 ```tsx
 'use client';
-import React, { useContext } from "react";
+import React, {useContext} from 'react';
 import {
   Disclosure as AriaDisclosure,
   DisclosurePanel as AriaDisclosurePanel,
   DisclosureStateContext,
   Heading,
   type DisclosurePanelProps as AriaDisclosurePanelProps,
-  type DisclosureProps as AriaDisclosureProps,
+  type DisclosureProps as AriaDisclosureProps
 } from 'react-aria-components/Disclosure';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { Button } from './Button';
-import { tv } from "tailwind-variants";
-import { ChevronRight } from "lucide-react";
-import { composeTailwindRenderProps } from "./utils";
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {Button} from './Button';
+import {tv} from 'tailwind-variants';
+import {ChevronRight} from 'lucide-react';
+import {composeTailwindRenderProps} from './utils';
 
 const disclosure = tv({
-  base: "group min-w-50 font-sans rounded-lg text-neutral-900 dark:text-neutral-200"
+  base: 'group min-w-50 font-sans rounded-lg text-neutral-900 dark:text-neutral-200'
 });
 
 const chevron = tv({
-  base: "w-4 h-4 text-neutral-500 dark:text-neutral-400 transition-transform duration-200 ease-in-out",
+  base: 'w-4 h-4 text-neutral-500 dark:text-neutral-400 transition-transform duration-200 ease-in-out',
   variants: {
     isExpanded: {
-      true: "transform rotate-90",
+      true: 'transform rotate-90'
     },
     isDisabled: {
       true: 'text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]'
@@ -184,12 +185,13 @@ export interface DisclosureProps extends AriaDisclosureProps {
   children: React.ReactNode;
 }
 
-export function Disclosure({ children, ...props }: DisclosureProps) {
+export function Disclosure({children, ...props}: DisclosureProps) {
   return (
     <AriaDisclosure
       {...props}
-      className={composeRenderProps(props.className, (className, renderProps) => disclosure({ ...renderProps, className }))}
-    >
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        disclosure({...renderProps, className})
+      )}>
       {children}
     </AriaDisclosure>
   );
@@ -199,17 +201,14 @@ export interface DisclosureHeaderProps {
   children: React.ReactNode;
 }
 
-export function DisclosureHeader({ children }: DisclosureHeaderProps) {
-  let { isExpanded } = useContext(DisclosureStateContext)!;
+export function DisclosureHeader({children}: DisclosureHeaderProps) {
+  let {isExpanded} = useContext(DisclosureStateContext)!;
   return (
     <Heading className="text-lg font-semibold m-0">
-      <Button
-        slot="trigger"
-        variant="quiet"
-        className="w-full justify-start font-medium">
+      <Button slot="trigger" variant="quiet" className="w-full justify-start font-medium">
         {({isDisabled}) => (
           <>
-            <ChevronRight aria-hidden className={chevron({ isExpanded, isDisabled })} />
+            <ChevronRight aria-hidden className={chevron({isExpanded, isDisabled})} />
             <span>{children}</span>
           </>
         )}
@@ -222,9 +221,14 @@ export interface DisclosurePanelProps extends AriaDisclosurePanelProps {
   children: React.ReactNode;
 }
 
-export function DisclosurePanel({ children, ...props }: DisclosurePanelProps) {
+export function DisclosurePanel({children, ...props}: DisclosurePanelProps) {
   return (
-    <AriaDisclosurePanel {...props} className={composeTailwindRenderProps(props.className, 'h-(--disclosure-panel-height) motion-safe:transition-[height] overflow-clip')}>
+    <AriaDisclosurePanel
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'h-(--disclosure-panel-height) motion-safe:transition-[height] overflow-clip'
+      )}>
       <div className="px-4 py-2">{children}</div>
     </AriaDisclosurePanel>
   );
@@ -366,10 +370,10 @@ import {Settings} from 'lucide-react';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", DisclosureRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", DisclosureRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: DisclosureRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: DisclosureRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### DisclosurePanel
 
@@ -452,7 +456,7 @@ import {Settings} from 'lucide-react';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", DisclosurePanelRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", DisclosurePanelRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `role` | `"group" | "region" | undefined` | 'group' | The accessibility role for the disclosure's panel. |
-| `style` | `(React.CSSProperties | ((values: DisclosurePanelRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: DisclosurePanelRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

@@ -17,7 +17,7 @@ npm install @react-aria/test-utils --dev
 
 <InlineAlert variant="notice">
   <Heading>Requirements</Heading>
-  <Content>Please note that this library uses [@testing-library/react@16](https://www.npmjs.com/package/@testing-library/react) and [@testing-library/user-event@14](https://www.npmjs.com/package/@testing-library/user-event). This means that you need to be on React 18+ in order for these utilities to work.</Content>
+  <Content>Please note that this library uses [@testing-library/dom@10](https://www.npmjs.com/package/@testing-library/dom) and [@testing-library/user-event@14](https://www.npmjs.com/package/@testing-library/user-event). This means that you need to be on React 18+ in order for these utilities to work.</Content>
 </InlineAlert>
 
 Initialize a `User` object at the top of your test file, and use it to create a `GridList` pattern tester in your test cases. The tester has methods that you can call within your test to query for specific subcomponents or simulate common interactions.
@@ -41,17 +41,17 @@ it('GridList can select a row via keyboard', async function () {
   );
   let gridListTester = testUtilUser.createTester('GridList', {root: getByTestId('test-gridlist'), interactionType: 'keyboard'});
 
-  let row = gridListTester.rows[0];
+  let row = gridListTester.getRows()[0];
   expect(within(row).getByRole('checkbox')).not.toBeChecked();
-  expect(gridListTester.selectedRows).toHaveLength(0);
+  expect(gridListTester.getSelectedRows()).toHaveLength(0);
 
   await gridListTester.toggleRowSelection({row: 0});
   expect(within(row).getByRole('checkbox')).toBeChecked();
-  expect(gridListTester.selectedRows).toHaveLength(1);
+  expect(gridListTester.getSelectedRows()).toHaveLength(1);
 
   await gridListTester.toggleRowSelection({row: 0});
   expect(within(row).getByRole('checkbox')).not.toBeChecked();
-  expect(gridListTester.selectedRows).toHaveLength(0);
+  expect(gridListTester.getSelectedRows()).toHaveLength(0);
 });
 ```
 

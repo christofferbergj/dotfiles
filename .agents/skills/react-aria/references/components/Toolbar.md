@@ -1,7 +1,7 @@
 # Toolbar
 
-A toolbar is a container for a set of interactive controls, such as buttons, dropdown menus, or checkboxes,
-with arrow key navigation.
+A toolbar is a container for a set of interactive controls, such as buttons, dropdown menus, or
+checkboxes, with arrow key navigation.
 
 ## Vanilla CSS example
 
@@ -52,16 +52,17 @@ import {Bold, Italic, Underline, ClipboardCopy, Scissors, ClipboardPaste} from '
 
 ```tsx
 'use client';
-import { Toolbar as RACToolbar, type ToolbarProps } from 'react-aria-components/Toolbar';
-import { SeparatorContext } from 'react-aria-components/Separator';
-import { ToggleButtonGroupContext } from 'react-aria-components/ToggleButtonGroup';
+import {Toolbar as RACToolbar, type ToolbarProps} from 'react-aria-components/Toolbar';
+import {SeparatorContext} from 'react-aria-components/Separator';
+import {ToggleButtonGroupContext} from 'react-aria-components/ToggleButtonGroup';
 import './Toolbar.css';
 
 export function Toolbar(props: ToolbarProps) {
   let {orientation = 'horizontal'} = props;
   return (
     <ToggleButtonGroupContext.Provider value={{orientation}}>
-      <SeparatorContext.Provider value={{orientation: orientation === 'horizontal' ? 'vertical' : 'horizontal'}}>
+      <SeparatorContext.Provider
+        value={{orientation: orientation === 'horizontal' ? 'vertical' : 'horizontal'}}>
         <RACToolbar {...props} />
       </SeparatorContext.Provider>
     </ToggleButtonGroupContext.Provider>
@@ -73,7 +74,7 @@ export function Toolbar(props: ToolbarProps) {
 ### Toolbar.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-Toolbar {
   display: flex;
@@ -82,11 +83,11 @@ export function Toolbar(props: ToolbarProps) {
   gap: var(--spacing-1);
   width: fit-content;
 
-  &[data-orientation=horizontal] {
+  &[data-orientation='horizontal'] {
     flex-direction: row;
   }
-  
-  &[data-orientation=vertical] {
+
+  &[data-orientation='vertical'] {
     flex-direction: column;
     align-items: start;
   }
@@ -96,7 +97,7 @@ export function Toolbar(props: ToolbarProps) {
   }
 
   .react-aria-Separator {
-    &[aria-orientation=vertical] {
+    &[aria-orientation='vertical'] {
       height: auto;
       margin: 0px var(--spacing-1);
     }
@@ -152,10 +153,10 @@ import {Bold, Italic, Underline, ClipboardCopy, Scissors, ClipboardPaste} from '
 ```tsx
 'use client';
 import React from 'react';
-import { Toolbar as RACToolbar, type ToolbarProps } from 'react-aria-components/Toolbar';
-import { ToggleButtonGroupContext } from 'react-aria-components/ToggleButtonGroup';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { tv } from 'tailwind-variants';
+import {Toolbar as RACToolbar, type ToolbarProps} from 'react-aria-components/Toolbar';
+import {ToggleButtonGroupContext} from 'react-aria-components/ToggleButtonGroup';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {tv} from 'tailwind-variants';
 
 const styles = tv({
   base: 'flex flex-wrap gap-2',
@@ -165,17 +166,17 @@ const styles = tv({
       vertical: 'flex-col items-start'
     }
   }
-})
+});
 
 export function Toolbar(props: ToolbarProps) {
   return (
     <ToggleButtonGroupContext.Provider value={{orientation: props.orientation}}>
       <RACToolbar
         {...props}
-        className={composeRenderProps(
-          props.className,
-          (className, renderProps) => styles({...renderProps, className})
-        )} />
+        className={composeRenderProps(props.className, (className, renderProps) =>
+          styles({...renderProps, className})
+        )}
+      />
     </ToggleButtonGroupContext.Provider>
   );
 }
@@ -277,7 +278,7 @@ export function Toolbar(props: ToolbarProps) {
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `orientation` | `Orientation | undefined` | 'horizontal' | The orientation of the entire toolbar. |
-| `render` | `DOMRenderFunction<"div", ToolbarRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", ToolbarRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ToolbarRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: ToolbarRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

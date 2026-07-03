@@ -1,7 +1,6 @@
 # Checkbox
 
-A checkbox allows a user to select multiple items from a list of individual items, or
-to mark one individual item as selected.
+A checkbox allows a user to select an item, with support for validation and help text.
 
 ## Vanilla CSS example
 
@@ -9,31 +8,47 @@ to mark one individual item as selected.
 
 ```tsx
 'use client';
-import { Checkbox as AriaCheckbox, type CheckboxProps } from 'react-aria-components/Checkbox';
+import {
+  CheckboxButton,
+  CheckboxField,
+  type CheckboxFieldProps,
+  type ValidationResult
+} from 'react-aria-components/Checkbox';
 import './Checkbox.css';
+import {Description, FieldError} from './Form';
+import type {ReactNode} from 'react';
 
-export function Checkbox(
-  { children, ...props }: Omit<CheckboxProps, 'children'> & {
-    children?: React.ReactNode;
-  }
-) {
+interface CheckboxProps extends CheckboxFieldProps {
+  children?: ReactNode;
+  description?: string;
+  errorMessage?: string | ((validation: ValidationResult) => string);
+}
+
+export function Checkbox({children, description, errorMessage, ...props}: CheckboxProps) {
   return (
-    (
-      <AriaCheckbox {...props}>
-        {({ isIndeterminate }) => (
+    <CheckboxField {...props}>
+      <CheckboxButton>
+        {({isIndeterminate}) => (
           <>
             <div className="indicator">
-              <svg viewBox="0 0 18 18" aria-hidden="true" key={isIndeterminate ? 'indeterminate' : 'check'}>
-                {isIndeterminate
-                  ? <rect x={1} y={7.5} width={16} height={3} />
-                  : <polyline points="2 9 7 14 16 4" />}
+              <svg
+                viewBox="0 0 18 18"
+                aria-hidden="true"
+                key={isIndeterminate ? 'indeterminate' : 'check'}>
+                {isIndeterminate ? (
+                  <rect x={1} y={7.5} width={16} height={3} />
+                ) : (
+                  <polyline points="2 9 7 14 16 4" />
+                )}
               </svg>
             </div>
             {children}
           </>
         )}
-      </AriaCheckbox>
-    )
+      </CheckboxButton>
+      {description && <Description>{description}</Description>}
+      <FieldError>{errorMessage}</FieldError>
+    </CheckboxField>
   );
 }
 
@@ -42,10 +57,25 @@ export function Checkbox(
 ### Checkbox.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
-.react-aria-Checkbox {
+.react-aria-CheckboxField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+
+  [slot='description'],
+  .react-aria-FieldError {
+    margin-left: calc(var(--spacing) * 6.5);
+  }
+
+  &[data-disabled] [slot='description'] {
+    color: var(--text-color-disabled);
+  }
+}
+
+.react-aria-CheckboxButton {
   --checkmark-color: var(--highlight-foreground);
 
   display: flex;
@@ -111,12 +141,18 @@ export function Checkbox(
 
 ```tsx
 'use client';
-import { Check, Minus } from 'lucide-react';
+import {Check, Minus} from 'lucide-react';
 import React from 'react';
-import { Checkbox as AriaCheckbox, type CheckboxProps } from 'react-aria-components/Checkbox';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
-import { tv } from 'tailwind-variants';
-import { focusRing } from './utils';
+import {
+  CheckboxField,
+  CheckboxButton,
+  type CheckboxFieldProps,
+  type ValidationResult
+} from 'react-aria-components/Checkbox';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
+import {tv} from 'tailwind-variants';
+import {focusRing} from './utils';
+import {Description, FieldError} from './Field';
 
 const checkboxStyles = tv({
   base: 'flex gap-2 items-center group font-sans text-sm transition relative [-webkit-tap-highlight-color:transparent]',
@@ -133,7 +169,8 @@ const boxStyles = tv({
   base: 'w-4.5 h-4.5 box-border shrink-0 rounded-sm flex items-center justify-center border transition',
   variants: {
     isSelected: {
-      false: 'bg-white dark:bg-neutral-900 border-(--color) [--color:var(--color-neutral-400)] dark:[--color:var(--color-neutral-400)] group-pressed:[--color:var(--color-neutral-500)] dark:group-pressed:[--color:var(--color-neutral-300)]',
+      false:
+        'bg-white dark:bg-neutral-900 border-(--color) [--color:var(--color-neutral-400)] dark:[--color:var(--color-neutral-400)] group-pressed:[--color:var(--color-neutral-500)] dark:group-pressed:[--color:var(--color-neutral-300)]',
       true: 'bg-(--color) border-(--color) [--color:var(--color-neutral-700)] group-pressed:[--color:var(--color-neutral-800)] dark:[--color:var(--color-neutral-300)] dark:group-pressed:[--color:var(--color-neutral-200)] forced-colors:[--color:Highlight]!'
     },
     isInvalid: {
@@ -145,25 +182,42 @@ const boxStyles = tv({
   }
 });
 
-const iconStyles = 'w-3.5 h-3.5 text-white group-disabled:text-neutral-400 dark:text-neutral-900 dark:group-disabled:text-neutral-600 forced-colors:text-[HighlightText] pointer-events-none';
+const iconStyles =
+  'w-3.5 h-3.5 text-white group-disabled:text-neutral-400 dark:text-neutral-900 dark:group-disabled:text-neutral-600 forced-colors:text-[HighlightText] pointer-events-none';
+
+interface CheckboxProps extends CheckboxFieldProps {
+  children?: React.ReactNode;
+  description?: string;
+  errorMessage?: string | ((validation: ValidationResult) => string);
+}
 
 export function Checkbox(props: CheckboxProps) {
   return (
-    <AriaCheckbox {...props} className={composeRenderProps(props.className, (className, renderProps) => checkboxStyles({...renderProps, className}))}>
-      {composeRenderProps(props.children, (children, {isSelected, isIndeterminate, ...renderProps}) => (
-        <>
-          <div className={boxStyles({isSelected: isSelected || isIndeterminate, ...renderProps})}>
-            {isIndeterminate
-              ? <Minus aria-hidden className={iconStyles} />
-              : isSelected
-                ? <Check aria-hidden className={iconStyles} />
-                : null
-            }
-          </div>
-          {children}
-        </>
-      ))}
-    </AriaCheckbox>
+    <CheckboxField {...props} className="flex flex-col gap-1 group">
+      <CheckboxButton
+        className={composeRenderProps(props.className, (className, renderProps) =>
+          checkboxStyles({...renderProps, className})
+        )}>
+        {composeRenderProps(
+          props.children,
+          (children, {isSelected, isIndeterminate, ...renderProps}) => (
+            <>
+              <div
+                className={boxStyles({isSelected: isSelected || isIndeterminate, ...renderProps})}>
+                {isIndeterminate ? (
+                  <Minus aria-hidden className={iconStyles} />
+                ) : isSelected ? (
+                  <Check aria-hidden className={iconStyles} />
+                ) : null}
+              </div>
+              {children}
+            </>
+          )
+        )}
+      </CheckboxButton>
+      {props.description && <Description className="ms-6.5">{props.description}</Description>}
+      <FieldError className="ms-6.5">{props.errorMessage}</FieldError>
+    </CheckboxField>
   );
 }
 
@@ -209,9 +263,10 @@ import {Form} from 'vanilla-starter/Form';;
   <Checkbox
     name="terms"
     value="agree"
-    isRequired>
+    isRequired
+    description="By clicking this checkbox, you agree to the terms and conditions.">
     {/*- end highlight -*/}
-    I agree to the terms
+    Accept terms and conditions
   </Checkbox>
   <Button type="submit" style={{marginTop: 8}}>Submit</Button>
 </Form>
@@ -220,10 +275,14 @@ import {Form} from 'vanilla-starter/Form';;
 ## API
 
 ```tsx
-<Checkbox>Label</Checkbox>
+<CheckboxField>
+  <CheckboxButton>Label</CheckboxButton>
+  <Text slot="description" />
+  <FieldError />
+</CheckboxField>
 ```
 
-### Checkbox
+### CheckboxField
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
@@ -234,8 +293,8 @@ import {Form} from 'vanilla-starter/Form';;
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | undefined` | — | Whether the element should receive focus on render. |
-| `children` | `ChildrenOrFunction<CheckboxRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
-| `className` | `ClassNameOrFunction<CheckboxRenderProps> | undefined` | 'react-aria-Checkbox' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
+| `children` | `ChildrenOrFunction<CheckboxFieldRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
+| `className` | `ClassNameOrFunction<CheckboxFieldRenderProps> | undefined` | 'react-aria-CheckboxField' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `defaultSelected` | `boolean | undefined` | — | Whether the element should be selected (uncontrolled). |
 | `dir` | `string | undefined` | — |  |
 | `excludeFromTabOrder` | `boolean | undefined` | — | Whether to exclude the element from the sequential tab order. If true, the element will not be focusable via the keyboard by tabbing. This should be avoided except in rare scenarios where an alternative means of accessing the element or its functionality via the keyboard is available. |
@@ -252,6 +311,99 @@ import {Form} from 'vanilla-starter/Form';;
 | `isSelected` | `boolean | undefined` | — | Whether the element should be selected (controlled). |
 | `lang` | `string | undefined` | — |  |
 | `name` | `string | undefined` | — | The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). |
+| `onAnimationEnd` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationIteration` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationIterationCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationStart` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAuxClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
+| `onChange` | `((isSelected: boolean) => void) | undefined` | — | Handler that is called when the element's selection state changes. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
+| `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onDoubleClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onDoubleClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onFocus` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element receives focus. |
+| `onFocusChange` | `((isFocused: boolean) => void) | undefined` | — | Handler that is called when the element's focus status changes. |
+| `onGotPointerCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onKeyDown` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is pressed. |
+| `onKeyUp` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is released. |
+| `onLostPointerCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseDown` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseDownCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseEnter` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseLeave` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseMove` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseMoveCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOut` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOutCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOver` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOverCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseUp` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseUpCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerCancel` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerCancelCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerDown` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerDownCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerEnter` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerLeave` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerMove` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerMoveCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOut` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOutCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOver` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOverCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerUp` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerUpCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPress` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when the press is released over the target. |
+| `onPressChange` | `((isPressed: boolean) => void) | undefined` | — | Handler that is called when the press state changes. |
+| `onPressEnd` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction ends, either over the target or when the pointer leaves the target. |
+| `onPressStart` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction starts. |
+| `onPressUp` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press is released over the target, regardless of whether it started on the target or not. |
+| `onScroll` | `React.UIEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onScrollCapture` | `React.UIEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchCancel` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchCancelCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchEnd` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchEndCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchMove` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchMoveCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchStart` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchStartCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionCancel` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionCancelCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionEnd` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionEndCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionRun` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionRunCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionStart` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", CheckboxFieldRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
+| `style` | `(((values: CheckboxFieldRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+| `validate` | `((value: boolean) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
+| `value` | `string | undefined` | — | The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). |
+
+### CheckboxButton
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ChildrenOrFunction<CheckboxButtonRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
+| `className` | `ClassNameOrFunction<CheckboxButtonRenderProps> | undefined` | 'react-aria-CheckboxButton' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
+| `dir` | `string | undefined` | — |  |
+| `hidden` | `boolean | undefined` | — |  |
+| `inert` | `boolean | undefined` | — |  |
+| `lang` | `string | undefined` | — |  |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAnimationIteration` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
@@ -260,23 +412,17 @@ import {Form} from 'vanilla-starter/Form';;
 | `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAuxClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
-| `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
-| `onChange` | `((isSelected: boolean) => void) | undefined` | — | Handler that is called when the element's selection state changes. |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onDoubleClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onDoubleClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
-| `onFocus` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element receives focus. |
-| `onFocusChange` | `((isFocused: boolean) => void) | undefined` | — | Handler that is called when the element's focus status changes. |
 | `onGotPointerCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onHoverChange` | `((isHovering: boolean) => void) | undefined` | — | Handler that is called when the hover state changes. |
 | `onHoverEnd` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction ends. |
 | `onHoverStart` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction starts. |
-| `onKeyDown` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is pressed. |
-| `onKeyUp` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is released. |
 | `onLostPointerCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onMouseDown` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
@@ -305,11 +451,6 @@ import {Form} from 'vanilla-starter/Form';;
 | `onPointerOverCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onPointerUp` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onPointerUpCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
-| `onPress` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when the press is released over the target. |
-| `onPressChange` | `((isPressed: boolean) => void) | undefined` | — | Handler that is called when the press state changes. |
-| `onPressEnd` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction ends, either over the target or when the pointer leaves the target. |
-| `onPressStart` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction starts. |
-| `onPressUp` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press is released over the target, regardless of whether it started on the target or not. |
 | `onScroll` | `React.UIEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onScrollCapture` | `React.UIEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onTouchCancel` | `React.TouchEventHandler<HTMLLabelElement> | undefined` | — |  |
@@ -330,10 +471,7 @@ import {Form} from 'vanilla-starter/Form';;
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLLabelElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"label", CheckboxRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"label", CheckboxButtonRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: CheckboxRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
-| `validate` | `((value: boolean) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
-| `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
-| `value` | `string | undefined` | — | The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). |
+| `style` | `(((values: CheckboxButtonRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

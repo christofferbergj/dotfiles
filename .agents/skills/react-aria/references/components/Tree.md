@@ -1,7 +1,7 @@
 # Tree
 
-A tree provides users with a way to navigate nested hierarchical information, with support for keyboard navigation
-and selection.
+A tree provides users with a way to navigate nested hierarchical information, with support for
+keyboard navigation and selection.
 
 ## Vanilla CSS example
 
@@ -39,28 +39,29 @@ import {
   TreeLoadMoreItem as AriaTreeLoadMoreItem,
   type TreeLoadMoreItemProps,
   TreeSection as AriaTreeSection,
-  TreeHeader as AriaTreeHeader,
+  TreeHeader as AriaTreeHeader
 } from 'react-aria-components/Tree';
 import {ChevronRight, GripVertical} from 'lucide-react';
 import {Checkbox} from './Checkbox';
 import {ProgressCircle} from './ProgressCircle';
 import './Tree.css';
 
-export function Tree<T extends object>(props: TreeProps<T>) {
+export function Tree<T>(props: TreeProps<T>) {
   return <AriaTree {...props} />;
 }
 
 export function TreeItemContent(
-  props: Omit<TreeItemContentProps, 'children'> & { children?: React.ReactNode }
+  props: Omit<TreeItemContentProps, 'children'> & {children?: React.ReactNode}
 ) {
   return (
     <AriaTreeItemContent>
-      {(
-        { selectionBehavior, selectionMode, allowsDragging }:
-          TreeItemContentRenderProps
-      ) => (
+      {({selectionBehavior, selectionMode, allowsDragging}: TreeItemContentRenderProps) => (
         <>
-          {allowsDragging && <Button slot="drag"><GripVertical size={16} /></Button>}
+          {allowsDragging && (
+            <Button slot="drag">
+              <GripVertical size={16} />
+            </Button>
+          )}
           {selectionBehavior === 'toggle' && selectionMode !== 'none' && (
             <Checkbox slot="selection" />
           )}
@@ -75,17 +76,21 @@ export function TreeItemContent(
 }
 
 export interface TreeItemProps extends Partial<AriaTreeItemProps> {
-  title: React.ReactNode;
+  title?: React.ReactNode;
 }
 
 export function TreeItem(props: TreeItemProps) {
   let textValue = typeof props.title === 'string' ? props.title : '';
   return (
     <AriaTreeItem textValue={textValue} {...props}>
-      <TreeItemContent>
-        {props.title}
-      </TreeItemContent>
-      {props.children}
+      {props.title != null ? (
+        <>
+          <TreeItemContent>{props.title}</TreeItemContent>
+          {props.children}
+        </>
+      ) : (
+        props.children
+      )}
     </AriaTreeItem>
   );
 }
@@ -98,15 +103,11 @@ export function TreeLoadMoreItem(props: TreeLoadMoreItemProps) {
   );
 }
 
-export function TreeSection<T extends object>(
-  props: React.ComponentProps<typeof AriaTreeSection>
-) {
+export function TreeSection(props: React.ComponentProps<typeof AriaTreeSection>) {
   return <AriaTreeSection {...props} />;
 }
 
-export function TreeHeader(
-  props: React.ComponentProps<typeof AriaTreeHeader>
-) {
+export function TreeHeader(props: React.ComponentProps<typeof AriaTreeHeader>) {
   return <AriaTreeHeader {...props} />;
 }
 
@@ -115,7 +116,7 @@ export function TreeHeader(
 ### Tree.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-Tree {
   display: flex;
@@ -156,7 +157,7 @@ export function TreeHeader(
     min-height: 100px;
   }
 
-  &[data-selection-mode=multiple] {
+  &[data-selection-mode='multiple'] {
     --checkbox-width: calc(var(--spacing) * 6.5);
   }
 
@@ -173,7 +174,10 @@ export function TreeHeader(
   .react-aria-DropIndicator {
     &[data-drop-target] {
       outline: 1px solid var(--highlight-background);
-      margin-left: calc(var(--spacing-2) + var(--checkbox-width) + var(--drag-button-width) + var(--spacing-5) + (var(--tree-item-level) - 1) * var(--spacing-4));
+      margin-left: calc(
+        var(--spacing-2) + var(--checkbox-width) + var(--drag-button-width) + var(--spacing-5) +
+          (var(--tree-item-level) - 1) * var(--spacing-4)
+      );
     }
   }
 }
@@ -208,7 +212,10 @@ export function TreeHeader(
     display: block;
     position: absolute;
     bottom: 0;
-    inset-inline-start: calc(var(--spacing-2) + var(--checkbox-width) + var(--drag-button-width) + var(--chevron-width) + (var(--tree-item-level) - 1) * var(--padding));
+    inset-inline-start: calc(
+      var(--spacing-2) + var(--checkbox-width) + var(--drag-button-width) + var(--chevron-width) +
+        (var(--tree-item-level) - 1) * var(--padding)
+    );
     inset-inline-end: var(--spacing-2);
     border-bottom: 0.5px solid var(--border-color);
   }
@@ -272,7 +279,7 @@ export function TreeHeader(
     background: var(--highlight-overlay);
   }
 
-  .react-aria-Button[slot=chevron] {
+  .react-aria-Button[slot='chevron'] {
     all: unset;
     display: flex;
     visibility: hidden;
@@ -291,15 +298,15 @@ export function TreeHeader(
     }
   }
 
-  &[data-has-child-items] .react-aria-Button[slot=chevron] {
+  &[data-has-child-items] .react-aria-Button[slot='chevron'] {
     visibility: visible;
   }
 
-  &[data-expanded] .react-aria-Button[slot=chevron] svg {
+  &[data-expanded] .react-aria-Button[slot='chevron'] svg {
     rotate: 90deg;
   }
 
-  .react-aria-Button[slot=drag] {
+  .react-aria-Button[slot='drag'] {
     all: unset;
     display: inline-flex;
     align-items: center;
@@ -314,7 +321,7 @@ export function TreeHeader(
   }
 }
 
-:where(.react-aria-TreeItem) .react-aria-Checkbox {
+.react-aria-TreeItem .react-aria-CheckboxButton {
   --checkmark-color: var(--highlight-background);
   &[data-selected] .indicator {
     --indicator-color: var(--highlight-foreground);
@@ -362,19 +369,20 @@ import {
   TreeItemContent as AriaTreeItemContent,
   Button,
   type TreeItemProps as AriaTreeItemProps,
-  type TreeProps,
+  type TreeProps
 } from 'react-aria-components/Tree';
-import { ChevronRight } from "lucide-react";
-import { tv } from 'tailwind-variants';
-import { Checkbox } from './Checkbox';
-import { composeTailwindRenderProps, focusRing } from './utils';
+import {ChevronRight} from 'lucide-react';
+import {tv} from 'tailwind-variants';
+import {Checkbox} from './Checkbox';
+import {composeTailwindRenderProps, focusRing} from './utils';
 
 const itemStyles = tv({
   extend: focusRing,
   base: 'relative font-sans flex group gap-3 cursor-default select-none py-1 px-3 text-sm text-neutral-900 dark:text-neutral-200 bg-white dark:bg-neutral-900 border-t dark:border-t-neutral-700 border-transparent first:border-t-0 -outline-offset-2 first:rounded-t-lg last:rounded-b-lg',
   variants: {
     isSelected: {
-      false: 'hover:bg-neutral-100 pressed:bg-neutral-100 dark:hover:bg-neutral-800 dark:pressed:bg-neutral-800',
+      false:
+        'hover:bg-neutral-100 pressed:bg-neutral-100 dark:hover:bg-neutral-800 dark:pressed:bg-neutral-800',
       true: 'bg-blue-100 dark:bg-blue-700/30 hover:bg-blue-200 pressed:bg-blue-200 dark:hover:bg-blue-700/40 dark:pressed:bg-blue-700/40 border-y-blue-200 dark:border-y-blue-900 z-20'
     },
     isDisabled: {
@@ -383,11 +391,14 @@ const itemStyles = tv({
   }
 });
 
-export function Tree<T extends object>(
-  { children, ...props }: TreeProps<T>
-) {
+export function Tree<T>({children, ...props}: TreeProps<T>) {
   return (
-    <AriaTree {...props} className={composeTailwindRenderProps(props.className, 'w-48 max-w-full overflow-auto relative border border-neutral-200 dark:border-neutral-700 rounded-lg')}>
+    <AriaTree
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'w-48 max-w-full overflow-auto relative border border-neutral-200 dark:border-neutral-700 rounded-lg'
+      )}>
       {children}
     </AriaTree>
   );
@@ -395,7 +406,7 @@ export function Tree<T extends object>(
 
 const expandButton = tv({
   extend: focusRing,
-  base: "border-0 p-0 bg-transparent shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-start cursor-default [-webkit-tap-highlight-color:transparent]",
+  base: 'border-0 p-0 bg-transparent shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-start cursor-default [-webkit-tap-highlight-color:transparent]',
   variants: {
     isDisabled: {
       true: 'text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]'
@@ -404,10 +415,10 @@ const expandButton = tv({
 });
 
 const chevron = tv({
-  base: "w-4.5 h-4.5 text-neutral-500 dark:text-neutral-400 transition-transform duration-200 ease-in-out",
+  base: 'w-4.5 h-4.5 text-neutral-500 dark:text-neutral-400 transition-transform duration-200 ease-in-out',
   variants: {
     isExpanded: {
-      true: "transform rotate-90",
+      true: 'transform rotate-90'
     },
     isDisabled: {
       true: 'text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]'
@@ -421,26 +432,28 @@ export interface TreeItemProps extends Partial<AriaTreeItemProps> {
 
 export function TreeItem(props: TreeItemProps) {
   return (
-    <AriaTreeItem className={itemStyles}  textValue={props.title} {...props}>
+    <AriaTreeItem className={itemStyles} textValue={props.title} {...props}>
       <AriaTreeItemContent {...props}>
-        {({ selectionMode, selectionBehavior, hasChildItems, isExpanded, isDisabled }) => (
+        {({selectionMode, selectionBehavior, hasChildItems, isExpanded, isDisabled}) => (
           <div className={`flex items-center`}>
             {selectionMode !== 'none' && selectionBehavior === 'toggle' && (
               <Checkbox slot="selection" />
             )}
-            <div className='shrink-0 w-[calc(calc(var(--tree-item-level)_-_1)_*_calc(var(--spacing)_*_3))]' />
+            <div className="shrink-0 w-[calc(calc(var(--tree-item-level)_-_1)_*_calc(var(--spacing)_*_3))]" />
             {hasChildItems ? (
-              <Button slot="chevron" className={expandButton({ isDisabled })}>
-              <ChevronRight aria-hidden className={chevron({ isExpanded, isDisabled })} />
-            </Button>
-            ) : <div className='shrink-0 w-8 h-8' />}
+              <Button slot="chevron" className={expandButton({isDisabled})}>
+                <ChevronRight aria-hidden className={chevron({isExpanded, isDisabled})} />
+              </Button>
+            ) : (
+              <div className="shrink-0 w-8 h-8" />
+            )}
             {props.title}
           </div>
         )}
       </AriaTreeItemContent>
       {props.children}
     </AriaTreeItem>
-  )
+  );
 }
 
 ```
@@ -634,7 +647,7 @@ import {Tree, TreeHeader, TreeItem, TreeSection} from 'vanilla-starter/Tree';
     <TreeItem id="shared-photos" title="Shared Photos">
       <TreeItem id="shared-photo-1" title="Shared Photo 1" />
       <TreeItem id="shared-photo-2" title="Shared Photo 2" />
-    </TreeItem> 
+    </TreeItem>
   </TreeSection>
   <TreeSection>
     <TreeHeader>Documents</TreeHeader>
@@ -694,6 +707,50 @@ function Example(props) {
     </div>
   );
 }
+```
+
+## Keyboard navigation
+
+By default, Tree uses arrow key navigation to move focus into rows. Set `keyboardNavigationBehavior="tab"` to have <Keyboard>Tab</Keyboard> move focus in and out of a row.
+Use this when rows contain interactive elements such as text fields, where arrow keys and typing in the field should not trigger grid navigation or selection.
+
+```tsx
+import {Tree, TreeItem, TreeItemContent} from 'vanilla-starter/Tree';
+import {TextField} from 'vanilla-starter/TextField';
+
+<Tree
+  /*- begin highlight -*/
+  keyboardNavigationBehavior="tab"
+  /*- end highlight -*/
+  selectionMode="multiple"
+  defaultExpandedKeys={['documents', 'photos']}
+  aria-label="Shared files">
+  <TreeItem id="documents" textValue="Documents">
+    <TreeItemContent>
+      <TextField aria-label="title" defaultValue="Documents" />
+    </TreeItemContent>
+    <TreeItem id="weekly" textValue="Weekly Report.pdf">
+      <TreeItemContent>
+        <TextField aria-label="title" defaultValue="Weekly Report.pdf" />
+      </TreeItemContent>
+    </TreeItem>
+    <TreeItem id="budget" textValue="Budget.xlsx">
+      <TreeItemContent>
+        <TextField aria-label="title" defaultValue="Budget.xlsx" />
+      </TreeItemContent>
+    </TreeItem>
+  </TreeItem>
+  <TreeItem id="photos">
+    <TreeItemContent>
+      <TextField aria-label="title" defaultValue="Photos" />
+    </TreeItemContent>
+    <TreeItem id="sunset" textValue="Sunset.jpg">
+      <TreeItemContent>
+        <TextField aria-label="title" defaultValue="Sunset.jpg" />
+      </TreeItemContent>
+    </TreeItem>
+  </TreeItem>
+</Tree>
 ```
 
 ## Drag and drop
@@ -802,7 +859,7 @@ function Example() {
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | FocusStrategy | undefined` | — | Whether to auto focus the gridlist or an option. |
-| `children` | `React.ReactNode | ((item: T) => ReactNode)` | — | The contents of the collection. |
+| `children` | `((item: T) => ReactNode) | React.ReactNode` | — | The contents of the collection. |
 | `className` | `ClassNameOrFunction<TreeRenderProps> | undefined` | 'react-aria-Tree' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `defaultExpandedKeys` | `Iterable<Key> | undefined` | — | The initial expanded keys in the collection (uncontrolled). |
 | `defaultSelectedKeys` | `"all" | Iterable<Key> | undefined` | — | The initial selected keys in the collection (uncontrolled). |
@@ -818,6 +875,7 @@ function Example() {
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
 | `items` | `Iterable<T> | undefined` | — | Item objects in the collection. |
+| `keyboardNavigationBehavior` | `"arrow" | "tab" | undefined` | 'arrow' | Whether keyboard navigation to focusable elements within grid list items is via the left/right arrow keys or the tab key. |
 | `lang` | `string | undefined` | — |  |
 | `onAction` | `((key: Key) => void) | undefined` | — | Handler that is called when a user performs an action on an item. The exact user event depends on the collection's `selectionBehavior` prop and the interaction modality. |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -886,15 +944,15 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", TreeRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", TreeRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `renderEmptyState` | `((props: TreeEmptyStateRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no items in the list. |
 | `selectedKeys` | `"all" | Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
-| `selectionBehavior` | `SelectionBehavior | undefined` | "toggle" | How multiple selection should behave in the tree. |
+| `selectionBehavior` | `SelectionBehavior | undefined` | 'toggle' | How multiple selection should behave in the tree. |
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: TreeRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: TreeRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### TreeItem
 
@@ -904,7 +962,7 @@ function Example() {
 | `children` | `React.ReactNode` | — | The content of the tree item along with any nested children. Supports static nested tree items or use of a Collection to dynamically render nested tree items. |
 | `className` | `ClassNameOrFunction<TreeItemRenderProps> | undefined` | 'react-aria-TreeItem' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
-| `download` | `string | boolean | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
+| `download` | `boolean | string | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
 | `hasChildItems` | `boolean | undefined` | — | Whether this item has children, even if not loaded yet. |
 | `hidden` | `boolean | undefined` | — |  |
 | `href` | `string | undefined` | — | A URL to link to. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). |
@@ -922,7 +980,7 @@ function Example() {
 | `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
 | `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -989,12 +1047,12 @@ function Example() {
 | `ping` | `string | undefined` | — | A space-separated list of URLs to ping when the link is followed. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#ping). |
 | `referrerPolicy` | `React.HTMLAttributeReferrerPolicy | undefined` | — | How much of the referrer to send when following the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#referrerpolicy). |
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
-| `render` | `DOMRenderFunction<"div", TreeItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", TreeItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
-| `style` | `(React.CSSProperties | ((values: TreeItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `(((values: TreeItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string` | — | A string representation of the tree item's contents, used for features like typeahead. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `T | undefined` | — | The object value that this tree item represents. When using dynamic collections, this is set automatically. |
 
 ### TreeItemContent
@@ -1017,9 +1075,9 @@ function Example() {
 | `className` | `ClassNameOrFunction<TreeLoadMoreItemRenderProps> | undefined` | 'react-aria-TreeLoadMoreItem' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `isLoading` | `boolean | undefined` | — | Whether or not the loading spinner should be rendered or not. |
 | `onLoadMore` | `(() => any) | undefined` | — | Handler that is called when more items should be loaded, e.g. while scrolling near the bottom. |
-| `render` | `DOMRenderFunction<"div", TreeLoadMoreItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", TreeLoadMoreItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `scrollOffset` | `number | undefined` | 1 | The amount of offset from the bottom of your scrollable region that should trigger load more. Uses a percentage value relative to the scroll body's client height. Load more is then triggered when your current scroll position's distance from the bottom of the currently loaded list of items is less than or equal to the provided value. (e.g. 1 = 100% of the scroll region's height). |
-| `style` | `(React.CSSProperties | ((values: TreeLoadMoreItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `(((values: TreeLoadMoreItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 
 ## Related Types
 
@@ -1027,28 +1085,29 @@ function Example() {
 
 `useDragAndDrop(options: DragAndDropOptions<T>): DragAndDrop<T>`
 
-Provides the hooks required to enable drag and drop behavior for a drag and drop compatible collection component.
+Provides the hooks required to enable drag and drop behavior for a drag and drop compatible
+collection component.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `acceptedDragTypes` | `"all" | (string | symbol)[] | undefined` | 'all' | The drag types that the droppable collection accepts. If the collection accepts directories, include `DIRECTORY_DRAG_TYPE` in your array of allowed types. |
+| `dropTargetDelegate` | `DropTargetDelegate | undefined` | — | A custom delegate object that provides drop targets for pointer coordinates within the collection. |
+| `getAllowedDropOperations` | `(() => DropOperation[]) | undefined` | — | Function that returns the drop operations that are allowed for the dragged items. If not provided, all drop operations are allowed. |
+| `getDropOperation` | `((target: DropTarget, types: DragTypes, allowedOperations: DropOperation[]) => DropOperation) | undefined` | — | A function returning the drop operation to be performed when items matching the given types are dropped on the drop target. |
 | `getItems` | `((keys: Set<Key>, items: T[]) => DragItem[]) | undefined` | () => \[] | A function that returns the items being dragged. If not specified, we assume that the collection is not draggable. |
+| `isDisabled` | `boolean | undefined` | — | Whether the drag and drop events should be disabled. |
+| `onDragEnd` | `((e: DraggableCollectionEndEvent) => void) | undefined` | — | Handler that is called when the drag operation is ended, either as a result of a drop or a cancellation. |
+| `onDragMove` | `((e: DraggableCollectionMoveEvent) => void) | undefined` | — | Handler that is called when the drag is moved. |
+| `onDragStart` | `((e: DraggableCollectionStartEvent) => void) | undefined` | — | Handler that is called when a drag operation is started. |
+| `onDrop` | `((e: DroppableCollectionDropEvent) => void) | undefined` | — | Handler that is called when a valid drag is dropped on a drop target. When defined, this overrides other drop handlers such as `onInsert`, and `onItemDrop`. |
+| `onDropActivate` | `((e: DroppableCollectionActivateEvent) => void) | undefined` | — | Handler that is called after a valid drag is held over a drop target for a period of time. |
+| `onDropEnter` | `((e: DroppableCollectionEnterEvent) => void) | undefined` | — | Handler that is called when a valid drag enters a drop target. |
+| `onDropExit` | `((e: DroppableCollectionExitEvent) => void) | undefined` | — | Handler that is called when a valid drag exits a drop target. |
+| `onInsert` | `((e: DroppableCollectionInsertDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped "between" items. |
+| `onItemDrop` | `((e: DroppableCollectionOnItemDropEvent) => void) | undefined` | — | Handler that is called when items are dropped "on" an item. |
+| `onMove` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are moved within the source collection. This handler allows dropping both on or between items, and items may be moved to a different parent item within a tree. |
+| `onReorder` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are reordered within the collection. This handler only allows dropping between items, not on items. It does not allow moving items to a different parent item within a tree. |
+| `onRootDrop` | `((e: DroppableCollectionRootDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped on the droppable collection's root. |
 | `renderDragPreview` | `((items: DragItem[]) => JSX.Element | { element: JSX.Element; x: number; y: number; }) | undefined` | — | A function that renders a drag preview, which is shown under the user's cursor while dragging. By default, a copy of the dragged element is rendered. |
 | `renderDropIndicator` | `((target: DropTarget) => JSX.Element) | undefined` | — | A function that renders a drop indicator element between two items in a collection. This should render a `<DropIndicator>` element. If this function is not provided, a default DropIndicator is provided. |
-| `dropTargetDelegate` | `DropTargetDelegate | undefined` | — | A custom delegate object that provides drop targets for pointer coordinates within the collection. |
-| `isDisabled` | `boolean | undefined` | — | Whether the drag and drop events should be disabled. |
-| `onDragStart` | `((e: DraggableCollectionStartEvent) => void) | undefined` | — | Handler that is called when a drag operation is started. |
-| `onDragMove` | `((e: DraggableCollectionMoveEvent) => void) | undefined` | — | Handler that is called when the drag is moved. |
-| `onDragEnd` | `((e: DraggableCollectionEndEvent) => void) | undefined` | — | Handler that is called when the drag operation is ended, either as a result of a drop or a cancellation. |
-| `getAllowedDropOperations` | `(() => DropOperation[]) | undefined` | — | Function that returns the drop operations that are allowed for the dragged items. If not provided, all drop operations are allowed. |
-| `acceptedDragTypes` | `"all" | (string | symbol)[] | undefined` | 'all' | The drag types that the droppable collection accepts. If the collection accepts directories, include `DIRECTORY_DRAG_TYPE` in your array of allowed types. |
-| `onInsert` | `((e: DroppableCollectionInsertDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped "between" items. |
-| `onRootDrop` | `((e: DroppableCollectionRootDropEvent) => void) | undefined` | — | Handler that is called when external items are dropped on the droppable collection's root. |
-| `onItemDrop` | `((e: DroppableCollectionOnItemDropEvent) => void) | undefined` | — | Handler that is called when items are dropped "on" an item. |
-| `onReorder` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are reordered within the collection. This handler only allows dropping between items, not on items. It does not allow moving items to a different parent item within a tree. |
-| `onMove` | `((e: DroppableCollectionReorderEvent) => void) | undefined` | — | Handler that is called when items are moved within the source collection. This handler allows dropping both on or between items, and items may be moved to a different parent item within a tree. |
 | `shouldAcceptItemDrop` | `((target: ItemDropTarget, types: DragTypes) => boolean) | undefined` | — | A function returning whether a given target in the droppable collection is a valid "on" drop target for the current drag types. |
-| `onDropEnter` | `((e: DroppableCollectionEnterEvent) => void) | undefined` | — | Handler that is called when a valid drag enters a drop target. |
-| `onDropActivate` | `((e: DroppableCollectionActivateEvent) => void) | undefined` | — | Handler that is called after a valid drag is held over a drop target for a period of time. |
-| `onDropExit` | `((e: DroppableCollectionExitEvent) => void) | undefined` | — | Handler that is called when a valid drag exits a drop target. |
-| `onDrop` | `((e: DroppableCollectionDropEvent) => void) | undefined` | — | Handler that is called when a valid drag is dropped on a drop target. When defined, this overrides other drop handlers such as `onInsert`, and `onItemDrop`. |
-| `getDropOperation` | `((target: DropTarget, types: DragTypes, allowedOperations: DropOperation[]) => DropOperation) | undefined` | — | A function returning the drop operation to be performed when items matching the given types are dropped on the drop target. |

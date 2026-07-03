@@ -13,28 +13,28 @@ import {
   TimeField as AriaTimeField,
   type TimeFieldProps as AriaTimeFieldProps,
   type TimeValue,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/TimeField';
 import {Label, FieldError, Description} from './Form';
 import {DateInput, DateSegment} from './DateField';
 import './TimeField.css';
 
-export interface TimeFieldProps<T extends TimeValue>
-  extends AriaTimeFieldProps<T> {
+export interface TimeFieldProps<T extends TimeValue> extends AriaTimeFieldProps<T> {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
-export function TimeField<T extends TimeValue>(
-  { label, description, errorMessage, ...props }: TimeFieldProps<T>
-) {
+export function TimeField<T extends TimeValue>({
+  label,
+  description,
+  errorMessage,
+  ...props
+}: TimeFieldProps<T>) {
   return (
     <AriaTimeField {...props}>
       <Label>{label}</Label>
-      <DateInput>
-        {(segment) => <DateSegment segment={segment} />}
-      </DateInput>
+      <DateInput>{segment => <DateSegment segment={segment} />}</DateInput>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
     </AriaTimeField>
@@ -46,7 +46,7 @@ export function TimeField<T extends TimeValue>(
 ### TimeField.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-TimeField {
   display: flex;
@@ -66,24 +66,28 @@ import {
   TimeField as AriaTimeField,
   type TimeFieldProps as AriaTimeFieldProps,
   type TimeValue,
-  type ValidationResult,
+  type ValidationResult
 } from 'react-aria-components/TimeField';
-import { DateInput } from './DateField';
-import { Description, FieldError, Label } from './Field';
-import { composeTailwindRenderProps } from './utils';
+import {DateInput} from './DateField';
+import {Description, FieldError, Label} from './Field';
+import {composeTailwindRenderProps} from './utils';
 
-export interface TimeFieldProps<T extends TimeValue>
-  extends AriaTimeFieldProps<T> {
+export interface TimeFieldProps<T extends TimeValue> extends AriaTimeFieldProps<T> {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
-export function TimeField<T extends TimeValue>(
-  { label, description, errorMessage, ...props }: TimeFieldProps<T>
-) {
+export function TimeField<T extends TimeValue>({
+  label,
+  description,
+  errorMessage,
+  ...props
+}: TimeFieldProps<T>) {
   return (
-    <AriaTimeField {...props} className={composeTailwindRenderProps(props.className, 'flex flex-col gap-1 font-sans')}>
+    <AriaTimeField
+      {...props}
+      className={composeTailwindRenderProps(props.className, 'flex flex-col gap-1 font-sans')}>
       <Label>{label}</Label>
       <DateInput />
       {description && <Description>{description}</Description>}
@@ -179,7 +183,7 @@ import {Form} from 'vanilla-starter/Form';;
 | `contextualHelp` | `ReactNode` | — | A ContextualHelp element to place next to the label. |
 | `defaultValue` | `T | null | undefined` | — | The default value (uncontrolled). |
 | `description` | `ReactNode` | — | A description for the field. Provides a hint such as specific requirements for what to choose. |
-| `errorMessage` | `ReactNode | ((v: ValidationResult) => ReactNode)` | — | An error message for the field. |
+| `errorMessage` | `((v: ValidationResult) => ReactNode) | ReactNode` | — | An error message for the field. |
 | `form` | `string | undefined` | — | The `<form>` element to associate the input with. The value of this attribute must be the id of a `<form>` in the same document. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#form). |
 | `granularity` | `"hour" | "minute" | "second" | undefined` | 'minute' | Determines the smallest unit that is displayed in the time picker. |
 | `hideTimeZone` | `boolean | undefined` | — | Whether to hide the time zone abbreviation. |
@@ -204,13 +208,13 @@ import {Form} from 'vanilla-starter/Form';;
 | `onKeyUp` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is released. |
 | `placeholderValue` | `T | undefined` | — | A placeholder time that influences the format of the placeholder shown when no value is selected. Defaults to 12:00 AM or 00:00 depending on the hour cycle. |
 | `shouldForceLeadingZeros` | `boolean | undefined` | — | Whether to always show leading zeros in the hour field. By default, this is determined by the user's locale. |
-| `size` | `"S" | "M" | "L" | "XL" | undefined` | 'M' | The size of the TimeField. |
+| `size` | `"L" | "M" | "S" | "XL" | undefined` | 'M' | The size of the TimeField. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `styles` | `StylesProp | undefined` | — | Spectrum-defined styles, returned by the `style()` macro. |
 | `UNSAFE_className` | `UnsafeClassName | undefined` | — | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 | `UNSAFE_style` | `CSSProperties | undefined` | — | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
-| `validate` | `((value: MappedTimeValue<T>) => ValidationError | true | null | undefined) | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
-| `validationBehavior` | `"native" | "aria" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
+| `validate` | `((value: MappedTimeValue<T>) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
 | `value` | `T | null | undefined` | — | The current value (controlled). |
 
 ### DateInput
@@ -287,10 +291,10 @@ import {Form} from 'vanilla-starter/Form';;
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", DateInputRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", DateInputRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: DateInputRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: DateInputRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### DateSegment
 
@@ -369,7 +373,7 @@ import {Form} from 'vanilla-starter/Form';;
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLSpanElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLSpanElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLSpanElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"span", DateSegmentRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"span", DateSegmentRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `segment` | `IDateSegment` | — |  |
-| `style` | `(React.CSSProperties | ((values: DateSegmentRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: DateSegmentRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

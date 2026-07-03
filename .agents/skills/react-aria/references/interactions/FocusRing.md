@@ -31,7 +31,7 @@ If CSS classes are not being used for styling, see [useFocusRing](useFocusRing.m
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `autoFocus` | `boolean | undefined` | — | Whether the element will be auto focused. |
-| `children` | `React.ReactElement<unknown, string | React.JSXElementConstructor<any>>` | — | Child element to apply CSS classes to. |
+| `children` | `React.ReactElement<React.JSXElementConstructor<any> | unknown, string>` | — | Child element to apply CSS classes to. |
 | `focusClass` | `string | undefined` | — | CSS class to apply when the element is focused. |
 | `focusRingClass` | `string | undefined` | — | CSS class to apply when the element has keyboard focus. |
 | `isTextInput` | `boolean | undefined` | — | Whether the element is a text input. |

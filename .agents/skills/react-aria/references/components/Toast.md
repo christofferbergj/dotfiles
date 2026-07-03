@@ -1,6 +1,6 @@
 # Toast
 
-
+{docs.exports.UNSTABLE_Toast.description}
 
 ## Vanilla CSS example
 
@@ -36,13 +36,13 @@ import {
   UNSTABLE_ToastQueue as ToastQueue,
   UNSTABLE_ToastContent as ToastContent,
   type ToastProps,
-  Text,
+  Text
 } from 'react-aria-components/Toast';
 import {Button} from './Button';
 import {X} from 'lucide-react';
 import './Toast.css';
 import {flushSync} from 'react-dom';
-import { type CSSProperties } from 'react';
+import {type CSSProperties} from 'react';
 
 // Define the type for your toast content. This interface defines the properties of your toast content, affecting what you
 // pass to the queue calls as arguments.
@@ -95,7 +95,7 @@ export function MyToast(props: ToastProps<MyToastContent>) {
 ### Toast.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-ToastRegion {
   position: fixed;
@@ -137,18 +137,18 @@ export function MyToast(props: ToastProps<MyToastContent>) {
     min-width: 0;
     font: var(--font-size) system-ui;
 
-    [slot=title] {
+    [slot='title'] {
       font-weight: 600;
       color: var(--highlight-foreground);
     }
 
-    [slot=description] {
+    [slot='description'] {
       font-size: var(--font-size-sm);
       color: var(--highlight-foreground);
     }
   }
 
-  .react-aria-Button[slot=close] {
+  .react-aria-Button[slot='close'] {
     flex: 0 0 auto;
     background: none;
     border: none;
@@ -232,7 +232,7 @@ function Example(props) {
 
 ```tsx
 'use client';
-import React, { type CSSProperties } from 'react';
+import React, {type CSSProperties} from 'react';
 import {
   UNSTABLE_ToastRegion as ToastRegion,
   UNSTABLE_Toast as Toast,
@@ -240,7 +240,7 @@ import {
   UNSTABLE_ToastContent as ToastContent,
   type ToastProps,
   Button,
-  Text,
+  Text
 } from 'react-aria-components/Toast';
 import {XIcon} from 'lucide-react';
 import {composeTailwindRenderProps} from './utils';
@@ -277,9 +277,13 @@ export function MyToastRegion() {
       {({toast}) => (
         <MyToast toast={toast}>
           <ToastContent className="flex flex-col flex-1 min-w-0">
-            <Text slot="title" className="font-semibold text-white text-sm">{toast.content.title}</Text>
+            <Text slot="title" className="font-semibold text-white text-sm">
+              {toast.content.title}
+            </Text>
             {toast.content.description && (
-              <Text slot="description" className="text-xs text-white">{toast.content.description}</Text>
+              <Text slot="description" className="text-xs text-white">
+                {toast.content.description}
+              </Text>
             )}
           </ToastContent>
           <Button
@@ -301,7 +305,7 @@ export function MyToast(props: ToastProps<MyToastContent>) {
       style={{viewTransitionName: props.toast.key} as CSSProperties}
       className={composeTailwindRenderProps(
         props.className,
-        "flex items-center gap-4 bg-blue-600 px-4 py-3 rounded-lg outline-none forced-colors:outline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 [view-transition-class:toast] font-sans w-[230px]"
+        'flex items-center gap-4 bg-blue-600 px-4 py-3 rounded-lg outline-none forced-colors:outline focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 [view-transition-class:toast] font-sans w-[230px]'
       )}
     />
   );

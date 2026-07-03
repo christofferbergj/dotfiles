@@ -2,6 +2,16 @@
 
 Learn how to use the React Aria MCP Server, Agent Skills, and more to help you build with AI.
 
+## Agent Skills
+
+[Agent Skills](https://agentskills.io) are folders of instructions, scripts, and resources that your AI coding tool can load when relevant to help with specific tasks.
+
+To install the React Aria skill, run:
+
+```bash
+npx skills add https://react-aria.adobe.com
+```
+
 ## MCP Server
 
 [Node.js](https://nodejs.org/) must be installed on your system to run the MCP server.
@@ -10,7 +20,7 @@ Learn how to use the React Aria MCP Server, Agent Skills, and more to help you b
   aria-label="MCP Clients"
   density="compact"
 >
-  <TabList><Tab id="cursor">Cursor</Tab><Tab id="vscode">VS Code</Tab><Tab id="claude-code">Claude Code</Tab><Tab id="codex">Codex</Tab><Tab id="gemini-cli">Gemini CLI</Tab><Tab id="other">Other</Tab></TabList>
+  <TabList><Tab id="cursor">Cursor</Tab><Tab id="vscode">VS Code</Tab><Tab id="claude-desktop">Claude Code (Desktop)</Tab><Tab id="claude-code">Claude Code (CLI)</Tab><Tab id="codex">Codex</Tab><Tab id="gemini-cli">Gemini CLI</Tab><Tab id="other">Other</Tab></TabList>
 
   <TabPanel id="cursor">
     Click the button to install:
@@ -52,6 +62,12 @@ Learn how to use the React Aria MCP Server, Agent Skills, and more to help you b
       }
     }
     ```
+  </TabPanel>
+
+  <TabPanel id="claude-desktop">
+    Click the button to add to Claude Desktop:
+
+    [Add to Claude Desktop](claude://claude.ai/directory/connectors/ant.dir.gh.adobe.react-aria.md)
   </TabPanel>
 
   <TabPanel id="claude-code">
@@ -101,16 +117,6 @@ Learn how to use the React Aria MCP Server, Agent Skills, and more to help you b
     ```
   </TabPanel>
 </Tabs>
-
-## Agent Skills
-
-[Agent Skills](https://agentskills.io) are folders of instructions, scripts, and resources that your AI coding tool can load when relevant to help with specific tasks.
-
-To install the React Aria skill, run:
-
-```bash
-npx skills add https://react-aria.adobe.com
-```
 
 ## Markdown docs
 

@@ -8,7 +8,7 @@ A meter represents a quantity within a known range, or a fractional value.
 
 ```tsx
 'use client';
-import { Meter as AriaMeter, type MeterProps as AriaMeterProps } from 'react-aria-components/Meter';
+import {Meter as AriaMeter, type MeterProps as AriaMeterProps} from 'react-aria-components/Meter';
 import {Label} from './Form';
 import './Meter.css';
 
@@ -16,26 +16,32 @@ export interface MeterProps extends AriaMeterProps {
   label?: string;
 }
 
-export function Meter({ label, ...props }: MeterProps) {
+export function Meter({label, ...props}: MeterProps) {
   return (
-    (
-      <AriaMeter {...props}>
-        {({ percentage, valueText }) => (
-          <>
-            <Label>{label}</Label>
-            <span className="value">{valueText}</span>
-            <div className="track inset">
-              <div
-                className="fill"
-                style={{
+    <AriaMeter {...props}>
+      {({percentage, valueText}) => (
+        <>
+          <Label>{label}</Label>
+          <span className="value">{valueText}</span>
+          <div className="track inset">
+            <div
+              className="fill"
+              style={
+                {
                   width: percentage + '%',
-                  '--fill-color': percentage < 70 ? 'var(--green)' : percentage < 90 ? 'var(--orange)' : 'var(--red)'
-                } as any} />
-            </div>
-          </>
-        )}
-      </AriaMeter>
-    )
+                  '--fill-color':
+                    percentage < 70
+                      ? 'var(--green)'
+                      : percentage < 90
+                        ? 'var(--orange)'
+                        : 'var(--red)'
+                } as any
+              }
+            />
+          </div>
+        </>
+      )}
+    </AriaMeter>
   );
 }
 
@@ -44,13 +50,14 @@ export function Meter({ label, ...props }: MeterProps) {
 ### Meter.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
 .react-aria-Meter {
   display: grid;
-  grid-template-areas: "label value"
-                       "bar bar";
+  grid-template-areas:
+    'label value'
+    'bar bar';
   grid-template-columns: 1fr auto;
   width: 250px;
   color: var(--text-color);
@@ -74,7 +81,10 @@ export function Meter({ label, ...props }: MeterProps) {
     height: calc(100% - 2px);
     margin: 1px 0 0 1px;
     border-radius: inherit;
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4), 0 1px 0 lch(from var(--fill-color) 42% c h), 0 0 0 1px var(--fill-color);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.4),
+      0 1px 0 lch(from var(--fill-color) 42% c h),
+      0 0 0 1px var(--fill-color);
 
     @media (forced-colors: active) {
       box-shadow: none;
@@ -91,30 +101,44 @@ export function Meter({ label, ...props }: MeterProps) {
 
 ```tsx
 'use client';
-import { AlertTriangle } from 'lucide-react';
+import {AlertTriangle} from 'lucide-react';
 import React from 'react';
-import { Meter as AriaMeter, type MeterProps as AriaMeterProps } from 'react-aria-components/Meter';
-import { Label } from './Field';
-import { composeTailwindRenderProps } from './utils';
+import {Meter as AriaMeter, type MeterProps as AriaMeterProps} from 'react-aria-components/Meter';
+import {Label} from './Field';
+import {composeTailwindRenderProps} from './utils';
 
 export interface MeterProps extends AriaMeterProps {
   label?: string;
 }
 
-export function Meter({ label, ...props }: MeterProps) {
+export function Meter({label, ...props}: MeterProps) {
   return (
-    <AriaMeter {...props} className={composeTailwindRenderProps(props.className, 'flex flex-col gap-2 font-sans max-w-full')}>
-      {({ percentage, valueText }) => (
+    <AriaMeter
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'flex flex-col gap-2 font-sans max-w-full'
+      )}>
+      {({percentage, valueText}) => (
         <>
           <div className="flex justify-between gap-2">
             <Label>{label}</Label>
-            <span className={`text-sm ${percentage >= 80 ? 'text-red-600 dark:text-red-500' : 'text-neutral-600 dark:text-neutral-400'}`}>
-              {percentage >= 80 && <AlertTriangle aria-label="Alert" className="inline-block w-4 h-4 align-text-bottom" />}
+            <span
+              className={`text-sm ${percentage >= 80 ? 'text-red-600 dark:text-red-500' : 'text-neutral-600 dark:text-neutral-400'}`}>
+              {percentage >= 80 && (
+                <AlertTriangle
+                  aria-label="Alert"
+                  className="inline-block w-4 h-4 align-text-bottom"
+                />
+              )}
               {' ' + valueText}
             </span>
           </div>
           <div className="w-64 max-w-full h-2 rounded-full bg-neutral-300 dark:bg-neutral-700 outline outline-1 -outline-offset-1 outline-transparent relative">
-            <div className={`absolute top-0 left-0 h-full rounded-full ${getColor(percentage)} forced-colors:bg-[Highlight]`} style={{ width: percentage + '%' }} />
+            <div
+              className={`absolute top-0 left-0 h-full rounded-full ${getColor(percentage)} forced-colors:bg-[Highlight]`}
+              style={{width: percentage + '%'}}
+            />
           </div>
         </>
       )}
@@ -165,7 +189,7 @@ import {VanillaMeter} from '@react-spectrum/s2';
 | `children` | `ChildrenOrFunction<MeterRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<MeterRenderProps> | undefined` | 'react-aria-Meter' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
-| `formatOptions` | `Intl.NumberFormatOptions | undefined` | \{style: 'percent'} | The display format of the value label. |
+| `formatOptions` | `Intl.NumberFormatOptions | undefined` | \{ style: 'percent' } | The display format of the value label. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `inert` | `boolean | undefined` | — |  |
@@ -236,9 +260,9 @@ import {VanillaMeter} from '@react-spectrum/s2';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", MeterRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", MeterRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: MeterRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: MeterRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `number | undefined` | 0 | The current value (controlled). |
 | `valueLabel` | `React.ReactNode` | — | The content to display as the value's label (e.g. 1 of 4). |

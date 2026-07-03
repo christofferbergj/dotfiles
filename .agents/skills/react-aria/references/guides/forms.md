@@ -32,7 +32,7 @@ How you submit form data depends on your framework, application, and server. By 
 
 When using React 19, use the `action` prop to handle form submission. This receives a [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object containing the values for each form field. In React 18 or earlier, use the `onSubmit` event instead.
 
-## Vanilla CSS example
+## React 19 example
 
 ```tsx
 import {Form} from 'vanilla-starter/Form';
@@ -50,6 +50,8 @@ import {Button} from 'vanilla-starter/Button';
   <Button type="submit">Submit</Button>
 </Form>
 ```
+
+## React 18 example
 
 ```tsx
 import {Form} from 'vanilla-starter/Form';

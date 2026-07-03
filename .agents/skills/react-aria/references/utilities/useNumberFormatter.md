@@ -1,7 +1,7 @@
 # useNumberFormatter
 
-Provides localized number formatting for the current locale. Automatically updates when the locale changes,
-and handles caching of the number formatter for performance.
+Provides localized number formatting for the current locale. Automatically updates when the
+locale changes, and handles caching of the number formatter for performance.
 
 ## Introduction
 

@@ -1,6 +1,7 @@
 # FileTrigger
 
-A FileTrigger allows a user to access the file system with any pressable React Aria or React Spectrum component, or custom components built with usePress.
+A FileTrigger allows a user to access the file system with any pressable React Aria or React
+Spectrum component, or custom components built with usePress.
 
 ```tsx
 import {FileTrigger} from 'react-aria-components/FileTrigger';
@@ -74,7 +75,7 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `acceptedFileTypes` | `readonly string[] | undefined` | — | Specifies what mime type of files are allowed. |
 | `allowsMultiple` | `boolean | undefined` | — | Whether multiple files can be selected. |
 | `children` | `React.ReactNode` | — | The children of the component. |
-| `defaultCamera` | `"user" | "environment" | undefined` | — | Specifies the use of a media capture mechanism to capture the media on the spot. |
+| `defaultCamera` | `"environment" | "user" | undefined` | — | Specifies the use of a media capture mechanism to capture the media on the spot. |
 | `dir` | `string | undefined` | — |  |
 | `hidden` | `boolean | undefined` | — |  |
 | `inert` | `boolean | undefined` | — |  |
@@ -144,4 +145,4 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLInputElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLInputElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLInputElement> | undefined` | — |  |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |

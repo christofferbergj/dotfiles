@@ -1,7 +1,7 @@
 # useCollator
 
-Provides localized string collation for the current locale. Automatically updates when the locale changes,
-and handles caching of the collator for performance.
+Provides localized string collation for the current locale. Automatically updates when the locale
+changes, and handles caching of the collator for performance.
 
 ## Introduction
 

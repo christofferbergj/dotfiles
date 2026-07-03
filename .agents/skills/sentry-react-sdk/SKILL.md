@@ -127,7 +127,12 @@ Sentry.init({
   environment: import.meta.env.MODE,
   release: import.meta.env.VITE_APP_VERSION, // inject at build time
 
-  sendDefaultPii: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/react/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
 
   integrations: [
     Sentry.browserTracingIntegration(),
@@ -298,13 +303,6 @@ export default defineConfig({
 });
 ```
 
-Add to `.env` (never commit):
-```bash
-SENTRY_AUTH_TOKEN=sntrys_...
-SENTRY_ORG=my-org-slug
-SENTRY_PROJECT=my-project-slug
-```
-
 **Create React App (via CRACO):**
 
 ```bash
@@ -329,6 +327,8 @@ module.exports = {
   },
 };
 ```
+
+`SENTRY_ORG` / `SENTRY_PROJECT` / `SENTRY_AUTH_TOKEN` are build-time values; the auth token is a secret (never commit it). For creating the token and wiring it into CI, see [`sentry-source-maps`](../sentry-source-maps/SKILL.md).
 
 ### For Each Agreed Feature
 
@@ -356,7 +356,7 @@ For each feature: `Read ${SKILL_ROOT}/references/<feature>.md`, follow steps exa
 | `dsn` | `string` | — | **Required.** SDK disabled when empty |
 | `environment` | `string` | `"production"` | e.g., `"staging"`, `"development"` |
 | `release` | `string` | — | e.g., `"my-app@1.0.0"` or git SHA — links errors to releases |
-| `sendDefaultPii` | `boolean` | `false` | Includes IP addresses and request headers |
+| `dataCollection` | `object` | conservative unless set | Fine-grained control over auto-collected categories (`userInfo`, `cookies`, `httpHeaders`, `httpBodies`, `queryParams`, `genAI`). When omitted, the SDK falls back to `sendDefaultPii` (default `false`). Passing the object — even `{}` — flips unset categories to their permissive defaults; opt out per category. |
 | `tracesSampleRate` | `number` | — | 0–1; `1.0` in dev, `0.1–0.2` in prod |
 | `tracesSampler` | `function` | — | Per-transaction sampling; overrides rate |
 | `tracePropagationTargets` | `(string\|RegExp)[]` | — | Outgoing URLs that receive distributed tracing headers |
@@ -367,6 +367,37 @@ For each feature: `Read ${SKILL_ROOT}/references/<feature>.md`, follow steps exa
 | `maxBreadcrumbs` | `number` | `100` | Breadcrumbs stored per event |
 | `debug` | `boolean` | `false` | Verbose SDK output to console |
 | `tunnel` | `string` | — | Proxy URL to bypass ad blockers |
+
+### `dataCollection` Options (SDK ≥10.57.0)
+
+Fine-grained control over what data the SDK collects. Collection is on by default (with sensitive-value scrubbing); opt out per category:
+
+| Field | Type | Default | Notes |
+|-------|------|---------|-------|
+| `userInfo` | `boolean` | `true` | Collect user id, email, and IP |
+| `cookies` | `boolean \| { allow: string[] } \| { deny: string[] }` | `true` | Cookie collection and filtering; `true` = all cookies (sensitive keys filtered) |
+| `httpHeaders.request` | `boolean \| { allow: string[] } \| { deny: string[] }` | `true` | HTTP request header collection |
+| `httpHeaders.response` | `boolean \| { allow: string[] } \| { deny: string[] }` | `true` | HTTP response header collection |
+| `queryParams` | `boolean \| { allow: string[] } \| { deny: string[] }` | `true` | Query parameter collection and filtering |
+| `httpBodies` | `HttpBodyCollectionTarget[]` | `["incomingRequest", "outgoingRequest", "incomingResponse", "outgoingResponse"]` | Collect request/response bodies; options: `'incomingRequest'`, `'outgoingRequest'`, `'incomingResponse'`, `'outgoingResponse'` |
+| `genAI.inputs` | `boolean` | `true` | Record AI model inputs (for AI monitoring) |
+| `genAI.outputs` | `boolean` | `true` | Record AI model outputs (for AI monitoring) |
+| `stackFrameVariables` | `boolean` | `true` | Capture local variable values in stack frames |
+| `frameContextLines` | `number` | `5` | Source code context lines around stack frames |
+
+**Example:** Allow only specific cookies and headers:
+
+```typescript
+Sentry.init({
+  dataCollection: {
+    cookies: { allow: ['session', 'user_id'] },
+    httpHeaders: {
+      request: { allow: ['authorization', 'x-request-id'] },
+      response: { deny: ['set-cookie'] },
+    },
+  },
+});
+```
 
 ### React Compatibility Matrix
 

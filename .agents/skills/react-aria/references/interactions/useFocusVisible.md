@@ -45,8 +45,8 @@ globally, see [useFocusRing](useFocusRing.md).
 
 | Name | Type | Description |
 |------|------|-------------|
-| `isTextInput` | `boolean | undefined` | Whether the element is a text input. |
 | `autoFocus` | `boolean | undefined` | Whether the element will be auto focused. |
+| `isTextInput` | `boolean | undefined` | Whether the element is a text input. |
 
 ### FocusVisibleResult
 

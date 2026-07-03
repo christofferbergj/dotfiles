@@ -1,7 +1,7 @@
 # useDateFormatter
 
-Provides localized date formatting for the current locale. Automatically updates when the locale changes,
-and handles caching of the date formatter for performance.
+Provides localized date formatting for the current locale. Automatically updates when the locale
+changes, and handles caching of the date formatter for performance.
 
 ## Introduction
 
@@ -51,24 +51,24 @@ function CurrentDate() {
 | Name | Type | Description |
 |------|------|-------------|
 | `calendar` | `string | undefined` | — |
-| `localeMatcher` | `"best fit" | "lookup" | undefined` | — |
-| `weekday` | `"long" | "short" | "narrow" | undefined` | — |
-| `era` | `"long" | "short" | "narrow" | undefined` | — |
-| `year` | `"numeric" | "2-digit" | undefined` | — |
-| `month` | `"long" | "short" | "narrow" | "numeric" | "2-digit" | undefined` | — |
-| `day` | `"numeric" | "2-digit" | undefined` | — |
-| `hour` | `"numeric" | "2-digit" | undefined` | — |
-| `minute` | `"numeric" | "2-digit" | undefined` | — |
-| `second` | `"numeric" | "2-digit" | undefined` | — |
-| `timeZoneName` | `"long" | "short" | "shortOffset" | "longOffset" | "shortGeneric" | "longGeneric" | undefined` | — |
-| `formatMatcher` | `"best fit" | "basic" | undefined` | — |
-| `hour12` | `boolean | undefined` | — |
-| `timeZone` | `string | undefined` | — |
-| `dayPeriod` | `"long" | "short" | "narrow" | undefined` | — |
-| `numberingSystem` | `string | undefined` | — |
-| `dateStyle` | `"long" | "short" | "full" | "medium" | undefined` | — |
-| `timeStyle` | `"long" | "short" | "full" | "medium" | undefined` | — |
-| `hourCycle` | `"h11" | "h12" | "h23" | "h24" | undefined` | — |
+| `dateStyle` | `"full" | "long" | "medium" | "short" | undefined` | — |
+| `day` | `"2-digit" | "numeric" | undefined` | — |
+| `dayPeriod` | `"long" | "narrow" | "short" | undefined` | — |
+| `era` | `"long" | "narrow" | "short" | undefined` | — |
+| `formatMatcher` | `"basic" | "best fit" | undefined` | — |
 | `fractionalSecondDigits` | `1 | 2 | 3 | undefined` | — |
+| `hour` | `"2-digit" | "numeric" | undefined` | — |
+| `hour12` | `boolean | undefined` | — |
+| `hourCycle` | `"h11" | "h12" | "h23" | "h24" | undefined` | — |
+| `localeMatcher` | `"best fit" | "lookup" | undefined` | — |
+| `minute` | `"2-digit" | "numeric" | undefined` | — |
+| `month` | `"2-digit" | "long" | "narrow" | "numeric" | "short" | undefined` | — |
+| `numberingSystem` | `string | undefined` | — |
+| `second` | `"2-digit" | "numeric" | undefined` | — |
+| `timeStyle` | `"full" | "long" | "medium" | "short" | undefined` | — |
+| `timeZone` | `string | undefined` | — |
+| `timeZoneName` | `"long" | "longGeneric" | "longOffset" | "short" | "shortGeneric" | "shortOffset" | undefined` | — |
+| `weekday` | `"long" | "narrow" | "short" | undefined` | — |
+| `year` | `"2-digit" | "numeric" | undefined` | — |
 
 ### DateFormatter

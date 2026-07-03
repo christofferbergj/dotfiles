@@ -1,6 +1,7 @@
 # Separator
 
-A separator is a visual divider between two groups of content, e.g. groups of menu items or sections of a page.
+A separator is a visual divider between two groups of content, e.g. groups of menu items or
+sections of a page.
 
 ## Vanilla example
 
@@ -8,19 +9,20 @@ A separator is a visual divider between two groups of content, e.g. groups of me
 
 ```tsx
 'use client';
-import { Separator as RACSeparator, type SeparatorProps } from 'react-aria-components/Separator';
+import {Separator as RACSeparator, type SeparatorProps} from 'react-aria-components/Separator';
 import React from 'react';
 import './Separator.css';
 
 export function Separator(props: SeparatorProps) {
-  return <RACSeparator {...props} />
+  return <RACSeparator {...props} />;
 }
+
 ```
 
 ### Separator.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-Separator {
   background-color: var(--gray-500);
@@ -28,8 +30,8 @@ export function Separator(props: SeparatorProps) {
   border-radius: 1px;
   height: 2px;
   width: 100%;
-  
-  &[aria-orientation="vertical"] {
+
+  &[aria-orientation='vertical'] {
     width: 2px;
     min-height: 32px;
     height: 100%;
@@ -45,8 +47,8 @@ export function Separator(props: SeparatorProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { Separator as RACSeparator, type SeparatorProps } from 'react-aria-components/Separator';
-import { tv } from 'tailwind-variants';
+import {Separator as RACSeparator, type SeparatorProps} from 'react-aria-components/Separator';
+import {tv} from 'tailwind-variants';
 
 const styles = tv({
   base: 'bg-neutral-300 dark:bg-neutral-600 forced-colors:bg-[ButtonBorder] border-none',
@@ -65,7 +67,8 @@ export function Separator(props: SeparatorProps) {
   return (
     <RACSeparator
       {...props}
-      className={styles({orientation: props.orientation, className: props.className})} />
+      className={styles({orientation: props.orientation, className: props.className})}
+    />
   );
 }
 
@@ -151,7 +154,7 @@ export function Separator(props: SeparatorProps) {
 | `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
 | `orientation` | `Orientation | undefined` | 'horizontal' | The orientation of the separator. |
-| `render` | `DOMRenderFunction<"div" | "hr", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div" | "hr", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |

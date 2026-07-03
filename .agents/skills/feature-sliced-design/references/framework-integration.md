@@ -3,7 +3,6 @@
 How to set up FSD within specific frameworks. Covers directory placement,
 routing integration, and framework-specific path alias configuration.
 
-
 ## General Principle
 
 Place FSD layers inside `src/` to avoid naming conflicts with framework
@@ -14,22 +13,28 @@ All FSD projects follow the same `@/<layer>/*` path alias convention. The
 exact configuration differs by framework. See each framework section
 below. Astro is the one exception, using a single `@/*` alias instead.
 
-
 ## Next.js
 
-FSD is compatible with both the App Router and the Pages Router. The main
-conflict is that Next.js owns the `app/` and `pages/` folder names, and both
-collide with FSD layer names. Resolve the conflict by moving the Next.js
-routing folders to the project root and importing FSD pages from `src/` into
-them.
+FSD works with both the App Router and the Pages Router. Next.js uses the
+`app/` and `pages/` folder names for its own routing. Those names collide with
+the FSD `app/` and `pages/` layers. Rename the FSD layers to `_app/` and `_pages/`
+(with the underscore prefix). Do this even if you only use one router. Keep the Next.js
+routing folders at the project root so `src/` holds only FSD code. The FSD
+linter (Steiger) expects this naming.
+
+### Projects on the previously recommended pattern
+
+An earlier version of this guide recommended a different layout. It kept the
+Next.js `app`/`pages` folders at the root and added an empty root `pages/`
+placeholder. The `src/app`/`src/pages` layers were not prefixed. Projects set
+up that way keep working. The empty `pages/` placeholder can break the build on
+Next.js 13.5 and later. That is why the prefix is now the default. Use
+`_app`/`_pages` for new projects. Move a project off the old pattern when you
+can.
 
 ### App Router
 
-The Next.js `app/` folder lives at the project root. **Always create an
-empty `pages/` folder at the project root as well, even when you only use
-the App Router.** Without it, Next.js tries to use `src/pages/` as the Pages
-Router and the build breaks. Add a `pages/README.md` explaining why the
-folder exists.
+Route files in `app/` re-export from the FSD `_pages/` layer.
 
 #### Directory structure
 
@@ -43,10 +48,8 @@ my-nextjs-project/
     api/
       get-example/
         route.ts
-  pages/                   ← Empty, required even for App Router
-    README.md
   src/
-    app/                   ← FSD app layer
+    _app/                  ← FSD app layer
       providers/
         index.tsx          ← All providers (QueryClient, theme, etc.)
       styles/
@@ -54,7 +57,7 @@ my-nextjs-project/
       api-routes/          ← Route Handler implementations (see below)
         index.ts
         get-example-data.ts
-    pages/                 ← FSD pages layer
+    _pages/                ← FSD pages layer
       home/
         ui/HomePage.tsx
         index.ts
@@ -77,8 +80,8 @@ my-nextjs-project/
 
 ```typescript
 // app/layout.tsx
-import { Providers } from '@/app/providers';
-import '@/app/styles/globals.css';
+import { Providers } from '@/_app/providers';
+import '@/_app/styles/globals.css';
 
 export default function RootLayout({ children }) {
   return (
@@ -89,15 +92,15 @@ export default function RootLayout({ children }) {
 }
 
 // app/example/page.tsx: re-export the FSD page (component + metadata)
-export { ExamplePage as default, metadata } from '@/pages/example';
+export { ExamplePage as default, metadata } from '@/_pages/example';
 ```
 
 Always re-export both the component and `metadata`. Route files contain no logic.
 
 ### Pages Router
 
-The Pages Router uses `pages/` at the project root. The FSD `src/` tree is
-unchanged. Routes re-export from `src/pages/`:
+The Pages Router uses `pages/` at the project root.
+Each route file should re-export the corresponding page module from the FSD `_pages/` layer.
 
 ```text
 my-nextjs-project/
@@ -106,10 +109,10 @@ my-nextjs-project/
     api/example.ts         ← API route re-export
     example/index.tsx
   src/
-    app/
+    _app/
       custom-app/          ← Custom App component
       api-routes/          ← Route Handler implementations
-    pages/
+    _pages/
       example/
         ui/example.tsx
         index.ts
@@ -117,13 +120,13 @@ my-nextjs-project/
 
 ```typescript
 // pages/example/index.tsx
-export { Example as default } from '@/pages/example';
+export { Example as default } from '@/_pages/example';
 
-// pages/_app.tsx: re-export the custom App from src/app/custom-app
-export { App as default } from '@/app/custom-app';
+// pages/_app.tsx: re-export the custom App from src/_app/custom-app
+export { App as default } from '@/_app/custom-app';
 ```
 
-The custom App component itself lives in `src/app/custom-app/` and exports
+The custom App component itself lives in `src/_app/custom-app/` and exports
 `App` from its public API like any other FSD slice.
 
 ### Middleware and instrumentation
@@ -134,15 +137,15 @@ them inside `src/`.
 
 ### Route Handlers (API routes)
 
-Use a dedicated `api-routes` segment in the FSD `app/` layer
-(`src/app/api-routes/`) to host the actual request handlers. The Next.js
+Use a dedicated `api-routes` segment in the FSD `_app/` layer
+(`src/_app/api-routes/`) to host the actual request handlers. The Next.js
 `app/api/*/route.ts` (App Router) or `pages/api/*.ts` (Pages Router) files
 become thin re-exports.
 
 **App Router:**
 
 ```typescript
-// src/app/api-routes/get-example-data.ts
+// src/_app/api-routes/get-example-data.ts
 import { getExamplesList } from '@/shared/db';
 
 export const getExampleData = () => {
@@ -157,17 +160,17 @@ export const getExampleData = () => {
   }
 };
 
-// src/app/api-routes/index.ts
+// src/_app/api-routes/index.ts
 export { getExampleData } from './get-example-data';
 
 // app/api/example/route.ts
-export { getExampleData as GET } from '@/app/api-routes';
+export { getExampleData as GET } from '@/_app/api-routes';
 ```
 
 **Pages Router:**
 
 ```typescript
-// src/app/api-routes/get-example-data.ts
+// src/_app/api-routes/get-example-data.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const config = { api: { bodyParser: { sizeLimit: '1mb' } }, maxDuration: 5 };
@@ -177,7 +180,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) =>
 export const getExampleData = { config, handler } as const;
 
 // app/api/example.ts
-import { getExampleData } from '@/app/api-routes';
+import { getExampleData } from '@/_app/api-routes';
 export const config = getExampleData.config;
 export default getExampleData.handler;
 ```
@@ -198,8 +201,8 @@ Co-locate caching and revalidation logic with the queries themselves.
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/app/*": ["src/app/*"],
-      "@/pages/*": ["src/pages/*"],
+      "@/_app/*": ["src/_app/*"],
+      "@/_pages/*": ["src/_pages/*"],
       "@/widgets/*": ["src/widgets/*"],
       "@/features/*": ["src/features/*"],
       "@/entities/*": ["src/entities/*"],
@@ -212,72 +215,18 @@ Co-locate caching and revalidation logic with the queries themselves.
 Next.js reads `tsconfig.json` paths automatically. No `next.config.js`
 alias configuration is needed.
 
-### Server Components and Public API splitting
+### Server and client public APIs
 
-FSD layers work inside both Server and Client Components. However, the
-standard single `index.ts` public API can cause problems in RSC environments
-because re-exporting client and server code from the same entry point may
-trigger bundler errors or unintended boundary crossings.
+In the Next.js App Router, a single slice can contain both client-usable modules
+and server-only modules.
 
-Split the public API into multiple entry points per environment:
+Keep `index.ts` free of server-only exports, such as Server Components or
+data-access functions that import `server-only`. When a Client Component imports
+the slice, those exports can enter the client module graph and cause build
+errors.
 
-```text
-entities/user/
-  model/
-    user.ts
-  ui/
-    UserAvatar.tsx          ← 'use client', uses hooks
-    UserProfileCard.tsx     ← Server Component, no hooks
-  api/
-    user-queries.server.ts  ← Server-only data fetching
-  index.ts                  ← Shared exports (types, pure functions)
-  index.client.ts           ← Client component exports
-  index.server.ts           ← Server component + server-only exports
-```
-
-```typescript
-// entities/user/index.ts: shared (types, pure logic, no components)
-export type { User } from "./model/user";
-export { formatUserName } from "./model/user";
-
-// entities/user/index.client.ts: client components only
-export { UserAvatar } from "./ui/UserAvatar";
-
-// entities/user/index.server.ts: server components + server-only code
-export { UserProfileCard } from "./ui/UserProfileCard";
-export { fetchUser } from "./api/user-queries.server";
-```
-
-```typescript
-// Consumers import from the appropriate entry point:
-
-// In a Server Component (pages/profile/ui/ProfilePage.tsx)
-import { UserProfileCard } from "@/entities/user/index.server";
-import type { User } from "@/entities/user";
-
-// In a Client Component (features/comment/ui/CommentAuthor.tsx)
-import { UserAvatar } from "@/entities/user/index.client";
-```
-
-**Rules for split public APIs:**
-
-1. **`index.ts`**: types, constants, and pure functions that work in both
-   environments. Default import path.
-2. **`index.client.ts`**: components using `'use client'`, hooks, or
-   browser APIs.
-3. **`index.server.ts`**: Server Components and server-only data fetching.
-4. The `index.[env].ts` pattern generalises beyond RSC. Any meta-framework
-   with distinct runtime environments can use it (e.g., `index.edge.ts`).
-   Verified for Next.js App Router; Nuxt and Astro compatibility is under
-   review.
-5. Steiger support for multiple entry points is available or coming in an
-   upcoming release. If Steiger flags these files, check for version
-   updates.
-
-**When NOT to split:** A slice with no client/server boundary concerns uses
-a single `index.ts`. Split only when a slice actually has both client and
-server exports.
-
+Split only when this boundary is required. Put server-only exports in
+`index.server.ts`.
 
 ## Nuxt 3
 
@@ -338,7 +287,6 @@ export default defineNuxtConfig({
 });
 ```
 
-
 ## Vite + React
 
 ### Directory structure
@@ -384,7 +332,6 @@ export default defineConfig({
 });
 ```
 
-
 ## Create React App (CRA)
 
 CRA is no longer actively maintained. **Migrate to Vite for new projects.**
@@ -409,7 +356,6 @@ module.exports = {
   },
 };
 ```
-
 
 ## Astro
 
@@ -482,7 +428,6 @@ src/
 
 Let the integration handle its own routing and rendering, while FSD layers
 manage application-specific code.
-
 
 ## Key Reminders for All Frameworks
 

@@ -154,7 +154,7 @@ fireEvent.mouseUp(thumb, {pageX: 50});
 
 ## React Aria test utils
 
-(beta)
+(rc)
 
 [@react-aria/test-utils](https://www.npmjs.com/package/@react-aria/test-utils) is a set of testing utilities that aims to make writing unit tests easier for consumers of React Aria
 or for users who have built their own components following the respective ARIA pattern specification.
@@ -167,7 +167,7 @@ npm install @react-aria/test-utils --dev
 
 <InlineAlert variant="notice">
   <Heading>Requirements</Heading>
-  <Content>Please note that this library uses [@testing-library/react@16](https://www.npmjs.com/package/@testing-library/react) and [@testing-library/user-event@14](https://www.npmjs.com/package/@testing-library/user-event). This means that you need to be on React 18+ in order for these utilities to work.</Content>
+  <Content>Please note that this library uses [@testing-library/dom@10](https://www.npmjs.com/package/@testing-library/dom) and [@testing-library/user-event@14](https://www.npmjs.com/package/@testing-library/user-event). This means that you need to be on React 18+ in order for these utilities to work.</Content>
 </InlineAlert>
 
 ### Setup
@@ -204,6 +204,7 @@ the testers in your test suite.
 
 - [CheckboxGroup](./CheckboxGroup/testing.md)
 - [ComboBox](./ComboBox/testing.md)
+- Dialog via [Modal](./Modal/testing.md) / [Popover](./Popover/testing.md)
 - [GridList](./GridList/testing.md)
 - [ListBox](./ListBox/testing.md)
 - [Menu](./Menu/testing.md)
@@ -217,6 +218,10 @@ the testers in your test suite.
 
 ### triggerLongPress
 
-`triggerLongPress(opts: {element: HTMLElement, advanceTimer: (time: number) => unknown | Promise<unknown>, pointerOpts?: Record<string, any>}): Promise<void>`
+`triggerLongPress(opts: Promise<unknown>;
+  pointerOpts?: Record<string, any>;
+} | {
+  element: HTMLElement;
+  advanceTimer: (time: number) => unknown): Promise<void>`
 
 Simulates a "long press" event on a element.

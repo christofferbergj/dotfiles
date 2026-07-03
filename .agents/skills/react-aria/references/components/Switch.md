@@ -8,23 +8,41 @@ A switch allows a user to turn a setting on or off.
 
 ```tsx
 'use client';
-import { Switch as AriaSwitch, type SwitchProps as AriaSwitchProps } from 'react-aria-components/Switch';
+import {
+  SwitchField,
+  SwitchButton,
+  type SwitchFieldProps,
+  type ValidationResult
+} from 'react-aria-components/Switch';
 import './Switch.css';
+import {Description, FieldError} from './Form';
+import type {ReactNode} from 'react';
 
-export interface SwitchProps extends Omit<AriaSwitchProps, 'children'> {
-  children: React.ReactNode;
+export interface SwitchProps extends Omit<SwitchFieldProps, 'children'> {
+  children: ReactNode;
+  description?: string;
+  errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
-export function Switch({ children, ...props }: SwitchProps) {
+export function Switch({children, description, errorMessage, ...props}: SwitchProps) {
   return (
-    <AriaSwitch {...props}>
-      {({isSelected, isDisabled}) => (<>
-        <div className="track indicator">
-          <div data-disabled={isDisabled || undefined} className={isSelected ? 'handle' : 'handle indicator'} />
-        </div>
-        {children}
-      </>)}
-    </AriaSwitch>
+    <SwitchField {...props}>
+      <SwitchButton>
+        {({isSelected, isDisabled}) => (
+          <>
+            <div className="track indicator">
+              <div
+                data-disabled={isDisabled || undefined}
+                className={isSelected ? 'handle' : 'handle indicator'}
+              />
+            </div>
+            {children}
+          </>
+        )}
+      </SwitchButton>
+      {description && <Description>{description}</Description>}
+      <FieldError>{errorMessage}</FieldError>
+    </SwitchField>
   );
 }
 
@@ -33,10 +51,20 @@ export function Switch({ children, ...props }: SwitchProps) {
 ### Switch.css
 
 ```css
-@import "./theme.css";
-@import "./utilities.css";
+@import './theme.css';
+@import './utilities.css';
 
-.react-aria-Switch {
+.react-aria-SwitchField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+
+  &[data-disabled] [slot='description'] {
+    color: var(--text-color-disabled);
+  }
+}
+
+.react-aria-SwitchButton {
   display: flex;
   /* This is needed so the HiddenInput is positioned correctly */
   position: relative;
@@ -73,13 +101,25 @@ export function Switch({ children, ...props }: SwitchProps) {
     background: var(--button-background-pressed);
   }
 
+  &[data-invalid] {
+    .handle {
+      --indicator-color: var(--invalid-color);
+    }
+
+    &[data-pressed] .handle {
+      background: transparent;
+    }
+  }
+
   &[data-selected] {
     --border-color: var(--highlight-background-pressed);
     .handle {
       transform: translateX(var(--spacing-4));
       transform-origin: var(--spacing-9) 50%;
       background: white;
-      box-shadow: inset 0 0 0 1px var(--border-color), inset 0 -4px 4px oklch(from var(--tint) 85% c h / 0.3);
+      box-shadow:
+        inset 0 0 0 1px var(--border-color),
+        inset 0 -4px 4px oklch(from var(--tint) 85% c h / 0.3);
 
       @media (forced-colors: active) {
         background: HighlightText;
@@ -117,12 +157,20 @@ export function Switch({ children, ...props }: SwitchProps) {
 ```tsx
 'use client';
 import React from 'react';
-import { Switch as AriaSwitch, type SwitchProps as AriaSwitchProps } from 'react-aria-components/Switch';
-import { tv } from 'tailwind-variants';
-import { composeTailwindRenderProps, focusRing } from './utils';
+import {
+  SwitchField,
+  SwitchButton,
+  type SwitchFieldProps,
+  type ValidationResult
+} from 'react-aria-components/Switch';
+import {tv} from 'tailwind-variants';
+import {composeTailwindRenderProps, focusRing} from './utils';
+import {Description, FieldError} from './Field';
 
-export interface SwitchProps extends Omit<AriaSwitchProps, 'children'> {
+export interface SwitchProps extends Omit<SwitchFieldProps, 'children'> {
   children: React.ReactNode;
+  description?: string;
+  errorMessage?: string | ((validation: ValidationResult) => string);
 }
 
 const track = tv({
@@ -130,11 +178,12 @@ const track = tv({
   base: 'flex h-5 w-9 box-border px-px items-center shrink-0 cursor-default rounded-full transition duration-200 ease-in-out shadow-inner border border-transparent font-sans',
   variants: {
     isSelected: {
-      false: 'bg-neutral-100 dark:bg-neutral-800 group-pressed:bg-neutral-200 dark:group-pressed:bg-neutral-700 border-neutral-400 dark:border-neutral-400',
-      true: 'bg-neutral-700 dark:bg-neutral-300 forced-colors:bg-[Highlight]! group-pressed:bg-neutral-800 dark:group-pressed:bg-neutral-200',
+      false:
+        'bg-neutral-100 dark:bg-neutral-800 group-pressed:bg-neutral-200 dark:group-pressed:bg-neutral-700 border-neutral-400 dark:border-neutral-400',
+      true: 'bg-neutral-700 dark:bg-neutral-300 forced-colors:bg-[Highlight]! group-pressed:bg-neutral-800 dark:group-pressed:bg-neutral-200'
     },
     isDisabled: {
-      true: 'bg-neutral-100 dark:bg-neutral-800 group-selected:bg-neutral-300 dark:group-selected:bg-neutral-800 forced-colors:group-selected:bg-[GrayText]! border-neutral-300 dark:border-neutral-900 forced-colors:border-[GrayText]',
+      true: 'bg-neutral-100 dark:bg-neutral-800 group-selected:bg-neutral-300 dark:group-selected:bg-neutral-800 forced-colors:group-selected:bg-[GrayText]! border-neutral-300 dark:border-neutral-900 forced-colors:border-[GrayText]'
     }
   }
 });
@@ -164,18 +213,26 @@ const handle = tv({
   ]
 });
 
-export function Switch({ children, ...props }: SwitchProps) {
+export function Switch({children, ...props}: SwitchProps) {
   return (
-    <AriaSwitch {...props} className={composeTailwindRenderProps(props.className, 'group relative flex gap-2 items-center text-neutral-800 disabled:text-neutral-300 dark:text-neutral-200 dark:disabled:text-neutral-600 forced-colors:disabled:text-[GrayText] text-sm transition [-webkit-tap-highlight-color:transparent]')}>
-      {(renderProps) => (
-        <>
-          <div className={track(renderProps)}>
-            <span className={handle(renderProps)} />
-          </div>
-          {children}
-        </>
-      )}
-    </AriaSwitch>
+    <SwitchField {...props} className="flex flex-col gap-1 group">
+      <SwitchButton
+        className={composeTailwindRenderProps(
+          props.className,
+          'group relative flex gap-2 items-center text-neutral-800 disabled:text-neutral-300 dark:text-neutral-200 dark:disabled:text-neutral-600 forced-colors:disabled:text-[GrayText] text-sm transition [-webkit-tap-highlight-color:transparent]'
+        )}>
+        {renderProps => (
+          <>
+            <div className={track(renderProps)}>
+              <span className={handle(renderProps)} />
+            </div>
+            {children}
+          </>
+        )}
+      </SwitchButton>
+      {props.description && <Description>{props.description}</Description>}
+      <FieldError>{props.errorMessage}</FieldError>
+    </SwitchField>
   );
 }
 
@@ -209,7 +266,7 @@ function Example(props) {
 
 ## Forms
 
-Use the `name` and `value` props to submit the switch to the server. See the [Forms](forms.md) guide to learn more.
+Use the `name` and `value` props to submit the switch to the server. Set the `isRequired` prop to validate the user selects the switch, or implement custom client or server-side validation. See the [Forms](forms.md) guide to learn more.
 
 ```tsx
 import {Switch} from 'vanilla-starter/Switch';
@@ -218,7 +275,12 @@ import {Form} from 'vanilla-starter/Form';
 
 <Form>
   {/*- begin highlight -*/}
-  <Switch name="wifi">Wi-Fi</Switch>
+  <Switch
+    name="two-factor"
+    isRequired
+    description="Your organization requires two-factor authentication.">
+    Two-factor authentication
+  </Switch>
   {/*- end highlight -*/}
   <Button type="submit" style={{marginTop: 8}}>Submit</Button>
 </Form>
@@ -227,22 +289,27 @@ import {Form} from 'vanilla-starter/Form';
 ## API
 
 ```tsx
-<Switch>Label</Switch>
+<SwitchField>
+  <SwitchButton>Label</SwitchButton>
+  <Text slot="description" />
+  <FieldError />
+</SwitchField>
 ```
 
-### Switch
+### SwitchField
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `aria-controls` | `string | undefined` | — | Identifies the element (or elements) whose contents or presence are controlled by the current element. |
 | `aria-describedby` | `string | undefined` | — | Identifies the element (or elements) that describes the object. |
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
+| `aria-errormessage` | `string | undefined` | — | Identifies the element that provides an error message for the object. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
 | `autoFocus` | `boolean | undefined` | — | Whether the element should receive focus on render. |
-| `children` | `ChildrenOrFunction<SwitchRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
-| `className` | `ClassNameOrFunction<SwitchRenderProps> | undefined` | 'react-aria-Switch' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
-| `defaultSelected` | `boolean | undefined` | — | Whether the Switch should be selected (uncontrolled). |
+| `children` | `ChildrenOrFunction<SwitchFieldRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
+| `className` | `ClassNameOrFunction<SwitchFieldRenderProps> | undefined` | 'react-aria-SwitchField' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
+| `defaultSelected` | `boolean | undefined` | — | Whether the element should be selected (uncontrolled). |
 | `dir` | `string | undefined` | — |  |
 | `excludeFromTabOrder` | `boolean | undefined` | — | Whether to exclude the element from the sequential tab order. If true, the element will not be focusable via the keyboard by tabbing. This should be avoided except in rare scenarios where an alternative means of accessing the element or its functionality via the keyboard is available. |
 | `form` | `string | undefined` | — | The `<form>` element to associate the input with. The value of this attribute must be the id of a `<form>` in the same document. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#form). |
@@ -251,10 +318,105 @@ import {Form} from 'vanilla-starter/Form';
 | `inert` | `boolean | undefined` | — |  |
 | `inputRef` | `RefObject<HTMLInputElement | null> | undefined` | — | A ref for the HTML input element. |
 | `isDisabled` | `boolean | undefined` | — | Whether the input is disabled. |
+| `isInvalid` | `boolean | undefined` | — | Whether the input value is invalid. |
 | `isReadOnly` | `boolean | undefined` | — | Whether the input can be selected but not changed by the user. |
-| `isSelected` | `boolean | undefined` | — | Whether the Switch should be selected (controlled). |
+| `isRequired` | `boolean | undefined` | — | Whether user input is required on the input before form submission. |
+| `isSelected` | `boolean | undefined` | — | Whether the element should be selected (controlled). |
 | `lang` | `string | undefined` | — |  |
 | `name` | `string | undefined` | — | The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). |
+| `onAnimationEnd` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationIteration` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationIterationCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationStart` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAuxClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
+| `onChange` | `((isSelected: boolean) => void) | undefined` | — | Handler that is called when the element's selection state changes. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
+| `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onDoubleClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onDoubleClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onFocus` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element receives focus. |
+| `onFocusChange` | `((isFocused: boolean) => void) | undefined` | — | Handler that is called when the element's focus status changes. |
+| `onGotPointerCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onKeyDown` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is pressed. |
+| `onKeyUp` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is released. |
+| `onLostPointerCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseDown` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseDownCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseEnter` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseLeave` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseMove` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseMoveCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOut` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOutCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOver` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseOverCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseUp` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onMouseUpCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerCancel` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerCancelCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerDown` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerDownCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerEnter` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerLeave` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerMove` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerMoveCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOut` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOutCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOver` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerOverCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerUp` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPointerUpCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onPress` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when the press is released over the target. |
+| `onPressChange` | `((isPressed: boolean) => void) | undefined` | — | Handler that is called when the press state changes. |
+| `onPressEnd` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction ends, either over the target or when the pointer leaves the target. |
+| `onPressStart` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press interaction starts. |
+| `onPressUp` | `((e: PressEvent) => void) | undefined` | — | Handler that is called when a press is released over the target, regardless of whether it started on the target or not. |
+| `onScroll` | `React.UIEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onScrollCapture` | `React.UIEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchCancel` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchCancelCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchEnd` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchEndCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchMove` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchMoveCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchStart` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTouchStartCapture` | `React.TouchEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionCancel` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionCancelCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionEnd` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionEndCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionRun` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionRunCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionStart` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", SwitchFieldRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
+| `style` | `(((values: SwitchFieldRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+| `validate` | `((value: boolean) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
+| `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
+| `value` | `string | undefined` | — | The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). |
+
+### SwitchButton
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ChildrenOrFunction<SwitchButtonRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
+| `className` | `ClassNameOrFunction<SwitchButtonRenderProps> | undefined` | 'react-aria-SwitchButton' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
+| `dir` | `string | undefined` | — |  |
+| `hidden` | `boolean | undefined` | — |  |
+| `inert` | `boolean | undefined` | — |  |
+| `lang` | `string | undefined` | — |  |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAnimationIteration` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
@@ -263,22 +425,17 @@ import {Form} from 'vanilla-starter/Form';
 | `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAuxClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
-| `onBlur` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element loses focus. |
-| `onChange` | `((isSelected: boolean) => void) | undefined` | — | Handler that is called when the Switch's selection state changes. |
+| `onClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onDoubleClick` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onDoubleClickCapture` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
-| `onFocus` | `((e: React.FocusEvent<Element>) => void) | undefined` | — | Handler that is called when the element receives focus. |
-| `onFocusChange` | `((isFocused: boolean) => void) | undefined` | — | Handler that is called when the element's focus status changes. |
 | `onGotPointerCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onHoverChange` | `((isHovering: boolean) => void) | undefined` | — | Handler that is called when the hover state changes. |
 | `onHoverEnd` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction ends. |
 | `onHoverStart` | `((e: HoverEvent) => void) | undefined` | — | Handler that is called when a hover interaction starts. |
-| `onKeyDown` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is pressed. |
-| `onKeyUp` | `((e: KeyboardEvent) => void) | undefined` | — | Handler that is called when a key is released. |
 | `onLostPointerCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onMouseDown` | `React.MouseEventHandler<HTMLLabelElement> | undefined` | — |  |
@@ -327,8 +484,7 @@ import {Form} from 'vanilla-starter/Form';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLLabelElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLLabelElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"label", SwitchRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"label", SwitchButtonRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: SwitchRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
-| `value` | `string | undefined` | — | The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue). |
+| `style` | `(((values: SwitchButtonRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |

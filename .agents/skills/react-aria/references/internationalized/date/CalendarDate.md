@@ -390,7 +390,7 @@ Sets the time zone identifier for the current user.
 
 ### Calendar
 
-`Calendar(props: P & RefAttributes<T>): React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | null`
+`Calendar(props: P & RefAttributes<T>): React.ReactElement<React.JSXElementConstructor<any> | unknown, string> | null`
 
 Calendars display a grid of days in one or more months and allow users to select a single date.
 
@@ -403,9 +403,9 @@ Calendars display a grid of days in one or more months and allow users to select
 | `autoFocus` | `boolean | undefined` | false | Whether to automatically focus the calendar when it mounts. |
 | `createCalendar` | `((identifier: CalendarIdentifier) => Calendar) | undefined` | — | A function to create a new [Calendar](https://react-spectrum.adobe.com/internationalized/date/Calendar.html) object for a given calendar identifier. If not provided, the `createCalendar` function from `@internationalized/date` will be used. |
 | `defaultFocusedValue` | `DateValue | null | undefined` | — | The date that is focused when the calendar first mounts (uncontrolled). |
-| `defaultValue` | `T | null | undefined` | — | The default value (uncontrolled). |
+| `defaultValue` | `CalendarValueType<null, M | T> | undefined` | — | The default value (uncontrolled). |
 | `errorMessage` | `React.ReactNode` | — | The error message to display when the calendar is invalid. |
-| `firstDayOfWeek` | `"sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | undefined` | — | The day that starts the week. |
+| `firstDayOfWeek` | `"fri" | "mon" | "sat" | "sun" | "thu" | "tue" | "wed" | undefined` | — | The day that starts the week. |
 | `focusedValue` | `DateValue | null | undefined` | — | Controls the currently focused date within the calendar. |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
 | `isDateUnavailable` | `((date: DateValue) => boolean) | undefined` | — | Callback that is called for each date of the calendar. If it returns true, then the date is unavailable. |
@@ -414,15 +414,16 @@ Calendars display a grid of days in one or more months and allow users to select
 | `isReadOnly` | `boolean | undefined` | false | Whether the calendar value is immutable. |
 | `maxValue` | `DateValue | null | undefined` | — | The maximum allowed date that a user may select. |
 | `minValue` | `DateValue | null | undefined` | — | The minimum allowed date that a user may select. |
-| `onChange` | `((value: MappedDateValue<T>) => void) | undefined` | — | Handler that is called when the value changes. |
+| `onChange` | `((value: CalendarValueType<MappedDateValue<T>, M>) => void) | undefined` | — | Handler that is called when the value changes. |
 | `onFocusChange` | `((date: CalendarDate) => void) | undefined` | — | Handler that is called when the focused date changes. |
 | `pageBehavior` | `PageBehavior | undefined` | visible | Controls the behavior of paging. Pagination either works by advancing the visible page by visibleDuration (default) or one unit of visibleDuration. |
-| `selectionAlignment` | `"center" | "start" | "end" | undefined` | 'center' | Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection. |
+| `selectionAlignment` | `"center" | "end" | "start" | undefined` | 'center' | Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection. |
+| `selectionMode` | `M | undefined` | 'single' | Whether single or multiple selection is enabled. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `styles` | `StylesProp | undefined` | — | Spectrum-defined styles, returned by the `style()` macro. |
 | `UNSAFE_className` | `UnsafeClassName | undefined` | — | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 | `UNSAFE_style` | `React.CSSProperties | undefined` | — | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
-| `value` | `T | null | undefined` | — | The current value (controlled). |
+| `value` | `CalendarValueType<null, M | T> | undefined` | — | The current value (controlled). |
 | `visibleMonths` | `number | undefined` | 1 | The number of months to display at once. |
 
 ### toCalendar
@@ -437,10 +438,10 @@ Represents an amount of time in calendar-specific units, for use when performing
 
 | Name | Type | Description |
 |------|------|-------------|
-| `years` | `number | undefined` | The number of years to add or subtract. |
+| `days` | `number | undefined` | The number of days to add or subtract. |
 | `months` | `number | undefined` | The number of months to add or subtract. |
 | `weeks` | `number | undefined` | The number of weeks to add or subtract. |
-| `days` | `number | undefined` | The number of days to add or subtract. |
+| `years` | `number | undefined` | The number of years to add or subtract. |
 
 ### parseDuration
 
@@ -450,18 +451,19 @@ Parses an ISO 8601 duration string (e.g. "P3Y6M6W4DT12H30M5S").
 
 ### DateTimeDuration
 
-Represents an amount of time with both date and time components, for use when performing arithmetic.
+Represents an amount of time with both date and time components, for use when performing
+arithmetic.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `years` | `number | undefined` | The number of years to add or subtract. |
-| `months` | `number | undefined` | The number of months to add or subtract. |
-| `weeks` | `number | undefined` | The number of weeks to add or subtract. |
 | `days` | `number | undefined` | The number of days to add or subtract. |
 | `hours` | `number | undefined` | The number of hours to add or subtract. |
-| `minutes` | `number | undefined` | The number of minutes to add or subtract. |
-| `seconds` | `number | undefined` | The number of seconds to add or subtract. |
 | `milliseconds` | `number | undefined` | The number of milliseconds to add or subtract. |
+| `minutes` | `number | undefined` | The number of minutes to add or subtract. |
+| `months` | `number | undefined` | The number of months to add or subtract. |
+| `seconds` | `number | undefined` | The number of seconds to add or subtract. |
+| `weeks` | `number | undefined` | The number of weeks to add or subtract. |
+| `years` | `number | undefined` | The number of years to add or subtract. |
 
 ### CalendarDateTime
 
@@ -471,17 +473,17 @@ A CalendarDateTime represents a date and time without a time zone, in a specific
 
 `toCalendarDateTime(date: CalendarDate | CalendarDateTime | ZonedDateTime, time?: AnyTime): CalendarDateTime`
 
-Converts a date value to a \`CalendarDateTime\`. An optional \`Time\` value can be passed to set the time
-of the resulting value, otherwise it will default to midnight.
+Converts a date value to a \`CalendarDateTime\`. An optional \`Time\` value can be passed to set the
+time of the resulting value, otherwise it will default to midnight.
 
 ### Properties
 
 | Name | Type | Description |
 |------|------|-------------|
 | `hour` \* | `number` | — |
+| `millisecond` \* | `number` | — |
 | `minute` \* | `number` | — |
 | `second` \* | `number` | — |
-| `millisecond` \* | `number` | — |
 
 ### Methods
 
@@ -499,20 +501,22 @@ A ZonedDateTime represents a date and time in a specific time zone and calendar 
 
 `toZoned(date: CalendarDate | CalendarDateTime | ZonedDateTime, timeZone: string, disambiguation?: Disambiguation): ZonedDateTime`
 
-Converts a date value to a \`ZonedDateTime\` in the provided time zone. The \`disambiguation\` option can be set
-to control how values that fall on daylight saving time changes are interpreted.
+Converts a date value to a \`ZonedDateTime\` in the provided time zone. The \`disambiguation\` option
+can be set to control how values that fall on daylight saving time changes are interpreted.
 
 ### isSameYear
 
 `isSameYear(a: DateValue, b: DateValue): boolean`
 
-Returns whether the given dates occur in the same year, using the calendar system of the first date.
+Returns whether the given dates occur in the same year, using the calendar system of the first
+date.
 
 ### isSameMonth
 
 `isSameMonth(a: DateValue, b: DateValue): boolean`
 
-Returns whether the given dates occur in the same month, using the calendar system of the first date.
+Returns whether the given dates occur in the same month, using the calendar system of the first
+date.
 
 ### isSameDay
 
@@ -546,9 +550,7 @@ Returns whether the given dates occur on the same day, and are of the same calen
 
 ### startOfYear
 
-`startOfYear(date: ZonedDateTime): ZonedDateTime`
-
-Returns the first day of the year for the given date.
+`startOfYear(year: number): number`
 
 ### endOfYear
 

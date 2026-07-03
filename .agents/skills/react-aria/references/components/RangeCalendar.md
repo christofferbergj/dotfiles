@@ -1,6 +1,7 @@
 # RangeCalendar
 
-RangeCalendars display a grid of days in one or more months and allow users to select a contiguous range of dates.
+RangeCalendars display a grid of days in one or more months and allow users to select a
+contiguous range of dates.
 
 ## Vanilla CSS example
 
@@ -11,58 +12,74 @@ RangeCalendars display a grid of days in one or more months and allow users to s
 import {
   CalendarCell as AriaCalendarCell,
   RangeCalendar as AriaRangeCalendar,
-  Heading,
+  CalendarHeading,
   Text,
   type DateValue,
   type RangeCalendarProps as AriaRangeCalendarProps,
-  type CalendarCellProps,
+  type CalendarCellProps
 } from 'react-aria-components/RangeCalendar';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
 import {Button} from './Button';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {CalendarGrid} from './Calendar';
 import './RangeCalendar.css';
 
-export interface RangeCalendarProps<T extends DateValue>
-  extends AriaRangeCalendarProps<T> {
+export interface RangeCalendarProps<T extends DateValue> extends AriaRangeCalendarProps<T> {
   errorMessage?: string;
 }
 
-export function RangeCalendar<T extends DateValue>(
-  { errorMessage, ...props }: RangeCalendarProps<T>
-) {
+export function RangeCalendar<T extends DateValue>({
+  errorMessage,
+  ...props
+}: RangeCalendarProps<T>) {
+  let months = props.visibleDuration?.months || 1;
   return (
-    (
-      <AriaRangeCalendar {...props}>
-        <header>
-          <Button slot="previous" variant="quiet"><ChevronLeft size={18} /></Button>
-          <Heading />
-          <Button slot="next" variant="quiet"><ChevronRight size={18} /></Button>
-        </header>
-        <CalendarGrid>
-          {(date) => <CalendarCell date={date} />}
-        </CalendarGrid>
-        {errorMessage && <Text slot="errorMessage">{errorMessage}</Text>}
-      </AriaRangeCalendar>
-    )
+    <AriaRangeCalendar {...props}>
+      <div className="months">
+        {Array.from({length: months}, (_, i) => (
+          <div key={i} className="month">
+            <header>
+              {i === 0 && (
+                <Button slot="previous" variant="quiet">
+                  <ChevronLeft />
+                </Button>
+              )}
+              <CalendarHeading offset={{months: i}} />
+              {i === months - 1 && (
+                <Button slot="next" variant="quiet">
+                  <ChevronRight />
+                </Button>
+              )}
+            </header>
+            <CalendarGrid offset={{months: i}}>{date => <CalendarCell date={date} />}</CalendarGrid>
+          </div>
+        ))}
+      </div>
+      {errorMessage && <Text slot="errorMessage">{errorMessage}</Text>}
+    </AriaRangeCalendar>
   );
 }
-
 
 export {CalendarGrid};
 export function CalendarCell(props: CalendarCellProps) {
   return (
     <AriaCalendarCell {...props}>
-      {composeRenderProps(props.children, (children, {defaultChildren, isHovered, isPressed, isSelectionStart, isSelectionEnd, isDisabled}) => 
-        <span
-          className="button-base"
-          data-variant="quiet"
-          data-hovered={isHovered || undefined}
-          data-pressed={isPressed || undefined}
-          data-selected={isSelectionStart || isSelectionEnd || undefined}
-          data-disabled={isDisabled || undefined}>
-          {children || defaultChildren}
-        </span>
+      {composeRenderProps(
+        props.children,
+        (
+          children,
+          {defaultChildren, isHovered, isPressed, isSelectionStart, isSelectionEnd, isDisabled}
+        ) => (
+          <span
+            className="button-base"
+            data-variant="quiet"
+            data-hovered={isHovered || undefined}
+            data-pressed={isPressed || undefined}
+            data-selected={isSelectionStart || isSelectionEnd || undefined}
+            data-disabled={isDisabled || undefined}>
+            {children || defaultChildren}
+          </span>
+        )
       )}
     </AriaCalendarCell>
   );
@@ -73,21 +90,36 @@ export function CalendarCell(props: CalendarCellProps) {
 ### RangeCalendar.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-RangeCalendar {
-  width: calc(var(--spacing-9) * 7);
-  max-width: 100%;
-  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  overflow: auto;
+  width: 100%;
+  max-width: fit-content;
   font: var(--font-size) system-ui;
   color: var(--text-color);
+
+  .months {
+    display: flex;
+    gap: var(--spacing-3);
+  }
+
+  .month {
+    width: calc(var(--spacing-9) * 7);
+    min-width: calc(var(--spacing-7) * 7);
+    container-type: inline-size;
+  }
 
   header {
     display: flex;
     align-items: center;
     margin: 0 var(--spacing-1) var(--spacing-4) var(--spacing-1);
+    min-height: var(--spacing-8);
 
-    .react-aria-Heading {
+    .react-aria-CalendarHeading {
       flex: 1;
       margin: 0;
       text-align: center;
@@ -100,7 +132,7 @@ export function CalendarCell(props: CalendarCellProps) {
     border-spacing: 0;
   }
 
-  [slot=errorMessage] {
+  [slot='errorMessage'] {
     font-size: var(--font-size-sm);
     color: var(--invalid-color);
   }
@@ -137,7 +169,7 @@ export function CalendarCell(props: CalendarCellProps) {
       }
 
       &[data-selection-start],
-      &:is(td:first-child > *, [aria-disabled] + td > *)  {
+      &:is(td:first-child > *, [aria-disabled] + td > *) {
         border-start-start-radius: 9999px;
         border-end-start-radius: 9999px;
         border-inline-start-width: 0.5px;
@@ -194,20 +226,24 @@ export function CalendarCell(props: CalendarCellProps) {
 ```tsx
 'use client';
 import React from 'react';
+import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {
   RangeCalendar as AriaRangeCalendar,
   CalendarCell,
   CalendarGrid,
   CalendarGridBody,
+  CalendarHeading,
   Text,
   type DateValue,
   type RangeCalendarProps as AriaRangeCalendarProps
 } from 'react-aria-components/RangeCalendar';
-import { tv } from 'tailwind-variants';
-import { CalendarGridHeader, CalendarHeader } from './Calendar';
-import { composeTailwindRenderProps, focusRing } from './utils';
+import {useLocale} from 'react-aria-components/I18nProvider';
+import {tv} from 'tailwind-variants';
+import {Button} from './Button';
+import {CalendarGridHeader} from './Calendar';
+import {composeTailwindRenderProps, focusRing} from './utils';
 
-export interface RangeCalendarProps<T extends DateValue> extends Omit<AriaRangeCalendarProps<T>, 'visibleDuration'> {
+export interface RangeCalendarProps<T extends DateValue> extends AriaRangeCalendarProps<T> {
   errorMessage?: string;
 }
 
@@ -216,14 +252,14 @@ const cell = tv({
   base: 'w-full h-full flex items-center justify-center rounded-full forced-color-adjust-none text-neutral-900 dark:text-neutral-200',
   variants: {
     selectionState: {
-      'none': 'group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 group-pressed:bg-neutral-300 dark:group-pressed:bg-neutral-600',
-      'middle': [
+      none: 'group-hover:bg-neutral-200 dark:group-hover:bg-neutral-700 group-pressed:bg-neutral-300 dark:group-pressed:bg-neutral-600',
+      middle: [
         'group-hover:bg-blue-200 dark:group-hover:bg-blue-900 forced-colors:group-hover:bg-[Highlight]',
         'group-invalid:group-hover:bg-red-200 dark:group-invalid:group-hover:bg-red-900 forced-colors:group-invalid:group-hover:bg-[Mark]',
         'group-pressed:bg-blue-300 dark:group-pressed:bg-blue-800 forced-colors:group-pressed:bg-[Highlight] forced-colors:text-[HighlightText]',
-        'group-invalid:group-pressed:bg-red-300 dark:group-invalid:group-pressed:bg-red-800 forced-colors:group-invalid:group-pressed:bg-[Mark]',
+        'group-invalid:group-pressed:bg-red-300 dark:group-invalid:group-pressed:bg-red-800 forced-colors:group-invalid:group-pressed:bg-[Mark]'
       ],
-      'cap': 'bg-blue-600 group-invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:group-invalid:bg-[Mark] text-white forced-colors:text-[HighlightText]'
+      cap: 'bg-blue-600 group-invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:group-invalid:bg-[Mark] text-white forced-colors:text-[HighlightText]'
     },
     isDisabled: {
       true: 'text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]'
@@ -231,30 +267,85 @@ const cell = tv({
   }
 });
 
-export function RangeCalendar<T extends DateValue>(
-  { errorMessage, ...props }: RangeCalendarProps<T>
-) {
+export function RangeCalendar<T extends DateValue>({
+  errorMessage,
+  ...props
+}: RangeCalendarProps<T>) {
+  let {direction} = useLocale();
+  let months = props.visibleDuration?.months || 1;
   return (
-    <AriaRangeCalendar {...props} className={composeTailwindRenderProps(props.className, 'font-sans w-[calc(9*var(--spacing)*7)] max-w-full @container')}>
-      <CalendarHeader />
-      <CalendarGrid className="[&_td]:px-0 [&_td]:py-px border-spacing-0">
-        <CalendarGridHeader />
-        <CalendarGridBody>
-          {(date) => <CalendarCell date={date} className="group w-[calc(100cqw/7)] aspect-square text-sm outline outline-0 cursor-default outside-month:text-neutral-300 selected:bg-blue-100 dark:selected:bg-blue-700/30 forced-colors:selected:bg-[Highlight] invalid:selected:bg-red-100 dark:invalid:selected:bg-red-700/30 forced-colors:invalid:selected:bg-[Mark] [td:first-child_&]:rounded-s-full selection-start:rounded-s-full [td:last-child_&]:rounded-e-full selection-end:rounded-e-full [-webkit-tap-highlight-color:transparent]">
-            {({formattedDate, isSelected, isSelectionStart, isSelectionEnd, isFocusVisible, isDisabled}) =>
-              <span
-                className={cell({
-                  selectionState: isSelected && (isSelectionStart || isSelectionEnd) ? 'cap' : isSelected ? 'middle' : 'none',
-                  isDisabled,
-                  isFocusVisible
-                })}>
-                {formattedDate}
-              </span>
-            }
-          </CalendarCell>}
-        </CalendarGridBody>
-      </CalendarGrid>
-      {errorMessage && <Text slot="errorMessage" className="text-sm text-red-600">{errorMessage}</Text>}
+    <AriaRangeCalendar
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        'flex font-sans w-full max-w-fit overflow-auto gap-3'
+      )}>
+      {Array.from({length: months}, (_, i) => (
+        <div key={i} className="@container flex flex-col w-[calc(9*var(--spacing)*7)]">
+          <header className="flex items-center mb-4">
+            {i === 0 && (
+              <Button variant="quiet" slot="previous">
+                {direction === 'rtl' ? (
+                  <ChevronRight aria-hidden size={18} />
+                ) : (
+                  <ChevronLeft aria-hidden size={18} />
+                )}
+              </Button>
+            )}
+            <CalendarHeading
+              offset={{months: i}}
+              className="flex-1 font-sans font-semibold [font-variation-settings:normal] text-base text-center mx-2 my-0 text-neutral-900 dark:text-neutral-200"
+            />
+            {i === months - 1 && (
+              <Button variant="quiet" slot="next">
+                {direction === 'rtl' ? (
+                  <ChevronLeft aria-hidden size={18} />
+                ) : (
+                  <ChevronRight aria-hidden size={18} />
+                )}
+              </Button>
+            )}
+          </header>
+          <CalendarGrid offset={{months: i}} className="[&_td]:px-0 [&_td]:py-px border-spacing-0">
+            <CalendarGridHeader />
+            <CalendarGridBody>
+              {date => (
+                <CalendarCell
+                  date={date}
+                  className="group w-[calc(100cqw/7)] aspect-square text-sm outline outline-0 cursor-default outside-month:text-neutral-300 selected:bg-blue-100 dark:selected:bg-blue-700/30 forced-colors:selected:bg-[Highlight] invalid:selected:bg-red-100 dark:invalid:selected:bg-red-700/30 forced-colors:invalid:selected:bg-[Mark] [td:first-child_&]:rounded-s-full selection-start:rounded-s-full [td:last-child_&]:rounded-e-full selection-end:rounded-e-full [-webkit-tap-highlight-color:transparent]">
+                  {({
+                    formattedDate,
+                    isSelected,
+                    isSelectionStart,
+                    isSelectionEnd,
+                    isFocusVisible,
+                    isDisabled
+                  }) => (
+                    <span
+                      className={cell({
+                        selectionState:
+                          isSelected && (isSelectionStart || isSelectionEnd)
+                            ? 'cap'
+                            : isSelected
+                              ? 'middle'
+                              : 'none',
+                        isDisabled,
+                        isFocusVisible
+                      })}>
+                      {formattedDate}
+                    </span>
+                  )}
+                </CalendarCell>
+              )}
+            </CalendarGridBody>
+          </CalendarGrid>
+        </div>
+      ))}
+      {errorMessage && (
+        <Text slot="errorMessage" className="text-sm text-red-600">
+          {errorMessage}
+        </Text>
+      )}
     </AriaRangeCalendar>
   );
 }
@@ -424,7 +515,8 @@ function Example(props) {
       onChange={setRange}
       
       minValue={today(getLocalTimeZone())}
-      isDateUnavailable={date => (
+      isDateUnavailable={(date, anchorDate) => (
+        (anchorDate && Math.abs(date.compare(anchorDate)) > 7) ||
         disabledRanges.some((interval) =>
           date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0
         )
@@ -437,52 +529,19 @@ function Example(props) {
 
 ## Display options
 
-Set the `visibleDuration` prop and render multiple `CalendarGrid` elements to display more than one month at a time. The `pageBehavior` prop controls whether pagination advances by a single month or multiple. The `firstDayOfWeek` prop overrides the locale-specified first day of the week.
+Set the `visibleDuration` prop and render multiple `CalendarGrid` elements to display more than one month at a time. The `pageBehavior` prop controls whether pagination advances by a single month or multiple. The `firstDayOfWeek` and `weeksInMonth` props override the locale-specified defaults.
 
 ```tsx
-import {RangeCalendar, Heading} from 'react-aria-components/RangeCalendar';
-import {CalendarGrid, CalendarCell} from 'vanilla-starter/RangeCalendar';
-import {Button} from 'vanilla-starter/Button';
-import {useDateFormatter} from 'react-aria/useDateFormatter';
-import {ChevronLeft, ChevronRight} from 'lucide-react';
+import {RangeCalendar} from 'vanilla-starter/RangeCalendar';
 
 // TODO: move this into the starter example.
 function Example(props) {
-  let monthFormatter = useDateFormatter({
-    month: 'long',
-    year: 'numeric',
-  });
-
   return (
     <RangeCalendar
       {...props}
       aria-label="Trip dates"
       
-      style={{display: 'flex', gap: 12, overflow: 'auto'}}
-    >
-      {({state}) => (
-        [...Array(props.visibleDuration.months).keys()].map(i => (
-          <div key={i} style={{flex: 1}}>
-            <header style={{minHeight: 32}}>
-              {i === 0 &&
-                <Button slot="previous" variant="quiet">
-                  <ChevronLeft />
-                </Button>
-              }
-              <Heading>{monthFormatter.format(state.visibleRange.start.add({months: i}).toDate(state.timeZone))}</Heading>
-              {i === props.visibleDuration.months - 1 &&
-                <Button slot="next" variant="quiet">
-                  <ChevronRight />
-                </Button>
-              }
-            </header>
-            <CalendarGrid offset={{months: i}}>
-              {date => <CalendarCell date={date} />}
-            </CalendarGrid>
-          </div>
-        ))
-      )}
-    </RangeCalendar>
+    />
   );
 }
 ```
@@ -519,32 +578,47 @@ function Example() {
 
 ### Month and year pickers
 
-You can also control the focused date via `CalendarStateContext`. This example shows month and year dropdown components that work inside any `<RangeCalendar>`.
+Use the `<CalendarMonthPicker>` and `<CalendarYearPicker>` components to allow the user to jump to a different month or year. This example uses the render prop function to render a [Select](Select.md).
 
 ```tsx
-import {RangeCalendar} from 'react-aria-components/RangeCalendar';
+import {RangeCalendar, CalendarMonthPicker, CalendarYearPicker} from 'react-aria-components/RangeCalendar';
 import {CalendarGrid, CalendarCell} from 'vanilla-starter/RangeCalendar';
-import {MonthDropdown} from './MonthDropdown';
-import {YearDropdown} from './YearDropdown';
 import {Button} from 'vanilla-starter/Button';
+import {Select, SelectItem} from 'vanilla-starter/Select';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 
 <RangeCalendar>
-  <header style={{display: 'flex', gap: 4}}>
-    <Button slot="previous" variant="quiet">
-      <ChevronLeft />
-    </Button>
-    {/*- begin highlight -*/}
-    <MonthDropdown />
-    <YearDropdown />
-    {/*- end highlight -*/}
-    <Button slot="next" variant="quiet">
-      <ChevronRight />
-    </Button>
-  </header>
-  <CalendarGrid>
-    {(date) => <CalendarCell date={date} />}
-  </CalendarGrid>
+  <div className="months">
+    <div className="month">
+      <header style={{display: 'flex', gap: 4}}>
+        <Button slot="previous" variant="quiet">
+          <ChevronLeft />
+        </Button>
+        {/*- begin highlight -*/}
+        <CalendarMonthPicker>
+          {(props) => (
+            <Select {...props}>
+              {item => <SelectItem>{item.formatted}</SelectItem>}
+            </Select>
+          )}
+        </CalendarMonthPicker>
+        <CalendarYearPicker>
+          {(props) => (
+            <Select {...props}>
+              {item => <SelectItem>{item.formatted}</SelectItem>}
+            </Select>
+          )}
+        </CalendarYearPicker>
+        {/*- end highlight -*/}
+        <Button slot="next" variant="quiet">
+          <ChevronRight />
+        </Button>
+      </header>
+      <CalendarGrid>
+        {(date) => <CalendarCell date={date} />}
+      </CalendarGrid>
+    </div>
+  </div>
 </RangeCalendar>
 ```
 
@@ -552,8 +626,10 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 
 ```tsx
 <RangeCalendar>
+  <CalendarHeading />
+  <CalendarMonthPicker />
+  <CalendarYearPicker />
   <Button slot="previous" />
-  <Heading />
   <Button slot="next" />
   <CalendarGrid>
     <CalendarGridHeader>
@@ -582,10 +658,10 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `defaultFocusedValue` | `DateValue | null | undefined` | — | The date that is focused when the calendar first mounts (uncontrolled). |
 | `defaultValue` | `RangeValue<T> | null | undefined` | — | The default value (uncontrolled). |
 | `errorMessage` | `ReactNode` | — | The error message to display when the calendar is invalid. |
-| `firstDayOfWeek` | `"sun" | "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | undefined` | — | The day that starts the week. |
+| `firstDayOfWeek` | `"fri" | "mon" | "sat" | "sun" | "thu" | "tue" | "wed" | undefined` | — | The day that starts the week. |
 | `focusedValue` | `DateValue | null | undefined` | — | Controls the currently focused date within the calendar. |
 | `id` | `string | undefined` | — | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
-| `isDateUnavailable` | `((date: DateValue) => boolean) | undefined` | — | Callback that is called for each date of the calendar. If it returns true, then the date is unavailable. |
+| `isDateUnavailable` | `((date: DateValue, anchorDate: CalendarDate | null) => boolean) | undefined` | — | Callback that is called for each date of the calendar. If it returns true, then the date is unavailable. The second argument provides the current selection anchor date, if any. This can be used to adjust the available dates based on the user's first selected date. |
 | `isDisabled` | `boolean | undefined` | false | Whether the calendar is disabled. |
 | `isInvalid` | `boolean | undefined` | — | Whether the current selection is invalid according to application logic. |
 | `isReadOnly` | `boolean | undefined` | false | Whether the calendar value is immutable. |
@@ -594,7 +670,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onChange` | `((value: RangeValue<MappedDateValue<T>>) => void) | undefined` | — | Handler that is called when the value changes. |
 | `onFocusChange` | `((date: CalendarDate) => void) | undefined` | — | Handler that is called when the focused date changes. |
 | `pageBehavior` | `PageBehavior | undefined` | visible | Controls the behavior of paging. Pagination either works by advancing the visible page by visibleDuration (default) or one unit of visibleDuration. |
-| `selectionAlignment` | `"start" | "center" | "end" | undefined` | 'center' | Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection. |
+| `selectionAlignment` | `"center" | "end" | "start" | undefined` | 'center' | Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `styles` | `StylesProp | undefined` | — | Spectrum-defined styles, returned by the `style()` macro. |
 | `UNSAFE_className` | `UnsafeClassName | undefined` | — | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
@@ -606,7 +682,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>[] | ((date: CalendarDate) => ReactElement) | undefined` | — | Either a function to render calendar cells for each date in the month, or children containing a `<CalendarGridHeader>`` and `<CalendarGridBody>`when additional customization is needed. |
+| `children` | `((date: CalendarDate) => ReactElement) | React.ReactElement<React.JSXElementConstructor<any> | unknown, string> | React.ReactElement<React.JSXElementConstructor<any> | unknown, string>[] | undefined` | — | Either a function to render calendar cells for each date in the month, or children containing a `<CalendarGridHeader>`` and `<CalendarGridBody>`when additional customization is needed. |
 |`className`|`string | undefined`| 'react-aria-CalendarGrid' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
 |`dir`|`string | undefined`| — |  |
 |`hidden`|`boolean | undefined`| — |  |
@@ -677,10 +753,10 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 |`onTransitionStartCapture`|`React.TransitionEventHandler<HTMLTableElement> | undefined`| — |  |
 |`onWheel`|`React.WheelEventHandler<HTMLTableElement> | undefined`| — |  |
 |`onWheelCapture`|`React.WheelEventHandler<HTMLTableElement> | undefined`| — |  |
-|`render`|`DOMRenderFunction\<"table", undefined> | undefined`| — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: * You must render the expected element type (e.g. if`<button>`is expected, you cannot render an`<a>`). * Only a single root DOM element can be rendered (no fragments). * You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+|`render`|`DOMRenderFunction\<"table", undefined> | undefined`| — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if`<button>`is expected, you cannot render an  `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `style`|`React.CSSProperties | undefined`| — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-|`translate`|`"yes" | "no" | undefined`| — |  |
-|`weekdayStyle`|`"narrow" | "short" | "long" | undefined\` | "narrow" | The style of weekday names to display in the calendar grid header, e.g. single letter, abbreviation, or full day name. |
+|`translate`|`"no" | "yes" | undefined`| — |  |
+|`weekdayStyle`|`"long" | "narrow" | "short" | undefined\` | 'narrow' | The style of weekday names to display in the calendar grid header, e.g. single letter, abbreviation, or full day name. |
 
 ### CalendarGridHeader
 
@@ -756,9 +832,9 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLTableSectionElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLTableSectionElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableSectionElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"thead", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"thead", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### CalendarHeaderCell
 
@@ -835,9 +911,9 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLTableHeaderCellElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLTableHeaderCellElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableHeaderCellElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"th", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"th", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### CalendarGridBody
 
@@ -913,9 +989,9 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLTableSectionElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLTableSectionElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableSectionElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"tbody", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"tbody", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### CalendarCell
 
@@ -995,6 +1071,304 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", CalendarCellRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `style` | `(React.CSSProperties | ((values: CalendarCellRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", CalendarCellRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `style` | `(((values: CalendarCellRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+
+### CalendarHeading
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `about` | `string | undefined` | — |  |
+| `accessKey` | `string | undefined` | — |  |
+| `aria-activedescendant` | `string | undefined` | — | Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. |
+| `aria-atomic` | `(boolean | "true" | "false") | undefined` | — | Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. |
+| `aria-autocomplete` | `"both" | "inline" | "list" | "none" | undefined` | — | Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be presented if they are made. |
+| `aria-braillelabel` | `string | undefined` | — | Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user. |
+| `aria-brailleroledescription` | `string | undefined` | — | Defines a human-readable, author-localized abbreviated description for the role of an element, which is intended to be converted into Braille. |
+| `aria-busy` | `(boolean | "true" | "false") | undefined` | — |  |
+| `aria-checked` | `boolean | "true" | "false" | "mixed" | undefined` | — | Indicates the current "checked" state of checkboxes, radio buttons, and other widgets. |
+| `aria-colcount` | `number | undefined` | — | Defines the total number of columns in a table, grid, or treegrid. |
+| `aria-colindex` | `number | undefined` | — | Defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid. |
+| `aria-colindextext` | `string | undefined` | — | Defines a human readable text alternative of aria-colindex. |
+| `aria-colspan` | `number | undefined` | — | Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid. |
+| `aria-controls` | `string | undefined` | — | Identifies the element (or elements) whose contents or presence are controlled by the current element. |
+| `aria-current` | `boolean | "true" | "false" | "date" | "location" | "page" | "step" | "time" | undefined` | — | Indicates the element that represents the current item within a container or set of related elements. |
+| `aria-describedby` | `string | undefined` | — | Identifies the element (or elements) that describes the object. |
+| `aria-description` | `string | undefined` | — | Defines a string value that describes or annotates the current element. |
+| `aria-details` | `string | undefined` | — | Identifies the element that provides a detailed, extended description for the object. |
+| `aria-disabled` | `(boolean | "true" | "false") | undefined` | — | Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable. |
+| `aria-errormessage` | `string | undefined` | — | Identifies the element that provides an error message for the object. |
+| `aria-expanded` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. |
+| `aria-flowto` | `string | undefined` | — | Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion, allows assistive technology to override the general default of reading in document source order. |
+| `aria-haspopup` | `boolean | "true" | "false" | "dialog" | "grid" | "listbox" | "menu" | "tree" | undefined` | — | Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. |
+| `aria-hidden` | `(boolean | "true" | "false") | undefined` | — | Indicates whether the element is exposed to an accessibility API. |
+| `aria-invalid` | `boolean | "true" | "false" | "grammar" | "spelling" | undefined` | — | Indicates the entered value does not conform to the format expected by the application. |
+| `aria-keyshortcuts` | `string | undefined` | — | Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. |
+| `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
+| `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
+| `aria-level` | `number | undefined` | — | Defines the hierarchical level of an element within a structure. |
+| `aria-live` | `"assertive" | "off" | "polite" | undefined` | — | Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region. |
+| `aria-modal` | `(boolean | "true" | "false") | undefined` | — | Indicates whether an element is modal when displayed. |
+| `aria-multiline` | `(boolean | "true" | "false") | undefined` | — | Indicates whether a text box accepts multiple lines of input or only a single line. |
+| `aria-multiselectable` | `(boolean | "true" | "false") | undefined` | — | Indicates that the user may select more than one item from the current selectable descendants. |
+| `aria-orientation` | `"horizontal" | "vertical" | undefined` | — | Indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous. |
+| `aria-owns` | `string | undefined` | — | Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship between DOM elements where the DOM hierarchy cannot be used to represent the relationship. |
+| `aria-placeholder` | `string | undefined` | — | Defines a short hint (a word or short phrase) intended to aid the user with data entry when the control has no value. A hint could be a sample value or a brief description of the expected format. |
+| `aria-posinset` | `number | undefined` | — | Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. |
+| `aria-pressed` | `boolean | "true" | "false" | "mixed" | undefined` | — | Indicates the current "pressed" state of toggle buttons. |
+| `aria-readonly` | `(boolean | "true" | "false") | undefined` | — | Indicates that the element is not editable, but is otherwise operable. |
+| `aria-relevant` | `"additions" | "additions removals" | "additions text" | "all" | "removals" | "removals additions" | "removals text" | "text" | "text additions" | "text removals" | undefined` | — | Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified. |
+| `aria-required` | `(boolean | "true" | "false") | undefined` | — | Indicates that user input is required on the element before a form may be submitted. |
+| `aria-roledescription` | `string | undefined` | — | Defines a human-readable, author-localized description for the role of an element. |
+| `aria-rowcount` | `number | undefined` | — | Defines the total number of rows in a table, grid, or treegrid. |
+| `aria-rowindex` | `number | undefined` | — | Defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid. |
+| `aria-rowindextext` | `string | undefined` | — | Defines a human readable text alternative of aria-rowindex. |
+| `aria-rowspan` | `number | undefined` | — | Defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid. |
+| `aria-selected` | `(boolean | "true" | "false") | undefined` | — | Indicates the current "selected" state of various widgets. |
+| `aria-setsize` | `number | undefined` | — | Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. |
+| `aria-sort` | `"ascending" | "descending" | "none" | "other" | undefined` | — | Indicates if items in a table or grid are sorted in ascending or descending order. |
+| `aria-valuemax` | `number | undefined` | — | Defines the maximum allowed value for a range widget. |
+| `aria-valuemin` | `number | undefined` | — | Defines the minimum allowed value for a range widget. |
+| `aria-valuenow` | `number | undefined` | — | Defines the current value for a range widget. |
+| `aria-valuetext` | `string | undefined` | — | Defines the human readable text alternative of aria-valuenow for a range widget. |
+| `autoCapitalize` | `"characters" | "none" | "off" | "on" | "sentences" | "words" | (string & {}) | undefined` | — |  |
+| `autoCorrect` | `string | undefined` | — |  |
+| `autoFocus` | `boolean | undefined` | — |  |
+| `autoSave` | `string | undefined` | — |  |
+| `children` | `React.ReactNode` | — |  |
+| `className` | `string | undefined` | 'react-aria-CalendarHeading' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
+| `color` | `string | undefined` | — |  |
+| `content` | `string | undefined` | — |  |
+| `contentEditable` | `"inherit" | "plaintext-only" | (boolean | "true" | "false") | undefined` | — |  |
+| `contextMenu` | `string | undefined` | — |  |
+| `dangerouslySetInnerHTML` | `{ __html: string | TrustedHTML; } | undefined` | — |  |
+| `datatype` | `string | undefined` | — |  |
+| `defaultChecked` | `boolean | undefined` | — |  |
+| `defaultValue` | `number | string | readonly string[] | undefined` | — |  |
+| `dir` | `string | undefined` | — |  |
+| `draggable` | `(boolean | "true" | "false") | undefined` | — |  |
+| `enterKeyHint` | `"done" | "enter" | "go" | "next" | "previous" | "search" | "send" | undefined` | — |  |
+| `exportparts` | `string | undefined` | — |  |
+| `format` | `CalendarHeadingFormatOptions | undefined` | — | The format of the month heading. |
+| `hidden` | `boolean | undefined` | — |  |
+| `id` | `string | undefined` | — |  |
+| `inert` | `boolean | undefined` | — |  |
+| `inlist` | `any` | — |  |
+| `inputMode` | `"decimal" | "email" | "none" | "numeric" | "search" | "tel" | "text" | "url" | undefined` | — | Hints at the type of data that might be entered by the user while editing the element or its contents |
+| `is` | `string | undefined` | — | Specify that a standard HTML element should behave like a defined custom built-in element |
+| `itemID` | `string | undefined` | — |  |
+| `itemProp` | `string | undefined` | — |  |
+| `itemRef` | `string | undefined` | — |  |
+| `itemScope` | `boolean | undefined` | — |  |
+| `itemType` | `string | undefined` | — |  |
+| `lang` | `string | undefined` | — |  |
+| `level` | `number | undefined` | 3 | The heading level. |
+| `nonce` | `string | undefined` | — |  |
+| `offset` | `DateDuration | undefined` | 0 | The number of months from the start of the visible range to display. |
+| `onAbort` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onAbortCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationEnd` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationIteration` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationIterationCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationStart` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAuxClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onAuxClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onBeforeInput` | `React.InputEventHandler<HTMLElement> | undefined` | — |  |
+| `onBeforeInputCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onBeforeToggle` | `React.ToggleEventHandler<HTMLElement> | undefined` | — |  |
+| `onBlur` | `React.FocusEventHandler<HTMLElement> | undefined` | — |  |
+| `onBlurCapture` | `React.FocusEventHandler<HTMLElement> | undefined` | — |  |
+| `onCanPlay` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onCanPlayCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onCanPlayThrough` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onCanPlayThroughCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onChange` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onChangeCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onCompositionEnd` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |  |
+| `onCompositionEndCapture` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |  |
+| `onCompositionStart` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |  |
+| `onCompositionStartCapture` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |  |
+| `onCompositionUpdate` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |  |
+| `onCompositionUpdateCapture` | `React.CompositionEventHandler<HTMLElement> | undefined` | — |  |
+| `onContextMenu` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onContextMenuCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onCopy` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onCopyCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onCut` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onCutCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onDoubleClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onDoubleClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onDrag` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragEnd` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragEndCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragEnter` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragEnterCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragExit` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragExitCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragLeave` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragLeaveCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragOver` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragOverCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragStart` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDragStartCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDrop` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDropCapture` | `React.DragEventHandler<HTMLElement> | undefined` | — |  |
+| `onDurationChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onDurationChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onEmptied` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onEmptiedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onEncrypted` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onEncryptedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onEnded` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onEndedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onError` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onErrorCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onFocus` | `React.FocusEventHandler<HTMLElement> | undefined` | — |  |
+| `onFocusCapture` | `React.FocusEventHandler<HTMLElement> | undefined` | — |  |
+| `onGotPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onInput` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onInputCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onInvalid` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onInvalidCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onKeyDown` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onKeyDownCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onKeyUp` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onKeyUpCapture` | `React.KeyboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoad` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoadCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoadedData` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoadedDataCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoadedMetadata` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoadedMetadataCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoadStart` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLoadStartCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onLostPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseDown` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseDownCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseEnter` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseLeave` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseMove` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseMoveCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOut` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOutCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOver` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOverCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseUp` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseUpCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onPaste` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onPasteCapture` | `React.ClipboardEventHandler<HTMLElement> | undefined` | — |  |
+| `onPause` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onPauseCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onPlay` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onPlayCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onPlaying` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onPlayingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerCancel` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerCancelCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerDown` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerDownCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerEnter` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerLeave` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerMove` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerMoveCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOut` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOutCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOver` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOverCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerUp` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerUpCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onProgress` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onProgressCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onRateChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onRateChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onReset` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onResetCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onScroll` | `React.UIEventHandler<HTMLElement> | undefined` | — |  |
+| `onScrollCapture` | `React.UIEventHandler<HTMLElement> | undefined` | — |  |
+| `onScrollEnd` | `React.UIEventHandler<HTMLElement> | undefined` | — |  |
+| `onScrollEndCapture` | `React.UIEventHandler<HTMLElement> | undefined` | — |  |
+| `onSeeked` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onSeekedCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onSeeking` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onSeekingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onSelect` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onSelectCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onStalled` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onStalledCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onSubmit` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onSubmitCapture` | `React.FormEventHandler<HTMLElement> | undefined` | — |  |
+| `onSuspend` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onSuspendCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onTimeUpdate` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onTimeUpdateCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onToggle` | `React.ToggleEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchCancel` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchCancelCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchEnd` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchEndCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchMove` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchMoveCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchStart` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchStartCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionCancel` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionCancelCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionEnd` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionEndCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionRun` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionRunCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionStart` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onVolumeChange` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onVolumeChangeCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onWaiting` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onWaitingCapture` | `React.ReactEventHandler<HTMLElement> | undefined` | — |  |
+| `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
+| `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
+| `part` | `string | undefined` | — |  |
+| `popover` | `"" | "auto" | "manual" | undefined` | — |  |
+| `popoverTarget` | `string | undefined` | — |  |
+| `popoverTargetAction` | `"hide" | "show" | "toggle" | undefined` | — |  |
+| `prefix` | `string | undefined` | — |  |
+| `property` | `string | undefined` | — |  |
+| `radioGroup` | `string | undefined` | — |  |
+| `rel` | `string | undefined` | — |  |
+| `render` | `DOMRenderFunction<"h1", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `resource` | `string | undefined` | — |  |
+| `results` | `number | undefined` | — |  |
+| `rev` | `string | undefined` | — |  |
+| `role` | `React.AriaRole | undefined` | — |  |
+| `security` | `string | undefined` | — |  |
+| `slot` | `string | undefined` | — |  |
+| `spellCheck` | `(boolean | "true" | "false") | undefined` | — |  |
+| `style` | `React.CSSProperties | undefined` | — |  |
+| `suppressContentEditableWarning` | `boolean | undefined` | — |  |
+| `suppressHydrationWarning` | `boolean | undefined` | — |  |
+| `tabIndex` | `number | undefined` | — |  |
+| `title` | `string | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+| `typeof` | `string | undefined` | — |  |
+| `unselectable` | `"off" | "on" | undefined` | — |  |
+| `vocab` | `string | undefined` | — |  |
+
+### CalendarMonthPicker
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `(renderProps: CalendarMonthPickerAria) => JSX.Element` | — | A function to render the month picker. |
+| `format` | `"2-digit" | "long" | "narrow" | "numeric" | "short" | undefined` | — | The format of the month. |
+
+### CalendarYearPicker
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `(renderProps: CalendarYearPickerAria) => JSX.Element` | — | A function to render the year picker. |
+| `format` | `CalendarYearPickerFormatOptions | undefined` | — | The format to display. |
+| `visibleYears` | `number | undefined` | 20 | The number of years to display. |

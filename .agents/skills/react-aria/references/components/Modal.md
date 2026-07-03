@@ -39,7 +39,7 @@ function Example(props) {
 
 ```tsx
 'use client';
-import { Modal as RACModal, type ModalOverlayProps } from 'react-aria-components/Modal';
+import {Modal as RACModal, type ModalOverlayProps} from 'react-aria-components/Modal';
 import './Modal.css';
 
 export function Modal(props: ModalOverlayProps) {
@@ -51,15 +51,16 @@ export function Modal(props: ModalOverlayProps) {
 ### Modal.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-ModalOverlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: var(--page-width);
   height: var(--page-height);
-  background: rgba(0 0 0 / .5);
+  background: rgba(0 0 0 / 0.5);
+  overflow: clip;
   z-index: 100;
   font-family: system-ui;
   font-size: var(--font-size);
@@ -156,8 +157,8 @@ function Example(props) {
 ```tsx
 'use client';
 import React from 'react';
-import { ModalOverlay, type ModalOverlayProps, Modal as RACModal } from 'react-aria-components/Modal';
-import { tv } from 'tailwind-variants';
+import {ModalOverlay, type ModalOverlayProps, Modal as RACModal} from 'react-aria-components/Modal';
+import {tv} from 'tailwind-variants';
 
 const overlayStyles = tv({
   base: 'absolute top-0 left-0 w-full h-(--page-height) isolate z-20 bg-black/[50%] text-center backdrop-blur-lg',
@@ -400,11 +401,11 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", ModalRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
+| `render` | `DOMRenderFunction<"div", ModalRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `shouldCloseOnInteractOutside` | `((element: Element) => boolean) | undefined` | — | When user interacts with the argument element outside of the overlay ref, return true if onClose should be called.  This gives you a chance to filter out interaction with elements that should not dismiss the overlay. By default, onClose will always be called on interaction outside the overlay ref. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(React.CSSProperties | ((values: ModalRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `style` | `(((values: ModalRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### Dialog
 
@@ -414,7 +415,7 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `aria-details` | `string | undefined` | — | Identifies the element (or elements) that provide a detailed, extended description for the object. |
 | `aria-label` | `string | undefined` | — | Defines a string value that labels the current element. |
 | `aria-labelledby` | `string | undefined` | — | Identifies the element (or elements) that labels the current element. |
-| `children` | `React.ReactNode | ((opts: DialogRenderProps) => ReactNode)` | — | Children of the dialog. A function may be provided to access a function to close the dialog. |
+| `children` | `((opts: DialogRenderProps) => ReactNode) | React.ReactNode` | — | Children of the dialog. A function may be provided to access a function to close the dialog. |
 | `className` | `string | undefined` | 'react-aria-Dialog' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
 | `dir` | `string | undefined` | — |  |
 | `hidden` | `boolean | undefined` | — |  |
@@ -485,8 +486,8 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"section", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `role` | `"dialog" | "alertdialog" | undefined` | 'dialog' | The accessibility role for the dialog. |
+| `render` | `DOMRenderFunction<"section", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `role` | `"alertdialog" | "dialog" | undefined` | 'dialog' | The accessibility role for the dialog. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `translate` | `"no" | "yes" | undefined` | — |  |

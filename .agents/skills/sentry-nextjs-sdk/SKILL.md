@@ -141,7 +141,12 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN ?? "___PUBLIC_DSN___",
 
-  sendDefaultPii: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
 
   // 100% in dev, 10% in production
   tracesSampleRate: process.env.NODE_ENV === "development" ? 1.0 : 0.1,
@@ -171,7 +176,12 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.SENTRY_DSN ?? "___DSN___",
 
-  sendDefaultPii: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
   tracesSampleRate: process.env.NODE_ENV === "development" ? 1.0 : 0.1,
 
   // Attach local variable values to stack frames
@@ -189,7 +199,12 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.SENTRY_DSN ?? "___DSN___",
 
-  sendDefaultPii: true,
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/options/#dataCollection
+    // userInfo: false,
+    // httpBodies: [],
+  },
   tracesSampleRate: process.env.NODE_ENV === "development" ? 1.0 : 0.1,
 
   enableLogs: true,
@@ -321,43 +336,18 @@ export const config = {
 
 ### Source Maps Setup
 
-Source maps make production stack traces readable — without them, you see minified code. This is non-negotiable for production apps.
-
-**Step 1: Generate a Sentry auth token**
-
-Go to [sentry.io/settings/auth-tokens/](https://sentry.io/settings/auth-tokens/) and create a token with `project:releases` and `org:read` scopes.
-
-**Step 2: Set environment variables**
-
-```bash
-# .env.sentry-build-plugin  (gitignore this file)
-SENTRY_AUTH_TOKEN=sntrys_eyJ...
-```
-
-Or set in CI secrets:
-
-```bash
-SENTRY_AUTH_TOKEN=sntrys_eyJ...
-SENTRY_ORG=my-org        # optional if set in next.config
-SENTRY_PROJECT=my-project # optional if set in next.config
-```
-
-**Step 3: Add to `.gitignore`**
-
-```
-.env.sentry-build-plugin
-```
-
-**Step 4: Verify `authToken` is wired in `next.config.ts`**
+`withSentryConfig` uploads source maps on production builds so stack traces show your original code instead of minified output. The SDK-specific wiring is the `authToken` (plus `widenClientFileUpload`, which improves client stack traces) in `next.config.ts`:
 
 ```typescript
 withSentryConfig(nextConfig, {
   org: "my-org",
   project: "my-project",
-  authToken: process.env.SENTRY_AUTH_TOKEN, // reads from .env.sentry-build-plugin or CI env
+  authToken: process.env.SENTRY_AUTH_TOKEN, // from CI env or a gitignored .env.sentry-build-plugin
   widenClientFileUpload: true,
 });
 ```
+
+`SENTRY_AUTH_TOKEN` is a build-time secret, distinct from the DSN. For creating the token, wiring it into CI, and troubleshooting minified traces, see [`sentry-source-maps`](../sentry-source-maps/SKILL.md).
 
 Source maps are uploaded automatically on every `next build`.
 
@@ -382,34 +372,7 @@ For each feature: read the reference file, follow its steps exactly, and verify 
 
 ---
 
-## Verification
-
-After wizard or manual setup, verify Sentry is working:
-
-```typescript
-// Add temporarily to a server action or API route, then remove
-import * as Sentry from "@sentry/nextjs";
-
-throw new Error("Sentry test error — delete me");
-// or
-Sentry.captureException(new Error("Sentry test error — delete me"));
-```
-
-Then check your [Sentry Issues dashboard](https://sentry.io/issues/) — the error should appear within ~30 seconds.
-
-**Verification checklist:**
-
-| Check | How |
-|-------|-----|
-| Client errors captured | Throw in a client component, verify in Sentry |
-| Server errors captured | Throw in a server action or API route |
-| Edge errors captured | Throw in middleware or edge route handler |
-| Source maps working | Check stack trace shows readable file names |
-| Session Replay working | Check Replays tab in Sentry dashboard |
-
----
-
-## Config Reference
+## Configuration Reference
 
 ### `Sentry.init()` Options
 
@@ -419,7 +382,7 @@ Then check your [Sentry Issues dashboard](https://sentry.io/issues/) — the err
 | `tracesSampleRate` | `number` | — | 0–1; 1.0 in dev, 0.1 in prod recommended |
 | `replaysSessionSampleRate` | `number` | `0.1` | Fraction of all sessions recorded |
 | `replaysOnErrorSampleRate` | `number` | `1.0` | Fraction of error sessions recorded |
-| `sendDefaultPii` | `boolean` | `false` | Include IP, request headers in events |
+| `dataCollection` | `object` | conservative unless set | Fine-grained control over auto-collected categories (`userInfo`, `cookies`, `httpHeaders`, `httpBodies`, `queryParams`, `genAI`). When omitted, the SDK falls back to `sendDefaultPii` (default `false`). Passing the object — even `{}` — flips unset categories to their permissive defaults; opt out per category. |
 | `includeLocalVariables` | `boolean` | `false` | Attach local variable values to stack frames (server only) |
 | `enableLogs` | `boolean` | `false` | Enable Sentry Logs product |
 | `environment` | `string` | auto | `"production"`, `"staging"`, etc. |
@@ -449,6 +412,33 @@ Then check your [Sentry Issues dashboard](https://sentry.io/issues/) — the err
 | `SENTRY_PROJECT` | Build | Project slug (alternative to `project` in config) |
 | `SENTRY_RELEASE` | Server | Release version string (auto-detected from git) |
 | `NEXT_RUNTIME` | Server / Edge | `"nodejs"` or `"edge"` (set by Next.js internally) |
+
+---
+
+## Verification
+
+After wizard or manual setup, verify Sentry is working:
+
+```typescript
+// Add temporarily to a server action or API route, then remove
+import * as Sentry from "@sentry/nextjs";
+
+throw new Error("Sentry test error — delete me");
+// or
+Sentry.captureException(new Error("Sentry test error — delete me"));
+```
+
+Then check your [Sentry Issues dashboard](https://sentry.io/issues/) — the error should appear within ~30 seconds.
+
+**Verification checklist:**
+
+| Check | How |
+|-------|-----|
+| Client errors captured | Throw in a client component, verify in Sentry |
+| Server errors captured | Throw in a server action or API route |
+| Edge errors captured | Throw in middleware or edge route handler |
+| Source maps working | Check stack trace shows readable file names |
+| Session Replay working | Check Replays tab in Sentry dashboard |
 
 ---
 

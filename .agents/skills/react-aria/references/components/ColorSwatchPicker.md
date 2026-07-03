@@ -25,30 +25,20 @@ import {
   ColorSwatchPicker as AriaColorSwatchPicker,
   ColorSwatchPickerItem as AriaColorSwatchPickerItem,
   type ColorSwatchPickerItemProps,
-  type ColorSwatchPickerProps,
+  type ColorSwatchPickerProps
 } from 'react-aria-components/ColorSwatchPicker';
 import {ColorSwatch} from './ColorSwatch';
 import './ColorSwatchPicker.css';
 
-export function ColorSwatchPicker(
-  { children, ...props }: ColorSwatchPickerProps
-) {
-  return (
-    (
-      <AriaColorSwatchPicker {...props}>
-        {children}
-      </AriaColorSwatchPicker>
-    )
-  );
+export function ColorSwatchPicker({children, ...props}: ColorSwatchPickerProps) {
+  return <AriaColorSwatchPicker {...props}>{children}</AriaColorSwatchPicker>;
 }
 
 export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
   return (
-    (
-      <AriaColorSwatchPickerItem {...props}>
-        <ColorSwatch />
-      </AriaColorSwatchPickerItem>
-    )
+    <AriaColorSwatchPickerItem {...props}>
+      <ColorSwatch />
+    </AriaColorSwatchPickerItem>
   );
 }
 
@@ -57,7 +47,7 @@ export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
 ### ColorSwatchPicker.css
 
 ```css
-@import "./theme.css";
+@import './theme.css';
 
 .react-aria-ColorSwatchPicker {
   display: flex;
@@ -94,7 +84,7 @@ export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
 }
 
 .react-aria-ColorSwatchPicker {
-  &[data-layout=stack] {
+  &[data-layout='stack'] {
     flex-direction: column;
   }
 }
@@ -125,9 +115,9 @@ import {
   ColorSwatchPicker as AriaColorSwatchPicker,
   ColorSwatchPickerItem as AriaColorSwatchPickerItem,
   type ColorSwatchPickerItemProps,
-  type ColorSwatchPickerProps,
+  type ColorSwatchPickerProps
 } from 'react-aria-components/ColorSwatchPicker';
-import { composeRenderProps } from 'react-aria-components/composeRenderProps';
+import {composeRenderProps} from 'react-aria-components/composeRenderProps';
 import {ColorSwatch} from './ColorSwatch';
 import {focusRing} from './utils';
 import {tv} from 'tailwind-variants';
@@ -140,13 +130,15 @@ const pickerStyles = tv({
       grid: 'flex-wrap'
     }
   }
-})
+});
 
-export function ColorSwatchPicker(
-  { children, ...props }: Omit<ColorSwatchPickerProps, 'layout'>
-) {
+export function ColorSwatchPicker({children, ...props}: Omit<ColorSwatchPickerProps, 'layout'>) {
   return (
-    <AriaColorSwatchPicker {...props} className={composeRenderProps(props.className, (className, renderProps) => pickerStyles({...renderProps, className}))}>
+    <AriaColorSwatchPicker
+      {...props}
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        pickerStyles({...renderProps, className})
+      )}>
       {children}
     </AriaColorSwatchPicker>
   );
@@ -160,13 +152,18 @@ const itemStyles = tv({
 export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
   return (
     <AriaColorSwatchPickerItem {...props} className={itemStyles}>
-      {({isSelected}) => <>
-        <ColorSwatch />
-        {isSelected && <div className="absolute top-0 left-0 w-full h-full box-border border border-2 border-black dark:border-white outline outline-2 outline-white dark:outline-black -outline-offset-4 rounded-md forced-color-adjust-none" />}
-      </>}
+      {({isSelected}) => (
+        <>
+          <ColorSwatch />
+          {isSelected && (
+            <div className="absolute top-0 left-0 w-full h-full box-border border border-2 border-black dark:border-white outline outline-2 outline-white dark:outline-black -outline-offset-4 rounded-md forced-color-adjust-none" />
+          )}
+        </>
+      )}
     </AriaColorSwatchPickerItem>
   );
 }
+
 ```
 
 ## Value
@@ -295,9 +292,9 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", ColorSwatchPickerRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `style` | `(React.CSSProperties | ((values: ColorSwatchPickerRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", ColorSwatchPickerRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `style` | `(((values: ColorSwatchPickerRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `string | Color | undefined` | — | The current value (controlled). |
 
 ### ColorSwatchPickerItem
@@ -320,7 +317,7 @@ function Example() {
 | `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
-| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides  additional event details for non-mouse interactions. |
+| `onClick` | `((e: React.MouseEvent<FocusableElement>) => void) | undefined` | — | **Not recommended – use `onPress` instead.** `onClick` is an alias for `onPress` provided for compatibility with other libraries. `onPress` provides additional event details for non-mouse interactions. |
 | `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -384,13 +381,28 @@ function Example() {
 | `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
-| `render` | `DOMRenderFunction<"div", ColorSwatchPickerItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: \* You must render the expected element type (e.g. if `<button>` is expected, you cannot render an `<a>`). \* Only a single root DOM element can be rendered (no fragments). \* You must pass through props and ref to the underlying DOM element, merging with your own prop as appropriate. |
-| `style` | `(React.CSSProperties | ((values: ColorSwatchPickerItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
-| `translate` | `"yes" | "no" | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", ColorSwatchPickerItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `style` | `(((values: ColorSwatchPickerItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
 
 ## Related Types
 
 ### Color
+
+`Color(props: IconProps & {size?: 'L' | 'S' | 'M'}): ReactNode`
+
+| Name | Type | Description |
+|------|------|-------------|
+| `aria-describedby` | `string | undefined` | Identifies the element (or elements) that describes the object. |
+| `aria-details` | `string | undefined` | Identifies the element (or elements) that provide a detailed, extended description for the object. |
+| `aria-hidden` | `boolean | "true" | "false" | undefined` | — |
+| `aria-label` | `string | undefined` | Defines a string value that labels the current element. |
+| `aria-labelledby` | `string | undefined` | Identifies the element (or elements) that labels the current element. |
+| `id` | `string | undefined` | The element's unique identifier. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). |
+| `slot` | `string | null | undefined` | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
+| `styles` | `StyleString<AllowedOverrides> | undefined` | — |
+| `UNSAFE_className` | `UnsafeClassName | undefined` | Sets the CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
+| `UNSAFE_style` | `CSSProperties | undefined` | Sets inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. Only use as a **last resort**. Use the `style` macro via the `styles` prop instead. |
 
 ### parseColor
 

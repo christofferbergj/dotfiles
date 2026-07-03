@@ -268,7 +268,7 @@ Deep slices are slow because all skipped docs must be sorted first.
 ```groq
 // Compound cursor: publishedAt + _id for deterministic pagination
 *[_type == "article" && (
-  publishedAt < $lastDate ||
+  publishedAt < $lastDate || 
   (publishedAt == $lastDate && _id > $lastId)
 )] | order(publishedAt desc, _id)[0...20]
 ```

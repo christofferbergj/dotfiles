@@ -1,77 +1,86 @@
 ---
 name: better-result-adopt
-description: Migrate codebase from try/catch or Promise-based error handling to better-result. Use when adopting Result types, converting thrown exceptions to typed errors, or refactoring existing error handling to railway-oriented programming.
+description: Adopt better-result in an existing TypeScript codebase. Use when replacing try/catch, Promise rejection handling, null sentinels, or thrown domain exceptions with typed Result workflows.
+references:
+  - references/tagged-errors.md
 ---
 
-# better-result Adoption
+# better-result Adopt
 
-Migrate existing error handling (try/catch, Promise rejections, thrown exceptions) to typed Result-based error handling with better-result.
+Adopt `better-result` incrementally in existing codebases without rewriting everything at once.
 
 ## When to Use
 
-- Adopting better-result in existing codebase
-- Converting try/catch blocks to Result types
-- Replacing thrown exceptions with typed errors
-- Migrating Promise-based code to Result.tryPromise
-- Introducing railway-oriented programming patterns
+Use this skill when the user wants to:
+
+- migrate from try/catch to `Result.try` or `Result.tryPromise`
+- replace nullable return values with typed `Result<T, E>`
+- define domain-specific `TaggedError` types
+- refactor nested error handling into `andThen` chains or `Result.gen`
+- standardize error handling across a service or module
+
+## Reading Order
+
+| Task                                   | Files to Read                 |
+| -------------------------------------- | ----------------------------- |
+| Adopt better-result in a module        | This file                     |
+| Define or review error types           | `references/tagged-errors.md` |
+| Inspect library implementation details | `opensrc/` if present         |
+
+## Prerequisites
+
+Before editing code:
+
+1. Confirm `better-result` is already installed in the target project.
+2. Check for an `opensrc/` directory. If present, read the package source there for current patterns.
+3. Identify the migration scope first: one file, one module, or one boundary layer.
 
 ## Migration Strategy
 
-### 1. Start at Boundaries
+### 1. Start at boundaries
 
-Begin migration at I/O boundaries (API calls, DB queries, file ops) and work inward. Don't attempt full-codebase migration at once.
+Begin with I/O boundaries and exception-heavy code:
 
-### 2. Identify Error Categories
+- HTTP clients
+- database access
+- file system operations
+- parsing and validation
+- framework adapters
 
-Before migrating, categorize errors in target code:
+Do not convert the whole codebase at once.
 
-| Category       | Example                | Migration Target                                |
-| -------------- | ---------------------- | ----------------------------------------------- |
-| Domain errors  | NotFound, Validation   | TaggedError + Result.err                        |
-| Infrastructure | Network, DB connection | Result.tryPromise + TaggedError                 |
-| Bugs/defects   | null deref, type error | Let throw (becomes Panic if in Result callback) |
+### 2. Classify existing failures
 
-### 3. Migration Order
+| Category              | Examples                    | Target shape                                                   |
+| --------------------- | --------------------------- | -------------------------------------------------------------- |
+| Domain errors         | not found, validation, auth | `TaggedError` + `Result.err`                                   |
+| Infrastructure errors | network, DB, file I/O       | `Result.tryPromise` + mapped error                             |
+| Programmer defects    | bad assumptions, null deref | leave throwing; defects become `Panic` inside Result callbacks |
 
-1. Define TaggedError classes for domain errors
-2. Wrap throwing functions with Result.try/tryPromise
-3. Convert imperative error checks to Result chains
-4. Refactor callbacks to generator composition
+### 3. Migrate in this order
 
-## Pattern Transformations
+1. Define error types.
+2. Wrap throwing boundaries with `Result.try` / `Result.tryPromise`.
+3. Replace null or boolean sentinel returns with `Result`.
+4. Refactor call sites to propagate `Result` values.
+5. Collapse nested branching into `andThen`, `mapError`, or `Result.gen`.
 
-### Try/Catch to Result.try
+## Core Transformations
 
-```typescript
-// BEFORE
-function parseConfig(json: string): Config {
-  try {
-    return JSON.parse(json);
-  } catch (e) {
-    throw new ParseError(e);
-  }
-}
+### Try/catch → `Result.try`
 
-// AFTER
+```ts
 function parseConfig(json: string): Result<Config, ParseError> {
   return Result.try({
     try: () => JSON.parse(json) as Config,
-    catch: (e) => new ParseError({ cause: e, message: `Parse failed: ${e}` }),
+    catch: (cause) => new ParseError({ cause, message: `Parse failed: ${cause}` }),
   });
 }
 ```
 
-### Async/Await to Result.tryPromise
+### Async throws → `Result.tryPromise`
 
-```typescript
-// BEFORE
-async function fetchUser(id: string): Promise<User> {
-  const res = await fetch(`/api/users/${id}`);
-  if (!res.ok) throw new ApiError(res.status);
-  return res.json();
-}
-
-// AFTER
+```ts
 async function fetchUser(id: string): Promise<Result<User, ApiError | UnhandledException>> {
   return Result.tryPromise({
     try: async () => {
@@ -79,50 +88,25 @@ async function fetchUser(id: string): Promise<Result<User, ApiError | UnhandledE
       if (!res.ok) throw new ApiError({ status: res.status, message: `API ${res.status}` });
       return res.json() as Promise<User>;
     },
-    catch: (e) => (e instanceof ApiError ? e : new UnhandledException({ cause: e })),
+    catch: (cause) => (cause instanceof ApiError ? cause : new UnhandledException({ cause })),
   });
 }
 ```
 
-### Null Checks to Result
+### Null sentinel → `Result`
 
-```typescript
-// BEFORE
-function findUser(id: string): User | null {
-  return users.find((u) => u.id === id) ?? null;
-}
-// Caller must check: if (user === null) ...
-
-// AFTER
+```ts
 function findUser(id: string): Result<User, NotFoundError> {
-  const user = users.find((u) => u.id === id);
+  const user = users.find((candidate) => candidate.id === id);
   return user
     ? Result.ok(user)
     : Result.err(new NotFoundError({ id, message: `User ${id} not found` }));
 }
-// Caller: yield* findUser(id) in Result.gen, or .match()
 ```
 
-### Callback Hell to Generator
+### Nested flow → `Result.gen`
 
-```typescript
-// BEFORE
-async function processOrder(orderId: string) {
-  try {
-    const order = await fetchOrder(orderId);
-    if (!order) throw new NotFoundError(orderId);
-    const validated = validateOrder(order);
-    if (!validated.ok) throw new ValidationError(validated.errors);
-    const result = await submitOrder(validated.data);
-    return result;
-  } catch (e) {
-    if (e instanceof NotFoundError) return { error: "not_found" };
-    if (e instanceof ValidationError) return { error: "invalid" };
-    throw e;
-  }
-}
-
-// AFTER
+```ts
 async function processOrder(orderId: string): Promise<Result<OrderResult, OrderError>> {
   return Result.gen(async function* () {
     const order = yield* Result.await(fetchOrder(orderId));
@@ -131,32 +115,39 @@ async function processOrder(orderId: string): Promise<Result<OrderResult, OrderE
     return Result.ok(result);
   });
 }
-// Error type is union of all yielded errors
 ```
 
-## Defining TaggedErrors
+## Execution Workflow
 
-See [references/tagged-errors.md](references/tagged-errors.md) for TaggedError patterns.
+1. Audit the target module for `try`, `catch`, `.catch(...)`, `throw`, `null`, `undefined`, and status-flag error handling.
+2. Define or update `TaggedError` classes before changing control flow.
+3. Convert boundary functions first and change their signatures to `Result<T, E>` or `Promise<Result<T, E>>`.
+4. Update immediate callers so they handle or propagate the new `Result`.
+5. Where multiple Result-returning steps compose, use `Result.gen` or `andThen`.
+6. Preserve error context by keeping `cause`, IDs, messages, and other structured fields.
+7. Run tests and add coverage for both success and error paths.
 
-## Workflow
+## Completion Criteria
 
-1. **Check for source reference**: Look for `opensrc/` directory - if present, read the better-result source code for implementation details and patterns
-2. **Audit**: Find try/catch, Promise.catch, thrown errors in target module
-3. **Define errors**: Create TaggedError classes for domain errors
-4. **Wrap boundaries**: Use Result.try/tryPromise at I/O points
-5. **Chain operations**: Convert if/else error checks to .andThen or Result.gen
-6. **Update signatures**: Change return types to Result<T, E>
-7. **Update callers**: Propagate Result handling up call stack
-8. **Test**: Verify error paths with .match or type narrowing
+A migration is complete when:
+
+- target functions no longer rely on try/catch for expected domain failures
+- nullable or sentinel error returns are replaced with explicit `Result` values
+- domain failures use typed `TaggedError` classes
+- callers either propagate `Result` or explicitly unwrap/match it
+- tests cover at least one success path and one representative error path
 
 ## Common Pitfalls
 
-- **Over-wrapping**: Don't wrap every function. Start at boundaries, propagate inward.
-- **Losing error info**: Always include cause/context in TaggedError constructors.
-- **Mixing paradigms**: Once a module returns Result, callers should too (or explicitly .unwrap).
-- **Ignoring Panic**: Callbacks that throw become Panic. Fix the bug, don't catch Panic.
+- Over-wrapping everything instead of starting at boundaries
+- Losing original failure context when mapping errors
+- Mixing `throw`-based and `Result`-based APIs deep in the same flow
+- Catching `Panic` instead of fixing the underlying defect
 
-## References
+## In This Reference
 
-- [TaggedError Patterns](references/tagged-errors.md) - Defining and matching typed errors
-- `opensrc/` directory (if present) - Full better-result source code for deeper context
+| File                          | Purpose                                                   |
+| ----------------------------- | --------------------------------------------------------- |
+| `references/tagged-errors.md` | TaggedError patterns, matching, type guards, and examples |
+
+If `opensrc/` exists, treat it as the source of truth for implementation details and current API behavior.
