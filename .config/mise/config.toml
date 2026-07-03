@@ -1,3 +1,7 @@
+[env]
+PNPM_HOME = "{{env.HOME}}/Library/pnpm"
+_.path = { path = ["{{env.HOME}}/Library/pnpm/bin"], tools = true }
+
 [tools]
 bun = "latest"
 node = "lts"
@@ -10,11 +14,13 @@ idiomatic_version_file_enable_tools = []
 [tasks.update-all]
 description = "Update Homebrew, Mise tools, and Bun globals"
 run = [
+    "cd",
     "brew upgrade",
     "brew cleanup",
     "brew autoremove",
     "mise upgrade",
     "mise prune -y",
-    "pnx skills update -y -g",
+    "pnpm dlx skills update -y -g",
+    "pnpm dlx skills add https://react-aria.adobe.com -y",
     "pnpm update --global --latest",
 ]
