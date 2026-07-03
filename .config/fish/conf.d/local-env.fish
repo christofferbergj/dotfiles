@@ -5,7 +5,7 @@ if test -r "$local_env"
 end
 
 if test (uname -s 2>/dev/null) = Darwin; and command -q launchctl
-    set -l launchctl_vars UIDOTSH_MCP_AUTHORIZATION CONTEXT7_API_KEY
+    set -l launchctl_vars UIDOTSH_MCP_AUTHORIZATION CONTEXT7_API_KEY SANITY_MCP_AUTHORIZATION
 
     if set -q LOCAL_ENV_LAUNCHCTL_VARS
         set launchctl_vars $launchctl_vars $LOCAL_ENV_LAUNCHCTL_VARS

@@ -38,6 +38,13 @@
       "headers": {
         "Authorization": "{env:UIDOTSH_MCP_AUTHORIZATION}"
       }
+    },
+    "Sanity": {
+      "headers": {
+        "Authorization": "{env:SANITY_MCP_AUTHORIZATION}"
+      },
+      "type": "remote",
+      "url": "https://mcp.sanity.io"
     }
   }
 }

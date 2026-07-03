@@ -8,6 +8,7 @@
 // from the command palette or from `Zed` application menu.
 {
   // General Settings
+  "diff_view_style": "split",
   "context_servers": {
     "mcp-server-context7": {
       "enabled": true,
