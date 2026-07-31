@@ -100,6 +100,30 @@ app/sync/background-sync.ts                  ← Global concern
 3. Check that no empty layer directories remain.
 4. Update documentation to reflect the new structure.
 
+## Phasing out a small widgets layer (optional)
+
+The widgets layer is discouraged, but this migration is optional. A project
+with an established widgets layer that works well can keep it as is (see
+`references/layer-structure.md`). This section is for projects with only a
+few widgets that want to align with the recommended structure.
+
+Route each widget individually by its actual responsibility:
+
+1. **Used by one page only** → inline it into that page's slice. This is the
+   most common case: the block was extracted prematurely and never reused.
+2. **Contains a user action reused across pages** (a form, a dialog, a
+   toolbar with behavior) → move both the action and its UI to `features/`.
+3. **Pure presentational UI with no business context** → move to `shared/ui/`.
+4. **App-wide shell or layout** (header, footer, navigation frame) → move to
+   `app/`, and compose it in the route configuration.
+5. **Composes multiple features** → move the composition up into the page or
+   the route layout in `app` instead of keeping a middle layer.
+
+Migrate one widget per commit, updating its imports as you go. Delete the
+`widgets/` directory (and its path alias) only when the last widget is gone.
+A half-empty widgets layer is fine in the meantime; import rules keep
+working throughout.
+
 ## Part 2: Custom architecture → FSD
 
 This part follows the official `from-custom` migration order. The core
@@ -259,8 +283,11 @@ API functions related to these slices can stay in `shared/api`.
 ### Step 7. Refactor your modules
 
 The `modules/` folder typically holds business logic, similar in nature to
-the Features layer. Some modules describe large UI chunks (an app header)
-which belong in the Widgets layer.
+the Features layer. Some modules describe large UI chunks (an app header).
+Projects that keep a widgets layer can migrate these there. Otherwise place
+the composition where it is used: a screen-specific block stays in `pages/`,
+a reusable action plus its UI goes to `features/`, and an app-wide shell
+(header, footer) goes to `app/`.
 
 ### Step 8. Form a clean UI foundation in `shared/ui`
 
@@ -273,8 +300,9 @@ places, copy-pasting back to consumers is an acceptable choice.
 
 1. **Extracting too early.** Wait for real reuse, not anticipated reuse.
    The v2.1 philosophy is "pages first, extract later".
-2. **Creating empty layers.** Do not create `features/`, `entities/`, or
-   `widgets/` directories until there is content for them.
+2. **Creating empty layers.** Do not create `features/` or `entities/`
+   directories until there is content for them, and do not actively adopt
+   the discouraged `widgets/` layer.
 3. **Refactoring while migrating.** Separate relocation from refactoring.
    Move files first, improve them in separate commits.
 4. **Ignoring import direction.** Enforce import rules from day one with

@@ -1,0 +1,5 @@
+interface:
+  display_name: 'Update Dependencies'
+  short_description: 'Audit and update JavaScript dependency surfaces'
+policy:
+  allow_implicit_invocation: false

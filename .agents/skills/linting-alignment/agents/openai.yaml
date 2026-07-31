@@ -1,0 +1,3 @@
+interface:
+  display_name: 'Linting Alignment'
+  short_description: 'Align lint policy with its owning toolchain'

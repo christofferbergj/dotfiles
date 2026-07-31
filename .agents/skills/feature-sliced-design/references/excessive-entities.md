@@ -43,7 +43,7 @@ src/
 ### 1. Avoid preemptive slicing
 
 FSD v2.1 encourages **deferred decomposition** of slices. Place code in the
-`model` segment of the consuming page, widget, or feature first. Move it to
+`model` segment of the consuming page (widget, feature) first. Move it to
 `entities` later, when business requirements stabilize and reuse is
 confirmed across multiple consumers.
 
@@ -118,8 +118,7 @@ complicating the architecture.
 
 The Auth guide also documents **In Entities** (a `user` entity) as a
 valid placement when the project already has an entities layer and the
-data is genuinely reused. **In Pages/Widgets** is discouraged for both
-guides.
+data is genuinely reused. **In Pages/Widgets** is not recommended.
 
 **`shared/auth` (or `shared/api`) is the recommended default.** Choose
 it when:
@@ -171,9 +170,11 @@ expose it through a context or `localStorage` with the key kept in
 `shared/api`, or inject the token into the API client whenever the entity
 store updates.
 
-**Pages and widgets are discouraged.** Avoid placing the token store in a
-page's `model/` segment or in a widget. App-wide state belongs in Shared
-or Entities, not in route-bound or block-bound layers.
+**Pages and a specific feature slice are not recommended.** Tokens are
+application-wide state: a token store inside `features/login` cannot be
+imported by other features, and one inside a page is unreachable from lower
+layers. See the auth section of `references/practical-examples.md` for the
+full explanation.
 
 ### Decision summary
 
@@ -182,7 +183,7 @@ or Entities, not in route-bound or block-bound layers.
 | No entities layer (yet), simple token + minimal user info | `shared/auth` |
 | Entities layer exists, auth and profile tightly coupled | `entities/user` |
 | Complex token logic, no profile reuse yet | `shared/auth` (split from `shared/api`) |
-| Token storage in a single page or widget | Avoid; promote to Shared or Entities |
+| Token storage in a single page, widget, or feature slice | Avoid; promote to Shared or Entities |
 
 A `user` entity created **only** to wrap a login response is premature.
 Wait until profile data is consumed for non-auth purposes (avatars in
@@ -249,7 +250,7 @@ A new piece of business logic needs a home.
   │   ├─ Auth and profile data tightly coupled, entities layer exists?
   │   │   └─ YES → entities/user/
   │   └─ Otherwise → shared/auth/ (default).
-  │       Avoid placing in a page or widget.
+  │       Avoid placing in a page, widget, or single feature slice.
   │
   ├─ Is it just a TypeScript type for an API response?
   │   └─ YES → shared/api/. No entity needed for types alone.
@@ -271,8 +272,8 @@ A new piece of business logic needs a home.
   entity is justified when profile data is reused across non-auth flows
   (avatars in comments, names in posts) or when token logic is genuinely
   tied to user business logic. Until that reuse appears, `shared/auth`
-  is simpler. Storing tokens in a page or widget is discouraged regardless
-  of the project shape.
+  is simpler. Storing tokens in a page, widget, or single feature slice is
+  discouraged regardless of the project shape.
 - **Splitting one domain into many entities (`order`, `order-item`,
   `order-customer-info`).** This produces `@x` chains. Merge into a single
   isolated context (`order-info` or `order`).

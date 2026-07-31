@@ -158,6 +158,13 @@ features/
 
 ### Strategy C: Compose from an upper layer (IoC)
 
+Embedding pages, features, and entities into each other is possible, but the
+composition must happen in a higher layer. For example, a page can import
+multiple features and entities to compose a complete screen. When necessary,
+components can also be passed through props or children for composition.
+However, one feature must not directly import another feature according to
+the layer import rule.
+
 Instead of connecting slices within the same layer via cross-imports,
 compose them at a higher level (`pages` or `app`). The upper layer assembles
 and connects the slices; the slices themselves do not know about each other.

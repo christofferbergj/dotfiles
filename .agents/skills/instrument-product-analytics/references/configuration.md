@@ -115,6 +115,29 @@ config.setBeforeSend { event in
 }
 ```
 
+Filter autocaptured screen views
+
+You can stop specific screens from being autocaptured by filtering them in your before-send hook. Return `null` for any `$screen` event whose `$screen_name` matches a screen you don't want to track, and it's dropped before being sent – keeping unwanted screen views out of your event log.
+
+Because it's just a function, you can filter however you like – an **ignorelist** (drop the screens you name), an **allowlist** (invert the check to capture only the screens you name), or any custom rule such as a name prefix, a regex, or a check against the event's properties.
+
+Swift
+
+PostHog AI
+
+```swift
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
+let ignoredScreens: Set<String> = ["Splash", "Debug"]
+config.setBeforeSend { event in
+    if event.event == "$screen",
+       let screenName = event.properties["$screen_name"] as? String,
+       ignoredScreens.contains(screenName) {
+        return nil
+    }
+    return event
+}
+```
+
 ### Sampling events
 
 Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
@@ -266,6 +289,7 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog-ios/blob/main/Po
 | reuseAnonymousIdType: BooleanDefault: false | Whether the SDK should reuse the anonymous Id between user changes. When enabled, a single Id will be used for all anonymous users on this device. |
 | surveysType: BooleanDefault: true | Enable Surveys. |
 | setBeforeSendType: FunctionDefault: undefined | Hook that allows for amending, sampling, or dropping events before they are sent to PostHog. |
+| bootstrapType: PostHogBootstrapConfigDefault: nil | Seeds identity (distinctId, isIdentifiedId) and feature-flag state (featureFlags, featureFlagPayloads) before the first /flags response. Bootstrapped identity applies to the first session; only enabled flags are served, until the first /flags response replaces them. See [bootstrapping](/docs/feature-flags/bootstrapping.md#behavior-on-mobile-sdks). |
 
 ### Community questions
 

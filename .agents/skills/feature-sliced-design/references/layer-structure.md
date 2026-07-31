@@ -98,21 +98,21 @@ confirmed, not anticipated).
 
 ### Page Layout Patterns
 
-A typical page composes widgets, features, and entities from lower layers,
-plus its own local UI components:
+A typical page composes features and entities from lower layers, plus its own
+local UI components:
 
 ```typescript
 // pages/product-detail/ui/ProductDetailPage.tsx
-import { Header } from '@/widgets/header';
 import { AddToCart } from '@/features/add-to-cart';
 import { Product } from '@/entities/product';
+import { PageHeader } from './PageHeader'; // local to this page
 
 export const ProductDetailPage = ({ productId }) => {
   const product = useProductDetail(productId); // local hook in this page
 
   return (
     <>
-      <Header />
+      <PageHeader />
       <Product.Card data={product} />
       <AddToCart productId={productId} />
       <RelatedProducts products={product.related} /> {/* local component */}
@@ -139,11 +139,41 @@ export const AboutPage = () => (
 
 ---
 
-## Widgets Layer
+## Widgets Layer (discouraged)
 
-Composite UI blocks with their own logic, **reused across multiple pages**.
-Add this layer only when UI blocks actually appear in 2+ pages and sharing
-provides clear value.
+Widgets are a layer for placing reusable UI blocks. They can be composed from
+multiple UI elements into a meaningful section of a screen and then used in
+upper layers such as Pages or App.
+
+> **This guide discourages using the Widgets layer.**
+
+Widgets may seem useful for representing independent UI blocks. However, in
+real frontend code, UI blocks often include logic required for user flows,
+such as data fetching, state management, and event handling. In this case,
+the responsibilities of Features, which handle user flows, and Widgets, which
+handle UI blocks, can overlap, making the boundary between the two layers
+unclear.
+
+Not creating a widget does not mean simply moving that UI block to another
+layer. Compositions that are specific to a particular screen should stay in
+`pages`. When a user action is reused across multiple pages, both the action
+and the UI composition required to perform it should be extracted into
+`features`. Shared UI without business context should be separated into
+`shared`. UI such as app-wide layouts can be handled in `app`.
+
+One edge case: multiple flows from the Features layer may need to be composed
+together, the kind of case that previously would have been placed in Widgets.
+In most cases this can be resolved by taking a different approach to
+composition. The parent (`pages` or `app`) imports the features and connects
+them, which is Strategy C in `references/cross-import-patterns.md`. Still,
+there may be edge cases that are genuinely hard to resolve. When that happens,
+document the situation in
+[feature-sliced/skills#7](https://github.com/feature-sliced/skills/issues/7).
+
+Discouraging the layer does not mean removing it entirely. It means
+recommending against actively adopting it. Projects already using widgets can
+keep using them as before, and the standard slice/segment and public API rules
+apply just as on any other layer:
 
 ```text
 widgets/
@@ -157,19 +187,72 @@ widgets/
     api/
       fetch-notifications.ts
     index.ts
-  sidebar/
-    ui/
-      Sidebar.tsx
-    model/
-      sidebar.ts
-    index.ts
 ```
 
-**Belongs in widgets:** Navigation bars, sidebars, dashboards, footers,
-complex card layouts that combine data from multiple entities/features.
+**If you still use widgets:** Navigation bars, sidebars, dashboards, and
+footers are the typical examples. Simple UI primitives belong in `shared/ui/`,
+and single-use page sections stay in the page.
 
-**Does not belong:** Simple UI primitives (→ `shared/ui/`), single-use
-page sections (→ keep in the page).
+---
+
+## Where should layouts be placed?
+
+Layout components often need to compose data handling, state management,
+access control and user actions that are shared across multiple routes.
+
+In React Router nested child routes may share a common URL path such as
+`/users`, `/users/:id` and `/users/:id/settings`. Instead of repeating the
+same handling in each page you can use the router's nesting capabilities to
+apply a common layout and route-level logic in one place.
+
+The location of a layout should be determined based on its **scope and
+responsibility** rather than its structural complexity.
+
+- Layouts responsible for the entire application or routing structure should
+  be placed in `app`.
+- Layouts specific to a particular page or route group should be placed in
+  `pages`.
+- Layout UI that is reusable without business context can be placed in
+  `shared/ui`.
+- Layouts centered around a specific user action or user flow and reused
+  across multiple pages can be implemented in the corresponding `features`
+  slice.
+
+A layout in `shared` that directly imports from `features`, `entities` or
+`pages` violates the layer import rule. Modules in `app` and `pages` can
+import modules from lower layers to compose a screen.
+
+> A module can only import modules from layers below the layer it belongs to.
+
+Before extracting a layout into a separate module consider the following:
+
+- Is this layout actually reused across multiple routes?
+- Is it specific to a particular page or route structure?
+- Is the layout itself the reusable unit or is it only the user action used
+  within the layout?
+
+A layout used by only a small number of pages and tied to a particular screen
+structure may be simpler to define directly in the corresponding `page` or
+route configuration.
+
+1. **Configure a route layout in the App layer**
+   You can group multiple routes with a common URL path using the router's
+   nesting capabilities and assign a single layout in `app`.
+   A layout located in `app` can compose modules from `pages`, `features`,
+   `entities` and `shared` without violating the layer import rule.
+
+2. **Pass feature UI through render props or slots**
+   In React you can use the render props pattern. In Vue you can use slots.
+   In this approach the layout in `shared` provides only the common UI
+   structure while the required feature UI is passed from `app` or `pages`.
+   This allows the layout to compose the required screen without directly
+   depending on a specific feature.
+
+3. **Define it directly in a page**
+   A layout used only by a specific page can be defined directly in the
+   corresponding `page` without introducing a separate abstraction.
+   When there is little duplicated code and the layout is unlikely to change
+   frequently there is no need to extract it into a shared module.
 
 ---
 
@@ -209,7 +292,7 @@ features/
 higher layers:
 
 ```typescript
-// widgets/post-card/ui/PostCard.tsx
+// pages/feed/ui/PostCard.tsx  (composition lives in the page that uses it)
 import { UserAvatar } from '@/entities/user';
 import { LikeButton } from '@/features/like-post';
 import { CommentButton } from '@/features/comment-create';
@@ -244,8 +327,8 @@ entities/user/
 // Entity with UI (use with caution)
 // ⚠️ Adding UI to entities increases cross-import risk.
 // Other entities may want to import this UI, leading to @x dependencies.
-// Entity UI should only be imported from higher layers (features, widgets,
-// pages), never from other entities.
+// Entity UI should only be imported from higher layers (features, pages,
+// app), never from other entities.
 entities/product/
   model/
     product.ts
