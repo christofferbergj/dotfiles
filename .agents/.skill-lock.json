@@ -728,6 +728,24 @@
       "skillFolderHash": "901c085a23945001618b2aee838accedae2d1a27",
       "installedAt": "2026-07-26T17:45:58.234Z",
       "updatedAt": "2026-07-26T17:45:58.234Z"
+    },
+    "linting-alignment": {
+      "source": "christofferbergj/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/christofferbergj/agent-skills.git",
+      "skillPath": "skills/engineering/linting-alignment/SKILL.md",
+      "skillFolderHash": "4e33bed9906440a81e88764c4f6e62c236129d62",
+      "installedAt": "2026-07-31T14:23:51.988Z",
+      "updatedAt": "2026-07-31T14:23:51.988Z"
+    },
+    "update-dependencies": {
+      "source": "christofferbergj/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/christofferbergj/agent-skills.git",
+      "skillPath": "skills/engineering/update-dependencies/SKILL.md",
+      "skillFolderHash": "5962ea2e3ed38bdebd5f6b6b8970ed6c69deb4f5",
+      "installedAt": "2026-07-31T14:23:51.990Z",
+      "updatedAt": "2026-07-31T14:23:51.990Z"
     }
   },
   "dismissed": {
