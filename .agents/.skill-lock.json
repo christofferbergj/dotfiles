@@ -243,15 +243,6 @@
       "installedAt": "2026-04-11T10:36:31.434Z",
       "updatedAt": "2026-07-23T07:50:03.194Z"
     },
-    "check": {
-      "source": "tw93/waza",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/tw93/waza.git",
-      "skillPath": "skills/check/SKILL.md",
-      "skillFolderHash": "44ac0799d44edc302c2f974bc85e9450475265c5",
-      "installedAt": "2026-04-15T09:41:45.835Z",
-      "updatedAt": "2026-07-28T07:06:05.336Z"
-    },
     "emil-design-eng": {
       "source": "emilkowalski/skill",
       "sourceType": "github",
