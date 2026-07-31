@@ -20,7 +20,7 @@ run = [
     "brew autoremove",
     "mise upgrade",
     "mise prune -y",
-    "pnpm dlx skills update -y -g",
+    "GH_TOKEN=\"$(gh auth token)\" pnpm dlx skills update -y -g",
     "pnpm dlx skills add https://react-aria.adobe.com -y",
     "pnpm update --global --latest",
 ]

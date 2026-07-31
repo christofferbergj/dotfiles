@@ -1,6 +1,12 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
+# Add indicator for git worktrees
+[custom.worktree]
+when = "[ -f .git ]"
+command = 'echo "🌳"'
+format = "[$output](green) "
+
 [line_break]
 disabled = false
 

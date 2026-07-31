@@ -1,20 +1,27 @@
 set -l local_env "$HOME/.config/local/env.fish"
+set -g __local_env_launchctl_vars
+
+function set_gui_env
+    set -l name $argv[1]
+    set -e argv[1]
+
+    set -gx $name $argv
+    set -ga __local_env_launchctl_vars $name
+end
 
 if test -r "$local_env"
     source "$local_env"
 end
 
+functions -e set_gui_env
+
 if test (uname -s 2>/dev/null) = Darwin; and command -q launchctl
-    set -l launchctl_vars UIDOTSH_MCP_AUTHORIZATION CONTEXT7_API_KEY SANITY_MCP_AUTHORIZATION
-
-    if set -q LOCAL_ENV_LAUNCHCTL_VARS
-        set launchctl_vars $launchctl_vars $LOCAL_ENV_LAUNCHCTL_VARS
-    end
-
-    for name in $launchctl_vars
+    for name in $__local_env_launchctl_vars
         if set -q $name
             set -l value $$name
             launchctl setenv "$name" "$value" >/dev/null 2>&1
         end
     end
 end
+
+set -e __local_env_launchctl_vars
