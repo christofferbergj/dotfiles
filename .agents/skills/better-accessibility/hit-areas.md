@@ -69,8 +69,26 @@ When the element can afford real box size, skip the pseudo-element and let the b
 
 If the extended hit area overlaps another interactive element, shrink the pseudo-element, but make it as large as possible without colliding. Two interactive elements should never have overlapping hit areas.
 
+## Decorative layers
+
+A decorative layer painted over interactive content absorbs every pointer event its box covers: a gradient scrim, a glow, a blurred sheen, a full-bleed `::after`. The control underneath looks live and does nothing, and no amount of hit-area sizing fixes it.
+
+Give each one `pointer-events: none` (Tailwind: `pointer-events-none`) so events reach the control below, plus `aria-hidden="true"` to keep it out of the accessibility tree:
+
+```css
+.card-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+```
+
+Keep pointer events on any layer the user is meant to hit: a modal scrim that dismisses on click is a control, not decoration.
+
 ## Touch behavior
 
 - Add `touch-action: manipulation` to interactive elements to remove the double-tap-to-zoom delay on mobile.
+- Set `touch-action: none` on a surface implementing its own pan, zoom, or drag gestures, so the browser stops claiming those gestures for scrolling and pinch-zoom. Scope it to that surface; at page level it takes away scrolling.
 - Set `-webkit-tap-highlight-color` to match the design instead of the default gray flash.
+- Put hover-only styling behind `@media (hover: hover)`. On touch, `:hover` latches after a tap and holds until the user taps elsewhere, so the hover treatment reads as a stuck selected state. Tailwind 4's `hover:` variant already compiles under this query.
 - Prefer generous targets and clear affordances over finicky interactions (tiny drag handles, precise hover zones).

@@ -795,7 +795,7 @@ function SelectableItem({id, children}) {
 | `security` | `string | undefined` | — |  |
 | `slot` | `string | undefined` | — |  |
 | `spellCheck` | `(boolean | "true" | "false") | undefined` | — |  |
-| `style` | `(((values: SharedElementRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<SharedElementRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `suppressContentEditableWarning` | `boolean | undefined` | — |  |
 | `suppressHydrationWarning` | `boolean | undefined` | — |  |
 | `tabIndex` | `number | undefined` | — |  |

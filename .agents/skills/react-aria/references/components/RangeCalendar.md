@@ -97,8 +97,8 @@ export function CalendarCell(props: CalendarCellProps) {
   flex-direction: column;
   gap: var(--spacing-2);
   overflow: auto;
-  width: 100%;
-  max-width: fit-content;
+  width: fit-content;
+  max-width: 100%;
   font: var(--font-size) system-ui;
   color: var(--text-color);
 
@@ -1072,7 +1072,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onWheel` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", CalendarCellRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
-| `style` | `(((values: CalendarCellRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<CalendarCellRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### CalendarHeading

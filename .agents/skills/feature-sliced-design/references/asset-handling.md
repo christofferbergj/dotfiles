@@ -8,8 +8,6 @@ case, not by type, and keep them next to the code that uses them.
 > files is **not recommended**. It violates the FSD principles of high
 > cohesion and locality of changes. Place assets where they are used.
 
----
-
 ## Decision Tree
 
 1. **Used by exactly one slice?** Keep the asset inside that slice, usually
@@ -21,8 +19,6 @@ case, not by type, and keep them next to the code that uses them.
 4. **Served as-is by the bundler (favicon, robots.txt)?** Use the framework's
    `public/` folder. The `public/` folder is not part of FSD and does not
    conflict with FSD layers.
-
----
 
 ## Slice-specific Assets
 
@@ -71,8 +67,6 @@ The principle is locality of changes: if you delete the slice, every file it
 owns goes with it. An asset that lives in business logic should sit next to
 that logic.
 
----
-
 ## Shared Assets
 
 When the same asset appears across multiple slices, move it to `shared/ui/`.
@@ -93,8 +87,6 @@ A single icon used by exactly one component in the UI kit stays next to that
 component. A library of icons or images reused across many components goes
 in a topical subfolder.
 
----
-
 ## Global Assets
 
 Global stylesheets and fonts belong in the `app/` layer because they are
@@ -113,8 +105,6 @@ app/
 Theme variables, CSS resets, and font registrations are app-wide concerns.
 They bootstrap the application's visual layer the same way providers
 bootstrap the runtime layer.
-
----
 
 ## Public Folder
 
@@ -142,8 +132,6 @@ src/
 Some projects keep a project-local `app/public/` folder when the bundler
 allows assets to live alongside the entrypoint. Both layouts are valid.
 
----
-
 ## Summary Table
 
 | Asset                                  | Location                                  |
@@ -155,8 +143,6 @@ allows assets to live alongside the entrypoint. Both layouts are valid.
 | Global CSS reset, theme variables      | `app/styles/`                             |
 | Web fonts                              | `app/fonts/`, `public/`, or `app/public/` |
 | Favicon, robots.txt, sitemap           | `public/` (or `app/public/`)              |
-
----
 
 ## Anti-patterns
 
@@ -172,8 +158,6 @@ allows assets to live alongside the entrypoint. Both layouts are valid.
 - **Do not split assets and the components that use them.** A page that
   ships a hero image should keep that image in the page so removing the page
   removes the image.
-
----
 
 ## See Also
 

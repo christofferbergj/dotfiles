@@ -1,5 +1,9 @@
 # Identify users - Docs
 
+Copy page
+
+# Identify users - Docs
+
 Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms.
 
 This is straightforward to do when [capturing backend events](/docs/product-analytics/capture-events?tab=Node.js.md), as you associate events to a specific user using a `distinct_id`, which is a required argument.
@@ -94,6 +98,31 @@ You only need to call `identify` once per session, and you should avoid calling 
 
 If you call `identify` multiple times with the same data without reloading the page in between, PostHog will ignore the subsequent calls.
 
+#### Identify users when the web SDK loads
+
+If your app already knows the signed-in user when you initialize the JavaScript web SDK, the [`loaded` callback](/docs/libraries/js/config.md) is a convenient place to call `identify`. This identifies the user as soon as the SDK has loaded:
+
+Web
+
+PostHog AI
+
+```javascript
+posthog.init('<ph_project_token>', {
+    api_host: 'https://us.i.posthog.com',
+    defaults: '2026-05-30',
+    loaded: (posthog) => {
+        if (currentUser?.id) {
+            posthog.identify(currentUser.id, {
+                email: currentUser.email,
+                name: currentUser.name,
+            })
+        }
+    },
+})
+```
+
+In this example, `currentUser` represents user data already available from your authentication system. If your app loads the user asynchronously, call `posthog.identify()` as soon as that data becomes available instead.
+
 ### 2\. Use unique strings for distinct IDs
 
 If two users have the same distinct ID, their data is merged and they are considered one user in PostHog. Two common ways this can happen are:
@@ -164,6 +193,10 @@ This enables you to set [person properties](/docs/product-analytics/person-prope
 Whenever possible, we recommend passing in all person properties you have available each time you call identify, as this ensures their person profile on PostHog is up to date.
 
 Person properties can also be set being adding a `$set` property to a event `capture` call.
+
+**\`$set\` and \`$set\_once\` aren't stored on events**
+
+These properties only tell PostHog how to update person data during ingestion — they aren't kept on the stored event, so you can't filter, break down, or query events by them. To query the values you set, use [person properties](/docs/product-analytics/person-properties.md) instead.
 
 See our [person properties docs](/docs/product-analytics/person-properties.md) for more details on how to work with them and best practices.
 

@@ -76,7 +76,6 @@ Disable spellcheck on emails, codes, and usernames: `spellcheck="false"`.
 
 - Never block paste in `<input>` or `<textarea>`; users paste passwords and one-time codes.
 - Stay compatible with password managers and 2FA autofill: real `<form>`, correct `autocomplete`, no fake inputs.
-- Never use `user-scalable=no` or `maximum-scale=1` to stop iOS input zoom; keep mobile input text at `16px` instead (covered in `better-typography`).
 
 ## Submit behavior
 

@@ -101,6 +101,7 @@ export function MyToast(props: ToastProps<MyToastContent>) {
   position: fixed;
   bottom: var(--spacing-4);
   right: var(--spacing-4);
+  z-index: 100;
   display: flex;
   flex-direction: column-reverse;
   gap: var(--spacing-2);

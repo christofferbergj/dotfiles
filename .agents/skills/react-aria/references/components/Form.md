@@ -97,6 +97,7 @@ export function FieldButton(props: ButtonProps) {
   color: var(--text-color);
   margin-bottom: var(--spacing-2);
   font-weight: 500;
+  cursor: default;
 }
 
 .react-aria-FieldError {

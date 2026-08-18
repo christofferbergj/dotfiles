@@ -220,6 +220,14 @@ export function ComboBoxSection<T>(props: DropdownSectionProps<T>) {
 
 ```
 
+<InlineAlert
+  variant="informative"
+  UNSAFE_style={{maxWidth: 500}}
+>
+  <Heading>Autocomplete vs. ComboBox</Heading>
+  <Content>Use ComboBox to **select one or more values** from a pre-defined set of options. Use [Autocomplete](Autocomplete.md) to **filter a collection** or provide **text completions**.</Content>
+</InlineAlert>
+
 ## Content
 
 `ComboBox` reuses the `ListBox` component, following the [Collection Components API](collections.md?component=ComboBox). It supports ListBox features such as static and dynamic collections, sections, disabled items, links, text slots, asynchronous loading, etc. See the [ListBox docs](ListBox.md) for more details.
@@ -634,7 +642,7 @@ import {ComboBox, ComboBoxItem} from 'vanilla-starter/ComboBox';
 | `autoFocus` | `boolean | undefined` | — | Whether the element should receive focus on render. |
 | `children` | `ChildrenOrFunction<ComboBoxRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<ComboBoxRenderProps> | undefined` | 'react-aria-ComboBox' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
-| `defaultFilter` | `((textValue: string, inputValue: string) => boolean) | undefined` | — | The filter function used to determine if a option should be included in the combo box list. |
+| `defaultFilter` | `((textValue: string, inputValue: string) => boolean) | undefined` | — | The filter function used to determine if an option should be included in the combo box list. By default, a language-sensitive "contains" filter from `useFilter` is used. |
 | `defaultInputValue` | `string | undefined` | — | The default value of the ComboBox input (uncontrolled). |
 | `defaultItems` | `Iterable<T> | undefined` | — | The list of ComboBox items (uncontrolled). |
 | `defaultValue` | `ValueType<M> | undefined` | — | The default value (uncontrolled). |
@@ -730,7 +738,7 @@ import {ComboBox, ComboBoxItem} from 'vanilla-starter/ComboBox';
 | `selectionMode` | `M | undefined` | 'single' | Whether single or multiple selection is enabled. |
 | `shouldFocusWrap` | `boolean | undefined` | — | Whether keyboard navigation is circular. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: ComboBoxRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<ComboBoxRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 | `validate` | `((value: ComboBoxValidationValue<M>) => true | undefined) | ValidationError | null | undefined` | — | A function that returns an error message if a given value is invalid. Validation errors are displayed to the user when the form is submitted if `validationBehavior="native"`. For realtime validation, use the `isInvalid` prop instead. |
 | `validationBehavior` | `"aria" | "native" | undefined` | 'native' | Whether to use native HTML form validation to prevent form submission when the value is missing or invalid, or mark the field as required or invalid via ARIA. |
@@ -1007,7 +1015,7 @@ import {ComboBox, ComboBoxItem} from 'vanilla-starter/ComboBox';
 | `security` | `string | undefined` | — |  |
 | `slot` | `string | undefined` | — |  |
 | `spellCheck` | `(boolean | "true" | "false") | undefined` | — |  |
-| `style` | `(((values: ComboBoxValueRenderProps<T> & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<ComboBoxValueRenderProps<T>> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `suppressContentEditableWarning` | `boolean | undefined` | — |  |
 | `suppressHydrationWarning` | `boolean | undefined` | — |  |
 | `tabIndex` | `number | undefined` | — |  |

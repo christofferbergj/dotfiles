@@ -328,5 +328,5 @@ function SegmentedControlItem(props: ToggleButtonProps) {
 | `selectedKeys` | `Iterable<Key> | undefined` | — | The currently selected keys in the collection (controlled). |
 | `selectionMode` | `"multiple" | "single" | undefined` | 'single' | Whether single or multiple selection is enabled. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: ToggleButtonGroupRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<ToggleButtonGroupRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |

@@ -56,12 +56,27 @@ Unless the only thing animating is a color change, build the underline as a cust
 
 Focusing an input with text smaller than `16px` zooms the whole page (an accessibility feature: `16px` is the web default and Safari treats smaller as too hard to read while typing).
 
+Two fixes work, and they differ in what they do to the design rather than in correctness. Ask which one the user wants before changing an input; do not pick for them.
+
+**Size up on mobile.** The input genuinely renders at `16px` on small screens and drops to the design size from the `sm` breakpoint up. Nothing to compensate, but the mobile input no longer matches the desktop one.
+
 ```tsx
-// Good: 16px on mobile, smaller from the sm breakpoint up
 <input className="text-base sm:text-sm" type="email" />
 ```
 
-Avoid the `maximum-scale=1` viewport meta as a fix: Safari ignores the cap for pinch zoom, but every other browser honors it and restricts pinch zoom, which fails WCAG 1.4.4. The responsive input size solves the zoom with no accessibility cost.
+**Scale the text down.** Keep `font-size` at `16px` so Safari never zooms, then render it at the intended size with a transform. The design survives at every viewport, at the cost of two compensating calcs: widen the element by the inverse of the scale so it still fills its container once shrunk, and divide `line-height` by the same factor so the intended leading survives. `origin-left` pins the text to the start edge (`origin-right` under RTL). Above the breakpoint, drop the transform and set the real size.
+
+```tsx
+// 13px rendered from a 16px font-size: 13 / 16 = 0.8125
+<div className="flex h-10 items-center rounded-[10px] bg-gray-300 px-2.5">
+  <input
+    className="h-full w-[calc(100%/0.8125)] origin-left scale-[0.8125] bg-transparent text-base leading-[calc(1.125/0.8125)] outline-none sm:w-full sm:scale-100 sm:text-[13px]"
+    type="email"
+  />
+</div>
+```
+
+The transform shrinks the whole box, not just the glyphs, so let a wrapper draw the field's surface and keep the input itself transparent. A background, border or ring on the scaled element shrinks with the text and misses the intended hit area.
 
 ## Decorative text
 

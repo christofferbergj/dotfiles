@@ -245,7 +245,7 @@ function Example(props) {
   UNSAFE_style={{marginTop: '2rem'}}
 >
   <Heading>Accessibility</Heading>
-  <Content>Tooltips are not shown on touch screen interactions. Ensure that your UI is usable without tooltips, or use an alternative component such as a [Popover](Popover.md) to show information in an adjacent element.</Content>
+  <Content>Tooltips are not shown on touch screen interactions. Ensure that your UI is usable without tooltips, or use an alternative component such as a [PreviewTrigger](PreviewTrigger.md) or a [Popover](Popover.md) to show information in an adjacent element.</Content>
 </InlineAlert>
 
 ## Custom trigger
@@ -383,7 +383,7 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `placement` | `Placement | undefined` | 'top' | The placement of the tooltip with respect to the trigger. |
 | `render` | `DOMRenderFunction<"div", TooltipRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `shouldFlip` | `boolean | undefined` | true | Whether the element should flip its orientation (e.g. top to bottom or left to right) when there is insufficient room for it to render completely. |
-| `style` | `(((values: TooltipRenderProps & { defaultStyle: CSSProperties; }) => CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TooltipRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 | `triggerRef` | `RefObject<Element | null> | undefined` | — | The ref for the element which the tooltip positions itself with respect to. When used within a TooltipTrigger this is set automatically. It is only required when used standalone. |
 
@@ -657,7 +657,7 @@ const CustomTrigger = React.forwardRef((props, ref) => (
 | `security` | `string | undefined` | — |  |
 | `slot` | `string | undefined` | — |  |
 | `spellCheck` | `(boolean | "true" | "false") | undefined` | — |  |
-| `style` | `(((values: OverlayArrowRenderProps & { defaultStyle: CSSProperties; }) => CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<OverlayArrowRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `suppressContentEditableWarning` | `boolean | undefined` | — |  |
 | `suppressHydrationWarning` | `boolean | undefined` | — |  |
 | `tabIndex` | `number | undefined` | — |  |

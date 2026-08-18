@@ -1180,11 +1180,11 @@ let photos = [
   items={photos}
   selectionMode="multiple"
   aria-label="Shared files">
-    {item => (
+  {item => (
     <GridListItem textValue={item.title}>
       <img src={item.src} alt="" />
       <Text>
-        <TextField style={{paddingTop: 2, paddingBottom: 2}} aria-label="title" defaultValue={item.title} />
+        <TextField style={{paddingTop: 2, paddingBottom: 2}} aria-label="title" defaultValue={item.title} placeholder="Enter a title" />
       </Text>
       <Text slot="description">{item.description}</Text>
     </GridListItem>
@@ -1600,7 +1600,7 @@ function Example() {
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: GridListRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<GridListRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### GridListSection
@@ -1694,10 +1694,12 @@ function Example() {
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `allowsArrowNavigation` | `boolean | undefined` | — | Whether the row should support arrow key navigation even when the containing collection uses tab keyboard navigation. Allows users to navigate between rows with arrow keys while focus is on an interactive child element within the row. |
 | `children` | `ChildrenOrFunction<GridListItemRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<GridListItemRenderProps> | undefined` | 'react-aria-GridListItem' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
 | `download` | `boolean | string | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
+| `focusMode` | `"child" | "row" | undefined` | — | Whether the row or its first focusable child element should be focused when navigating to the row. Defaults to 'row'. |
 | `hidden` | `boolean | undefined` | — |  |
 | `href` | `string | undefined` | — | A URL to link to. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). |
 | `hrefLang` | `string | undefined` | — | Hints at the human language of the linked URL. See[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#hreflang). |
@@ -1783,7 +1785,7 @@ function Example() {
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
 | `render` | `DOMRenderFunction<"div", GridListItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
-| `style` | `(((values: GridListItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<GridListItemRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string | undefined` | — | A string representation of the item's contents, used for features like typeahead. |
 | `translate` | `"no" | "yes" | undefined` | — |  |

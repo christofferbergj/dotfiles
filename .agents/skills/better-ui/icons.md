@@ -73,7 +73,7 @@ When an icon set offers outline and filled variants, use them as a state pair, n
 <TabIcon variant="solid" />
 ```
 
-The swap between variants is a contextual icon animation; use the exact cross-fade values in [animations.md](animations.md).
+The swap between variants is a contextual icon animation; use the exact cross-fade values in [icon-transitions.md](icon-transitions.md).
 
 ## Design at Render Size
 

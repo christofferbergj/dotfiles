@@ -51,6 +51,7 @@
 - [Getting started](getting-started.md): How to install React Aria and build your first component.
 - [GridList](GridList.md): A grid list displays a list of interactive items, with support for keyboard navigation,
 - [Group](Group.md): A group represents a set of related UI controls, and supports interactive states for styling.
+- [Hooks](hooks.md): React Aria offers two complementary APIs: high level **React Aria Components** and low level **Hooks**. This guide explains when to reach for hooks, and how to use them on their own or together with React Aria Components.
 - [How we internationalized our number field](blog/how-we-internationalized-our-numberfield.md): Number fields are commonly used form components, but are frequently not a great user experience. They often lack support for advanced formatting, such as currency and unit values, and do not provide a localized experience for users around the world. In this post, we'll discuss how we approached building our number field component with support for formatting and internationalization in mind.
 - [I18nProvider](I18nProvider.md): Provides the locale for the application to all child components.
 - [Improving Internationalization Support in Our Date and Time Components](blog/rtl-date-time.md): Internationalization is a core feature of our Date and Time components. We support 13 different calendar systems as well as locale-specific formatting, number systems, and 12 and 24 hour time. However, we identified an issue in our support for several right-to-left (RTL) languages where in some, the format of the date and time fields was incorrect. While investigating this bug, we faced several challenges in ensuring accurate date and time representation in RTL languages and implemented various strategies that we'd like to share.
@@ -72,6 +73,7 @@
 - [Photo Library](examples/photos.md): A photo library app with virtualized scrolling, view transitions, adjustable waterfall layout, folder tree, search, multi-selection, and accessible drag and drop.
 - [Popover](Popover.md): A popover is an overlay element positioned relative to a trigger.
 - [PortalProvider](PortalProvider.md): Sets the portal container for all overlay elements rendered by its children.
+- [PreviewTrigger](PreviewTrigger.md): A PreviewTrigger displays a non-modal popover on hover, focus, or long press. Unlike a tooltip,
 - [ProgressBar](ProgressBar.md): Progress bars show either determinate or indeterminate progress of an operation
 - [Quality](quality.md): React Aria is built around three core principles: **Accessibility**, **Internationalization**, and **Interactions**. Learn how to apply these tools to build high quality UIs that work for everyone, everywhere, and on every device.
 - [RadioGroup](RadioGroup.md): A radio group allows a user to select a single item from a list of mutually exclusive options.
@@ -110,32 +112,81 @@
 - [Toast](Toast.md): {docs.exports.UNSTABLE_Toast.description}
 - [ToggleButton](ToggleButton.md): A toggle button allows a user to toggle a selection on or off, for example switching between two
 - [ToggleButtonGroup](ToggleButtonGroup.md): A toggle button group allows a user to toggle multiple options, with single or multiple
+- [TokenField](TokenField.md): A token field allows users to enter text with inline tokens. Use it to build AI prompt fields,
 - [Toolbar](Toolbar.md): A toolbar is a container for a set of interactive controls, such as buttons, dropdown menus, or
 - [Tooltip](Tooltip.md): A tooltip displays a description of an element on hover or focus.
 - [Tree](Tree.md): A tree provides users with a way to navigate nested hierarchical information, with support for
+- [useAsyncList](useAsyncList.md): Manages state for an immutable async loaded list data structure, and provides convenience methods
+- [useBreadcrumbs](Breadcrumbs/useBreadcrumbs.md): Provides the behavior and accessibility implementation for a breadcrumbs component.
+- [useButton](Button/useButton.md): Provides the behavior and accessibility implementation for a button component. Handles mouse,
+- [useCalendar](Calendar/useCalendar.md): Provides the behavior and accessibility implementation for a calendar component.
+- [useCheckbox](Checkbox/useCheckbox.md): Provides the behavior and accessibility implementation for a checkbox component.
+- [useCheckboxGroup](CheckboxGroup/useCheckboxGroup.md): Provides the behavior and accessibility implementation for a checkbox group component.
 - [useClipboard](useClipboard.md): Handles clipboard interactions for a focusable element. Supports items of multiple
 - [useCollator](useCollator.md): Provides localized string collation for the current locale. Automatically updates when the locale
+- [useColorArea](ColorArea/useColorArea.md): Provides the behavior and accessibility implementation for a color area component. Color area
+- [useColorField](ColorField/useColorField.md): Provides the behavior and accessibility implementation for a color field component.
+- [useColorSlider](ColorSlider/useColorSlider.md): Provides the behavior and accessibility implementation for a color slider component.
+- [useColorSwatch](ColorSwatch/useColorSwatch.md): Provides the accessibility implementation for a color swatch component.
+- [useColorWheel](ColorWheel/useColorWheel.md): Provides the behavior and accessibility implementation for a color wheel component.
+- [useComboBox](ComboBox/useComboBox.md): Provides the behavior and accessibility implementation for a combo box component. A combo box
+- [useContextMenu](useContextMenu.md): Handles context menu events across mouse, touch, keyboard, and screen reader interactions.
+- [useDateField](DateField/useDateField.md): Provides the behavior and accessibility implementation for a date field component.
 - [useDateFormatter](useDateFormatter.md): Provides localized date formatting for the current locale. Automatically updates when the locale
+- [useDatePicker](DatePicker/useDatePicker.md): Provides the behavior and accessibility implementation for a date picker component. A date picker
+- [useDateRangePicker](DateRangePicker/useDateRangePicker.md): Provides the behavior and accessibility implementation for a date picker component.
+- [useDisclosure](Disclosure/useDisclosure.md): Provides the behavior and accessibility implementation for a disclosure component.
 - [useDrag](useDrag.md): Handles drag interactions for an element, with support for traditional mouse and touch
+- [useDraggableCollection](useDraggableCollection.md): Handles drag interactions for a collection component, with support for traditional mouse and
 - [useDrop](useDrop.md): Handles drop interactions for an element, with support for traditional mouse and touch
+- [useDroppableCollection](useDroppableCollection.md): Handles drop interactions for a collection component, with support for traditional mouse and
 - [useField](useField.md): Provides the accessibility implementation for input fields. Fields accept user input, gain
 - [useFilter](useFilter.md): Provides localized string search functionality that is useful for filtering or matching items in
 - [useFocus](useFocus.md): Handles focus events for the immediate target.
 - [useFocusRing](useFocusRing.md): Determines whether a focus ring should be shown to indicate keyboard focus.
 - [useFocusVisible](useFocusVisible.md): Manages focus visible state for the page, and subscribes individual components for updates.
 - [useFocusWithin](useFocusWithin.md): Handles focus events for the target and its descendants.
+- [useGridList](GridList/useGridList.md): Provides the behavior and accessibility implementation for a list component with interactive
 - [useHover](useHover.md): Handles pointer hover interactions for an element. Normalizes behavior
 - [useId](useId.md): If a default is not provided, generate an id.
 - [useIsSSR](useIsSSR.md): Returns whether the component is currently being server side rendered or
 - [useKeyboard](useKeyboard.md): Handles keyboard interactions for a focusable element.
 - [useLabel](useLabel.md): Provides the accessibility implementation for labels and their associated elements.
 - [useLandmark](useLandmark.md): Provides landmark navigation in an application. Call this with a role and label to register a
+- [useLink](Link/useLink.md): Provides the behavior and accessibility implementation for a link component.
+- [useListBox](ListBox/useListBox.md): Provides the behavior and accessibility implementation for a listbox component.
+- [useListData](useListData.md): Manages state for an immutable list data structure, and provides convenience methods to
+- [useListFormatter](useListFormatter.md): Provides localized list formatting for the current locale. Automatically updates when the locale
 - [useLocale](useLocale.md): Returns the current locale and layout direction.
 - [useLongPress](useLongPress.md): Handles long press interactions across mouse and touch devices. Supports a customizable time
+- [useMenu](Menu/useMenu.md): Provides the behavior and accessibility implementation for a menu component.
+- [useMeter](Meter/useMeter.md): Provides the accessibility implementation for a meter component.
+- [useModalOverlay](Modal/useModalOverlay.md): Provides the behavior and accessibility implementation for a modal component.
 - [useMove](useMove.md): Handles move interactions across mouse, touch, and keyboard, including dragging with
+- [useNumberField](NumberField/useNumberField.md): Provides the behavior and accessibility implementation for a number field component. Number
 - [useNumberFormatter](useNumberFormatter.md): Provides localized number formatting for the current locale. Automatically updates when the
 - [useObjectRef](useObjectRef.md): Offers an object ref for a given callback ref or an object ref. Especially
+- [usePopover](Popover/usePopover.md): Provides the behavior and accessibility implementation for a popover component.
 - [usePress](usePress.md): Handles press interactions across mouse, touch, keyboard, and screen readers.
+- [useProgressBar](ProgressBar/useProgressBar.md): Provides the accessibility implementation for a progress bar component.
+- [useRadioGroup](RadioGroup/useRadioGroup.md): Provides the behavior and accessibility implementation for a radio group component.
+- [useRangeCalendar](RangeCalendar/useRangeCalendar.md): Provides the behavior and accessibility implementation for a range calendar component. A range
+- [useSearchField](SearchField/useSearchField.md): Provides the behavior and accessibility implementation for a search field.
+- [useSelect](Select/useSelect.md): Provides the behavior and accessibility implementation for a select component.
+- [useSeparator](Separator/useSeparator.md): Provides the accessibility implementation for a separator.
+- [useSlider](Slider/useSlider.md): Provides the behavior and accessibility implementation for a slider component representing one or
+- [useSwitch](Switch/useSwitch.md): Provides the behavior and accessibility implementation for a switch component.
+- [useTable](Table/useTable.md): Provides the behavior and accessibility implementation for a table component. A table displays
+- [useTabList](Tabs/useTabList.md): Provides the behavior and accessibility implementation for a tab list.
+- [useTagGroup](TagGroup/useTagGroup.md): Provides the behavior and accessibility implementation for a tag group component. A tag group is
+- [useTextField](TextField/useTextField.md): Provides the behavior and accessibility implementation for a text field.
+- [useTimeField](TimeField/useTimeField.md): Provides the behavior and accessibility implementation for a time field component.
+- [useToast](Toast/useToast.md): Provides the behavior and accessibility implementation for a toast component. Toasts display
+- [useToggleButton](ToggleButton/useToggleButton.md): Provides the behavior and accessibility implementation for a toggle button component.
+- [useToggleButtonGroup](ToggleButtonGroup/useToggleButtonGroup.md): Provides the behavior and accessibility implementation for a toggle button group component.
+- [useToolbar](Toolbar/useToolbar.md): Provides the behavior and accessibility implementation for a toolbar.
+- [useTooltipTrigger](Tooltip/useTooltipTrigger.md): Provides the behavior and accessibility implementation for a tooltip trigger, e.g. a button
+- [useTreeData](useTreeData.md): Manages state for an immutable tree data structure, and provides convenience methods to
 - [v1.0.0](releases/v1-0-0.md): Welcome to the last release of the year! After a year of work, we are happy to announce the GA release of React Aria Components 🎉 This component library, built on top of our React Aria hooks, provides a simpler way to craft world-class accessible components with custom styles. See our new React Aria [landing page](../.md) for all of the details, including interactive examples. To help get you started even faster, we now also have a downloadable Storybook [starter kit](../getting-started.md#storybook-starter-kits) including an example CSS theme.
 - [v1.1.0](releases/v1-1-0.md): Welcome to the first release of the new year! We have had a great response to our GA release of React Aria Components. If you haven't tried it out, visit [our docs](../.md) to explore the examples. To help get you started, we have also created a few starter kits. These downloadable [starter kits](../getting-started.md#storybook-starter-kits) contain beautifully styled implementations of every available component and includes a working storybook. Available in vanilla and Tailwind CSS!
 - [v1.10.0](releases/v1-10-0.md): Drop everything! Drag and drop support in React Aria Tree has been released! 🫳🎤 This supports moving items within a tree or between collection components, with full keyboard and screen reader accessibility. It's interoperable with our existing drag and drop support in components like Table and GridList, and with third party apps via native HTML APIs. Check out our [previous blog post](../blog/drag-and-drop.md) on drag and drop to learn about the interactions, and our new [Tree drag and drop documentation](../Tree.md#drag-and-drop).
@@ -149,6 +200,7 @@
 - [v1.18.0](releases/v1-18-0.md): This release packs in several new features! [Calendar](../Calendar.md) now supports multiple date selection, as well as new [CalendarHeading](../Calendar.md#calendarheading), [CalendarMonthPicker](../Calendar.md#month-and-year-pickers), and [CalendarYearPicker](../Calendar.md#month-and-year-pickers) components that allow the user to jump to a different month or year. [RangeCalendar](../RangeCalendar.md#validation) now supports determining the available dates based on the first date a user selects. We have also added a [TableFooter](../Table.md#content) component, description and error messages for [Checkbox](../Checkbox.md#forms), [Radio](../RadioGroup.md), and [Switch](../Switch.md#forms), and a [SliderFill](../Slider.md#value-scale) component that simplifies the process of styling the fill portion in a Slider.
 - [v1.19.0](releases/v1-19-0.md): This release adds support for full interaction with embedded text fields and other interactive elements in [GridList](../GridList.md#keyboard-navigation) and [Tree](../Tree.md#keyboard-navigation) with the `keyboardNavigationBehavior` prop. [Autocomplete](../Autocomplete.md) and  [Popover](../Popover.md) gain several improvements to support [inline completions](../Autocomplete.md#inline-completions), including a new `getTargetRect` prop on Popover for positioning overlays relative to arbitrary character positions. Menu's `onAction` callback now provides both the item key and value, and `DragTypes.has()` accepts multiple MIME types and wildcards.
 - [v1.2.0](releases/v1-2-0.md): We have a huge release today! Its a GA bonanza 🎊 – [Submenu](../Menu.md#submenus), [unavailable menu items](s2:v3/Menu.md#unavailable-items), [DropZone](../DropZone.md) and [FileTrigger](../FileTrigger.md) components are now in GA. Check our [blog post](react-aria:blog/creating-a-pointer-friendly-submenu-experience.md) on the intricacies of the submenu interactions and how we handled them.
+- [v1.20.0](releases/v1-20-0.md): This release includes many new components and features!
 - [v1.3.0](releases/v1-3-0.md): For this summer release, we have been busy working on improving virtualization in many of our Spectrum components including TableView, ListView, and ListBox. We have significantly reduced the complexity of our implementation, resulting in smaller bundle size, better performance, and improved stability. In our testing, this resulted in 14x faster per-frame render times on large tables due to better reuse of DOM nodes as you scroll. We are also working on bringing virtualization support to React Aria Components, which is available as an unstable API in this version.
 - [v1.4.0](releases/v1-4-0.md): Happy fall! 🍁 We're excited to announce that our color picker components are now generally available! This includes [ColorPicker](../ColorPicker.md), [ColorArea](../ColorArea.md), [ColorField](../ColorField.md), [ColorSlider](../ColorSlider.md), [ColorSwatch](../ColorSwatch.md), [ColorSwatchPicker](../ColorSwatchPicker.md), and [ColorWheel](../ColorWheel.md). These enable you to build fully customizable color pickers, including accessible color descriptions for screen reader support.
 - [v1.5.0](releases/v1-5-0.md): We're excited to announce that our Disclosure components are now generally available! This includes [Disclosure](../Disclosure.md) and [DisclosureGroup](../DisclosureGroup.md) in React Aria. These components now also use the `hidden="until-found"` API currently supported in Chrome to enable searching collapsed content with ctrl + F.

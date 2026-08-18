@@ -727,26 +727,26 @@ import {TextField} from 'vanilla-starter/TextField';
   aria-label="Shared files">
   <TreeItem id="documents" textValue="Documents">
     <TreeItemContent>
-      <TextField aria-label="title" defaultValue="Documents" />
+      <TextField aria-label="title" defaultValue="Documents" placeholder="Enter name" />
     </TreeItemContent>
     <TreeItem id="weekly" textValue="Weekly Report.pdf">
       <TreeItemContent>
-        <TextField aria-label="title" defaultValue="Weekly Report.pdf" />
+        <TextField aria-label="title" defaultValue="Weekly Report.pdf" placeholder="Enter name" />
       </TreeItemContent>
     </TreeItem>
     <TreeItem id="budget" textValue="Budget.xlsx">
       <TreeItemContent>
-        <TextField aria-label="title" defaultValue="Budget.xlsx" />
+        <TextField aria-label="title" defaultValue="Budget.xlsx" placeholder="Enter name" />
       </TreeItemContent>
     </TreeItem>
   </TreeItem>
   <TreeItem id="photos">
     <TreeItemContent>
-      <TextField aria-label="title" defaultValue="Photos" />
+      <TextField aria-label="title" defaultValue="Photos" placeholder="Enter name" />
     </TreeItemContent>
     <TreeItem id="sunset" textValue="Sunset.jpg">
       <TreeItemContent>
-        <TextField aria-label="title" defaultValue="Sunset.jpg" />
+        <TextField aria-label="title" defaultValue="Sunset.jpg" placeholder="Enter name" />
       </TreeItemContent>
     </TreeItem>
   </TreeItem>
@@ -951,18 +951,20 @@ function Example() {
 | `selectionMode` | `SelectionMode | undefined` | — | The type of selection that is allowed in the collection. |
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: TreeRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TreeRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### TreeItem
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `allowsArrowNavigation` | `boolean | undefined` | — | Whether the row should support arrow key navigation even when the containing collection uses tab keyboard navigation. Allows users to navigate between rows with arrow keys while focus is on an interactive child element within the row. |
 | `aria-label` | `string | undefined` | — | An accessibility label for this tree item. |
 | `children` | `React.ReactNode` | — | The content of the tree item along with any nested children. Supports static nested tree items or use of a Collection to dynamically render nested tree items. |
 | `className` | `ClassNameOrFunction<TreeItemRenderProps> | undefined` | 'react-aria-TreeItem' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `dir` | `string | undefined` | — |  |
 | `download` | `boolean | string | undefined` | — | Causes the browser to download the linked URL. A string may be provided to suggest a file name. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download). |
+| `focusMode` | `"child" | "row" | undefined` | 'row' | Whether the row or its first focusable child element should be focused when the row is focused. |
 | `hasChildItems` | `boolean | undefined` | — | Whether this item has children, even if not loaded yet. |
 | `hidden` | `boolean | undefined` | — |  |
 | `href` | `string | undefined` | — | A URL to link to. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href). |
@@ -1049,7 +1051,7 @@ function Example() {
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
 | `render` | `DOMRenderFunction<"div", TreeItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
-| `style` | `(((values: TreeItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TreeItemRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string` | — | A string representation of the tree item's contents, used for features like typeahead. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
@@ -1062,6 +1064,87 @@ function Example() {
 | `children` | `ChildrenOrFunction<TreeItemContentRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 
 ### TreeSection
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `aria-label` | `string | undefined` | — | An accessibility label for the section. |
+| `children` | `((item: T) => React.ReactElement) | React.ReactNode` | — | Static child items or a function to render children. |
+| `className` | `string | undefined` | — | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
+| `dependencies` | `readonly any[] | undefined` | — | Values that should invalidate the item cache when using dynamic collections. |
+| `dir` | `string | undefined` | — |  |
+| `hidden` | `boolean | undefined` | — |  |
+| `id` | `Key | undefined` | — | The unique id of the section. |
+| `inert` | `boolean | undefined` | — |  |
+| `items` | `Iterable<T> | undefined` | — | Item objects in the section. |
+| `lang` | `string | undefined` | — |  |
+| `onAnimationEnd` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationIteration` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationIterationCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationStart` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLElement> | undefined` | — |  |
+| `onAuxClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onAuxClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onContextMenu` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onContextMenuCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onDoubleClick` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onDoubleClickCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onGotPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onLostPointerCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onLostPointerCaptureCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseDown` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseDownCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseEnter` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseLeave` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseMove` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseMoveCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOut` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOutCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOver` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseOverCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseUp` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onMouseUpCapture` | `React.MouseEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerCancel` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerCancelCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerDown` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerDownCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerEnter` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerLeave` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerMove` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerMoveCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOut` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOutCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOver` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerOverCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerUp` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onPointerUpCapture` | `React.PointerEventHandler<HTMLElement> | undefined` | — |  |
+| `onScroll` | `React.UIEventHandler<HTMLElement> | undefined` | — |  |
+| `onScrollCapture` | `React.UIEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchCancel` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchCancelCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchEnd` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchEndCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchMove` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchMoveCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchStart` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTouchStartCapture` | `React.TouchEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionCancel` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionCancelCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionEnd` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionEndCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionRun` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionRunCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionStart` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onTransitionStartCapture` | `React.TransitionEventHandler<HTMLElement> | undefined` | — |  |
+| `onWheel` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
+| `onWheelCapture` | `React.WheelEventHandler<HTMLElement> | undefined` | — |  |
+| `render` | `DOMRenderFunction<"div", undefined> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
+| `style` | `React.CSSProperties | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. |
+| `translate` | `"no" | "yes" | undefined` | — |  |
+| `value` | `T | undefined` | — | The object value that this section represents. When using dynamic collections, this is set automatically. |
 
 ### TreeHeader
 
@@ -1077,7 +1160,7 @@ function Example() {
 | `onLoadMore` | `(() => any) | undefined` | — | Handler that is called when more items should be loaded, e.g. while scrolling near the bottom. |
 | `render` | `DOMRenderFunction<"div", TreeLoadMoreItemRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `scrollOffset` | `number | undefined` | 1 | The amount of offset from the bottom of your scrollable region that should trigger load more. Uses a percentage value relative to the scroll body's client height. Load more is then triggered when your current scroll position's distance from the bottom of the currently loaded list of items is less than or equal to the provided value. (e.g. 1 = 100% of the scroll region's height). |
-| `style` | `(((values: TreeLoadMoreItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TreeLoadMoreItemRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 
 ## Related Types
 

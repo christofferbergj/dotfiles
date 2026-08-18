@@ -172,6 +172,65 @@ export {Text};
 
 ```
 
+## FileTrigger
+
+To allow the selection of files from the user's device, pass `FileTrigger` as a child of `DropZone`.
+
+```tsx
+import {DropZone, Text} from 'vanilla-starter/DropZone';
+import {FileTrigger} from 'react-aria-components';
+import {Button} from 'vanilla-starter/Button';
+import {useState} from 'react';
+import React from 'react';
+
+function Example() {
+  let [content, setContent] = useState<string | React.ReactElement | null>(null);
+
+  async function handleFiles(files: FileList | null) {
+    let file = files && [...files].find(f => f.type.startsWith('image/'));
+    if (file) {
+      let url = URL.createObjectURL(file);
+      setContent(<img src={url} alt={file.name} style={{maxHeight: 100, maxWidth: '100%'}} />);
+    }
+  }
+
+  return (
+    <DropZone
+      getDropOperation={types => (
+        ['text/plain', 'image/jpeg', 'image/png', 'image/gif'].some(t => types.has(t))
+          ? 'copy'
+          : 'cancel'
+      )}
+      onDrop={async (event) => {
+        let item = event.items.find(item => (
+          (item.kind === 'text' && item.types.has('text/plain')) ||
+          (item.kind === 'file' && item.type.startsWith('image/'))
+        ));
+
+        if (item?.kind === 'text') {
+          let text = await item.getText('text/plain');
+          setContent(text);
+        } else if (item?.kind === 'file') {
+          let file = await item.getFile();
+          let url = URL.createObjectURL(file);
+          setContent(<img src={url} alt={item.name} style={{maxHeight: 100, maxWidth: '100%'}} />)
+        }
+      }}>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8}}>
+        <Text slot="label">
+          {content || "Drop files here, or click Browse"}
+        </Text>
+        {/*- begin highlight -*/}
+        <FileTrigger acceptedFileTypes={['image/*']} onSelect={handleFiles}>
+          <Button>Browse</Button>
+        </FileTrigger>
+        {/*- end highlight -*/}
+      </div>
+    </DropZone>
+  );
+}
+```
+
 ## Examples
 
 <ExampleList
@@ -277,5 +336,5 @@ export {Text};
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", DropZoneRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: DropZoneRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<DropZoneRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |

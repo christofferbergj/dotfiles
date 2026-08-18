@@ -1,6 +1,6 @@
 ---
 name: better-typography
-description: Web typography from choosing fonts to spacing, wrapping and accessibility. Use when picking or pairing typefaces, configuring variable fonts or OpenType features, setting up a type scale, checking heading hierarchy, styling text in components, truncating text, styling underlines, selection, placeholders or carets, or reviewing frontend code for typography. Triggers on typography, fonts, font formats, woff2, variable fonts, font-weight, opentype, font-feature-settings, letter-spacing, line-height, type scale, heading hierarchy, heading levels, tabular numbers, text-wrap, truncation, line clamp, underlines, text-decoration, text selection, iOS input zoom, font smoothing, text contrast, measure, line length, text-box, smart punctuation, drop cap.
+description: Web typography from choosing fonts to spacing, wrapping and accessibility. Use when picking or pairing typefaces, configuring variable fonts or OpenType features, setting up a type scale, checking heading hierarchy, styling text in components, truncating text, styling underlines, selection, placeholders or carets, or reviewing frontend code for typography. Triggers on typography, fonts, font formats, woff2, variable fonts, font-weight, opentype, font-feature-settings, letter-spacing, line-height, type scale, heading hierarchy, heading levels, tabular numbers, text-wrap, truncation, line clamp, underlines, text-decoration, text selection, iOS input zoom, scaled input text, font smoothing, text contrast, measure, line length, text-box, smart punctuation, drop cap.
 ---
 
 # Great typography
@@ -11,7 +11,7 @@ When reviewing, read the page instead of scanning the code: squint to check the 
 
 The words themselves (button labels, error messages, empty states) are covered by the `better-writing` skill; semantic heading structure by `better-accessibility`; spatial RTL layout and logical CSS properties by `better-layout`; rendered-pair contrast measurement and color remediation by `better-colors`. This skill owns how text renders, wraps, and behaves in mixed-direction content.
 
-**Match the project's styling system.** Before suggesting or writing any fix, check how the codebase styles things and express every change in that system: Tailwind utilities in a Tailwind project, plain declarations in CSS, CSS Modules, styled-components or StyleX. The [cheat sheet](css-cheat-sheet.md) maps each declaration to its Tailwind equivalent. Never introduce a second styling approach just to apply a typography fix.
+Write every fix in the project's own idiom: the styling system already in use, never a second one alongside it. The [cheat sheet](css-cheat-sheet.md) maps each declaration to its Tailwind equivalent.
 
 ## Quick Reference
 
@@ -23,6 +23,7 @@ The words themselves (button labels, error messages, empty states) are covered b
 | Wrapping & punctuation | Measure, wrapping, truncation, smart punctuation, RTL | [wrapping-and-punctuation.md](wrapping-and-punctuation.md) |
 | Details & accessibility | Underlines, selection, forms, decorative text, contrast | [details-and-accessibility.md](details-and-accessibility.md) |
 | CSS cheat sheet | Quick lookup of every property covered, with Tailwind equivalents | [css-cheat-sheet.md](css-cheat-sheet.md) |
+| Review output format | Severity scale, findings table, verification, verdict | [review-output.md](review-output.md) |
 
 ## Core Principles
 
@@ -60,11 +61,11 @@ Large headings often look better with slightly negative letter-spacing. Small up
 
 ### 9. Cap the Measure
 
-Long lines make it hard for the eye to find the next line. Cap long-form text around 60–75 characters per line. Any unit works: `65ch` measures characters directly, and a pixel or rem cap is just as good: at a `16px` body size the range lands roughly between `560px` and `680px` depending on the font, so Tailwind's `max-w-xl` or `max-w-2xl` fit. What matters is that a cap exists and the resulting line length sits in range.
+Long lines make it hard for the eye to find the next line. Cap long-form text around 60–75 characters per line. Any unit works; what matters is that a cap exists and the resulting line length sits in range. [Unit choices and the pixel equivalents](wrapping-and-punctuation.md#measure-line-length).
 
 ### 10. Wrap Deliberately
 
-`text-wrap: balance` distributes text evenly across lines: use it on headings. `text-wrap: pretty` avoids leaving a single short word on the final line: use it on descriptions. Skip both in long-form text: browsers ignore `balance` past a few lines anyway, and evening out a whole paragraph wastes space and makes it harder to read. `overflow-wrap: break-word` where long words, links or IDs could escape the container. `white-space: nowrap` on labels and badges where a line break looks broken.
+`text-wrap: balance` distributes text evenly across lines: use it on headings. `text-wrap: pretty` avoids leaving a single short word on the final line: use it on descriptions. Skip both in long-form text. `overflow-wrap: break-word` where long words, links or IDs could escape the container. `white-space: nowrap` on labels and badges where a line break looks broken.
 
 ### 11. Tabular Numbers on Changing Values
 
@@ -84,7 +85,7 @@ Default underlines sit wherever the browser decides. Pull position and thickness
 
 ### 15. Inputs at 16px on Mobile
 
-iOS Safari zooms the whole page when an input's text is smaller than `16px`. Keep input text at `16px` on mobile viewports (`text-base sm:text-sm`). Avoid the `maximum-scale=1` viewport meta: Safari ignores it for pinch zoom, but every other browser honors it and blocks zooming, which fails WCAG.
+iOS Safari zooms the whole page when an input's text is smaller than `16px`. Two fixes hold the font size at `16px` in different ways, so ask which one the design wants instead of choosing silently: size the input up on mobile (`text-base sm:text-sm`), which changes how it looks on small screens, or keep `font-size: 16px` and render the intended size with `transform: scale()`, compensating width and `line-height` so the design is identical at every viewport. [Both recipes](details-and-accessibility.md).
 
 ### 16. Size and Contrast Floors
 
@@ -92,7 +93,7 @@ Start long-form body text near the browser default of `16px`, then judge it in t
 
 ### 17. Font Smoothing on the Root
 
-On macOS text renders heavier than intended. Apply `-webkit-font-smoothing: antialiased` and `-moz-osx-font-smoothing: grayscale` (both covered by Tailwind's `antialiased`) once on the root layout so they cover all text.
+On macOS text renders heavier than intended. Apply `-webkit-font-smoothing: antialiased` and `-moz-osx-font-smoothing: grayscale` (both covered by Tailwind's `antialiased`) once on the root layout, never per component.
 
 ### 18. Language and Bidi Behavior
 
@@ -122,7 +123,7 @@ Set `lang` so browsers and assistive technology choose the right pronunciation, 
 | `UPPERCASE` typed into copy | Natural case + `text-transform` |
 | Justified text in an interface | `text-align: start`; reserve justify for specific editorial layouts |
 | Underline cuts through descenders | `text-decoration-skip-ink: auto`, `from-font` metrics |
-| Inputs below `16px` zoom on iOS | `text-base sm:text-sm` |
+| Inputs below `16px` zoom on iOS | Ask first: `text-base sm:text-sm`, or `16px` scaled down with `transform` to keep the designed size |
 | Root layout omits font smoothing | Apply `antialiased` once at the root |
 | Mixed-direction value renders in the wrong order | Set the correct `lang`/`dir`; isolate the value with `<bdi>` when needed |
 | Selection disabled across application chrome | Restore selection; suppress it only on a specific interaction that conflicts with dragging or gestures |
@@ -130,42 +131,6 @@ Set `lang` so browsers and assistive technology choose the right pronunciation, 
 | Thin/Light weight on `14px` UI text | Weight `400`+ below `18px`; thin weights are display-only |
 | `leading-none` on a three-line card description | At least `1.4` on any text that wraps to 3+ lines |
 
-## Review Output Format
+## Reporting
 
-Use this format only when the user asks for a standalone typography review. When `better-interface` orchestrates the review, provide domain evidence and findings to that skill and let its output format, severity scale, consolidation rules, cap, and verdict take precedence.
-
-Present the standalone review in two parts.
-
-### Findings
-
-Group all confirmed findings by principle. Use a markdown table with **Severity**, **Location**, **Before**, **After**, and **Why** columns. Never use separate "Before:" / "After:" lines.
-
-- **Severity**: `HIGH` makes text unreadable, unavailable, or structurally misleading; `MEDIUM` harms hierarchy, wrapping, or scanning; `LOW` is isolated typographic polish.
-- **Location**: cite `path/to/file:line`. If the artifact has no source files, cite the exact screen and component instead.
-- **Before / After**: show the current typography and an actionable replacement.
-- **Why**: name the violated principle and its effect on readability or hierarchy.
-
-Consolidate a repeated systemic issue into one row and list every affected location. Omit principles with no findings.
-
-### Example
-
-#### Tabular numbers
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-| MEDIUM | `src/Price.tsx:17` | `<span>{price}</span>` on a live price | `<span className="tabular-nums">{price}</span>` | Proportional digits cause changing values to shift |
-| LOW | `src/numbers.css:8` | `font-feature-settings: "tnum" 1` | `font-variant-numeric: tabular-nums` | The high-level property preserves fallback behavior |
-
-#### Line-height and measure
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-| MEDIUM | `src/Article.tsx:33` | `leading-none` on a body paragraph | `leading-normal` (`1.5`–`1.6`) | Wrapped body text needs enough vertical separation |
-| MEDIUM | `src/article.css:12` | Full-width article column | `max-width` near 65 characters at `16px` | Long measures make lines hard to track |
-
-### Verification and Verdict
-
-After the findings:
-
-1. **Verification**: list the exact checks run and their observed results, including wrapping, hierarchy, text resizing, font loading, and dynamic-value stability when applicable. If a check was not run, state what still needs verification.
-2. **Verdict**: `Block` if any `HIGH` finding remains, `Needs changes` if only `MEDIUM` or `LOW` findings remain, and `Approve` only when no actionable findings remain.
-
-When there are no findings, omit the tables, state "No actionable typography findings", report verification, and end with `Approve`.
+A standalone typography review is finished when every confirmed finding is reported in the format in [review-output.md](review-output.md), with verification and a verdict. Under `better-interface`, its format governs instead.

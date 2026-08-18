@@ -149,6 +149,8 @@ export function TableHeader<T>({columns, children, ...otherProps}: TableHeaderPr
           width={32}
           minWidth={32}
           style={{width: 32}}
+          focusMode="child"
+          allowsArrowNavigation
           className="react-aria-Column button-base">
           {selectionMode === 'multiple' && <Checkbox slot="selection" />}
         </AriaColumn>
@@ -171,7 +173,10 @@ export function Row<T>({id, columns, children, ...otherProps}: RowProps<T>) {
         </Cell>
       )}
       {selectionBehavior === 'toggle' && (
-        <Cell>
+        <Cell
+          focusMode="child"
+          allowsArrowNavigation
+        >
           <Checkbox slot="selection" />
         </Cell>
       )}
@@ -932,7 +937,7 @@ function FileTable() {
             <Row columns={visibleColumns}>
               {column => (
                 <Cell>
-                  {column.id === 'price' 
+                  {column.id === 'price'
                     ? item.price.toLocaleString('en-US', {style: 'currency', currency: 'USD', maximumFractionDigits: 0})
                     : item[column.id]}
                 </Cell>
@@ -1419,6 +1424,47 @@ function subscribe(fn) {
 }
 ```
 
+## Keyboard navigation
+
+By default, Table uses arrow key navigation to move focus into cells. Set `keyboardNavigationBehavior="tab"` to have <Keyboard>Tab</Keyboard> move focus in and out of a cell.
+Use this when cells contain interactive elements such as text fields, where arrow keys and typing in the field should not trigger grid navigation or selection.
+
+```tsx
+import {Table, TableHeader, Column, Row, TableBody, Cell} from 'vanilla-starter/Table';
+import {TextField} from 'vanilla-starter/TextField';
+
+let files = [
+  {id: 'games', name: 'Games', type: 'Folder', date: '6/7/2023'},
+  {id: 'apps', name: 'Applications', type: 'Folder', date: '4/7/2025'},
+  {id: 'report', name: '2024 Financial Report', type: 'PDF Document', date: '12/30/2024'},
+  {id: 'job', name: 'Job Posting', type: 'Text Document', date: '1/18/2025'},
+];
+
+<Table
+  /*- begin highlight -*/
+  keyboardNavigationBehavior="tab"
+  /*- end highlight -*/
+  selectionMode="multiple"
+  aria-label="Shared files">
+  <TableHeader>
+    <Column id="name" isRowHeader>Name</Column>
+    <Column id="type">Type</Column>
+    <Column id="date">Date Modified</Column>
+    <Column id="notes">Notes</Column>
+  </TableHeader>
+  <TableBody items={files}>
+    {item => (
+      <Row id={item.id}>
+        <Cell>{item.name}</Cell>
+        <Cell>{item.type}</Cell>
+        <Cell>{item.date}</Cell>
+        <Cell><TextField aria-label={`${item.name} notes`} placeholder="Enter notes" /></Cell>
+      </Row>
+    )}
+  </TableBody>
+</Table>
+```
+
 ## Drag and drop
 
 Table supports drag and drop interactions when the `dragAndDropHooks` prop is provided using the `useDragAndDrop` hook. Users can drop data on the table as a whole, on individual rows, insert new rows between existing ones, or reorder rows. React Aria supports drag and drop via mouse, touch, keyboard, and screen reader interactions. See the [drag and drop guide](dnd.md?component=Table) to learn more.
@@ -1562,6 +1608,7 @@ function ReorderableTable() {
 | `expandedKeys` | `Iterable<Key> | undefined` | — | The currently expanded keys in the collection (controlled). |
 | `hidden` | `boolean | undefined` | — |  |
 | `inert` | `boolean | undefined` | — |  |
+| `keyboardNavigationBehavior` | `"arrow" | "tab" | undefined` | 'arrow' | Whether keyboard navigation to focusable elements within the cells is via the left/right arrow keys or the tab key. |
 | `lang` | `string | undefined` | — |  |
 | `onAnimationEnd` | `React.AnimationEventHandler<HTMLTableElement> | undefined` | — |  |
 | `onAnimationEndCapture` | `React.AnimationEventHandler<HTMLTableElement> | undefined` | — |  |
@@ -1638,7 +1685,7 @@ function ReorderableTable() {
 | `shouldSelectOnPressUp` | `boolean | undefined` | — | Whether selection should occur on press up instead of press down. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
 | `sortDescriptor` | `SortDescriptor | undefined` | — | The current sorted column and direction. |
-| `style` | `(((values: TableRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TableRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 | `treeColumn` | `Key | undefined` | — | The id of the column that displays hierarchical data. |
 
@@ -1722,18 +1769,20 @@ function ReorderableTable() {
 | `onWheel` | `React.WheelEventHandler<HTMLTableSectionElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableSectionElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div" | "thead", TableHeaderRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
-| `style` | `(((values: TableHeaderRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TableHeaderRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### Column
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `allowsArrowNavigation` | `boolean | undefined` | — | Whether the column should support arrow key navigation even when the containing table uses tab keyboard navigation. Allows users to navigate between columns and rows with arrow keys while focus is on an interactive child element within the column header. |
 | `allowsSorting` | `boolean | undefined` | — | Whether the column allows sorting. |
 | `children` | `ChildrenOrFunction<ColumnRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<ColumnRenderProps> | undefined` | 'react-aria-Column' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `defaultWidth` | `ColumnSize | null | undefined` | — | The default width of the column. This prop only applies when the `<Table>` is wrapped in a `<ResizableTableContainer>`. |
 | `dir` | `string | undefined` | — |  |
+| `focusMode` | `"cell" | "child" | undefined` | — | Whether the column header or its first focusable child element should be focused when the column header is focused. Defaults to 'child' in arrow keyboard navigation mode and 'cell' in tab keyboard navigation mode. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `Key | undefined` | — | The unique id of the column. |
 | `inert` | `boolean | undefined` | — |  |
@@ -1806,7 +1855,7 @@ function ReorderableTable() {
 | `onWheel` | `React.WheelEventHandler<HTMLTableHeaderCellElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableHeaderCellElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div" | "th", ColumnRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
-| `style` | `(((values: ColumnRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<ColumnRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `textValue` | `string | undefined` | — | A string representation of the column's contents, used for accessibility announcements. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 | `width` | `ColumnSize | null | undefined` | — | The width of the column. This prop only applies when the `<Table>` is wrapped in a `<ResizableTableContainer>`. |
@@ -1889,7 +1938,7 @@ function ReorderableTable() {
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableSectionElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div" | "tbody", TableBodyRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `renderEmptyState` | `((props: TableBodyRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no rows in the table. |
-| `style` | `(((values: TableBodyRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TableBodyRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### Row
@@ -1989,7 +2038,7 @@ function ReorderableTable() {
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
 | `render` | `DOMRenderFunction<"div" | "tr", RowRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
-| `style` | `(((values: RowRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<RowRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string | undefined` | — | A string representation of the row's contents, used for features like typeahead. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
@@ -1999,10 +2048,12 @@ function ReorderableTable() {
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `allowsArrowNavigation` | `boolean | undefined` | — | Whether the cell should support arrow key navigation even when the containing table uses tab keyboard navigation. Allows users to navigate between cells and rows with arrow keys while focus is on an interactive child element within the cell. |
 | `children` | `ChildrenOrFunction<CellRenderProps>` | — | The children of the component. A function may be provided to alter the children based on component state. |
 | `className` | `ClassNameOrFunction<CellRenderProps> | undefined` | 'react-aria-Cell' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. A function may be provided to compute the class based on component state. |
 | `colSpan` | `number | undefined` | — | Indicates how many columns the data cell spans. |
 | `dir` | `string | undefined` | — |  |
+| `focusMode` | `"cell" | "child" | undefined` | — | Whether the cell or its first focusable child element should be focused when the cell is focused. Defaults to 'child' in arrow keyboard navigation mode and 'cell' in tab keyboard navigation mode. |
 | `hidden` | `boolean | undefined` | — |  |
 | `id` | `Key | undefined` | — | The unique id of the cell. |
 | `inert` | `boolean | undefined` | — |  |
@@ -2072,7 +2123,7 @@ function ReorderableTable() {
 | `onWheel` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div" | "td", CellRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
-| `style` | `(((values: CellRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<CellRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `textValue` | `string | undefined` | — | A string representation of the cell's contents, used for features like typeahead. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
@@ -2316,7 +2367,7 @@ function ReorderableTable() {
 | `onWheel` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", ColumnResizerRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
-| `style` | `(((values: ColumnResizerRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<ColumnResizerRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### TableLoadMoreItem
@@ -2326,6 +2377,7 @@ function ReorderableTable() {
 | `children` | `React.ReactNode` | — | The load more spinner to render when loading additional items. |
 | `className` | `string | undefined` | 'react-aria-TableLoadMoreItem' | The CSS [className](https://developer.mozilla.org/en-US/docs/Web/API/Element/className) for the element. |
 | `dir` | `string | undefined` | — |  |
+| `direction` | `"end" | "start" | undefined` | 'end' | The scroll direction that triggers load more. Use 'start' for reversed layouts where older content loads when scrolling toward the top. |
 | `hidden` | `boolean | undefined` | — |  |
 | `inert` | `boolean | undefined` | — |  |
 | `isLoading` | `boolean | undefined` | — | Whether or not the loading spinner should be rendered or not. |

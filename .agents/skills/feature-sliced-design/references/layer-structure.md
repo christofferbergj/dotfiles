@@ -4,8 +4,6 @@ Detailed folder structures, code examples, and naming conventions for each
 FSD layer. Use this reference when creating, reviewing, or reorganizing
 project structure.
 
----
-
 ## App Layer
 
 App-wide initialization: providers, routing, global styles, entry point.
@@ -55,8 +53,6 @@ export const router = createBrowserRouter([
 routing setup, global styles, error boundaries, analytics initialization.
 
 **Does not belong:** Feature-specific code, business logic, page-level UI.
-
----
 
 ## Pages Layer
 
@@ -137,8 +133,6 @@ export const AboutPage = () => (
 );
 ```
 
----
-
 ## Widgets Layer (discouraged)
 
 Widgets are a layer for placing reusable UI blocks. They can be composed from
@@ -192,8 +186,6 @@ widgets/
 **If you still use widgets:** Navigation bars, sidebars, dashboards, and
 footers are the typical examples. Simple UI primitives belong in `shared/ui/`,
 and single-use page sections stay in the page.
-
----
 
 ## Where should layouts be placed?
 
@@ -254,8 +246,6 @@ route configuration.
    When there is little duplicated code and the layout is unlikely to change
    frequently there is no need to extract it into a shared module.
 
----
-
 ## Features Layer
 
 Independent, reusable user interactions. **Create only when used in 2+ places.**
@@ -310,8 +300,6 @@ export const PostCard = ({ post }) => (
 );
 ```
 
----
-
 ## Entities Layer
 
 Reusable business domain models. **Create only when used in 2+ places. Starting
@@ -336,8 +324,6 @@ entities/product/
     ProductCard.tsx
   index.ts
 ```
-
----
 
 ## Shared Layer Structure
 
@@ -373,8 +359,6 @@ feature-specific code, or entity-specific code.
 
 For asset placement specifically (images, icons, fonts, PDFs), see
 `references/asset-handling.md`.
-
----
 
 ## Segments
 
@@ -464,8 +448,6 @@ export { UserAvatar } from "./ui/UserAvatar";
 export { useUser, type User } from "./model/user";
 ```
 
----
-
 ## Slice Groups
 
 A **slice group** is a folder that contains related slices on the same
@@ -545,8 +527,6 @@ entire content.
 - **Do not relax slice isolation inside the group.** If two slices in the
   same group need to share code, extract it one layer down rather than
   adding a `_common/` file.
-
----
 
 ## Path Aliases
 

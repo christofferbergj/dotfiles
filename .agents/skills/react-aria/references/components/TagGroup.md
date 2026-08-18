@@ -94,6 +94,7 @@ export function Tag({
 ```css
 @import './theme.css';
 @import './utilities.css';
+@import './Form.css';
 
 .react-aria-TagGroup {
   display: flex;
@@ -155,17 +156,23 @@ export function Tag({
     background: none;
     border: none;
     padding: 0;
+    margin: 0;
+    appearance: none;
     color: var(--gray-1000);
+    font: inherit;
     transition: color 200ms;
     outline: none;
     border-radius: 100%;
     aspect-ratio: 1/1;
     height: calc(100% - 4px);
+    width: auto;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     transition-property: background, color, scale;
     transition-duration: 200ms;
+    -webkit-tap-highlight-color: transparent;
 
     svg {
       width: calc(100% - 2px);
@@ -657,7 +664,7 @@ function Example() {
 | `onWheelCapture` | `React.WheelEventHandler<HTMLDivElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", TagListRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `renderEmptyState` | `((props: TagListRenderProps) => ReactNode) | undefined` | — | Provides content to display when there are no items in the tag list. |
-| `style` | `(((values: TagListRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TagListRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### Tag
@@ -756,7 +763,7 @@ function Example() {
 | `rel` | `string | undefined` | — | The relationship between the linked resource and the current page. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel). |
 | `render` | `DOMRenderFunction<"div", TagRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
-| `style` | `(((values: TagRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<TagRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string | undefined` | — | A string representation of the tags's contents, used for accessibility. Required if children is not a plain text string. |
 | `translate` | `"no" | "yes" | undefined` | — |  |

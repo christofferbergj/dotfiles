@@ -60,7 +60,7 @@ Motion the user didn't ask for, and UI that acts on its own schedule:
 
 ## Zoom and reflow
 
-- **200% zoom** (WCAG 1.4.4): all content and functionality must survive text scaled to 200%. Never block zoom: no `user-scalable=no`, no `maximum-scale=1`. Safari ignores the cap but every other browser enforces it.
+- **200% zoom** (WCAG 1.4.4): all content and functionality must survive text scaled to 200%, and the viewport must leave the reader able to zoom.
 - **Reflow at 320px** (WCAG 1.4.10): at 400% zoom on a 1280px viewport (equivalent to a 320px viewport) the page must work with vertical scrolling only: no two-dimensional scrolling except for genuinely 2D content (tables, maps, code blocks), which scroll inside their own container.
 
 Fixed heights are what break under zoom: use `min-height` on anything containing text and let containers grow.

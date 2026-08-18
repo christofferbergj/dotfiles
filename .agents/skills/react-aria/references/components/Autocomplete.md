@@ -245,6 +245,14 @@ export function CommandPalette<T>(props: CommandPaletteProps<T>) {
 
 ```
 
+<InlineAlert
+  variant="informative"
+  UNSAFE_style={{maxWidth: 500}}
+>
+  <Heading>Autocomplete vs. ComboBox</Heading>
+  <Content>Use [ComboBox](ComboBox.md) to **select one or more values** from a pre-defined set of options. Use Autocomplete to **filter a collection** or provide **text completions**.</Content>
+</InlineAlert>
+
 ## Content
 
 Autocomplete filters a collection component using a [TextField](TextField.md) or [SearchField](SearchField.md). It can be used to build UI patterns such as command palettes, searchable menus, filterable selects, and more.
@@ -1290,13 +1298,13 @@ function Example() {
   let updateFilter = () => {
     let {selectionStart, selectionEnd, value} = inputRef.current!;
     if (selectionStart === selectionEnd && document.activeElement === inputRef.current!) {
-      // The current filter value is the substring between 
+      // The current filter value is the substring between
       // the anchor character '@' and the caret position.
       let index = value.lastIndexOf('@', selectionStart);
       if (index >= 0) {
         let slice = value.slice(index + 1, selectionStart);
         // Spaces are not allowed in the filter value.
-        if (!slice.includes(' ')) { 
+        if (!slice.includes(' ')) {
           setAnchorIndex(index);
           setFilterValue(slice);
           return;
@@ -1304,11 +1312,11 @@ function Example() {
       }
     }
 
-    // Reset the anchor index, but not the filter value so 
+    // Reset the anchor index, but not the filter value so
     // that the menu does not flicker during the close animation.
     setAnchorIndex(-1);
   };
-  
+
   return (
     /*- begin highlight -*/
     // Pass the filter substring to Autocomplete.

@@ -701,6 +701,82 @@ for (let i = 0; i < 1000; i++) {
 </Virtualizer>
 ```
 
+## Dynamic item sizes
+
+Use the `shouldObserveItemSize` prop to automatically re-layout when items change size.
+Note that this uses a `ResizeObserver` internally and may have performance overhead.
+
+```tsx
+import {Virtualizer, ListLayout} from 'react-aria-components/Virtualizer';
+import {GridList, GridListItem, Text} from 'vanilla-starter/GridList';
+import {Button} from 'vanilla-starter/Button';
+import {useState} from 'react';
+import {ChevronRight, ChevronDown} from 'lucide-react';
+
+let items: {
+  id: string;
+  name: string;
+}[] = [];
+for (let i = 0; i < 10; i++) {
+  items.push({id: `item_${i}`, name: `Item ${i}`});
+}
+
+function ExpandableItem({item}) {
+  let [expanded, setExpanded] = useState(false);
+  return (
+    <div className="expandable-item">
+      <Text>{item.name}</Text>
+      <Button
+        variant="quiet"
+        onPress={() => setExpanded(!expanded)}
+        aria-label={expanded ? 'Collapse' : 'Expand'}>
+        {expanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
+      </Button>
+      <Text slot="description" style={{display: expanded ? 'block' : 'none'}}>This is an expanded item.</Text>
+    </div>
+  );
+}
+
+<Virtualizer
+  layout={ListLayout}
+  layoutOptions={{
+    estimatedRowHeight: 25,
+    gap: 4,
+  }}
+  /*- begin highlight -*/
+  shouldObserveItemSize>
+  {/*- end highlight -*/}
+  <GridList
+    style={{display: 'block', padding: 4, height: 400, width: '100%'}}
+    aria-label="virtualized with expandable rows"
+    items={items}>
+    {item =>
+    <GridListItem textValue={item.name} style={{padding: 0}}><ExpandableItem item={item} /></GridListItem>}
+  </GridList>
+</Virtualizer>
+```
+
+```css
+.expandable-item {
+  display: grid;
+  padding: 4px;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+
+  .react-aria-Text {
+    grid-column: 1 / 1;
+  }
+  .react-aria-Button {
+    grid-column: 2 / 2;
+  }
+  .react-aria-Text[slot="description"] {
+    grid-column: 1 / span 2;
+    padding-top: 4px;
+  }
+}
+```
+
 ## Examples
 
 <ExampleList
@@ -717,11 +793,13 @@ for (let i = 0; i < 1000; i++) {
 | `children` | `React.ReactNode` | — | The child collection to virtualize (e.g. ListBox, GridList, or Table). |
 | `layout` | `ILayout<O> | LayoutClass<O>` | — | The layout object that determines the position and size of the visible elements. |
 | `layoutOptions` | `O | undefined` | — | Options for the layout. |
+| `shouldObserveItemSize` | `boolean | undefined` | — | Whether to observe each item's size with a ResizeObserver and re-measure when it changes. |
 
 ### ListLayout
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
+| `anchorTo` | `"end" | undefined` | — | Anchors the vertical list content to the end (bottom) of the viewport. When set to `'end'`, the viewport stays pinned to the latest content unless the user scrolls up. |
 | `dropIndicatorThickness` | `number | undefined` | 2 | The thickness of the drop indicator. |
 | `estimatedHeadingSize` | `number | undefined` | — | The estimated size of a section header in px with respect to the applied orientation, when heading sizes are variable. |
 | `estimatedRowSize` | `number | undefined` | — | The estimated size of a row in px with respect to the applied orientation, when row sizes are variable. |
@@ -731,6 +809,7 @@ for (let i = 0; i < 1000; i++) {
 | `orientation` | `Orientation | undefined` | 'vertical' | The primary orientation of the items. Usually this is the direction that the collection scrolls. |
 | `padding` | `number | undefined` | 0 | The padding around the list. |
 | `rowSize` | `number | undefined` | 48 | The fixed size of a row in px with respect to the applied orientation. |
+| `scrollEndThreshold` | `number | undefined` | 0 | The maximum distance in px from the anchored edge of the content for the viewport to be considered "near the end". While near the end, appended content and streaming size changes will keep the viewport pinned to `anchorTo`. |
 
 ### GridLayout
 

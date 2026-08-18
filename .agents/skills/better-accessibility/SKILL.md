@@ -1,11 +1,11 @@
 ---
 name: better-accessibility
-description: Accessibility engineering for product interfaces, from focus states and keyboard support to ARIA, forms, and screen readers. Use when building or reviewing UI components, modals, menus, forms, custom widgets, or when the user says "make this accessible" or reports keyboard or screen-reader issues. Triggers on accessibility, a11y, WCAG, aria, focus ring, focus-visible, focus trap, keyboard navigation, tab order, tabindex, screen reader, sr-only, aria-live, alt text, hit area, touch target, prefers-reduced-motion, autoplay, toast duration, skip link, semantic HTML, aria-label, form errors, disabled buttons, "not keyboard accessible".
+description: Accessibility engineering for product interfaces, from focus states and keyboard support to ARIA, forms, and screen readers. Use when building or reviewing UI components, modals, menus, forms, custom widgets, or when the user says "make this accessible" or reports keyboard or screen-reader issues. Triggers on accessibility, a11y, WCAG, aria, focus ring, focus-visible, focus trap, keyboard navigation, tab order, tabindex, screen reader, sr-only, aria-live, alt text, hit area, touch target, pointer-events, hover on touch, prefers-reduced-motion, autoplay, toast duration, skip link, semantic HTML, aria-label, form errors, disabled buttons, "not keyboard accessible".
 ---
 
 # Accessibility that comes with the craft
 
-Accessibility is not a compliance checkbox bolted on at the end; it is the floor for interface craft. Most of it is free if you use the platform: native elements ship with keyboard support, real labels announce themselves, and a visible focus ring is one CSS rule. Apply these principles when building or reviewing UI code, and match the project's existing styling system (Tailwind vs. plain CSS vs. CSS-in-JS) when applying fixes.
+Accessibility is not a compliance checkbox bolted on at the end; it is the floor for interface craft. Most of it is free if you use the platform: native elements ship with keyboard support, real labels announce themselves, and a visible focus ring is one CSS rule. Apply these principles when building or reviewing UI code, and write every fix in the project's own idiom: the styling system already in use, never a second one alongside it.
 
 When reviewing, walk the interface as a keyboard-only user first (every flow must complete without a mouse), then as a screen-reader user: does each control announce a name, a role, and its state? When unsure, prefer the platform default over a custom rebuild, and remove ARIA rather than add it.
 
@@ -21,6 +21,7 @@ Rendered-pair contrast measurement and color remediation are covered by the `bet
 | [Screen Readers](screen-readers.md) | Visually hidden content, live regions, toasts, alt text, SVG |
 | [Hit Areas](hit-areas.md) | Target sizes, expanding hit areas, collision rules |
 | [Motion & Zoom](motion-and-zoom.md) | `prefers-reduced-motion`, autoplay and timed UI, 200% zoom, reflow, rem vs px |
+| [Review Output Format](review-output.md) | Severity scale, findings table, verification, verdict |
 
 ## Core Principles
 
@@ -42,7 +43,7 @@ Modals set `inert` on the background content, move focus inside on open, and ret
 
 ### 5. Minimum Hit Area
 
-WCAG 2.5.8's Level AA baseline is a 24×24 CSS-pixel target or one of its defined spacing, equivalent-control, inline, user-agent, or essential exceptions. For easier activation, aim for 44×44px in touch contexts and 40×40px in desktop interfaces when density permits. Extend with a pseudo-element if the visible element should stay smaller. Never let extended hit areas overlap.
+WCAG 2.5.8's Level AA baseline is a 24×24 CSS-pixel target or one of its defined spacing, equivalent-control, inline, user-agent, or essential exceptions. For easier activation, aim for 44×44px in touch contexts and 40×40px in desktop interfaces when density permits. Extend with a pseudo-element if the visible element should stay smaller. Never let extended hit areas overlap, and give decorative layers `pointer-events: none` so a glow or gradient never swallows the clicks meant for the control beneath it.
 
 ### 6. Label and Type Every Control
 
@@ -78,7 +79,7 @@ Use headings that describe their sections and form a coherent outline; one page-
 
 ### 14. Survive Zoom and Text Resize
 
-The page must work at 200% zoom and reflow at 320px width without horizontal scrolling. Use `min-height` instead of fixed `height` on text containers, prefer `rem` breakpoints where they fit the codebase's conventions, and never use `user-scalable=no` or `maximum-scale=1`.
+The page must work at 200% zoom and reflow at 320px width without horizontal scrolling. Use `min-height` instead of fixed `height` on text containers, prefer `rem` breakpoints where they fit the codebase's conventions, and keep the viewport meta from capping how far the reader can zoom.
 
 ## Common Mistakes
 
@@ -93,56 +94,11 @@ The page must work at 200% zoom and reflow at 320px width without horizontal scr
 | `assertive` live region for a routine toast | Use `polite`; reserve `assertive` for errors |
 | `aria-hidden="true"` on a focusable element | Remove it or make the element non-focusable |
 | Functional icon alt describes the picture | Describe the action: `alt="Search"`, not `alt="magnifying glass"` |
-| `maximum-scale=1` to stop iOS input zoom | 16px input font on mobile (see `better-typography`); never block zoom |
 | Submit disabled until the form is valid | Keep it enabled; validate on submit and focus the first error |
+| Decorative glow or gradient swallowing clicks | `pointer-events: none` on the layer, plus `aria-hidden="true"` |
+| Hover treatment stuck after a tap on touch | Gate hover styling with `@media (hover: hover)` |
+| Tooltip on a natively `disabled` control | Persistent text beside it, or `aria-disabled` so it stays focusable |
 
-## Review Output Format
+## Reporting
 
-Use this format only when the user asks for a standalone accessibility review. When `better-interface` orchestrates the review, provide domain evidence and findings to that skill and let its output format, severity scale, consolidation rules, cap, and verdict take precedence.
-
-Present the standalone review in two parts.
-
-### Findings
-
-Group all confirmed findings by principle. Use a markdown table with **Severity**, **Location**, **Before**, **After**, and **Why** columns. Never use separate "Before:" / "After:" lines.
-
-- **Severity**: `HIGH` prevents a task, hides content from assistive technology, or creates a systemic accessibility failure; `MEDIUM` makes an interaction meaningfully harder; `LOW` is isolated polish.
-- **Location**: cite `path/to/file:line`. If the artifact has no source files, cite the exact screen and component instead.
-- **Before / After**: show the current implementation and an actionable replacement.
-- **Why**: name the violated principle and its user impact.
-
-Consolidate a repeated systemic issue into one row and list every affected location. Omit principles with no findings.
-
-### Example
-
-#### Accessible names everywhere
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-| HIGH | `src/Dialog.tsx:42` | `<button><XIcon /></button>` | Add `aria-label="Close"`; mark the icon `aria-hidden="true"` | The icon-only control has no accessible name |
-| HIGH | `src/Nav.tsx:18` | `<a href="/settings"><GearIcon /></a>` | Add `aria-label="Settings"` | The link destination is unavailable to screen readers |
-
-#### Visible focus rings
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-| HIGH | `src/button.css:12` | `button:focus { outline: none; }` | `button:focus-visible { outline: 2px solid; outline-offset: 2px; }` | Keyboard users cannot see focus |
-| HIGH | `src/Menu.tsx:31` | `focus:outline-none` | `focus-visible:outline-2 focus-visible:outline-offset-2` | Menu navigation has no visible focus indicator |
-
-#### Errors that announce
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-| HIGH | `src/EmailField.tsx:27` | Error shown only as `border-red-500` | Add `aria-invalid="true"` + `aria-describedby="email-error"` with inline error text | Color alone neither explains nor announces the error |
-| MEDIUM | `src/SignupForm.tsx:64` | Submit disabled until the form is valid | Keep submit enabled; on failure, focus the first invalid field | A disabled action hides what must be fixed |
-
-#### Minimum hit area
-| Severity | Location | Before | After | Why |
-| --- | --- | --- | --- | --- |
-| MEDIUM | `src/Toolbar.tsx:22` | `size-4` icon-only button | Extend the hit area to 44×44px with `after:absolute after:size-11` | The target is too small for reliable touch input |
-
-### Verification and Verdict
-
-After the findings:
-
-1. **Verification**: list the exact checks run and their observed results, including keyboard traversal, accessible-name inspection, and screen-reader or automated checks when applicable. If a check was not run, state what still needs verification.
-2. **Verdict**: `Block` if any `HIGH` finding remains, `Needs changes` if only `MEDIUM` or `LOW` findings remain, and `Approve` only when no actionable findings remain.
-
-When there are no findings, omit the tables, state "No actionable accessibility findings", report verification, and end with `Approve`.
+A standalone accessibility review is finished when every confirmed finding is reported in the format in [review-output.md](review-output.md), with verification and a verdict. Under `better-interface`, its format governs instead.

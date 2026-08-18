@@ -71,6 +71,7 @@ export function CheckboxGroup({
 
 ```css
 @import './theme.css';
+@import './Form.css';
 
 .react-aria-CheckboxGroup {
   display: flex;

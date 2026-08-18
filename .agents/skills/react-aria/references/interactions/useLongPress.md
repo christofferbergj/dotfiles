@@ -90,6 +90,7 @@ A long press is triggered when a user presses and holds their pointer over a tar
 | `onLongPress` | `((e: LongPressEvent) => void) | undefined` | — | Handler that is called when the threshold time is met while the press is over the target. |
 | `onLongPressEnd` | `((e: LongPressEvent) => void) | undefined` | — | Handler that is called when a long press interaction ends, either over the target or when the pointer leaves the target. |
 | `onLongPressStart` | `((e: LongPressEvent) => void) | undefined` | — | Handler that is called when a long press interaction starts. |
+| `pointerType` | `"mouse" | "touch" | undefined` | — | Which pointer type to listen for. By default, both mouse and touch are listened for. |
 | `threshold` | `number | undefined` | 500ms | The amount of time in milliseconds to wait before triggering a long press. |
 
 ### LongPressResult

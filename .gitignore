@@ -5,6 +5,7 @@
 
 .agents/skills/linting-alignment/
 .agents/skills/update-dependencies/
+.agents/skills/bro/
 
 .config/fish/conf.d/*_fig*
 .config/fish/functions/fzf_key_bindings.fish

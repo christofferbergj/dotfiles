@@ -134,6 +134,7 @@ The `references/` directory contains detailed documentation organized as follows
 - [Forms](references/guides/forms.md)
 - [Framework setup](references/guides/frameworks.md)
 - [Getting started](references/guides/getting-started.md)
+- [Hooks](references/guides/hooks.md)
 - [Quality](references/guides/quality.md)
 - [Selection](references/guides/selection.md)
 - [Styling](references/guides/styling.md)
@@ -144,14 +145,17 @@ The `references/` directory contains detailed documentation organized as follows
 
 Component documentation is in `references/components/` — one Markdown file per component (e.g. `references/components/Button.md`). Read the file for a component when you need its API, props, examples, or accessibility notes.
 
-Available components: Autocomplete, Breadcrumbs, Button, Calendar, Checkbox, CheckboxGroup, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatch, ColorSwatchPicker, ColorWheel, ComboBox, DateField, DatePicker, DateRangePicker, Disclosure, DisclosureGroup, DropZone, FileTrigger, Form, GridList, Group, Link, ListBox, Menu, Meter, Modal, NumberField, Popover, ProgressBar, RadioGroup, RangeCalendar, SearchField, Select, Separator, Slider, Switch, Table, Tabs, TagGroup, TextField, TimeField, Toast, ToggleButton, ToggleButtonGroup, Toolbar, Tooltip, Tree, Virtualizer.
+Available components: Autocomplete, Breadcrumbs, Button, Calendar, Checkbox, CheckboxGroup, ColorArea, ColorField, ColorPicker, ColorSlider, ColorSwatch, ColorSwatchPicker, ColorWheel, ComboBox, DateField, DatePicker, DateRangePicker, Disclosure, DisclosureGroup, DropZone, FileTrigger, Form, GridList, Group, Link, ListBox, Menu, Meter, Modal, NumberField, Popover, PreviewTrigger, ProgressBar, RadioGroup, RangeCalendar, SearchField, Select, Separator, Slider, Switch, Table, Tabs, TagGroup, TextField, TimeField, Toast, ToggleButton, ToggleButtonGroup, TokenField, Toolbar, Tooltip, Tree, useBreadcrumbs, useButton, useCalendar, useCheckbox, useCheckboxGroup, useColorArea, useColorField, useColorSlider, useColorSwatch, useColorWheel, useComboBox, useDateField, useDatePicker, useDateRangePicker, useDisclosure, useGridList, useLink, useListBox, useMenu, useMeter, useModalOverlay, useNumberField, usePopover, useProgressBar, useRadioGroup, useRangeCalendar, useSearchField, useSelect, useSeparator, useSlider, useSwitch, useTable, useTabList, useTagGroup, useTextField, useTimeField, useToast, useToggleButton, useToggleButtonGroup, useToolbar, useTooltipTrigger, Virtualizer.
 
 ### Interactions
 - [FocusRing](references/interactions/FocusRing.md): A utility component that applies a CSS class when an element has keyboard focus.
 - [FocusScope](references/interactions/FocusScope.md): A FocusScope manages focus for its descendants. It supports containing focus inside
 - [useClipboard](references/interactions/useClipboard.md): Handles clipboard interactions for a focusable element. Supports items of multiple
+- [useContextMenu](references/interactions/useContextMenu.md): Handles context menu events across mouse, touch, keyboard, and screen reader interactions.
 - [useDrag](references/interactions/useDrag.md): Handles drag interactions for an element, with support for traditional mouse and touch
+- [useDraggableCollection](references/interactions/useDraggableCollection.md): Handles drag interactions for a collection component, with support for traditional mouse and
 - [useDrop](references/interactions/useDrop.md): Handles drop interactions for an element, with support for traditional mouse and touch
+- [useDroppableCollection](references/interactions/useDroppableCollection.md): Handles drop interactions for a collection component, with support for traditional mouse and
 - [useFocus](references/interactions/useFocus.md): Handles focus events for the immediate target.
 - [useFocusRing](references/interactions/useFocusRing.md): Determines whether a focus ring should be shown to indicate keyboard focus.
 - [useFocusVisible](references/interactions/useFocusVisible.md): Manages focus visible state for the page, and subscribes individual components for updates.
@@ -168,6 +172,7 @@ Available components: Autocomplete, Breadcrumbs, Button, Calendar, Checkbox, Che
 - [mergeProps](references/utilities/mergeProps.md): Merges multiple props objects together. Event handlers are chained,
 - [PortalProvider](references/utilities/PortalProvider.md): Sets the portal container for all overlay elements rendered by its children.
 - [SSRProvider](references/utilities/SSRProvider.md): When using SSR with React Aria in React 16 or 17, applications must be wrapped in an SSRProvider.
+- [useAsyncList](references/utilities/useAsyncList.md): Manages state for an immutable async loaded list data structure, and provides convenience methods
 - [useCollator](references/utilities/useCollator.md): Provides localized string collation for the current locale. Automatically updates when the locale
 - [useDateFormatter](references/utilities/useDateFormatter.md): Provides localized date formatting for the current locale. Automatically updates when the locale
 - [useField](references/utilities/useField.md): Provides the accessibility implementation for input fields. Fields accept user input, gain
@@ -175,9 +180,12 @@ Available components: Autocomplete, Breadcrumbs, Button, Calendar, Checkbox, Che
 - [useId](references/utilities/useId.md): If a default is not provided, generate an id.
 - [useIsSSR](references/utilities/useIsSSR.md): Returns whether the component is currently being server side rendered or
 - [useLabel](references/utilities/useLabel.md): Provides the accessibility implementation for labels and their associated elements.
+- [useListData](references/utilities/useListData.md): Manages state for an immutable list data structure, and provides convenience methods to
+- [useListFormatter](references/utilities/useListFormatter.md): Provides localized list formatting for the current locale. Automatically updates when the locale
 - [useLocale](references/utilities/useLocale.md): Returns the current locale and layout direction.
 - [useNumberFormatter](references/utilities/useNumberFormatter.md): Provides localized number formatting for the current locale. Automatically updates when the
 - [useObjectRef](references/utilities/useObjectRef.md): Offers an object ref for a given callback ref or an object ref. Especially
+- [useTreeData](references/utilities/useTreeData.md): Manages state for an immutable tree data structure, and provides convenience methods to
 - [VisuallyHidden](references/utilities/VisuallyHidden.md): VisuallyHidden hides its children visually, while keeping content visible
 
 ### Internationalization

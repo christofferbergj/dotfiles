@@ -82,9 +82,8 @@ export function CalendarGrid(props: CalendarGridProps) {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
-  overflow: auto;
-  width: 100%;
-  max-width: fit-content;
+  width: fit-content;
+  max-width: 100%;
   color: var(--text-color);
   font: var(--font-size) system-ui;
 
@@ -114,7 +113,15 @@ export function CalendarGrid(props: CalendarGridProps) {
   }
 
   .react-aria-CalendarGrid {
+    border-collapse: collapse;
     border-spacing: 0;
+    width: 100%;
+    table-layout: fixed;
+
+    td,
+    th {
+      padding: 0;
+    }
   }
 
   [slot='errorMessage'] {
@@ -650,7 +657,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `selectionAlignment` | `"center" | "end" | "start" | undefined` | 'center' | Determines the alignment of the visible months on initial render based on the current selection or current date if there is no selection. |
 | `selectionMode` | `M | undefined` | 'single' | Whether single or multiple selection is enabled. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: CalendarRenderProps<M> & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<CalendarRenderProps<M>> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 | `value` | `CalendarValueType<null, M | T> | undefined` | — | The current value (controlled). |
 | `visibleDuration` | `DateDuration | undefined` | \{ months: 1 } | The amount of days that will be displayed at once. This affects how pagination works. |
@@ -1050,7 +1057,7 @@ import {ChevronLeft, ChevronRight} from 'lucide-react';
 | `onWheel` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `onWheelCapture` | `React.WheelEventHandler<HTMLTableCellElement> | undefined` | — |  |
 | `render` | `DOMRenderFunction<"div", CalendarCellRenderProps> | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Requirements: - You must render the expected element type (e.g. if `<button>` is expected, you cannot render an   `<a>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
-| `style` | `(((values: CalendarCellRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<CalendarCellRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### CalendarHeading

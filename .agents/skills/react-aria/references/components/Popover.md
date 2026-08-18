@@ -88,6 +88,7 @@ export function Popover({children, hideArrow, ...props}: PopoverProps) {
     opacity 200ms;
   font: var(--font-size) system-ui;
   padding: 8px;
+  overflow: auto;
 
   &[data-trigger='MenuTrigger'],
   &[data-trigger='SubmenuTrigger'] {
@@ -205,7 +206,7 @@ export interface PopoverProps extends Omit<AriaPopoverProps, 'children'> {
 }
 
 const styles = tv({
-  base: 'font-sans bg-white dark:bg-neutral-900/70 dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas] shadow-2xl rounded-xl bg-clip-padding border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 outline-0',
+  base: 'font-sans bg-white dark:bg-neutral-900/70 dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas] shadow-2xl rounded-xl bg-clip-padding border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-300 outline-0 overflow-auto',
   variants: {
     isEntering: {
       true: 'animate-in fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 ease-out duration-200'
@@ -369,12 +370,15 @@ function Example() {
 | `onAnimationStartCapture` | `React.AnimationEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onAuxClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onBlurWithin` | `((e: React.FocusEvent) => void) | undefined` | — | Handler that is called when the target element and all descendants lose focus. |
 | `onClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenu` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onContextMenuCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onDoubleClick` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onDoubleClickCapture` | `React.MouseEventHandler<HTMLDivElement> | undefined` | — |  |
+| `onFocusWithin` | `((e: React.FocusEvent) => void) | undefined` | — | Handler that is called when the target element or a descendant receives focus. |
+| `onFocusWithinChange` | `((isFocusWithin: boolean) => void) | undefined` | — | Handler that is called when the the focus within state changes. |
 | `onGotPointerCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onGotPointerCaptureCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
 | `onLostPointerCapture` | `React.PointerEventHandler<HTMLDivElement> | undefined` | — |  |
@@ -431,9 +435,10 @@ function Example() {
 | `scrollRef` | `RefObject<Element | null> | undefined` | overlayRef | A ref for the scrollable region within the overlay. |
 | `shouldCloseOnInteractOutside` | `((element: Element) => boolean) | undefined` | — | When user interacts with the argument element outside of the popover ref, return true if onClose should be called. This gives you a chance to filter out interaction with elements that should not dismiss the popover. By default, onClose will always be called on interaction outside the popover ref. |
 | `shouldFlip` | `boolean | undefined` | true | Whether the element should flip its orientation (e.g. top to bottom or left to right) when there is insufficient room for it to render completely. |
+| `shouldSkipAnimation` | `boolean | undefined` | — | Whether the popover should appear and disappear without an entry or exit animation. This is used by components such as PreviewTrigger to skip animations when quickly swapping between overlays. |
 | `shouldUpdatePosition` | `boolean | undefined` | true | Whether the overlay should update its position automatically. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: PopoverRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<PopoverRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 | `trigger` | `string | undefined` | — | The name of the component that triggered the popover. This is reflected on the element as the `data-trigger` attribute, and can be used to provide specific styles for the popover depending on which element triggered it. |
 | `triggerRef` | `RefObject<Element | null> | undefined` | — | The ref for the element which the popover positions itself with respect to. When used within a trigger component such as DialogTrigger, MenuTrigger, Select, etc., this is set automatically. It is only required when used standalone. |
@@ -708,7 +713,7 @@ function Example() {
 | `security` | `string | undefined` | — |  |
 | `slot` | `string | undefined` | — |  |
 | `spellCheck` | `(boolean | "true" | "false") | undefined` | — |  |
-| `style` | `(((values: OverlayArrowRenderProps & { defaultStyle: CSSProperties; }) => CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<OverlayArrowRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `suppressContentEditableWarning` | `boolean | undefined` | — |  |
 | `suppressHydrationWarning` | `boolean | undefined` | — |  |
 | `tabIndex` | `number | undefined` | — |  |

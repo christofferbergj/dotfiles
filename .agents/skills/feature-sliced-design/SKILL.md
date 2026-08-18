@@ -21,8 +21,6 @@ description: >
 > **Source**: [fsd.how](https://fsd.how) | Strictness can be adjusted based on
 > project scale and team context.
 
----
-
 ## 1. Core Philosophy & Layer Overview
 
 FSD v2.1 core principle: **"Start simple, extract when needed."**
@@ -85,8 +83,6 @@ import { likePost } from "@/features/like-post"; // features → features
 **Note**: The `processes/` layer is **deprecated** in v2.1. For migration
 details, read `references/migration-guide.md`.
 
----
-
 ## 2. Decision Framework
 
 When writing new code, follow this tree:
@@ -126,8 +122,6 @@ with stable boundaries?**
 **Golden Rule: When in doubt, keep it in `pages/`. Extract only when the
 same code is actively used in multiple places and the boundary is clear.**
 
----
-
 ## 3. Quick Placement Table
 
 | Scenario              | Single use                                  | Confirmed multi-use                   |
@@ -142,8 +136,6 @@ same code is actively used in multiple places and the boundary is clear.**
 | Modal manager         |                                             | `shared/ui/modal-manager/`            |
 | Modal content         | `pages/[page]/ui/SomeModal.tsx`             |                                       |
 | Date formatting util  |                                             | `shared/lib/format-date.ts`           |
-
----
 
 ## 4. Architectural Rules (MUST)
 
@@ -222,8 +214,6 @@ export const calculateUserReputation = (user) => { ... };
 export const calculateUserReputation = (user) => { ... };
 ```
 
----
-
 ## 5. Recommendations (SHOULD)
 
 ### 5-1. Pages First: place code where it is used
@@ -295,8 +285,6 @@ npm install -D @feature-sliced/steiger
 npx steiger src
 ```
 
----
-
 ## 6. Anti-patterns (AVOID)
 
 - **Do not adopt the `widgets/` layer by default.** UI blocks often include
@@ -324,8 +312,6 @@ npx steiger src
   `auth/`, `profile-edit/`, `password-reset/`).
 - **Do not create a top-level `assets/` segment.** Place static assets next
   to the code that uses them. See `references/asset-handling.md`.
-
----
 
 ## 7. Cross-Import Resolution
 
@@ -375,8 +361,6 @@ do not apply).
 For detailed code examples of each strategy, read
 `references/cross-import-patterns.md`.
 
----
-
 ## 8. Segments & Structure Rules
 
 ### Standard segments
@@ -413,8 +397,6 @@ api/update-settings.ts   ← Settings update
 If a segment has only one domain concern, the filename may match the slice
 name (e.g., `features/auth/model/auth.ts`).
 
----
-
 ## 9. Shared Layer Guide
 
 Shared contains infrastructure with **no business logic**. It is organized by
@@ -433,8 +415,6 @@ segments only (no slices). Segments within shared may import from each other.
 Shared **may** contain application-aware code (route constants, API endpoints,
 branding assets, common types). It must **never** contain business logic,
 feature-specific code, or entity-specific code.
-
----
 
 ## 10. Quick Reference
 
@@ -461,8 +441,6 @@ feature-specific code, or entity-specific code.
 - **Slice groups**: Optional navigation aid for large layers; group folder
   has no segments and no public API.
 - **Processes layer**: Deprecated. See `references/migration-guide.md`.
-
----
 
 ## 11. Conditional References
 

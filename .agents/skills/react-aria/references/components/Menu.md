@@ -157,6 +157,9 @@ export {Text, Header, Separator, Keyboard};
 @import './theme.css';
 
 .react-aria-Menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   min-height: 0;
   max-height: inherit;
   box-sizing: border-box;
@@ -876,6 +879,58 @@ import {ChevronDown} from 'lucide-react';
 </MenuTrigger>
 ```
 
+### Context menu
+
+Use `trigger="contextMenu"` to open the menu when right clicking with a mouse, long pressing on touch, or via OS and screen reader specific keyboard shortcuts. The menu is positioned at the point the user clicked.
+
+```tsx
+import {MenuTrigger, Menu, MenuItem, SubmenuTrigger, Separator} from 'vanilla-starter/Menu';
+import {Button} from 'react-aria-components/Button';
+
+<MenuTrigger trigger="contextMenu">
+  <Button className="context-menu-trigger">
+    Right click here
+  </Button>
+  <Menu>
+    <MenuItem>Open</MenuItem>
+    <SubmenuTrigger>
+      <MenuItem>Open with</MenuItem>
+      <Menu>
+        <MenuItem>Preview</MenuItem>
+        <MenuItem>Photoshop</MenuItem>
+        <MenuItem>Safari</MenuItem>
+      </Menu>
+    </SubmenuTrigger>
+    <Separator />
+    <MenuItem>Get Info</MenuItem>
+    <MenuItem>Rename</MenuItem>
+    <MenuItem>Duplicate</MenuItem>
+    <MenuItem>Move to Trash</MenuItem>
+  </Menu>
+</MenuTrigger>
+```
+
+```css
+.context-menu-trigger {
+  width: 250px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--gray-400);
+  border-radius: 10px;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  outline: none;
+
+  &[data-focus-visible] {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: -2px;
+  }
+}
+```
+
 ## Examples
 
 <ExampleList
@@ -1018,7 +1073,7 @@ import {ChevronDown} from 'lucide-react';
 | `shouldCloseOnSelect` | `boolean | undefined` | — | Whether the menu should close when the menu item is selected. |
 | `shouldFocusWrap` | `boolean | undefined` | — | Whether keyboard navigation is circular. |
 | `slot` | `string | null | undefined` | — | A slot name for the component. Slots allow the component to receive props from a parent component. An explicit `null` value indicates that the local props completely override all props received from a parent. |
-| `style` | `(((values: MenuRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<MenuRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
 
 ### MenuItem
@@ -1119,7 +1174,7 @@ import {ChevronDown} from 'lucide-react';
 | `render` | `((props: React.DetailedHTMLProps<Required<Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">> & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">, HTMLAnchorElement> | React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, renderProps: MenuItemRenderProps) => ReactElement) | undefined` | — | Overrides the default DOM element with a custom render function. This allows rendering existing components with built-in styles and behaviors such as router links, animation libraries, and pre-styled components. Note: You can check if `'href' in props` in order to tell whether to render an `<a>` element. Requirements: - You must render the expected element type (e.g. if `<a>` is expected, you cannot render a   `<button>`). - Only a single root DOM element can be rendered (no fragments). - You must pass through props and ref to the underlying DOM element, merging with your own prop   as appropriate. |
 | `routerOptions` | `undefined` | — | Options for the configured client side router. |
 | `shouldCloseOnSelect` | `boolean | undefined` | — | Whether the menu should close when the menu item is selected. |
-| `style` | `(((values: MenuItemRenderProps & { defaultStyle: React.CSSProperties; }) => React.CSSProperties | React.CSSProperties | undefined)) | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
+| `style` | `StyleOrFunction<MenuItemRenderProps> | undefined` | — | The inline [style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style) for the element. A function may be provided to compute the style based on component state. |
 | `target` | `React.HTMLAttributeAnchorTarget | undefined` | — | The target window for the link. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target). |
 | `textValue` | `string | undefined` | — | A string representation of the item's contents, used for features like typeahead. |
 | `translate` | `"no" | "yes" | undefined` | — |  |
