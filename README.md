@@ -1,155 +1,97 @@
 # Dotfiles
 
-Public dotfiles for my macOS setup, managed with [yadm](https://yadm.io/).
+Public configuration for my macOS development environment, managed with
+[yadm](https://yadm.io/).
 
-## Overview
+## What is included
 
-**Operating system**
-macOS
+- **Shell:** fish with Starship, zoxide, and fzf
+- **Terminals:** Ghostty, WezTerm, and Warp
+- **Editors:** Neovim, Zed, and JetBrains IDEs
+- **Desktop tools:** AeroSpace and Raycast
+- **Tooling:** Homebrew, Mise, GitHub CLI, pnpm, Bun, and uv
+- **Appearance:** Gruvbox Dark with JetBrains Mono
 
-**Terminal**
-Ghostty, WezTerm, and Warp
+The [Brewfile](Brewfile) is the source of truth for installed packages and
+applications. Configuration lives at the same paths where each tool expects it
+under `$HOME`.
 
-**Shell**
-fish
+## Set up a new Mac
 
-**Editor**
-Neovim, Zed, and JetBrains IDEs
+1. Install Apple's Command Line Tools:
 
-**Window manager**
-AeroSpace
+   ```sh
+   xcode-select --install
+   ```
 
-**Launcher**
-Raycast
+2. Install Homebrew and follow the shell setup instructions printed by the
+   installer:
 
-**Theme**
-Gruvbox Medium Dark
+   ```sh
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
 
-## Screenshots
+3. Install yadm and clone the dotfiles into `$HOME`:
 
-### WebStorm in TypeScript file
+   ```sh
+   brew install yadm
+   yadm clone https://github.com/christofferbergj/dotfiles.git
+   ```
 
-![WebStorm editor in TypeScript file](https://github.com/christofferbergj/dotfiles/assets/10507071/382ec3bd-5f53-4cd0-96bd-a9e8be88999c)
+   Use the SSH remote after GitHub authentication is configured:
 
-### Neovim in TypeScript file
+   ```sh
+   yadm remote set-url origin git@github.com:christofferbergj/dotfiles.git
+   ```
 
-![Neovim editor in TypeScript file](https://github.com/christofferbergj/dotfiles/assets/10507071/ceb605f9-9b3e-4215-a0d0-0ddf0cdc4987)
+4. Install the packages and applications:
 
-## Fresh macOS setup
+   ```sh
+   brew bundle --file="$HOME/Brewfile"
+   brew bundle check --file="$HOME/Brewfile"
+   ```
 
-### 1. Install Command Line Tools
+5. Make fish the login shell, then restart the terminal:
 
-```bash
-xcode-select --install
-```
-
-Homebrew requires Apple's Command Line Tools or Xcode.
-
-### 2. Install Homebrew
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-After installation, follow the shell setup lines printed by Homebrew. On Apple Silicon that is usually:
-
-```bash
-eval "$(/opt/homebrew/bin/brew shellenv)"
-```
-
-On Intel Macs the Homebrew prefix is usually `/usr/local`.
-
-### 3. Install yadm and clone dotfiles
-
-```bash
-brew install yadm
-yadm clone git@github.com:christofferbergj/dotfiles.git
-```
-
-Use the HTTPS URL instead if SSH keys are not configured yet:
-
-```bash
-yadm clone https://github.com/christofferbergj/dotfiles.git
-```
-
-### 4. Install apps and CLI tools
-
-```bash
-brew bundle --file="$HOME/Brewfile"
-```
-
-Check whether the machine matches the Brewfile with:
-
-```bash
-brew bundle check --file="$HOME/Brewfile"
-```
-
-### 5. Configure fish as the login shell
-
-The Brewfile installs fish. Confirm the path first:
-
-```bash
-command -v fish
-```
-
-Then add fish to the list of allowed login shells and switch to it:
-
-```bash
-command -v fish | sudo tee -a /etc/shells
-chsh -s "$(command -v fish)"
-```
-
-Restart the terminal afterwards. fish automatically loads `~/.config/fish/config.fish` and files in `~/.config/fish/conf.d/`.
-
-### 6. Configure GitHub SSH
-
-```bash
-gh auth login
-gh ssh-key add ~/.ssh/id_ed25519.pub
-```
-
-Create an SSH key first if one does not exist yet.
-
-## Fonts
-
-Fonts are installed from the Brewfile. To install one manually:
-
-```bash
-brew install --cask font-jetbrains-mono
-```
+   ```sh
+   fish_path="$(command -v fish)"
+   grep -Fxq "$fish_path" /etc/shells || echo "$fish_path" | sudo tee -a /etc/shells
+   chsh -s "$fish_path"
+   ```
 
 ## Local secrets
 
-Secrets do not belong in this public repository. Tracked config should only reference environment variable names, never raw credentials.
+Secrets and machine-specific values belong in the ignored file
+`~/.config/local/env.fish`, never in tracked configuration.
 
-Machine-local values are loaded from ignored files such as:
+Use standard fish exports for terminal-only values:
 
-- `~/.config/local/env.fish`
+```fish
+set -gx EXAMPLE_API_KEY "..."
+```
 
-That file is sourced by `~/.config/fish/conf.d/local-env.fish`, which also publishes selected variables through `launchctl` on macOS so GUI-launched apps can read them.
+For values needed by GUI-launched applications, use the helper provided while
+the file is loaded:
 
-Current examples:
+```fish
+set_gui_env EXAMPLE_GUI_TOKEN "..."
+```
 
-- `UIDOTSH_MCP_AUTHORIZATION` is stored in `~/.config/local/env.fish` and referenced from Codex with `env_http_headers`.
-- `CONTEXT7_API_KEY` follows the same pattern for the Context7 MCP server: the key lives in `~/.config/local/env.fish`, while `~/.codex/config.toml` only contains `env_http_headers = { CONTEXT7_API_KEY = "CONTEXT7_API_KEY" }`.
+Restart affected GUI applications after changing their environment.
 
-When adding a new local secret:
+## Maintain the dotfiles
 
-1. Add the value to `~/.config/local/env.fish`.
-2. If a GUI app needs it, add the variable name to `launchctl_vars` in `~/.config/fish/conf.d/local-env.fish`.
-3. Reference the variable name from tracked config instead of committing the value.
-4. Restart the app that needs the new environment variable.
+yadm uses `$HOME` as its Git work tree, so edit the live files in place and use
+yadm for version-control operations:
 
-## Raycast extensions
+```sh
+yadm status
+yadm diff
+yadm add ~/.config/example/config
+yadm commit
+yadm pull --rebase
+yadm push
+```
 
-Currently installed extensions detected from the local Raycast setup:
-
-- Apple Reminders
-- Coffee
-- Color Picker
-- GitHub
-- Kill Process
-- Port Manager
-- Ray.so
-- Sips
-- Speedtest
+Stage exact paths and review the diff before committing. Keep credentials,
+generated files, caches, and machine-local state ignored.
