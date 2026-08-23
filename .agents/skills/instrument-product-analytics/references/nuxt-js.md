@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # Nuxt.js - Docs
 
 Copy page
@@ -282,9 +284,9 @@ Alternatively, the following tutorials can help you get started:
 -   [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests.md)
 -   [How to set up surveys in Nuxt](/tutorials/nuxt-surveys.md)
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 

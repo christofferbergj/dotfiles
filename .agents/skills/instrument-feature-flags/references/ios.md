@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # iOS Feature Flags installation - Docs
 
 Copy page
@@ -141,9 +143,9 @@ Copy page
     | [How to do a phased rollout](/tutorials/phased-rollout.md) | Gradually roll out features to minimize risk |
     | [More tutorials](/docs/feature-flags/tutorials.md) | Other real-world examples and use cases |
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 

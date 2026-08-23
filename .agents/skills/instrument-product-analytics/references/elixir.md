@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # Elixir - Docs
 
 Copy page
@@ -409,9 +411,9 @@ PostHog.capture(AnotherPostHog, "user_signed_up", %{distinct_id: "user123"})
 
 The library is maintained by the PostHog team since February 2025. Thanks to [nkezhaya](https://github.com/nkezhaya) for contributing v0.1.0. Thanks to [martosaur](https://github.com/martosaur) for contributing v2.0.0.
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 

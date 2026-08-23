@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # Go - Docs
 
 Copy page
@@ -562,9 +564,9 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 This library is largely based on the `analytics-go` package.
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 

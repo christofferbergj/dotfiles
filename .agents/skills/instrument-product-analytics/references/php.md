@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # PHP - Docs
 
 Copy page
@@ -641,9 +643,9 @@ PostHog::init(
 
 This library is largely based on the `analytics-php` package.
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 

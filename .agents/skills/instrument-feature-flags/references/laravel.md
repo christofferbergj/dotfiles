@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # Laravel - Docs
 
 Copy page
@@ -165,9 +167,9 @@ PostHog::init(
 
 See the [PHP SDK docs](/docs/libraries/php.md) for usage examples and the full API reference.
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 

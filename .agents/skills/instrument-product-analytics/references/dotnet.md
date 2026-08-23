@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # .NET - Docs
 
 Copy page
@@ -762,9 +764,9 @@ By default, the library buffers events before sending them to the `/batch` endpo
 
 To avoid this, call `await posthog.FlushAsync()` after processing every request by adding it as a middleware to your server. This allows `posthog.Capture()` to remain asynchronous for better performance.
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 

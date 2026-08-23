@@ -1,3 +1,5 @@
+> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt
+
 # Angular - Docs
 
 Copy page
@@ -397,7 +399,7 @@ Angular SSR does not allow Node.js code to be bundled into client-side component
 
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features.md).
+For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/usage.md).
 
 Alternatively, the following tutorials can help you get started:
 
@@ -405,9 +407,9 @@ Alternatively, the following tutorials can help you get started:
 -   [How to set up A/B tests in Angular](/tutorials/angular-ab-tests.md)
 -   [How to set up surveys in Angular](/tutorials/angular-surveys.md)
 
-### Community questions
+### Still have questions?
 
-Ask a question
+Ask PostHog AI
 
 ### Was this page useful?
 
