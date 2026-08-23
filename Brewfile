@@ -44,12 +44,8 @@ brew "git-who"
 brew "gitleaks"
 # Blazing fast terminal-ui for git written in rust
 brew "gitui"
-# Post-modern modal text editor
-brew "helix"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
-# Command-line pager for JSON data
-brew "jless"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Library for encoding and decoding .avif files
@@ -127,8 +123,6 @@ cask "helium-browser"
 cask "jetbrains-toolbox"
 # Keyboard customiser
 cask "karabiner-elements"
-# Use Vim in input fields and non input fields
-cask "kindavim"
 # Utility that shows the latest app updates
 cask "latest"
 # Reverse proxy, secure introspectable tunnels to localhost
