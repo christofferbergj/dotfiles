@@ -1,12 +1,10 @@
-# Place a copy of this config to ~/.aerospace.toml
-# After that, you can edit ~/.aerospace.toml to your liking
+# AeroSpace window manager configuration.
 
 config-version = 2
 
 # Keep all named workspaces available even when they have no open windows.
 persistent-workspaces = [
     'browser',
-    'safari',
     'terminal',
     'editor',
     'ai',
@@ -14,7 +12,9 @@ persistent-workspaces = [
     'media',
     'mail',
     'figma',
-    'other',
+    'safari',
+    'secondary',
+    'macbook',
 ]
 
 # You can use it to add commands that run after login to a macOS user session.
@@ -25,7 +25,15 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # `after-startup-command` is run after 'after-login-command'
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+    'exec-and-forget open -g -b com.brave.Browser',
+    'exec-and-forget open -g -b com.google.Chrome',
+    'exec-and-forget open -g -b dev.warp.Warp-Stable',
+    'exec-and-forget open -g -b com.openai.codex',
+    'exec-and-forget open -g -b com.tinyspeck.slackmacgap',
+    'exec-and-forget open -g -b com.spotify.client',
+    'exec-and-forget open -g -b com.readdle.SparkDesktop',
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -37,22 +45,17 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 24
+accordion-padding = 30
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
 
 # Possible values: horizontal|vertical|auto
-# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
-#               tall monitor (anything higher than wide) gets vertical orientation
-default-root-container-orientation = 'auto'
+# Keep tiled windows side by side on every display.
+default-root-container-orientation = 'horizontal'
 
-# Mouse follows focus when focused monitor changes
-# Drop it from your config, if you don't like this behavior
-# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
-# See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
-# Fallback value (if you omit the key): on-focused-monitor-changed = []
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# Keep the pointer in place when focus moves between monitors.
+on-focused-monitor-changed = []
 
 # You can effectively turn off the macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
@@ -112,15 +115,18 @@ outer.right = 12
 # '''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-alt-slash = 'layout tiles horizontal'
-alt-comma = 'layout accordion horizontal'
-alt-shift-s = 'layout tiles horizontal accordion horizontal'
+alt-slash = 'layout h_tiles'
+alt-comma = 'layout accordion horizontal vertical'
+alt-shift-comma = 'layout h_tiles v_accordion'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
 alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
+alt-leftSquareBracket = 'focus --wrap-around dfs-prev'
+alt-rightSquareBracket = 'focus --wrap-around dfs-next'
+alt-r = 'focus --wrap-around dfs-next' # One-handed next-window shortcut
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -134,38 +140,45 @@ alt-equal = 'resize smart +100'
 alt-0 = 'balance-sizes'
 
 # Workspace shortcuts. "Hyper" is ctrl + alt + shift + cmd.
-ctrl-alt-shift-cmd-w = 'workspace browser'
+ctrl-alt-shift-cmd-w = ['workspace browser', 'exec-and-forget open -g -b com.brave.Browser']
 ctrl-alt-shift-cmd-i = 'workspace safari'
-ctrl-alt-shift-cmd-4 = 'workspace ai'
+ctrl-alt-shift-cmd-4 = ['workspace ai', 'exec-and-forget open -g -b com.openai.codex']
 ctrl-alt-shift-cmd-0 = 'workspace figma'
-ctrl-alt-shift-cmd-n = 'workspace other'
-ctrl-alt-shift-cmd-u = 'workspace media'
-ctrl-alt-shift-cmd-s = 'workspace slack'
-ctrl-alt-shift-cmd-o = 'workspace media'
-ctrl-alt-shift-cmd-m = 'workspace mail'
-ctrl-alt-shift-cmd-d = 'workspace media'
-cmd-backtick = 'workspace terminal'
-ctrl-alt-shift-cmd-e = 'workspace editor'
+ctrl-alt-shift-cmd-n = ['workspace mail', 'exec-and-forget open -g -b com.apple.Notes']
+ctrl-alt-shift-cmd-u = ['workspace media', 'exec-and-forget open -g -b com.apple.podcasts']
+ctrl-alt-shift-cmd-s = ['workspace slack', 'exec-and-forget open -g -b com.tinyspeck.slackmacgap']
+ctrl-alt-shift-cmd-o = ['workspace media', 'exec-and-forget open -g -b com.sonos.macController2']
+ctrl-alt-shift-cmd-m = ['workspace mail', 'exec-and-forget open -g -b com.readdle.SparkDesktop']
+ctrl-alt-shift-cmd-d = ['workspace media', 'exec-and-forget open -g -b com.spotify.client']
+cmd-backtick = ['workspace terminal', 'exec-and-forget open -g -b dev.warp.Warp-Stable']
+ctrl-alt-shift-cmd-e = ['workspace editor', 'exec-and-forget open -g -b dev.zed.Zed']
+ctrl-alt-shift-cmd-x = 'workspace secondary'
+ctrl-alt-shift-cmd-b = 'workspace macbook'
 
-# Open a new floating Finder window.
-ctrl-alt-shift-cmd-g = '''exec-and-forget osascript -e '
-tell application "Finder"
-    make new Finder window
-    activate
-end tell'
-'''
+# Open Downloads in a floating Finder window.
+ctrl-alt-shift-cmd-g = 'exec-and-forget /usr/bin/open -a Finder "${HOME}/Downloads"'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace browser'
-alt-shift-2 = 'move-node-to-workspace terminal'
-alt-shift-3 = 'move-node-to-workspace editor'
-alt-shift-4 = 'move-node-to-workspace slack'
-alt-shift-5 = 'move-node-to-workspace media'
-alt-shift-6 = 'move-node-to-workspace mail'
-alt-shift-7 = 'move-node-to-workspace figma'
-alt-shift-8 = 'move-node-to-workspace other'
-alt-shift-9 = 'move-node-to-workspace ai'
-alt-shift-0 = 'move-node-to-workspace safari'
+# Move the focused window to a workspace and follow it.
+# These mnemonics mirror the workspace switching shortcuts above.
+alt-shift-w = 'move-node-to-workspace --focus-follows-window browser'
+alt-shift-i = 'move-node-to-workspace --focus-follows-window safari'
+alt-shift-t = 'move-node-to-workspace --focus-follows-window terminal'
+alt-shift-e = 'move-node-to-workspace --focus-follows-window editor'
+alt-shift-4 = 'move-node-to-workspace --focus-follows-window ai'
+alt-shift-s = 'move-node-to-workspace --focus-follows-window slack'
+alt-shift-d = 'move-node-to-workspace --focus-follows-window media'
+alt-shift-m = 'move-node-to-workspace --focus-follows-window mail'
+alt-shift-0 = 'move-node-to-workspace --focus-follows-window figma'
+alt-shift-b = 'move-node-to-workspace --focus-follows-window macbook'
+
+# Move the focused window to the next monitor and follow it.
+alt-shift-n = 'move-node-to-monitor --focus-follows-window --wrap-around next'
+
+# Move a window onto the secondary Dell and follow it.
+alt-shift-x = 'move-node-to-workspace --focus-follows-window secondary'
+
+# Restore all configured app-to-workspace assignments.
+alt-shift-r = 'run-callback --for-every-window on-window-detected'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-shift-cmd-ctrl-tab = 'workspace-back-and-forth'
@@ -186,10 +199,11 @@ editor = 'main'
 slack = 'main'
 media = 'main'
 mail = 'main'
-other = 'main'
 ai = 'main'
 figma = ['secondary', 3, 'built-in', 'main']
 safari = ['secondary', 3, 'built-in', 'main']
+secondary = ['secondary', 3, 'built-in', 'main']
+macbook = 'built-in'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -198,6 +212,12 @@ esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
+
+# Navigate monitors or move the focused window between them.
+h = ['focus-monitor left', 'mode main']
+l = ['focus-monitor right', 'mode main']
+shift-h = ['move-node-to-monitor --focus-follows-window left', 'mode main']
+shift-l = ['move-node-to-monitor --focus-follows-window right', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
@@ -262,24 +282,23 @@ run = 'move-node-to-workspace media'
 if = 'test %{app-bundle-id} = com.apple.podcasts'
 run = 'move-node-to-workspace media'
 
-# Mail
+# Mail and notes share a vertical accordion workspace.
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.readdle.SparkDesktop'
-run = 'move-node-to-workspace mail'
+run = 'move-node-to-workspace mail; layout --workspace mail --root v_accordion'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = notion.id'
+run = 'move-node-to-workspace mail; layout --workspace mail --root v_accordion'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.apple.Notes'
+run = 'move-node-to-workspace mail; layout --workspace mail --root v_accordion'
 
 # Figma
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.figma.Desktop'
 run = 'move-node-to-workspace figma'
-
-# Other
-[[on-window-detected]]
-if = 'test %{app-bundle-id} = notion.id'
-run = 'move-node-to-workspace other'
-
-[[on-window-detected]]
-if = 'test %{app-bundle-id} = com.apple.Notes'
-run = 'move-node-to-workspace other'
 
 # Float these apps
 [[on-window-detected]]
