@@ -116,8 +116,8 @@ outer.right = 12
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout h_tiles'
-alt-comma = 'layout accordion horizontal vertical'
-alt-shift-comma = 'layout h_tiles v_accordion'
+alt-comma = 'layout h_accordion'
+alt-shift-comma = 'layout h_tiles h_accordion'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
@@ -282,18 +282,18 @@ run = 'move-node-to-workspace media'
 if = 'test %{app-bundle-id} = com.apple.podcasts'
 run = 'move-node-to-workspace media'
 
-# Mail and notes share a vertical accordion workspace.
+# Mail and notes share a horizontal accordion workspace.
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.readdle.SparkDesktop'
-run = 'move-node-to-workspace mail; layout --workspace mail --root v_accordion'
+run = 'move-node-to-workspace mail; layout --workspace mail --root h_accordion'
 
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = notion.id'
-run = 'move-node-to-workspace mail; layout --workspace mail --root v_accordion'
+run = 'move-node-to-workspace mail; layout --workspace mail --root h_accordion'
 
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.apple.Notes'
-run = 'move-node-to-workspace mail; layout --workspace mail --root v_accordion'
+run = 'move-node-to-workspace mail; layout --workspace mail --root h_accordion'
 
 # Figma
 [[on-window-detected]]
