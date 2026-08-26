@@ -27,11 +27,7 @@
 *.p12
 *.pfx
 
-.codex/*
-!.codex/
-!.codex/AGENTS.md
-!.codex/rules/
-!.codex/rules/default.rules
+.codex/
 .config/local/env.fish
 .config/local/*.local.fish
 .config/codex/env.local
