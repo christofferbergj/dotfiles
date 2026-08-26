@@ -6,7 +6,6 @@
 # Upstream skills are restored from .agents/.skill-lock.json.
 .agents/skills/*
 !.agents/skills/componentize/
-!.agents/skills/context7-mcp/
 !.agents/skills/design/
 !.agents/skills/ideas/
 !.agents/skills/make-responsive/
