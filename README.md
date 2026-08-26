@@ -51,7 +51,14 @@ under `$HOME`.
    brew bundle check --file="$HOME/Brewfile"
    ```
 
-5. Make fish the login shell, then restart the terminal:
+5. Restore the agent skills recorded in the lockfile:
+
+   ```sh
+   cd "$HOME"
+   npx skills experimental_install
+   ```
+
+6. Make fish the login shell, then restart the terminal:
 
    ```sh
    fish_path="$(command -v fish)"

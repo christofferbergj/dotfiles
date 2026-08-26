@@ -6,18 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/turborepo.git",
       "skillPath": "skills/turborepo/SKILL.md",
-      "skillFolderHash": "565aa926118630c68c43852fd08449d9265d09ed",
+      "skillFolderHash": "967d83842d77bea6844478b441853b9be4b3852f",
       "installedAt": "2026-01-23T10:55:47.272Z",
-      "updatedAt": "2026-08-22T10:24:19.279Z"
-    },
-    "vercel-react-best-practices": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
-      "skillPath": "skills/react-best-practices/SKILL.md",
-      "skillFolderHash": "343db72180d05814949fef7d46be96b5c6ee86b3",
-      "installedAt": "2026-01-23T10:56:06.390Z",
-      "updatedAt": "2026-04-15T08:52:18.287Z"
+      "updatedAt": "2026-08-26T07:57:23.375Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -42,18 +33,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "037e8078db4b20b4aa25c04f21c6de7d335ec449",
+      "skillFolderHash": "82def67855a0d2aad7794207951820fa5422fdb0",
       "installedAt": "2026-01-23T10:57:56.440Z",
-      "updatedAt": "2026-07-20T15:48:23.522Z"
+      "updatedAt": "2026-08-24T20:19:03.595Z"
     },
     "performance": {
       "source": "addyosmani/web-quality-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/web-quality-skills.git",
       "skillPath": "skills/performance/SKILL.md",
-      "skillFolderHash": "62de2e9d8439998bd386f06a1c8acb96877f48fe",
+      "skillFolderHash": "69232372c8ae1d7f927267073560cbc762251662",
       "installedAt": "2026-01-23T11:48:13.166Z",
-      "updatedAt": "2026-05-07T07:05:41.754Z"
+      "updatedAt": "2026-08-26T07:57:24.985Z"
     },
     "find-skills": {
       "source": "vercel-labs/skills",
@@ -81,15 +72,6 @@
       "installedAt": "2026-02-05T11:46:23.948Z",
       "updatedAt": "2026-07-23T07:51:04.113Z"
     },
-    "gh-fix-ci": {
-      "source": "openai/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/openai/skills.git",
-      "skillPath": "skills/.curated/gh-fix-ci/SKILL.md",
-      "skillFolderHash": "3f99938c9464393f27cc4cc00e4ba17387517803",
-      "installedAt": "2026-02-08T09:06:35.396Z",
-      "updatedAt": "2026-02-08T09:06:35.396Z"
-    },
     "react-doctor": {
       "source": "millionco/react-doctor",
       "sourceType": "github",
@@ -113,9 +95,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/sanity-io/agent-toolkit.git",
       "skillPath": "skills/sanity-best-practices/SKILL.md",
-      "skillFolderHash": "4edaea5217396995c5f608c55ad55470c1fda008",
+      "skillFolderHash": "06a93f8ecfbc200dad97b9f5dfd8474a04a37383",
       "installedAt": "2026-03-13T11:30:50.401Z",
-      "updatedAt": "2026-08-19T19:27:25.973Z"
+      "updatedAt": "2026-08-26T07:57:26.917Z"
     },
     "vite": {
       "source": "antfu/skills",
@@ -162,23 +144,14 @@
       "installedAt": "2026-03-26T09:05:22.655Z",
       "updatedAt": "2026-08-09T10:06:07.877Z"
     },
-    "make-interfaces-feel-better": {
-      "source": "jakubkrehel/make-interfaces-feel-better",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/jakubkrehel/make-interfaces-feel-better.git",
-      "skillPath": "skills/make-interfaces-feel-better/SKILL.md",
-      "skillFolderHash": "e880ad90e8a0a8384f5cfae2cdd6a854e2de5d89",
-      "installedAt": "2026-04-02T16:54:36.055Z",
-      "updatedAt": "2026-07-24T21:05:44.626Z"
-    },
     "portless": {
       "source": "vercel-labs/portless",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/portless.git",
       "skillPath": "skills/portless/SKILL.md",
-      "skillFolderHash": "6bcb0d4b3093792ec76e0e1ae5f594cbae8be556",
+      "skillFolderHash": "8befe18d9353d92d71b7cc925b885333731b839d",
       "installedAt": "2026-04-11T10:36:31.434Z",
-      "updatedAt": "2026-08-14T07:34:03.257Z"
+      "updatedAt": "2026-08-24T20:19:05.547Z"
     },
     "emil-design-eng": {
       "source": "emilkowalski/skill",
@@ -347,9 +320,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/posthog/ai-plugin.git",
       "skillPath": "skills/instrument-product-analytics/SKILL.md",
-      "skillFolderHash": "e877c89b0631f94acb8214bf1eaebfd6349338e4",
+      "skillFolderHash": "4c8c27973a0dd7b5fadf4199a87251bfc2f1fac4",
       "installedAt": "2026-06-30T11:13:22.757Z",
-      "updatedAt": "2026-08-22T10:24:24.646Z"
+      "updatedAt": "2026-08-24T20:19:08.289Z"
     },
     "code-review": {
       "source": "mattpocock/skills",
@@ -420,9 +393,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Jakubantalik/transitions.dev.git",
       "skillPath": "skills/transitions-dev/SKILL.md",
-      "skillFolderHash": "c942e6c9cbabf11ae8d28ec3717b4f108f0ad230",
+      "skillFolderHash": "f3f6692028d4d6f6b601d58cd6d876aaccc9d900",
       "installedAt": "2026-07-11T21:57:01.786Z",
-      "updatedAt": "2026-08-21T07:53:40.099Z"
+      "updatedAt": "2026-08-26T07:57:31.514Z"
     },
     "improve-react": {
       "source": "aidenybai/react-doctor",
@@ -640,15 +613,6 @@
       "installedAt": "2026-08-06T07:47:13.535Z",
       "updatedAt": "2026-08-19T19:28:03.633Z"
     },
-    "elegant-reports": {
-      "source": "jdrhyne/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/jdrhyne/agent-skills.git",
-      "skillPath": "skills/elegant-reports/SKILL.md",
-      "skillFolderHash": "7b8e748f0b946fec2e8531b54a129601a46c1d83",
-      "installedAt": "2026-08-22T12:16:04.586Z",
-      "updatedAt": "2026-08-22T12:16:04.586Z"
-    },
     "tsdown": {
       "source": "antfu/skills",
       "sourceType": "github",
@@ -658,14 +622,23 @@
       "installedAt": "2026-08-22T12:19:29.495Z",
       "updatedAt": "2026-08-22T12:19:29.495Z"
     },
-    "boneyard": {
-      "source": "0xgf/boneyard",
+    "audit-agent-documentation": {
+      "source": "christofferbergj/agent-skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/0xgf/boneyard.git",
-      "skillPath": ".claude/skills/boneyard/SKILL.md",
-      "skillFolderHash": "7ee3224dca2f29718b3c0ed2604ffaee99d9d1df",
-      "installedAt": "2026-08-23T10:29:58.975Z",
-      "updatedAt": "2026-08-23T10:29:58.975Z"
+      "sourceUrl": "https://github.com/christofferbergj/agent-skills.git",
+      "skillPath": "skills/agents/audit-agent-documentation/SKILL.md",
+      "skillFolderHash": "862325e456705484e3fa5f59b8c37402ea3379c7",
+      "installedAt": "2026-08-25T11:48:31.144Z",
+      "updatedAt": "2026-08-25T12:37:11.591Z"
+    },
+    "unslop": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/cursor/plugins.git",
+      "skillPath": "pstack/skills/unslop/SKILL.md",
+      "skillFolderHash": "6161508c5c7959b156ff0e4e10b510863b51f9cc",
+      "installedAt": "2026-08-26T14:18:05.806Z",
+      "updatedAt": "2026-08-26T14:18:05.806Z"
     }
   },
   "dismissed": {

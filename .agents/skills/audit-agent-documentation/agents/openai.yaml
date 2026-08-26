@@ -1,5 +1,0 @@
-interface:
-  display_name: 'Audit Agent Documentation'
-  short_description: 'Audit and improve repository agent guidance'
-policy:
-  allow_implicit_invocation: false
