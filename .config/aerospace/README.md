@@ -28,14 +28,13 @@ The main workspaces follow whichever monitor macOS marks as the main display. Fi
 | --- | --- |
 | Focus left, down, up, or right | `Alt + H/J/K/L` |
 | Focus previous or next window | `Alt + [` / `Alt + ]` |
-| Focus next window with one hand | `Alt + R` |
+| Focus previous or next window with one hand | `Alt + Shift + R` / `Alt + R` |
 | Move window left, down, up, or right | `Alt + Shift + H/J/K/L` |
 | Move window to the next monitor | `Alt + Shift + N` |
 | Resize focused window | `Alt + -` / `Alt + =` |
 | Balance window sizes | `Alt + 0` |
 | Toggle fullscreen | `Alt + Shift + F` |
 | Toggle floating and tiling | `Alt + Shift + G` |
-| Restore every app to its assigned workspace | `Alt + Shift + R` |
 | Jump back to the previous workspace | `Hyper + Tab` |
 
 Moving a window to a workspace or monitor follows the window, but leaves the mouse pointer where it is.
@@ -48,7 +47,7 @@ Horizontal tiling is the default, so windows sit next to each other. The `mail` 
 | --- | --- |
 | Horizontal tiles | `Alt + /` |
 | Horizontal accordion | `Alt + ,` |
-| Toggle tiles and accordion | `Alt + Shift + ,` |
+| Toggle tiles and accordion | `Alt + Shift + C` or `Alt + Shift + ,` |
 
 Windows have 12-pixel gaps. Accordion windows keep 30 pixels visible so each window remains easy to select.
 
@@ -59,7 +58,7 @@ Press `Alt + Shift + ;` to enter service mode. Most commands run once and return
 | Then press | Action |
 | --- | --- |
 | `Esc` | Reload the AeroSpace configuration |
-| `R` | Flatten and reset the current workspace layout |
+| `R` | Reset the current layout and restore every app to its assigned workspace |
 | `F` | Toggle floating and tiling |
 | `H` / `L` | Focus the monitor to the left or right |
 | `Shift + H/L` | Move the focused window to the left or right monitor |

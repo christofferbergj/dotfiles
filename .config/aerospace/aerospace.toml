@@ -118,6 +118,7 @@ outer.right = 12
 alt-slash = 'layout h_tiles'
 alt-comma = 'layout h_accordion'
 alt-shift-comma = 'layout h_tiles h_accordion'
+alt-shift-c = 'layout h_tiles h_accordion' # One-handed layout cycle
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
@@ -127,6 +128,7 @@ alt-l = 'focus right'
 alt-leftSquareBracket = 'focus --wrap-around dfs-prev'
 alt-rightSquareBracket = 'focus --wrap-around dfs-next'
 alt-r = 'focus --wrap-around dfs-next' # One-handed next-window shortcut
+alt-shift-r = 'focus --wrap-around dfs-prev' # One-handed previous-window shortcut
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -155,8 +157,15 @@ ctrl-alt-shift-cmd-e = ['workspace editor', 'exec-and-forget open -g -b dev.zed.
 ctrl-alt-shift-cmd-x = 'workspace secondary'
 ctrl-alt-shift-cmd-b = 'workspace macbook'
 
-# Open Downloads in a floating Finder window.
-ctrl-alt-shift-cmd-g = 'exec-and-forget /usr/bin/open -a Finder "${HOME}/Downloads"'
+# Focus an existing Finder window, or open Downloads when Finder has no windows.
+ctrl-alt-shift-cmd-g = '''exec-and-forget osascript -e '
+tell application "Finder"
+    if (count of Finder windows) is 0 then
+        open (path to downloads folder)
+    end if
+    activate
+end tell'
+'''
 
 # Move the focused window to a workspace and follow it.
 # These mnemonics mirror the workspace switching shortcuts above.
@@ -176,9 +185,6 @@ alt-shift-n = 'move-node-to-monitor --focus-follows-window --wrap-around next'
 
 # Move a window onto the secondary Dell and follow it.
 alt-shift-x = 'move-node-to-workspace --focus-follows-window secondary'
-
-# Restore all configured app-to-workspace assignments.
-alt-shift-r = 'run-callback --for-every-window on-window-detected'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-shift-cmd-ctrl-tab = 'workspace-back-and-forth'
@@ -209,7 +215,7 @@ macbook = 'built-in'
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
-r = ['flatten-workspace-tree', 'mode main'] # reset layout
+r = ['flatten-workspace-tree', 'run-callback --for-every-window on-window-detected', 'mode main'] # reset layout and app assignments
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
