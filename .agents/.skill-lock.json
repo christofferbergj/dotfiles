@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/turborepo.git",
       "skillPath": "skills/turborepo/SKILL.md",
-      "skillFolderHash": "967d83842d77bea6844478b441853b9be4b3852f",
+      "skillFolderHash": "7764d39f38532de1a185c90cb0d12de4622f75ce",
       "installedAt": "2026-01-23T10:55:47.272Z",
-      "updatedAt": "2026-08-26T07:57:23.375Z"
+      "updatedAt": "2026-08-27T07:29:49.259Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -230,9 +230,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/haydenbleasel/ultracite.git",
       "skillPath": "skills/ultracite/SKILL.md",
-      "skillFolderHash": "e8f11d5d407d5bcaa1422e5473335571f05a7778",
+      "skillFolderHash": "3854583c7d58f2eb96f97d972fd118527ccfdd3f",
       "installedAt": "2026-05-28T13:14:45.665Z",
-      "updatedAt": "2026-07-05T09:28:06.395Z"
+      "updatedAt": "2026-08-27T07:29:51.851Z"
     },
     "improve": {
       "source": "shadcn/improve",
