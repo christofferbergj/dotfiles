@@ -141,9 +141,9 @@ alt-0 = 'balance-sizes'
 
 # Workspace shortcuts. "Hyper" is ctrl + alt + shift + cmd.
 ctrl-alt-shift-cmd-w = ['workspace browser', 'exec-and-forget open -g -b com.brave.Browser']
-ctrl-alt-shift-cmd-i = 'workspace safari'
+ctrl-alt-shift-cmd-i = ['workspace safari', 'exec-and-forget open -g -b com.apple.Safari']
 ctrl-alt-shift-cmd-4 = ['workspace ai', 'exec-and-forget open -g -b com.openai.codex']
-ctrl-alt-shift-cmd-0 = 'workspace figma'
+ctrl-alt-shift-cmd-0 = ['workspace figma', 'exec-and-forget open -g -b com.figma.Desktop']
 ctrl-alt-shift-cmd-n = ['workspace mail', 'exec-and-forget open -g -b com.apple.Notes']
 ctrl-alt-shift-cmd-u = ['workspace media', 'exec-and-forget open -g -b com.apple.podcasts']
 ctrl-alt-shift-cmd-s = ['workspace slack', 'exec-and-forget open -g -b com.tinyspeck.slackmacgap']
