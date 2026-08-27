@@ -26,6 +26,88 @@
                         ]
                     },
                     {
+                        "manipulators": [
+                            {
+                                "description": "Change escape to MEH when held.",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "parameters": { "basic.to_if_alone_timeout_milliseconds": 160 },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "lazy": true,
+                                        "modifiers": ["left_control", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Use MEH+H/J/K/L for tab rearranging in Brave",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": ["^com\\.brave\\.Browser$"],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": { "mandatory": ["shift", "control", "option"] }
+                                },
+                                "to": [{ "key_code": "1", "modifiers": ["left_control", "left_shift"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": ["^com\\.brave\\.Browser$"],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "mandatory": ["shift", "control", "option"] }
+                                },
+                                "to": [{ "key_code": "2", "modifiers": ["left_control", "left_shift"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": ["^com\\.brave\\.Browser$"],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "mandatory": ["shift", "control", "option"] }
+                                },
+                                "to": [{ "key_code": "3", "modifiers": ["left_control", "left_shift"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": ["^com\\.brave\\.Browser$"],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": { "mandatory": ["shift", "control", "option"] }
+                                },
+                                "to": [{ "key_code": "4", "modifiers": ["left_control", "left_shift"] }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Ctrl+N/P to Down/Up and VIM-style navigation with Hyper+H/J/K/L",
                         "manipulators": [
                             {
