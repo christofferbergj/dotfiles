@@ -28,11 +28,8 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Change escape to MEH when held.",
-                                "from": {
-                                    "key_code": "escape",
-                                    "modifiers": { "optional": ["any"] }
-                                },
+                                "description": "Change tab to MEH when held.",
+                                "from": { "key_code": "tab" },
                                 "parameters": { "basic.to_if_alone_timeout_milliseconds": 160 },
                                 "to": [
                                     {
@@ -41,7 +38,7 @@
                                         "modifiers": ["left_control", "left_option"]
                                     }
                                 ],
-                                "to_if_alone": [{ "key_code": "escape" }],
+                                "to_if_alone": [{ "key_code": "tab" }],
                                 "type": "basic"
                             }
                         ]
