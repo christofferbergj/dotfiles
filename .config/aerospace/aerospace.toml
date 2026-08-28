@@ -76,12 +76,12 @@ preset = 'qwerty'
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 12
-inner.vertical = 12
-outer.left = 12
-outer.bottom = 12
-outer.top = 12
-outer.right = 12
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -238,6 +238,15 @@ up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
 
 # Browser
+# Keep Bitwarden extension windows on the browser workspace, but float them.
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.brave.Browser && test %{window-title} = Bitwarden'
+run = ['move-node-to-workspace browser', 'layout floating']
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.google.Chrome && test %{window-title} = Bitwarden'
+run = ['move-node-to-workspace browser', 'layout floating']
+
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.brave.Browser'
 run = 'move-node-to-workspace browser'
